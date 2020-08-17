@@ -26,8 +26,8 @@ tutorial_options(
   exercise.checker = gradethis::grade_learnr
 )
 
-borders <- readRDS("www/data/borders.rds")
-borders_age <- read_csv("www/data/BORDERS (inc Age).csv")
+borders_data <- readRDS("www/data/borders.rds")
+borders_age_data <- read_csv("www/data/BORDERS (inc Age).csv")
 ```
 
 ```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
@@ -234,8 +234,10 @@ x[2, 3]
 Have a look and click 'Run Code' below to see the output.
 
 ```{r foundations-structures-factors, exercise=TRUE}
-x <- factor(c(1, 2, 1, 2, 2, 1), levels = c(2, 1))
-x
+factor_ex <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
+factor_ex
+factor_ex <- factor(food, levels = c("low", "medium", "high"))
+levels(factor_ex)
 ```
 
 #### Data Frames
@@ -434,22 +436,22 @@ smr01 <- dbGetQuery(smra_connection, paste("<sql_query>"))
 
 * `summary()` returns all summary statistics based on a given array.
 
-You now have the borders data-set loaded as `borders`. See if you can get the mean value for `LengthOfStay`. Use the hint button if you need some help.
+You now have the borders data-set loaded as `borders_data`. See if you can get the mean value for `LengthOfStay`. Use the hint button if you need some help.
 
 ```{r mean, exercise=TRUE, exercise.eval=TRUE}
-borders
+borders_data
 ```
 
 ```{r mean-hint-1}
-mean(borders$...)
+mean(borders_data$...)
 ```
 
 ```{r mean-hint-2}
-mean(borders$LengthOfStay)
+mean(borders_data$LengthOfStay)
 ```
 
 ```{r mean-solution}
-mean(borders$LengthOfStay)
+mean(borders_data$LengthOfStay)
 ```
 
 ```{r mean-check}
@@ -477,15 +479,15 @@ addmargins(table(...))
 ```
 
 ```{r freq-hint-3}
-addmargins(table(borders$..., borders$...))
+addmargins(table(borders_data$..., borders_data$...))
 ```
 
 ```{r freq-hint-4}
-addmargins(table(borders$HospitalCode, borders$Sex))
+addmargins(table(borders_data$HospitalCode, borders_data$Sex))
 ```
 
 ```{r freq-solution}
-addmargins(table(borders$HospitalCode, borders$Sex))
+addmargins(table(borders_data$HospitalCode, borders_data$Sex))
 ```
 
 ```{r freq-check}
@@ -513,10 +515,10 @@ Before going on to the functions that make up `dplyr`, we need to talk about the
 
 ```{r pipe-example, exercise=TRUE}
 # Not using pipe operator
-arrange(filter(borders, HospitalCode == "B120H"), Dateofbirth)
+arrange(filter(borders_data, HospitalCode == "B120H"), Dateofbirth)
 
 # With pipe operator
-borders %>%
+borders_data %>%
   filter(HospitalCode == "B120H") %>%
   arrange(Dateofbirth)
 ```
@@ -527,34 +529,34 @@ Picks cases based on their values:
 
 * `filter(<data>, <logical_expression>)`
 
-Filter the `borders` data-set to where `HospitalCode` is "B120H" and `LengthOfStay` is more than 10. Use the hint button if you need some help.
+Filter the `borders_data` data-set to where `HospitalCode` is "B120H" and `LengthOfStay` is more than 10. Use the hint button if you need some help.
 
 ```{r filter-example, exercise=TRUE}
 
 ```
 
 ```{r filter-example-hint-1}
-borders %>%
+borders_data %>%
   ...(... == ... & ... > ...)
 ```
 
 ```{r filter-example-hint-2}
-borders %>%
+borders_data %>%
   filter(... == ... & ... > ...)
 ```
 
 ```{r filter-example-hint-3}
-borders %>%
+borders_data %>%
   filter(HospitalCode == ... & LengthOfStay > ...)
 ```
 
 ```{r filter-example-hint-4}
-borders %>%
+borders_data %>%
   filter(HospitalCode == "B120H" & LengthOfStay > 10)
 ```
 
 ```{r filter-example-solution}
-borders %>%
+borders_data %>%
   filter(HospitalCode == "B120H" & LengthOfStay > 10)
 ```
 
@@ -575,27 +577,27 @@ Create a new column in `border` that is equal to `LengthOfStay` divided by 2. Us
 ```
 
 ```{r mutate-example-hint-1}
-borders %>%
+borders_data %>%
   ...(... = ...)
 ```
 
 ```{r mutate-example-hint-2}
-borders %>%
+borders_data %>%
   mutate(... = ...)
 ```
 
 ```{r mutate-example-hint-3}
-borders %>%
+borders_data %>%
   mutate(los_div2 = ... / 2)
 ```
 
 ```{r mutate-example-hint-4}
-borders %>%
+borders_data %>%
   mutate(los_div2 = LengthOfStay / 2)
 ```
 
 ```{r mutate-example-solution}
-borders %>%
+borders_data %>%
   mutate(los_div2 = LengthOfStay / 2)
 ```
 
@@ -610,29 +612,29 @@ Changes the ordering of rows:
 * `arrange(<data>, <variables>)`
 * `desc()` to sort in descending order
 
-Sort `borders` by `HospitalCode`. Use the hint button if you need some help.
+Sort `borders_data` by `HospitalCode`. Use the hint button if you need some help.
 
 ```{r arrange-example, exercise=TRUE}
 
 ```
 
 ```{r arrange-example-hint-1}
-borders %>%
+borders_data %>%
   ...(...)
 ```
 
 ```{r arrange-example-hint-2}
-borders %>%
+borders_data %>%
   arrange(...)
 ```
 
 ```{r arrange-example-hint-3}
-borders %>%
+borders_data %>%
   arrange(HospitalCode)
 ```
 
 ```{r arrange-example-solution}
-borders %>%
+borders_data %>%
   arrange(HospitalCode)
 ```
 
@@ -647,34 +649,34 @@ Picks variables based on their names:
 * `select(<data>, <expression>)`
 * pre-pend `-` to a variable to remove
 
-Remove the `Postcode` variable from `borders`. Use the hint button if you need some help.
+Remove the `Postcode` variable from `borders_data`. Use the hint button if you need some help.
 
 ```{r select-example, exercise=TRUE}
 
 ```
 
 ```{r select-example-hint-1}
-borders %>%
+borders_data %>%
   ...(...)
 ```
 
 ```{r select-example-hint-2}
-borders %>%
+borders_data %>%
   select(...)
 ```
 
 ```{r select-example-hint-3}
-borders %>%
+borders_data %>%
   select(-...)
 ```
 
 ```{r select-example-hint-4}
-borders %>%
+borders_data %>%
   select(-Postcode)
 ```
 
 ```{r select-example-solution}
-borders %>%
+borders_data %>%
   select(-Postcode)
 ```
 
@@ -688,29 +690,29 @@ Groups variables to perform other operations:
 
 * `group_by(<data>, <col_name>)`
 
-We're not performing another operation but to see that it works, group `borders` by `HospitalCode`. Use the hint button if you need some help.
+We're not performing another operation but to see that it works, group `borders_data` by `HospitalCode`. Use the hint button if you need some help.
 
 ```{r group-by-example, exercise=TRUE}
 
 ```
 
 ```{r group-by-example-hint-1}
-borders %>%
+borders_data %>%
   ...(...)
 ```
 
 ```{r group-by-example-hint-2}
-borders %>%
+borders_data %>%
   group_by(...)
 ```
 
 ```{r group-by-example-hint-3}
-borders %>%
+borders_data %>%
   group_by(HospitalCode)
 ```
 
 ```{r group-by-example-solution}
-borders %>%
+borders_data %>%
   group_by(HospitalCode)
 ```
 
@@ -724,44 +726,44 @@ Reduces multiple values down to a single summary:
 
 * `summarise(<data>, <name> = <expression>)`
 
-What is the average `LengthOfStay` by `HospitalCode` in `borders`. Use the hint button if you need some help.
+What is the average `LengthOfStay` by `HospitalCode` in `borders_data`. Use the hint button if you need some help.
 
 ```{r summarise-example, exercise=TRUE}
 
 ```
 
 ```{r summarise-example-hint-1}
-borders %>%
+borders_data %>%
   ...(...) %>%
   ...(...)
 ```
 
 ```{r summarise-example-hint-2}
-borders %>%
+borders_data %>%
   ...(...) %>%
   summarise(mean_los = ...(...))
 ```
 
 ```{r summarise-example-hint-3}
-borders %>%
+borders_data %>%
   group_by(...) %>%
   summarise(mean_los = ...(...))
 ```
 
 ```{r summarise-example-hint-4}
-borders %>%
+borders_data %>%
   group_by(...) %>%
   summarise(mean_los = mean(...))
 ```
 
 ```{r summarise-example-hint-5}
-borders %>%
+borders_data %>%
   group_by(HospitalCode) %>%
   summarise(mean_los = mean(LengthOfStay))
 ```
 
 ```{r summarise-example-solution}
-borders %>%
+borders_data %>%
   group_by(HospitalCode) %>%
   summarise(mean_los = mean(LengthOfStay))
 ```
@@ -777,34 +779,34 @@ Useful for running frequencies, this calls `group_by()` and produces counts for 
 * `count(<data>, <variables>)`
 * sort by descending order using `sort = TRUE` as an argument
 
-What is the count of `Specialty` in `borders`, displayed in descending order. Use the hint button if you need some help.
+What is the count of `Specialty` in `borders_data`, displayed in descending order. Use the hint button if you need some help.
 
 ```{r count-example, exercise=TRUE}
 
 ```
 
 ```{r count-example-hint-1}
-borders %>%
+borders_data %>%
   ...(...)
 ```
 
 ```{r count-example-hint-2}
-borders %>%
+borders_data %>%
   count(...)
 ```
 
 ```{r count-example-hint-3}
-borders %>%
+borders_data %>%
   count(..., sort = TRUE)
 ```
 
 ```{r count-example-hint-4}
-borders %>%
+borders_data %>%
   count(Specialty, sort = TRUE)
 ```
 
 ```{r count-example-solution}
-borders %>%
+borders_data %>%
   count(Specialty, sort = TRUE)
 ```
 
@@ -818,29 +820,29 @@ Renames specific columns in a data frame:
 
 * `rename(<data>, <new_name> = <existing_name>)`
 
-The column `Dateofbirth` in `borders` doesn't follow the style guide, rename it to `date_of_birth`. Use the hint button if you need some help.
+The column `Dateofbirth` in `borders_data` doesn't follow the style guide, rename it to `date_of_birth`. Use the hint button if you need some help.
 
 ```{r rename-example, exercise=TRUE}
 
 ```
 
 ```{r rename-example-hint-1}
-borders %>%
+borders_data %>%
   ...(...)
 ```
 
 ```{r rename-example-hint-2}
-borders %>%
+borders_data %>%
   rename(... = ...)
 ```
 
 ```{r rename-example-hint-3}
-borders %>%
+borders_data %>%
   rename(date_of_birth = Dateofbirth)
 ```
 
 ```{r rename-example-solution}
-borders %>%
+borders_data %>%
   rename(date_of_birth = Dateofbirth)
 ```
 
@@ -854,39 +856,39 @@ Changes values within a column:
 
 * `mutate(<col_name> = recode(<col_name>, "<existing_code>" = "<new_code>"))`
 
-The `HospitalCode` "B120V" in `borders` needs to be changed to "B120H". Use the hint button if you need some help.
+The `HospitalCode` "B120V" in `borders_data` needs to be changed to "B120H". Use the hint button if you need some help.
 
 ```{r recode-example, exercise=TRUE}
 
 ```
 
 ```{r recode-example-hint-1}
-borders %>%
+borders_data %>%
   ...(... = ...)
 ```
 
 ```{r recode-example-hint-2}
-borders %>%
+borders_data %>%
   mutate(... = recode(...))
 ```
 
 ```{r recode-example-hint-3}
-borders %>%
+borders_data %>%
   mutate(HospitalCode = recode(..., ... = ...))
 ```
 
 ```{r recode-example-hint-4}
-borders %>%
+borders_data %>%
   mutate(HospitalCode = recode(HospitalCode, ... = ...))
 ```
 
 ```{r recode-example-hint-5}
-borders %>%
+borders_data %>%
   mutate(HospitalCode = recode(HospitalCode, "B120V" = "B120H"))
 ```
 
 ```{r recode-example-solution}
-borders %>%
+borders_data %>%
   mutate(HospitalCode = recode(HospitalCode, "B120V" = "B120H"))
 ```
 
@@ -971,12 +973,8 @@ line_plot
 
 ### Bar Plot
 
-```{r borders-age-data, eval=TRUE, include=FALSE}
-# borders_age <- read_csv("www/data/BORDERS (inc Age).csv")
-```
-
 ```{r bar-plot, exercise=TRUE}
-bar_plot <- ggplot(borders_age) +
+bar_plot <- ggplot(borders_age_data) +
   geom_bar(aes(x = admissionday))
 
 bar_plot
@@ -985,7 +983,7 @@ bar_plot
 ### Scatter Plot
 
 ```{r scatter-plot, exercise=TRUE}
-scatter_plot <- ggplot(borders_age, aes(x = ageonadmission,
+scatter_plot <- ggplot(borders_age_data, aes(x = ageonadmission,
                                         y = lengthofstay1)) +
   geom_point()
 
@@ -995,7 +993,7 @@ scatter_plot
 ### Customisation
 
 ```{r custom-plot, exercise=TRUE}
-custom_bar_plot <- ggplot(borders_age) +
+custom_bar_plot <- ggplot(borders_age_data) +
   geom_bar(aes(x = admissionday),
            fill = "magenta4",
            width = 0.5) +
@@ -1008,7 +1006,7 @@ custom_bar_plot
 
 ### Knowledge Checking
 
-Using the loaded `borders` data-set:
+Using the loaded `borders_data` data-set:
 
 1. Filter the data-set to show only records from `HospitalCode` "B109H", name this new data-set "borders_b109h"
 2. Create a histogram for patient's `LengthOfStay`, call this plot "b109h_los_hist"
