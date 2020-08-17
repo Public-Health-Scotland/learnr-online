@@ -1,0 +1,965 @@
+---
+title: "Intro to R"
+output: 
+  learnr::tutorial:
+    css: "css/style.css"
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+# Author: Russell McCreath
+# Original Date: Aug 2020
+# Version of R: 
+
+library(learnr)
+library(gradethis)
+library(stringr)
+library(readr)
+library(haven)
+library(dplyr)
+library(ggplot2)
+knitr::opts_chunk$set(echo = FALSE)
+
+tutorial_options(
+  exercise.checker = gradethis::grade_learnr
+)
+
+borders <- readRDS("www/data/borders.rds")
+borders_age <- read_csv("www/data/BORDERS (inc Age).csv")
+```
+
+```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
+knitr::include_graphics("images/phs-logo.png")
+```
+
+
+## Introduction
+
+Welcome to an Introduction to R. This course is designed as a self-led introduction to R for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. Below is an overview of the learning pathway.
+
+```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-intro-pathway-2.png")
+```
+
+### What is R?
+
+* A programming language widely used for data analysis, statistics, and graphics
+* Open source and available on all major operating systems
+* Has the functionality to go from raw data to interactive reports, web apps, and more
+* A part of the PHS analytical strategy
+
+</br>
+
+Since we're getting started, here's a quiz to get familiar with the layout:
+
+```{r intro-quiz}
+quiz(
+  question("Which of the following can R help to produce?",
+    answer("tidy data", correct = TRUE),
+    answer("dashboards", correct = TRUE),
+    answer("static/interactive reports", correct = TRUE),
+    answer("web apps", correct = TRUE),
+    answer("magic", message = "It may seem like R is magic but unfortunately not"),
+    answer("databases", correct = TRUE),
+    answer("presentations", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+
+## Foundations
+
+Base R is the fundamental language and what we'll explore in this section. 
+
+On top of base R are packages. Packages are bundles of code to expand the functionality of base R; we look at a couple of these later in the course. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own package too, `phsmethods` (a bundle of functions that are common for PHS staff).
+
+It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.
+
+```{r foundations-rstructure, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-foundations-structure.png")
+```
+
+### Input
+
+Below is an example of R code, it includes various types of R syntax:
+
+* `# Hello World example` - **comments** are just for us humans and ignored by R. They help to aid understanding of code, think more "why" than "what". 
+* `hello_world` - **variables** are names (containers) we give to 'objects'.
+* `<-` - **assignment operator** (shortcut: `alt` + `-`) is how we give variables their content.
+* `"Hello World"` - **character** / string (`'` or `"`) is one of the *basic data types* in R, we go over the others next.
+* `print()` - **functions** allow us to get R to do something by passing in arguments (the stuff inside the brackets). 
+
+Have a look and click 'Run Code' below to see the output. Then, change the code to get R to print "Hello \<your name\>".
+
+```{r foundations-input, exercise=TRUE}
+# Hello World example
+hello_world <- "Hello World"
+
+print(hello_world)
+```
+
+```{r foundations-input-check}
+grade_result(
+  pass_if(~ startsWith(.result, "Hello")),
+  fail_if(~ TRUE, "Have you entered a string to say Hello? Have another go!")
+)
+```
+
+### Basic Data Types
+
+R has some basic/primitive data types:
+
+* **Character**, also called strings, are written in single `'` or double `"` quotes around text, numbers, or symbols. It may be necessary to store a "number" as a character object, e.g. CHI numbers to preserve formatting. *Example:* `"Hello World!"`
+* **Numerical** type holds the whole set of real numbers. A subset of the numerical type is **integer**, this is created by appending an `L` to the end of the number. *Example:* `123.5`
+* **Logical** (Boolean) can be `TRUE`, `FALSE`, `T`, or `F`, other variations (e.g. lowercase) will result in an error.  *Example:* `TRUE`
+* **Complex** stores complex number objects, e.g. imaginary numbers. *Example:* `2i`
+
+Have a look and click 'Run Code' below to see the output. `typeof()` is a function that returns the argument's basic data type, `is.<data_type>()` returns a Boolean `TRUE` or `FALSE` depending on whether the argument provided is the data type in the name of the function.
+
+```{r foundations-basic-types, exercise=TRUE}
+typeof("Hello World")
+is.numeric(123.5)
+print(typeof(2 + 2i))
+```
+
+### Type Conversion
+
+It's sometimes necessary to convert from one basic data type to another. For example, we may receive a data-set with Boolean values stored as `1` and `0` or lowercase `true` and `false`. The function `as.<data_type>()` performs this function for us with some considerations required:
+
+* `as.character()` conversions tend to succeed without fault.
+* `as.numeric()` - `TRUE` and `FALSE` become `1` and `0`, character types need to be formatted correctly.
+* `as.logical()` - all numeric values except `0` become `TRUE`, character values can be upper, lower, or proper case versions.
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r foundations-type-conversion, exercise=TRUE}
+as.character(123.5)
+as.numeric("123.5") 
+as.logical("False")
+```
+
+### Operators
+
+These operators are common to most programming languages. The table shows the appropriate R syntax in the ‘operator’ column and are shown in order of operation/precedence. In terms of precedence, it is advisable to use brackets to avoid anything ambiguous.
+
+```{r, echo=FALSE}
+operators_table <- data.frame(
+  "Precedence" = c(1, 2, 3, 4, 5, 6, 7, 8),
+  "Operator" = c("`^`", "`%%`", "`*` `/`", "`+` `-`", "`<` `>` `<=` `>=` `==` `!=`", "`!`", "`&` `&&`", "<code>&#124;</code> <code>&#124;&#124;</code>"),
+  "Description" = c("Exponentiation (right to left)", "Modulus", "Multiplication, Division", "Addition, Subtraction", "Comparison Operators (Less Than, More Than, Less Than or Equal To, More Than or Equal To, Equal To, Not Equal To", "Logical NOT", "Logical AND", "Logical OR")
+)
+
+knitr::kable(operators_table)
+
+```
+
+### Data Structures
+
+This is a list of the main data structures (complex data types) available in R:
+
+* **Vectors** contain multiple objects of the same basic class
+* **Lists** are a special type of vector that can contain objects of *different* basic classes, including other lists
+* **Matrices** expand the dimensions with `nrow` (number of rows) and `ncol` (number of columns) arguments, these are constructed column-wise
+* **Factors** are used to represent categorical data
+* **Data Frames** store tabular data, each column contains one variable, each row contains an observation
+
+It's possible to use `str()` to get an overview and description of the data structure
+
+#### Vectors
+
+* Create: `vector(<data_type>, <length>)` or `c(...)`
+* Access: `<vector_name>[<index>]`
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r foundations-structures-vector, exercise=TRUE}
+vector(logical, 4)
+c("a", "c", "f", "b")[1]
+c(2, 5, 1, "abc")[2]
+```
+
+#### Lists
+
+* Create: `list(...)`
+* Sub-list: `<list_name>[<index>]`
+* Access: `<list_name>[[<index>]]`
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r foundations-structures-list, exercise=TRUE}
+list("abc", 4, FALSE)[1:2]
+list(list(2, 3), "abc")[2]
+```
+
+##### Naming Lists
+
+It's possible to name list items, this can be done during creation or after with the `names()` function.
+
+* At creation: `list("<name>", = <item>)`
+* After creation: `names(<list_name>) <- c("<name>")`
+
+This adds the ability to access list items with the `$` operator and using the list item's name.
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r foundations-structures-list-naming, exercise=TRUE}
+x <- list("Ch" = "a", "Nm" = 2) 
+names(x) <- c("Char", "Num") 
+x$Char
+```
+
+#### Matrices
+
+* Create: `matrix(<data>, nrow = <int>, ncol = <int>)`
+* Access: `<matrix_name>[<row_num>, <col_num>]`
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r foundations-structures-matrix, exercise=TRUE}
+x <- matrix(1:6, 2, 3) 
+x
+x[2, 3]
+```
+
+#### Factors
+
+* Create: `factor(c(...))`
+* Levels: `factor(c(...), levels = c(...))`
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r foundations-structures-factors, exercise=TRUE}
+x <- factor(c(1, 2, 1, 2, 2, 1), levels = c(2, 1))
+x
+```
+
+#### Data Frames
+
+* Create: `data.frame("<name>" = <element(s)>)`
+* Subset: `[]`
+* Access: `[[]]` or `$`
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r foundations-structures-dataframe, exercise=TRUE}
+data.frame(name = c("Harry", "Sarah"), score = c(62, 91))
+```
+
+### Knowledge Check
+
+```{r foundations-structures-quiz}
+quiz(
+  question("What will `c('abc', 5, TRUE, 123.5)[3]` return?",
+           answer("`TRUE`", message = "This is a vector so only holds one basic data type."),
+           answer("`5`"),
+           answer("`123.5`", message = "R has a 1-based indexing system and this is a vector so only holds one basic data type."),
+           answer("`'123.5'`", message = "R has a 1-based indexing system."),
+           answer("`'TRUE'`", correct = TRUE),
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("How do you return the second element from this list (not a sub-list)? (Select all that apply) `example_list <- list('Number' = 123, 'List' = list(1, 2, 3), TRUE, FALSE)`",
+           answer("`example_list[2]`", message = "Remember it's the element to be returned, not a sub-list"),
+           answer("`example_list[[2]]`", correct = TRUE),
+           answer("`example_list$List`", correct = TRUE),
+           answer("`c(1, 2, 3)`"),
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("What result did Zac get? `patient_list <- data.frame(name = c('Tom', 'Jen', 'Zac', 'Kat'), \n result = c(97.6, 54.3, 21.0, 83.8))`",
+           answer("97.6"),
+           answer("54.3"),
+           answer("21.0", correct = TRUE),
+           answer("83.8"),
+           allow_retry = TRUE
+           ),
+  question("How do you get the 2nd, 3rd, and 4th item from this list? `example_list <- list('x', 'a', 'b', 'c', 'y', 'z')`",
+           answer("`example_list[2:4]`", correct = TRUE),
+           answer("`example_list[1:3]`", message = "R has a 1-based indexing system"),
+           answer("`example_list[[2:4]]`"),
+           answer("`example_list[[1:3]]`"),
+           random_answer_order = TRUE,
+           allow_retry = TRUE
+           )
+)
+```
+
+
+## Packages
+
+Packages expand and improve the functionality of R with functions. Packages may be necessary for complex, repetitive, or exceptionally large tasks.
+
+To use packages, they must first be installed on your system. This only needs to be done once, it's like installing new software on your computer. Packages are installed by using `install.packages("<package_name>")`. 
+
+To utilise the functions within a package, they have to be loaded for each new session of R. This is done with `library(<package_name>)`. *Another function that loads packages is `require(<package_name>)`, however, this will not halt the execution of a program where an error occurs and is typically only used within other functions with supporting code.*
+
+When loading a package, it is common that a warning (not an error) will be thrown. This warning is when a function within the package has the same name as another function already available in the R session (potentially from base R or another package). The most recent package's function will "mask" the other. To be explicit on the function to use, you can use `<package_name>::<function>()`, e.g. `dplyr::filter()`.
+
+</br>
+
+#### Tidyverse
+
+<div class = "tidyverse-logo">
+```{r packages-tidyverse, echo=FALSE, fig.align='center', out.width="60%"}
+knitr::include_graphics("images/r-packages-tidyverse.png")
+```
+</div>
+
+Tidyverse is a suite of packages and have a common theme throughout. We’ll look at a couple of the Tidyverse packages later in [Wrangle]. It is not recommended to load Tidyverse in its entirety though, but rather each package that you’ll specifically use (e.g. `dplyr`). Tidyverse has grown dramatically so loading the whole suite will unnecessarily utilise a lot of resource.
+
+</br>
+
+While it's not possible to install packages on this course page, you can load them, dplyr has been pre-loaded for you and the below is a typical output. 
+
+```{r dplyr-load, eval=FALSE, include=TRUE, echo=TRUE}
+library(dplyr)
+```
+
+```{r dplyr-load-output, eval=FALSE, include=TRUE, echo=TRUE}
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:stats':
+  
+  filter, log
+
+The following objects are masked from 'package:base':
+  
+  intersect, setdiff, setequal, union
+```
+
+You can see that `dplyr` has the same function names as in a package called `stats`, `filter()` and `log()`, and from `base`, `intersect()`, `setdiff()`, `setequal()`, and `union()`. As `dplyr` was the latest package to be loaded, the functions from `dplyr` "mask" the functions from the other packages.
+
+
+</br>
+
+#### PHSMethods
+
+PHS have developed a package, `phsmethods`, with the aim to tackle some of the most common tasks, e.g. dealing with CHI numbers and working with postcodes.
+
+
+## RStudio
+
+![](https://www.youtube.com/watch?v=n3uue28FD0w)
+
+
+## Data Flow
+
+The chances are, that when you're working in R, you'll be working with some kind of data-set. The typical workflow involves bringing that data in, exploring, wrangling, creating visualisations, and then creating some kind of output. This workflow is outlined below with important foundations for projects to follow.
+
+```{r workflow, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-workflow.png")
+```
+
+*Unfortunately, it's not possible have the code exercises in this course reach directories for reading and writing code. To test these functions for yourself, the data we'll be working with is available here [link]. The data will be pre-loaded for you in later exercises.*
+
+### Working Directory
+
+* Current working directory: `getwd()`
+* Set new working directory: `setwd("<filepath>")`
+
+RStudio also provides options through the user interface for navigating directories. Also, other commands, such as `ls()` are available in R. 
+
+### CSV
+
+Working with CSVs requires the use of an R package, the recommended package to use is `readr`.
+
+* Read: `read_csv("<filepath>")`
+* Write: `write_csv(<object>, "<filepath>")`
+
+```{r csv-read, eval=FALSE, include=TRUE, echo=TRUE}
+library(readr)
+borders_csv <- read_csv("data/Borders.csv")
+```
+
+### SPSS
+
+Working with SPSS files requires the use of an R package, the recommended package to use is `haven`.
+
+* Read: `read_sav("<filepath>")`
+* Write: `write_sav(<object>, "<filepath>")`
+
+```{r spss-read, eval=FALSE, include=TRUE, echo=TRUE}
+library(haven)
+borders_spss <- read_sav("data/Borders.sav")
+```
+
+### RDS
+
+* Read: `readRDS("<filepath>")`
+* Write: `saveRDS(<object>, "<filepath>")`
+
+```{r rds-read, eval=FALSE, include=TRUE, echo=TRUE}
+borders_rds <- readRDS("data/borders.rds")
+```
+
+### Web
+
+The packages/functions used will vary depending on the structure of the data hosted on the web. This example uses a CSV so the process in very similar to before.
+
+* Read: `read_csv("<filepath>")`
+
+```{r web-read, eval=FALSE, include=TRUE, echo=TRUE}
+library(readr)
+borders_csv <- read_csv("https://www.opendata.nhs.scot/dataset/cbd1802e-0e04-4282-88eb-d7bdcfb120f0/resource/c698f450-eeed-41a0-88f7-c1e40a568acc/download/current_nhs_hospitals_in_scotland_010720.csv")
+```
+
+### Databases (SMRA)
+
+The packages/functions used will vary depending on the structure of the database. This example, for SMRA, uses the package `odbc`.
+
+* Connect (running this will then prompt you for your user credentials): 
+``` {r smra-connect, eval=FALSE, include=TRUE, echo=TRUE}
+smra_connection <- dbConnect(drv = odbc(), 
+dsn = "SMRA",
+uid = .rs.askForPassword("SMRA Username:"),
+pwd = .rs.askForPassword("SMRA Password:"))
+```
+
+* Extract:
+``` {r smra-extract, eval=FALSE, include=TRUE, echo=TRUE}
+smr01 <- dbGetQuery(smra_connection, paste("<sql_query>"))
+```
+
+
+## Explore
+
+### Mean/Median & Summary
+
+* `mean()` and `median()` are passed arrays of values (usually from a data frame) to return the mean and median value.
+
+* `summary()` returns all summary statistics based on a given array.
+
+```{r borders-data, eval=TRUE, include=FALSE}
+# borders <- readRDS("www/data/borders.rds")
+```
+
+You now have the borders data-set loaded as `borders`. See if you can get the mean value for `LengthOfStay`. Use the hint button if you need some help.
+
+```{r mean, exercise=TRUE, exercise.eval=TRUE}
+borders
+```
+
+```{r mean-hint-1}
+mean(borders$...)
+```
+
+```{r mean-hint-2}
+mean(borders$LengthOfStay)
+```
+
+### Frequencies & Crosstabs
+
+* Frequency: `table(<df_name>$<col_name>)`
+* Crosstab: `table(<df_name>$<col_name1>, <df_name>$<col_name2>)`
+* Add Col/Row Totals: `addmargins()`
+
+Create a crosstab for `HospitalCode` and `Sex`, add column and row totals. Use the hint button if you need some help.
+
+```{r freq, exercise=TRUE}
+
+```
+
+```{r freq-hint-1}
+...(table(...))
+```
+
+```{r freq-hint-2}
+addmargins(table(...))
+```
+
+```{r freq-hint-3}
+addmargins(table(borders$..., borders$...))
+```
+
+```{r freq-hint-4}
+addmargins(table(borders$HospitalCode, borders$Sex))
+```
+
+
+## Wrangle
+
+<div class = "tidyverse-logo">
+```{r packages-dplyr, echo=FALSE, fig.align='center', out.width="60%"}
+knitr::include_graphics("images/r-packages-dplyr.png")
+```
+</div>
+
+In [Packages] we spoke about Tidyverse, a suite of packages for data exploration, manipulation, and visualisation. Within the suite of packages, we get `dplyr`, the grammar of data manipulation. This package provides as with a set of "verbs" to help solve most data manipulation challenges:
+
+</br>
+
+`filter()` `mutate()` `arrange()` `select()` `group_by()` `summarise()` `count()` `rename()` `recode()`
+
+### Pipe Operator
+
+Before going on to the functions that make up `dplyr`, we need to talk about the pipe `%>%` (shortcut: `ctrl` + `shift` + `M`). This is used to link functions together, passing the result of the previous into the next. Using the pipe makes R code more readable and prevents extensive parenthesis building up with multiple function calls. An example is below, don't worry too much about the functions, we get into that next (`dplyr` has been loaded).
+
+```{r pipe-example, exercise=TRUE}
+# Not using pipe operator
+arrange(filter(borders, HospitalCode == "B120H"), Dateofbirth)
+
+# With pipe operator
+borders %>%
+  filter(HospitalCode == "B120H") %>%
+  arrange(Dateofbirth)
+```
+
+### Filter
+
+Picks cases based on their values:
+
+* `filter(<data>, <logical_expression>)`
+
+Filter the `borders` data-set to where `HospitalCode` is "B120H" and `LengthOfStay` is more than 10. Use the hint button if you need some help.
+
+```{r filter-example, exercise=TRUE}
+
+```
+
+```{r filter-example-hint-1}
+borders %>%
+  ...(... == ... & ... > ...)
+```
+
+```{r filter-example-hint-2}
+borders %>%
+  filter(... == ... & ... > ...)
+```
+
+```{r filter-example-hint-3}
+borders %>%
+  filter(HospitalCode == ... & LengthOfStay > ...)
+```
+
+```{r filter-example-hint-4}
+borders %>%
+  filter(HospitalCode == "B120H" & LengthOfStay > 10)
+```
+
+### Mutate
+
+Adds new variables that are functions of existing variables:
+
+* `mutate(<data>, <nol-col> = <expression>`
+
+Create a new column in `border` that is equal to `LengthOfStay` divided by 2. Use the hint button if you need some help.
+
+```{r mutate-example, exercise=TRUE}
+
+```
+
+```{r mutate-example-hint-1}
+borders %>%
+  ...(... = ...)
+```
+
+```{r mutate-example-hint-2}
+borders %>%
+  mutate(... = ...)
+```
+
+```{r mutate-example-hint-3}
+borders %>%
+  mutate(los_div2 = ... / 2)
+```
+
+```{r mutate-example-hint-4}
+borders %>%
+  mutate(los_div2 = LengthOfStay / 2)
+```
+
+### Arrange
+
+Changes the ordering of rows:
+
+* `arrange(<data>, <variables>)`
+* `desc()` to sort in descending order
+
+Sort `borders` by `HospitalCode`. Use the hint button if you need some help.
+
+```{r arrange-example, exercise=TRUE}
+
+```
+
+```{r arrange-example-hint-1}
+borders %>%
+  ...(...)
+```
+
+```{r arrange-example-hint-2}
+borders %>%
+  arrange(...)
+```
+
+```{r arrange-example-hint-3}
+borders %>%
+  arrange(HospitalCode)
+```
+
+### Select 
+
+Picks variables based on their names:
+
+* `select(<data>, <expression>)`
+* pre-pend `-` to a variable to remove
+
+Remove the `Postcode` variable from `borders`. Use the hint button if you need some help.
+
+```{r select-example, exercise=TRUE}
+
+```
+
+```{r select-example-hint-1}
+borders %>%
+  ...(...)
+```
+
+```{r select-example-hint-2}
+borders %>%
+  select(...)
+```
+
+```{r select-example-hint-3}
+borders %>%
+  select(-...)
+```
+
+```{r select-example-hint-4}
+borders %>%
+  select(-Postcode)
+```
+
+### Group By
+
+Groups variables to perform other operations:
+
+* `group_by(<data>, <col_name>)`
+
+We're not performing another operation but to see that it works, group `borders` by `HospitalCode`. Use the hint button if you need some help.
+
+```{r group-by-example, exercise=TRUE}
+
+```
+
+```{r group-by-example-hint-1}
+borders %>%
+  ...(...)
+```
+
+```{r group-by-example-hint-2}
+borders %>%
+  group_by(...)
+```
+
+```{r group-by-example-hint-3}
+borders %>%
+  group_by(HospitalCode)
+```
+
+### Summarise
+
+Reduces multiple values down to a single summary:
+
+* `summarise(<data>, <name> = <expression>)`
+
+What is the average `LengthOfStay` by `HospitalCode` in `borders`. Use the hint button if you need some help.
+
+```{r summarise-example, exercise=TRUE}
+
+```
+
+```{r summarise-example-hint-1}
+borders %>%
+  ...(...) %>%
+  ...(...)
+```
+
+```{r summarise-example-hint-2}
+borders %>%
+  ...(...) %>%
+  summarise(mean_los = ...(...))
+```
+
+```{r summarise-example-hint-3}
+borders %>%
+  group_by(...) %>%
+  summarise(mean_los = ...(...))
+```
+
+```{r summarise-example-hint-4}
+borders %>%
+  group_by(...) %>%
+  summarise(mean_los = mean(...))
+```
+
+```{r summarise-example-hint-5}
+borders %>%
+  group_by(HospitalCode) %>%
+  summarise(mean_los = mean(LengthOfStay))
+```
+
+### Count
+
+Useful for running frequencies, this calls `group_by()` and produces counts for specified column:
+
+* `count(<data>, <variables>)`
+* sort by descending order using `sort = TRUE` as an argument
+
+What is the count of `Specialty` in `borders`, displayed in descending order. Use the hint button if you need some help.
+
+```{r count-example, exercise=TRUE}
+
+```
+
+```{r count-example-hint-1}
+borders %>%
+  ...(...)
+```
+
+```{r count-example-hint-2}
+borders %>%
+  count(...)
+```
+
+```{r count-example-hint-3}
+borders %>%
+  count(..., sort = TRUE)
+```
+
+```{r count-example-hint-4}
+borders %>%
+  count(Specialty, sort = TRUE)
+```
+
+### Rename
+
+Renames specific columns in a data frame:
+
+* `rename(<data>, <new_name> = <existing_name>)`
+
+The column `Dateofbirth` in `borders` doesn't follow the style guide, rename it to `date_of_birth`. Use the hint button if you need some help.
+
+```{r rename-example, exercise=TRUE}
+
+```
+
+```{r rename-example-hint-1}
+borders %>%
+  ...(...)
+```
+
+```{r rename-example-hint-2}
+borders %>%
+  rename(... = ...)
+```
+
+```{r rename-example-hint-3}
+borders %>%
+  rename(date_of_birth = Dateofbirth)
+```
+
+### Recode
+
+Changes values within a column:
+
+* `mutate(<col_name> = recode(<col_name>, "<existing_code>" = "<new_code>"))`
+
+The `HospitalCode` "B120V" in `borders` needs to be changed to "B120H". Use the hint button if you need some help.
+
+```{r recode-example, exercise=TRUE}
+
+```
+
+```{r recode-example-hint-1}
+borders %>%
+  ...(... = ...)
+```
+
+```{r recode-example-hint-2}
+borders %>%
+  mutate(... = recode(...))
+```
+
+```{r recode-example-hint-3}
+borders %>%
+  mutate(HospitalCode = recode(..., ... = ...))
+```
+
+```{r recode-example-hint-4}
+borders %>%
+  mutate(HospitalCode = recode(HospitalCode, ... = ...))
+```
+
+```{r recode-example-hint-5}
+borders %>%
+  mutate(HospitalCode = recode(HospitalCode, "B120V" = "B120H"))
+```
+
+### Joining Tables
+
+For merging data by matching together common variables in 2 tables:
+
+* `<type>_join(<data_1>, <data_2>, by = <common_variable(s)>)`
+
+```{r join-tables-overview, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-joining-overview.png")
+```
+
+```{r baby-data, eval=TRUE, include=FALSE}
+library(readr)
+baby5 <- read_csv("www/data/Baby5.csv")
+baby6 <- read_csv("www/data/Baby6.csv")
+```
+
+2 new data-sets have been loaded, `baby5` and `baby6`, these have common variables `FAMILYID` and `DOB`. Using a left_join, merge them together. Use the hint button if you need some help.
+
+```{r join-example, exercise=TRUE}
+
+```
+
+```{r join-example-hint-1}
+...(..., ..., by = ...)
+```
+
+```{r join-example-hint-2}
+left_join(..., ..., by = c(..., ...))
+```
+
+```{r join-example-hint-3}
+left_join(baby5, baby6, by = c(..., ...))
+```
+
+```{r join-example-hint-4}
+left_join(baby5, baby6, by = c("FAMILYID", "DOB"))
+```
+
+
+## Visualise
+
+<div class = "tidyverse-logo">
+```{r packages-ggplot2, echo=FALSE, fig.align='center', out.width="60%"}
+knitr::include_graphics("images/r-packages-ggplot2.png")
+```
+</div>
+
+Visualisations are incredibly valuable and the process for creating them is simplified with `ggplot2`, a system from creating graphics to visualise data.
+
+It begins with a call to `ggplot()`, supplying the data and aesthetic mappings, using `aes()`, then just add `layers`, `scales`, `coords`, and `facets` with `+`.
+
+### Line Graph
+
+```{r line-graph, exercise=TRUE}
+# Define the data
+data <- data.frame(
+  x = c(1, 3, 2, 4),
+  y = c(4, 8, 7, 11))
+
+# Plot the data
+line_plot <- ggplot(data, aes(x, y)) +
+  geom_line() +
+  geom_point()
+
+line_plot
+```
+
+### Bar Plot
+
+```{r borders-age-data, eval=TRUE, include=FALSE}
+# borders_age <- read_csv("www/data/BORDERS (inc Age).csv")
+```
+
+```{r bar-plot, exercise=TRUE}
+bar_plot <- ggplot(borders_age) +
+  geom_bar(aes(x = admissionday))
+
+bar_plot
+```
+
+### Scatter Plot
+
+```{r scatter-plot, exercise=TRUE}
+scatter_plot <- ggplot(borders_age, aes(x = ageonadmission,
+                                        y = lengthofstay1)) +
+  geom_point()
+
+scatter_plot
+```
+
+### Customisation
+
+```{r custom-plot, exercise=TRUE}
+custom_bar_plot <- ggplot(borders_age) +
+  geom_bar(aes(x = admissionday),
+           fill = "magenta4",
+           width = 0.5) +
+  xlab("Admission Day") +
+  ylab("Number of Admissions") +
+  ggtitle("Distribution of Admissions")
+
+custom_bar_plot
+```
+
+### Knowledge Checking
+
+Using the loaded `borders` data-set:
+
+1. Filter the data-set to show only records from `HospitalCode` "B109H"
+2. Create a histogram for patient's `LengthOfStay`
+3. Add axis labels and a title to your histogram
+
+```{r plots-exercise, exercise=TRUE}
+
+```
+
+
+## Output
+
+#### RMarkdown
+
+<div class = "tidyverse-logo">
+```{r packages-rmarkdown, echo=FALSE, fig.align='center', out.width="60%"}
+knitr::include_graphics("images/r-packages-rmarkdown.png")
+```
+</div>
+
+RMarkdown allows for the production of fully reproducible documents, with R (and other language) 'chunks' included. It supports many static and dynamic outputs, including PDF, MS Word, HTML, books, presentation, even this course is written using RMarkdown (and Shiny). RMarkdown is currently used across PHS in RAP publications, infographics, and more.
+ 
+</br>
+ 
+#### Shiny 
+
+<div class = "tidyverse-logo">
+```{r packages-shiny, echo=FALSE, fig.align='center', out.width="60%"}
+knitr::include_graphics("images/r-packages-shiny.png")
+```
+</div>
+
+Shiny is used for building interactive web apps through R. It provides an interactive approach to sharing data and analyses and can be hosted online or embedded in RMarkdown documents. Shiny is used for some PHS publications and in development for more.
+
+</br>
+</br>
+
+
+## Review
+
+Now it's time to embed your new knowledge and skills, expand with related technologies (e.g. git), and when you're ready *Take R Further* with more training opportunities.
+
+#### Help
+
+* Vignettes (Help) / `?<function_name>`
+* Google / Stack Overflow (tag queries with "[r]")
+* [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
+* [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
+
+#### Feedback
+
+```{r microsoft-forms-feedback, include=FALSE, eval=FALSE}
+#<iframe width="100%" height= "480px" src= "https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5JmlMENbvENPtAs5eceNN9kYdUNEFYNEtYMzNFQUhPRjVOVFhIM003NExGTS4u&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%;" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+```
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfu38dXaRzJt5WrOy6dJsdWBS1JQcLQxM-0G7DfZD8hLC5Ivg/viewform?embedded=true" width="100%" height="2300" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>

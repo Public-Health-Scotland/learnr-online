@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css?family=Open Sans");
+@import url("https://fonts.google.com/specimen/Source+Code+Pro?category=Monospace");
+
+body, h1, h2, h3, h4, h5, h6, p, button {
+  font-family: 'Open Sans';
+}
+
+h1, h2 {
+  color: #433683;
+}
+
+h3, h4, h5 {
+  color: #bd27b9;
+}
+
+code {
+  font-family: 'Source Code Pro';
+}
+
+th {
+  color: #433683;
+}
+
+.panel-heading {
+  color: #bd27b9;
+  padding-bottom: 10px;
+}
+
+.btn-primary {
+  background-color: #0097d7;
+}
+
+.btn-success {
+  background-color: #80ba27;
+}
+
+.tidyverse-logo {
+  float: left;
+  width: 150px;
+}
+
+.tutorial-exercise-output {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+img {
+  max-width: 100%;
+}
