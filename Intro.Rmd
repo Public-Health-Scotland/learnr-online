@@ -434,10 +434,6 @@ smr01 <- dbGetQuery(smra_connection, paste("<sql_query>"))
 
 * `summary()` returns all summary statistics based on a given array.
 
-```{r borders-data, eval=TRUE, include=FALSE}
-# borders <- readRDS("www/data/borders.rds")
-```
-
 You now have the borders data-set loaded as `borders`. See if you can get the mean value for `LengthOfStay`. Use the hint button if you need some help.
 
 ```{r mean, exercise=TRUE, exercise.eval=TRUE}
@@ -450,6 +446,14 @@ mean(borders$...)
 
 ```{r mean-hint-2}
 mean(borders$LengthOfStay)
+```
+
+```{r mean-solution}
+mean(borders$LengthOfStay)
+```
+
+```{r mean-check}
+grade_code()
 ```
 
 ### Frequencies & Crosstabs
@@ -478,6 +482,14 @@ addmargins(table(borders$..., borders$...))
 
 ```{r freq-hint-4}
 addmargins(table(borders$HospitalCode, borders$Sex))
+```
+
+```{r freq-solution}
+addmargins(table(borders$HospitalCode, borders$Sex))
+```
+
+```{r freq-check}
+grade_code()
 ```
 
 
@@ -541,6 +553,15 @@ borders %>%
   filter(HospitalCode == "B120H" & LengthOfStay > 10)
 ```
 
+```{r filter-example-solution}
+borders %>%
+  filter(HospitalCode == "B120H" & LengthOfStay > 10)
+```
+
+```{r filter-example-check}
+grade_code()
+```
+
 ### Mutate
 
 Adds new variables that are functions of existing variables:
@@ -573,6 +594,15 @@ borders %>%
   mutate(los_div2 = LengthOfStay / 2)
 ```
 
+```{r mutate-example-solution}
+borders %>%
+  mutate(los_div2 = LengthOfStay / 2)
+```
+
+```{r mutate-example-check}
+grade_code()
+```
+
 ### Arrange
 
 Changes the ordering of rows:
@@ -599,6 +629,15 @@ borders %>%
 ```{r arrange-example-hint-3}
 borders %>%
   arrange(HospitalCode)
+```
+
+```{r arrange-example-solution}
+borders %>%
+  arrange(HospitalCode)
+```
+
+```{r arrange-example-check}
+grade_code()
 ```
 
 ### Select 
@@ -634,6 +673,15 @@ borders %>%
   select(-Postcode)
 ```
 
+```{r select-example-solution}
+borders %>%
+  select(-Postcode)
+```
+
+```{r select-example-check}
+grade_code()
+```
+
 ### Group By
 
 Groups variables to perform other operations:
@@ -659,6 +707,15 @@ borders %>%
 ```{r group-by-example-hint-3}
 borders %>%
   group_by(HospitalCode)
+```
+
+```{r group-by-example-solution}
+borders %>%
+  group_by(HospitalCode)
+```
+
+```{r group-by-example-check}
+grade_code()
 ```
 
 ### Summarise
@@ -703,6 +760,16 @@ borders %>%
   summarise(mean_los = mean(LengthOfStay))
 ```
 
+```{r summarise-example-solution}
+borders %>%
+  group_by(HospitalCode) %>%
+  summarise(mean_los = mean(LengthOfStay))
+```
+
+```{r summarise-example-check}
+grade_code()
+```
+
 ### Count
 
 Useful for running frequencies, this calls `group_by()` and produces counts for specified column:
@@ -736,6 +803,15 @@ borders %>%
   count(Specialty, sort = TRUE)
 ```
 
+```{r count-example-solution}
+borders %>%
+  count(Specialty, sort = TRUE)
+```
+
+```{r count-example-check}
+grade_code()
+```
+
 ### Rename
 
 Renames specific columns in a data frame:
@@ -761,6 +837,15 @@ borders %>%
 ```{r rename-example-hint-3}
 borders %>%
   rename(date_of_birth = Dateofbirth)
+```
+
+```{r rename-example-solution}
+borders %>%
+  rename(date_of_birth = Dateofbirth)
+```
+
+```{r rename-example-check}
+grade_code()
 ```
 
 ### Recode
@@ -800,6 +885,15 @@ borders %>%
   mutate(HospitalCode = recode(HospitalCode, "B120V" = "B120H"))
 ```
 
+```{r recode-example-solution}
+borders %>%
+  mutate(HospitalCode = recode(HospitalCode, "B120V" = "B120H"))
+```
+
+```{r recode-example-check}
+grade_code()
+```
+
 ### Joining Tables
 
 For merging data by matching together common variables in 2 tables:
@@ -836,6 +930,14 @@ left_join(baby5, baby6, by = c(..., ...))
 
 ```{r join-example-hint-4}
 left_join(baby5, baby6, by = c("FAMILYID", "DOB"))
+```
+
+```{r join-example-solution}
+left_join(baby5, baby6, by = c("FAMILYID", "DOB"))
+```
+
+```{r join-example-check}
+grade_code()
 ```
 
 
@@ -908,8 +1010,8 @@ custom_bar_plot
 
 Using the loaded `borders` data-set:
 
-1. Filter the data-set to show only records from `HospitalCode` "B109H"
-2. Create a histogram for patient's `LengthOfStay`
+1. Filter the data-set to show only records from `HospitalCode` "B109H", name this new data-set "borders_b109h"
+2. Create a histogram for patient's `LengthOfStay`, call this plot "b109h_los_hist"
 3. Add axis labels and a title to your histogram
 
 ```{r plots-exercise, exercise=TRUE}
