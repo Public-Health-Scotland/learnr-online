@@ -1045,7 +1045,7 @@ Shiny is used for building interactive web apps through R. It provides an intera
 </br>
 
 
-## Review
+## Review & Feedback
 
 Now it's time to embed your new knowledge and skills, expand with related technologies (e.g. git), and when you're ready *Take R Further* with more training opportunities.
 
