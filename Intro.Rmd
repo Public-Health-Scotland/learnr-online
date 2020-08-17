@@ -495,7 +495,7 @@ grade_code()
 ```
 
 
-## Wrangle
+## Wrangle - Part 1
 
 <div class = "tidyverse-logo">
 ```{r packages-dplyr, echo=FALSE, fig.align='center', out.width="60%"}
@@ -683,6 +683,34 @@ borders_data %>%
 ```{r select-example-check}
 grade_code()
 ```
+
+### Knowledge Check
+
+Let's put some of your new knowledge into action. Using the `borders_data` data-set, answer the questions below.
+
+* What patients had a `LengthOfStay` of between 2 and 10 days?
+* Of these patients, which were under `Specialty` "E12" or "C8"?
+* Remove all columns from the output other than `URI`, `Specialty`, and `LengthOfStay`. 
+* Order by `Length Of Stay`
+
+``` {r wrangle-1, exercise=TRUE}
+
+```
+
+``` {r wrangle-1-solution}
+borders_data %>%
+  filter(LengthOfStay >= 2 & LengthOfStay <= 10) %>%
+  filter(Specialty == "E12" | Specialty == "C8") %>%
+  select(URI, Specialty, LengthOfStay) %>%
+  arrange(LengthOfStay)
+```
+
+```{r wrangle-1-check}
+grade_code()
+```
+
+
+## Wrangle - Part 2
 
 ### Group By
 
@@ -939,6 +967,31 @@ left_join(baby5, baby6, by = c("FAMILYID", "DOB"))
 ```
 
 ```{r join-example-check}
+grade_code()
+```
+
+### Knowledge Check
+
+Another opportunity to exercise your new skills:
+
+* Select the URI, Specialty, and Dateofbirth columns from `borders_data`
+* Arrange this data in ascending order by `Specialty`
+* Exclude the records with a missing `Dateofbirth`
+* Finally, recode `Specialty` “A1” to be “General Medicine”
+
+``` {r wrangle-2, exercise=TRUE}
+
+```
+
+``` {r wrangle-2-solution}
+borders_data %>%
+  select(URI, Specialty, Dateofbirth) %>%
+  arrange(Specialty) %>%
+  filter(is.na(Dateofbirth) == TRUE) %>%
+  mutate(Specialty = recode(Specialty, "A1" = "General Medicine"))
+```
+
+```{r wrangle-2-check}
 grade_code()
 ```
 
