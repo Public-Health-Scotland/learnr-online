@@ -571,7 +571,7 @@ Adds new variables that are functions of existing variables:
 
 * `mutate(<data>, <nol-col> = <expression>`
 
-Create a new column in `border` that is equal to `LengthOfStay` divided by 2. Use the hint button if you need some help.
+Create a new column in `border` that is equal to `LengthOfStay` divided by 2. Name this column `los_div2`. Use the hint button if you need some help.
 
 ```{r mutate-example, exercise=TRUE}
 
@@ -592,18 +592,16 @@ borders_data %>%
   mutate(los_div2 = ... / 2)
 ```
 
-```{r mutate-example-hint-4}
-borders_data %>%
-  mutate(los_div2 = LengthOfStay / 2)
-```
-
 ```{r mutate-example-solution}
 borders_data %>%
   mutate(los_div2 = LengthOfStay / 2)
 ```
 
 ```{r mutate-example-check}
-grade_code()
+grade_result(
+  pass_if(~ identical(as.character(.result$los_div2[1]), "2") & identical(as.character(.result$los_div2[1000]), "4.5")),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Arrange
