@@ -819,18 +819,17 @@ borders_data %>%
   count(..., sort = TRUE)
 ```
 
-```{r count-example-hint-4}
-borders_data %>%
-  count(Specialty, sort = TRUE)
-```
-
 ```{r count-example-solution}
 borders_data %>%
   count(Specialty, sort = TRUE)
 ```
 
 ```{r count-example-check}
-grade_code()
+grade_result(
+  pass_if(~ identical(as.character(.result$Specialty[1]), "A1") & identical(as.character(.result$n[2]), "3762")),
+  fail_if(~ identical(as.character(.result$n[2]), "294"), "Did you forget to sort in descending order?"),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Rename
