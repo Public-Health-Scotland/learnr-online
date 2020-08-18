@@ -714,35 +714,33 @@ Groups variables to perform other operations:
 
 * `group_by(<data>, <col_name>)`
 
-We're not performing another operation but to see that it works, group `borders_data` by `HospitalCode`. Use the hint button if you need some help.
+We're not performing another operation but to see that it works, this is the output of `group_by()` on `borders_data` by `HospitalCode`. Notice the `"Groups: HospitalCode[48]"` output. 
 
-```{r group-by-example, exercise=TRUE}
-
-```
-
-```{r group-by-example-hint-1}
-borders_data %>%
-  ...(...)
-```
-
-```{r group-by-example-hint-2}
-borders_data %>%
-  group_by(...)
-```
-
-```{r group-by-example-hint-3}
+```{r group-by-example, eval=FALSE, include=TRUE, echo=TRUE}
 borders_data %>%
   group_by(HospitalCode)
 ```
 
-```{r group-by-example-solution}
-borders_data %>%
-  group_by(HospitalCode)
+```{r group-by-example-output, eval=FALSE, include=TRUE, echo=TRUE}
+# A tibble: 25,299 x 14
+# Groups: HospitalCode [48]
+     URI HospitalCode Specialty   MOP Main_Condition Main_op Dateofbirth DateofAdmission DateofDischarge
+   <dbl> <chr>        <chr>     <dbl> <chr>          <chr>         <dbl>           <dbl>           <dbl>
+ 1     1 B102H        E12           1 S4230          NA         19310212        20150419        20150423
+ 2     2 B114H        E12           1 C785           NA         19280416        20150421        20150423
+ 3     3 B114H        E12           1 G20X           NA         19310219        20150414        20150423
+ 4     4 B120H        C8            1 T814           W283       19230820        20150418        20150423
+ 5     5 B120H        AB            1 R02X           NA         19290213        20150423        20150423
+ 6     6 B120H        C7            3 H269           C751       19300927        20150420        20150423
+ 7     7 B120H        A1            1 I269           X558       19360306        20150418        20150423
+ 8     8 B120H        C8            1 M169           W371       19410127        20150419        20150423
+ 9     9 B120H        A1            1 K922           X339       19440509        20150417        20150423
+10    10 B120H        A1            1 J969           NA         19500112        20150423        20150423
+# … with 25,289 more rows, and 5 more variables: Sex <dbl>, Postcode <chr>, LinkNo <dbl>,
+#   LengthOfStay <dbl>, HBRes <chr>
 ```
 
-```{r group-by-example-check}
-grade_code()
-```
+Let's go and make some use of the `group_by()` function now.
 
 ### Summarise
 
