@@ -748,7 +748,7 @@ Reduces multiple values down to a single summary:
 
 * `summarise(<data>, <name> = <expression>)`
 
-What is the average `LengthOfStay` by `HospitalCode` in `borders_data`. Use the hint button if you need some help.
+What is the average `LengthOfStay` (name this `mean_los`) by `HospitalCode` in `borders_data`. Use the hint button if you need some help.
 
 ```{r summarise-example, exercise=TRUE}
 
@@ -778,12 +778,6 @@ borders_data %>%
   summarise(mean_los = mean(...))
 ```
 
-```{r summarise-example-hint-5}
-borders_data %>%
-  group_by(HospitalCode) %>%
-  summarise(mean_los = mean(LengthOfStay))
-```
-
 ```{r summarise-example-solution}
 borders_data %>%
   group_by(HospitalCode) %>%
@@ -791,7 +785,10 @@ borders_data %>%
 ```
 
 ```{r summarise-example-check}
-grade_code()
+grade_result(
+  pass_if(~ identical(as.character(.result$HospitalCode[1]), "A210H") & identical(as.character(.result$mean_los[1]), "2")),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Count
