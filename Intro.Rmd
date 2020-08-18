@@ -627,18 +627,17 @@ borders_data %>%
   arrange(...)
 ```
 
-```{r arrange-example-hint-3}
-borders_data %>%
-  arrange(HospitalCode)
-```
-
 ```{r arrange-example-solution}
 borders_data %>%
   arrange(HospitalCode)
 ```
 
 ```{r arrange-example-check}
-grade_code()
+grade_result(
+  pass_if(~ identical(as.character(.result$URI[1]), "1763") & identical(as.character(.result$URI[1000]), "19971")),
+  fail_if(~ identical(as.character(.result$URI[1]), "7503"), "Did you arrange in descending order?"),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Select 
