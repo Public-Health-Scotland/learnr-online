@@ -854,18 +854,16 @@ borders_data %>%
   rename(... = ...)
 ```
 
-```{r rename-example-hint-3}
-borders_data %>%
-  rename(date_of_birth = Dateofbirth)
-```
-
 ```{r rename-example-solution}
 borders_data %>%
   rename(date_of_birth = Dateofbirth)
 ```
 
 ```{r rename-example-check}
-grade_code()
+grade_result(
+  pass_if(~ (!"Dateofbirth" %in% colnames(.result)) & (c("URI", "HospitalCode", "Specialty", "MOP", "Main_Condition", "Main_op", "date_of_birth", "DateofAdmission", "DateofDischarge", "Postcode", "Sex", "LinkNo", "LengthOfStay", "HBRes") %in% colnames(.result))),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Recode
