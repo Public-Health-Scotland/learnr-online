@@ -872,7 +872,7 @@ Changes values within a column:
 
 * `mutate(<col_name> = recode(<col_name>, "<existing_code>" = "<new_code>"))`
 
-The `HospitalCode` "B120V" in `borders_data` needs to be changed to "B120H". Use the hint button if you need some help.
+The `HospitalCode` "B102H" in `borders_data` needs to be changed to "B102A". Use the hint button if you need some help.
 
 ```{r recode-example, exercise=TRUE}
 
@@ -898,18 +898,16 @@ borders_data %>%
   mutate(HospitalCode = recode(HospitalCode, ... = ...))
 ```
 
-```{r recode-example-hint-5}
-borders_data %>%
-  mutate(HospitalCode = recode(HospitalCode, "B120V" = "B120H"))
-```
-
 ```{r recode-example-solution}
 borders_data %>%
-  mutate(HospitalCode = recode(HospitalCode, "B120V" = "B120H"))
+  mutate(HospitalCode = recode(HospitalCode, "B102H" = "B102A"))
 ```
 
 ```{r recode-example-check}
-grade_code()
+grade_result(
+  pass_if(~ (!"B102H" %in% .result$HospitalCode) & ("B102A" %in% .result$HospitalCode)),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Joining Tables
