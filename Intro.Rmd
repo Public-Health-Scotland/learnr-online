@@ -550,18 +550,19 @@ borders_data %>%
   filter(HospitalCode == ... & LengthOfStay > ...)
 ```
 
-```{r filter-example-hint-4}
-borders_data %>%
-  filter(HospitalCode == "B120H" & LengthOfStay > 10)
-```
-
 ```{r filter-example-solution}
 borders_data %>%
   filter(HospitalCode == "B120H" & LengthOfStay > 10)
 ```
 
 ```{r filter-example-check}
-grade_code()
+grade_result(
+  pass_if(~ identical(as.character(.result$URI[1]), "28") & identical(as.character(.result$URI[1000]), "12598")),
+  fail_if(~ identical(as.character(.result$URI[1]), "4"), "Did you forget to include LengthOfStay?"),
+  fail_if(~ identical(as.character(.result$URI[10]), "138"), "Did you forget to include HospitalCode?"),
+  fail_if(~ identical(as.character(.result$URI[1000]), "10838"), "Did you filter to include where LengthOfStay is 10 or more? We're looking for more than 10 days."),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Mutate
