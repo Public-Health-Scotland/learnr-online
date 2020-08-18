@@ -944,16 +944,17 @@ left_join(..., ..., by = c(..., ...))
 left_join(baby5, baby6, by = c(..., ...))
 ```
 
-```{r join-example-hint-4}
-left_join(baby5, baby6, by = c("FAMILYID", "DOB"))
-```
-
 ```{r join-example-solution}
 left_join(baby5, baby6, by = c("FAMILYID", "DOB"))
 ```
 
 ```{r join-example-check}
-grade_code()
+grade_result(
+  pass_if(~ identical(as.character(.result$BABYNAME[1]), "Julie") & identical(as.character(.result$SURNAME[8]), "MacArthur") & identical(as.character(.result$DOB[3]), "1/6/2017") & !"FAMILYID.y" %in% colnames(.result)),
+  fail_if(~ identical(as.character(.result$DOB.x[1]), "1/15/2017"), "Did you forget DOB as a common variable?"),
+  fail_if(~ identical(as.character(.result$FAMILYID.y[1]), "1"), "Did you forget FAMILYID as a common variable?"),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Knowledge Check
