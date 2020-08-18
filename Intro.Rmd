@@ -668,18 +668,16 @@ borders_data %>%
   select(-...)
 ```
 
-```{r select-example-hint-4}
-borders_data %>%
-  select(-Postcode)
-```
-
 ```{r select-example-solution}
 borders_data %>%
   select(-Postcode)
 ```
 
 ```{r select-example-check}
-grade_code()
+grade_result(
+  pass_if(~ (!"Postcode" %in% colnames(.result)) & (c("URI", "HospitalCode", "Specialty", "MOP", "Main_Condition", "Main_op", "Dateofbirth", "DateofAdmission", "DateofDischarge", "Sex", "LinkNo", "LengthOfStay", "HBRes") %in% colnames(.result))),
+  fail_if(~ TRUE)
+)
 ```
 
 ### Knowledge Check
