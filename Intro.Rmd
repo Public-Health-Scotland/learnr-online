@@ -363,8 +363,12 @@ knitr::include_graphics("images/r-workflow.png")
 
 ### Working Directory
 
+Base R has it's own functions for navigating your working directory:
+
 * Current working directory: `getwd()`
 * Set new working directory: `setwd("<filepath>")`
+
+However, the recommended method is using the `here` package. This gives us the `here()` function which works similar to `getwd()` but is more forgiving in how it searches for files and directories.
 
 RStudio also provides options through the user interface for navigating directories. Also, other commands, such as `ls()` are available in R. 
 
