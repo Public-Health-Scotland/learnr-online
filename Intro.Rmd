@@ -359,7 +359,7 @@ The chances are, that when you're working in R, you'll be working with some kind
 knitr::include_graphics("images/r-workflow.png")
 ```
 
-*Unfortunately, it's not possible have the code exercises in this course reach directories for reading and writing code. To test these functions for yourself, the data we'll be working with is available here [link]. The data will be pre-loaded for you in later exercises.*
+*Unfortunately, it's not possible have the code exercises in this course reach directories for reading and writing code. To test these functions for yourself, the data we'll be working with is available [here](https://github.com/Public-Health-Scotland/learnr-intro/tree/master/data) on GitHub. The data will be pre-loaded for you in later exercises.*
 
 ### Working Directory
 
