@@ -236,7 +236,7 @@ Have a look and click 'Run Code' below to see the output.
 ```{r foundations-structures-factors, exercise=TRUE}
 factor_ex <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
 factor_ex
-factor_ex <- factor(food, levels = c("low", "medium", "high"))
+factor_ex <- factor(factor_ex, levels = c("low", "medium", "high"))
 levels(factor_ex)
 ```
 
