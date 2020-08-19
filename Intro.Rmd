@@ -503,7 +503,7 @@ In [Packages] we spoke about Tidyverse, a suite of packages for data exploration
 
 ### Pipe Operator
 
-Before going on to the functions that make up `dplyr`, we need to talk about the pipe `%>%` (shortcut: `ctrl` + `shift` + `M`). This is used to link functions together, passing the result of the previous into the next. Using the pipe makes R code more readable and prevents extensive parenthesis building up with multiple function calls. An example is below, don't worry too much about the functions, we get into that next (`dplyr` has been loaded).
+Before going on to the functions that make up `dplyr`, we need to talk about the pipe `%>%` (shortcut: `ctrl` + `shift` + `M`). This is used to link functions together, passing the result of the previous into the next. Using the pipe makes R code more readable and prevents extensive parenthesis building up with multiple function calls. An example is below, you can see the results are the same. Don't worry too much about the functions, we get into that next (`dplyr` has been loaded).
 
 ```{r pipe-example, exercise=TRUE}
 # Not using pipe operator
