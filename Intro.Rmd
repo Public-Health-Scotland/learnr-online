@@ -1044,6 +1044,25 @@ Using the loaded `borders_data` data-set:
 
 ```
 
+``` {r plots-exercise-solution}
+# Filter the data for HospitalCode B109H
+borders_b109h <- borders_data %>%
+  filter(HospitalCode == "B109H")
+
+# Create a histogram for patient's LengthOfStay
+b109H_los_hist <- ggplot(borders_b109h) +
+  geom_histogram(aes(LengthOfStay)) +
+  # Add labels
+  ggtitle("Length Of Stay Histogram") +
+  xlab("Length Of Stay") +
+  ylab("Count")
+b109H_los_hist
+```
+
+```{r plots-exercise-check}
+grade_code()
+```
+
 
 ## Output
 

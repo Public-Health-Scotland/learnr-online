@@ -954,7 +954,21 @@ custom_bar_plot</code></pre>
 <li>Add axis labels and a title to your histogram</li>
 </ol>
 <div class="tutorial-exercise" data-label="plots-exercise" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false}</script>
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="plots-exercise-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code># Filter the data for HospitalCode B109H
+borders_b109h &lt;- borders_data %&gt;%
+  filter(HospitalCode == &quot;B109H&quot;)
+
+# Create a histogram for patient&#39;s LengthOfStay
+b109H_los_hist &lt;- ggplot(borders_b109h) +
+  geom_histogram(aes(LengthOfStay)) +
+  # Add labels
+  ggtitle(&quot;Length Of Stay Histogram&quot;) +
+  xlab(&quot;Length Of Stay&quot;) +
+  ylab(&quot;Count&quot;)
+b109H_los_hist</code></pre>
 </div>
 </div>
 </div>
@@ -1120,27 +1134,27 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "intro-quiz-1", 
     question = structure("Which of the following can R help to produce?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_76285d6", 
+    "character")), answers = list(structure(list(id = "lnr_ans_88a12d", 
         option = "tidy data", value = "tidy data", label = structure("tidy data", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_28c9b93", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_34add3b", 
         option = "dashboards", value = "dashboards", label = structure("dashboards", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2b3fbc5", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_89aba78", 
         option = "static/interactive reports", value = "static/interactive reports", 
         label = structure("static/interactive reports", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_27f4ecd", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d1dde6f", 
         option = "web apps", value = "web apps", label = structure("web apps", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_44eeeb9", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f595d1", 
         option = "magic", value = "magic", label = structure("magic", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("It may seem like R is magic but unfortunately not", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_48fdc32", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2f0c819", 
         option = "databases", value = "databases", label = structure("databases", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1328b14", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a4db203", 
         option = "presentations", value = "presentations", label = structure("presentations", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1152,7 +1166,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich of the following can R help to produce?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1060811319.50602, options = list()), class = c("learnr_checkbox", 
+    seed = 388243145.81921, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
@@ -1558,22 +1572,22 @@ learnr:::store_exercise_cache("foundations-structures-dataframe", list(chunks = 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-1", 
     question = structure("What will <code>c(&#39;abc&#39;, 5, TRUE, 123.5)[3]<\u002fcode> return?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_b07661b", 
+    "character")), answers = list(structure(list(id = "lnr_ans_bfe7c07", 
         option = "`TRUE`", value = "`TRUE`", label = structure("<code>TRUE<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("This is a vector so only holds one basic data type.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b2fc458", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6097342", 
         option = "`5`", value = "`5`", label = structure("<code>5<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1d905e5", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cd7b8b0", 
         option = "`123.5`", value = "`123.5`", label = structure("<code>123.5<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system and this is a vector so only holds one basic data type.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8b900d1", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2992feb", 
         option = "`'123.5'`", value = "`'123.5'`", label = structure("<code>&#39;123.5&#39;<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_24a68d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_70e6d02", 
         option = "`'TRUE'`", value = "`'TRUE'`", label = structure("<code>&#39;TRUE&#39;<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1585,27 +1599,27 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-1-answer", question = "foundations-structures-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat will <code>c(&#39;abc&#39;, 5, TRUE, 123.5)[3]<\u002fcode> return?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1848017852.63945, options = list()), class = c("learnr_radio", 
+    seed = 1598470779.25565, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "foundations-structures-quiz-2", 
     question = structure("How do you return the second element from this list (not a sub-list)? (Select all that apply) <code>example_list &lt;- list(&#39;Number&#39; = 123, &#39;List&#39; = list(1, 2, 3), TRUE, FALSE)<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_4a570fe", 
+    "character")), answers = list(structure(list(id = "lnr_ans_43fa770", 
         option = "`example_list[2]`", value = "`example_list[2]`", 
         label = structure("<code>example_list[2]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("Remember it&#39;s the element to be returned, not a sub-list", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_858cd36", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_407e5c6", 
         option = "`example_list[[2]]`", value = "`example_list[[2]]`", 
         label = structure("<code>example_list[[2]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a3e044b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7c8d66b", 
         option = "`example_list$List`", value = "`example_list$List`", 
         label = structure("<code>example_list$List<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e791c8c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_dd9989f", 
         option = "`c(1, 2, 3)`", value = "`c(1, 2, 3)`", label = structure("<code>c(1, 2, 3)<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1617,23 +1631,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "foundations-structures-quiz-2-answer", question = "foundations-structures-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nHow do you return the second element from this list (not a sub-list)? (Select all that apply) <code>example_list &lt;- list(&#39;Number&#39; = 123, &#39;List&#39; = list(1, 2, 3), TRUE, FALSE)<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1083282602.49556, options = list()), class = c("learnr_checkbox", 
+    seed = 1044576880.01358, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-3", 
     question = structure("What result did Zac get? <code>patient_list &lt;- data.frame(name = c(&#39;Tom&#39;, &#39;Jen&#39;, &#39;Zac&#39;, &#39;Kat&#39;), \n result = c(97.6, 54.3, 21.0, 83.8))<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_4f8746c", 
+    "character")), answers = list(structure(list(id = "lnr_ans_d83287d", 
         option = "97.6", value = "97.6", label = structure("97.6", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_edfeec7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c7d56b1", 
         option = "54.3", value = "54.3", label = structure("54.3", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5cc0d34", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_de8bb9a", 
         option = "21.0", value = "21.0", label = structure("21.0", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e1e880d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ca0002c", 
         option = "83.8", value = "83.8", label = structure("83.8", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1645,27 +1659,27 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-3-answer", question = "foundations-structures-quiz-3"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat result did Zac get? <code>patient_list &lt;- data.frame(name = c(&#39;Tom&#39;, &#39;Jen&#39;, &#39;Zac&#39;, &#39;Kat&#39;), \n result = c(97.6, 54.3, 21.0, 83.8))<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 1026878957.02182, options = list()), class = c("learnr_radio", 
+    seed = 21393673.4900378, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-4", 
     question = structure("How do you get the 2nd, 3rd, and 4th item from this list? <code>example_list &lt;- list(&#39;x&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;y&#39;, &#39;z&#39;)<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_ae89cbd", 
+    "character")), answers = list(structure(list(id = "lnr_ans_95671ad", 
         option = "`example_list[2:4]`", value = "`example_list[2:4]`", 
         label = structure("<code>example_list[2:4]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d285182", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_91acbbe", 
         option = "`example_list[1:3]`", value = "`example_list[1:3]`", 
         label = structure("<code>example_list[1:3]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7ff5e10", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_73c5cc7", 
         option = "`example_list[[2:4]]`", value = "`example_list[[2:4]]`", 
         label = structure("<code>example_list[[2:4]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8d4415d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_da59469", 
         option = "`example_list[[1:3]]`", value = "`example_list[[1:3]]`", 
         label = structure("<code>example_list[[1:3]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
@@ -1678,7 +1692,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-4-answer", question = "foundations-structures-quiz-4"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nHow do you get the 2nd, 3rd, and 4th item from this list? <code>example_list &lt;- list(&#39;x&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;y&#39;, &#39;z&#39;)<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1149627051.46466, options = list()), class = c("learnr_radio", 
+    seed = 610411056.215755, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -2510,36 +2524,41 @@ output$`tutorial-exercise-plots-exercise-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache("plots-exercise", list(chunks = list(list(label = "plots-exercise", code = "", 
     opts = list(label = "\"plots-exercise\"", exercise = "TRUE"), 
-    engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
-    options = list(eval = FALSE, echo = TRUE, results = "markup", 
-        tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
-        comment = NA, highlight = FALSE, strip.white = TRUE, 
-        size = "normalsize", background = "#F7F7F7", cache = 0, 
-        cache.path = "Intro_cache/html/", cache.vars = NULL, 
-        cache.lazy = TRUE, dependson = NULL, autodep = FALSE, 
-        cache.rebuild = FALSE, fig.keep = "high", fig.show = "asis", 
-        fig.align = "default", fig.path = "Intro_files/figure-html/", 
-        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
-        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
-        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
-        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
-        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
-        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
-        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
-        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
-            solution_code = NULL, user_code = NULL, check_code = NULL, 
-            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
-            last_value = NULL, ...) 
-        {
-            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
-                solution_code = solution_code, user_code = user_code, 
-                check_code = check_code, envir_result = envir_result, 
-                evaluate_result = evaluate_result, envir_prep = envir_prep, 
-                last_value = last_value, ...)
-        }, label = "plots-exercise", exercise = TRUE, out.width.px = 624, 
-        out.height.px = 384, code = "", params.src = "plots-exercise, exercise=TRUE", 
-        fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
+    engine = "r")), code_check = NULL, check = structure("grade_code()", chunk_opts = list(
+    label = "plots-exercise-check")), solution = structure(c("# Filter the data for HospitalCode B109H", 
+"borders_b109h <- borders_data %>%", "  filter(HospitalCode == \"B109H\")", 
+"", "# Create a histogram for patient's LengthOfStay", "b109H_los_hist <- ggplot(borders_b109h) +", 
+"  geom_histogram(aes(LengthOfStay)) +", "  # Add labels", "  ggtitle(\"Length Of Stay Histogram\") +", 
+"  xlab(\"Length Of Stay\") +", "  ylab(\"Count\")", "b109H_los_hist"
+), chunk_opts = list(label = "plots-exercise-solution")), options = list(
+    eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+    tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+    highlight = FALSE, strip.white = TRUE, size = "normalsize", 
+    background = "#F7F7F7", cache = 0, cache.path = "Intro_cache/html/", 
+    cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, autodep = FALSE, 
+    cache.rebuild = FALSE, fig.keep = "high", fig.show = "asis", 
+    fig.align = "default", fig.path = "Intro_files/figure-html/", 
+    dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+    fig.width = 6.5, fig.height = 4, fig.env = "figure", fig.cap = NULL, 
+    fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, fig.pos = "", 
+    out.width = 624, out.height = NULL, out.extra = NULL, fig.retina = 2, 
+    external = TRUE, sanitize = FALSE, interval = 1, aniopts = "controls,loop", 
+    warning = TRUE, error = FALSE, message = TRUE, render = NULL, 
+    ref.label = NULL, child = NULL, engine = "r", split = FALSE, 
+    include = TRUE, purl = TRUE, max.print = 1000, tutorial = TRUE, 
+    exercise.checker = function (label = NULL, solution_code = NULL, 
+        user_code = NULL, check_code = NULL, envir_result = NULL, 
+        evaluate_result = NULL, envir_prep = NULL, last_value = NULL, 
+        ...) 
+    {
+        (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+            solution_code = solution_code, user_code = user_code, 
+            check_code = check_code, envir_result = envir_result, 
+            evaluate_result = evaluate_result, envir_prep = envir_prep, 
+            last_value = last_value, ...)
+    }, label = "plots-exercise", exercise = TRUE, out.width.px = 624, 
+    out.height.px = 384, code = "", params.src = "plots-exercise, exercise=TRUE", 
+    fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
  <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="dependencies">
