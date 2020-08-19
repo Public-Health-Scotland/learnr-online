@@ -446,10 +446,6 @@ borders_data
 mean(borders_data$...)
 ```
 
-```{r mean-hint-2}
-mean(borders_data$LengthOfStay)
-```
-
 ```{r mean-solution}
 mean(borders_data$LengthOfStay)
 ```
@@ -480,10 +476,6 @@ addmargins(table(...))
 
 ```{r freq-hint-3}
 addmargins(table(borders_data$..., borders_data$...))
-```
-
-```{r freq-hint-4}
-addmargins(table(borders_data$HospitalCode, borders_data$Sex))
 ```
 
 ```{r freq-solution}
