@@ -172,13 +172,13 @@ It's possible to use `str()` to get an overview and description of the data stru
 
 #### Vectors
 
-* Create: `vector(<data_type>, <length>)` or `c(...)`
+* Create: `vector("<data_type>", <length>)` or `c(...)`
 * Access: `<vector_name>[<index>]`
 
 Have a look and click 'Run Code' below to see the output.
 
 ```{r foundations-structures-vector, exercise=TRUE}
-vector(logical, 4)
+vector("logical", 4)
 c("a", "c", "f", "b")[1]
 c(2, 5, 1, "abc")[2]
 ```
