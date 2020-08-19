@@ -28,6 +28,8 @@ tutorial_options(
 
 borders_data <- readRDS("www/data/borders.rds")
 borders_age_data <- read_csv("www/data/BORDERS (inc Age).csv")
+baby5 <- read_csv("www/data/Baby5.csv")
+baby6 <- read_csv("www/data/Baby6.csv")
 ```
 
 ```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
@@ -910,12 +912,6 @@ For merging data by matching together common variables in 2 tables:
 
 ```{r join-tables-overview, echo=FALSE, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/r-joining-overview.png")
-```
-
-```{r baby-data, eval=TRUE, include=FALSE}
-library(readr)
-baby5 <- read_csv("www/data/Baby5.csv")
-baby6 <- read_csv("www/data/Baby6.csv")
 ```
 
 2 new data-sets have been loaded, `baby5` and `baby6`, these have common variables `FAMILYID` and `DOB`. Using a left_join, merge them together. Use the hint button if you need some help.
