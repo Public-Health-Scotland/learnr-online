@@ -107,8 +107,9 @@ print(hello_world)
 
 ```{r foundations-input-check}
 grade_result(
-  pass_if(~ startsWith(.result, "Hello")),
-  fail_if(~ TRUE, "Have you entered a string to say Hello? Have another go!")
+  pass_if(~ startsWith(.result, "Hello") & .result != "Hello World"),
+  fail_if(~ identical(as.character(.result), "Hello World"), "Try changing the output from Hello World."),
+  fail_if(~ TRUE, "Have you entered a string to say Hello?")
 )
 ```
 
