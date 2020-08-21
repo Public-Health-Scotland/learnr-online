@@ -59,13 +59,13 @@ Since we're getting started, here's a quiz to get familiar with the layout:
 ```{r intro-quiz}
 quiz(
   question("Which of the following can R help to produce?",
-    answer("tidy data", correct = TRUE),
-    answer("dashboards", correct = TRUE),
-    answer("static/interactive reports", correct = TRUE),
-    answer("web apps", correct = TRUE),
-    answer("magic", message = "It may seem like R is magic but unfortunately not"),
-    answer("databases", correct = TRUE),
-    answer("presentations", correct = TRUE),
+    answer("Tidy Data", correct = TRUE),
+    answer("Dashboards", correct = TRUE),
+    answer("Static/Interactive Reports", correct = TRUE),
+    answer("Web Apps", correct = TRUE),
+    answer("Magic", message = "It may seem like R is magic but unfortunately not"),
+    answer("Databases", correct = TRUE),
+    answer("Presentations", correct = TRUE),
     incorrect = "Not quite, have another go!",
     allow_retry = TRUE,
     random_answer_order = TRUE
