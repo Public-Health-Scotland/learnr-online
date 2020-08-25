@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open Sans");
-@import url("https://fonts.google.com/specimen/Source+Code+Pro?category=Monospace");
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
 body, h1, h2, h3, h4, h5, h6, p, button {
   font-family: 'Open Sans';
