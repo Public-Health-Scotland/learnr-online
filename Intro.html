@@ -131,7 +131,7 @@ $(document).ready(function () {
 <li>A part of the PHS analytical strategy</li>
 </ul>
 <p></br></p>
-<p>Since we're getting started, here's a quiz to get familiar with the layout:</p>
+<p>Since we’re getting started, here’s a quiz to get familiar with the layout:</p>
 <p><div class="panel-heading tutorial-quiz-title">Quiz</div><div class="panel panel-default">
 <div data-label="intro-quiz-1" class="tutorial-question panel-body">
 <div id="intro-quiz-1-answer_container" class="shiny-html-output"></div>
@@ -144,21 +144,21 @@ $(document).ready(function () {
 </div>
 <div id="section-foundations" class="section level2">
 <h2>Foundations</h2>
-<p>Base R is the fundamental language and what we'll explore in this section.</p>
+<p>Base R is the fundamental language and what we’ll explore in this section.</p>
 <p>On top of base R are packages. Packages are bundles of code to expand the functionality of base R; we look at a couple of these later in the course. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own package too, <code>phsmethods</code> (a bundle of functions that are common for PHS staff).</p>
-<p>It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.</p>
+<p>It’s on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.</p>
 <p><img src="images/r-foundations-structure.png" width="100%" style="display: block; margin: auto;" /></p>
 <div id="section-input" class="section level3">
 <h3>Input</h3>
 <p>Below is an example of R code, it includes various types of R syntax:</p>
 <ul>
-<li><code># Hello World example</code> - <strong>comments</strong> are just for us humans and ignored by R. They help to aid understanding of code, think more &quot;why&quot; than &quot;what&quot;.</li>
-<li><code>hello_world</code> - <strong>variables</strong> are names (containers) we give to 'objects'.</li>
+<li><code># Hello World example</code> - <strong>comments</strong> are just for us humans and ignored by R. They help to aid understanding of code, think more “why” than “what”.</li>
+<li><code>hello_world</code> - <strong>variables</strong> are names (containers) we give to ‘objects’.</li>
 <li><code>&lt;-</code> - <strong>assignment operator</strong> (shortcut: <code>alt</code> + <code>-</code>) is how we give variables their content.</li>
-<li><code>&quot;Hello World&quot;</code> - <strong>character</strong> / string (<code>'</code> or <code>&quot;</code>) is one of the <em>basic data types</em> in R, we go over the others next.</li>
+<li><code>"Hello World"</code> - <strong>character</strong> / string (<code>'</code> or <code>"</code>) is one of the <em>basic data types</em> in R, we go over the others next.</li>
 <li><code>print()</code> - <strong>functions</strong> allow us to get R to do something by passing in arguments (the stuff inside the brackets).</li>
 </ul>
-<p>Have a look and click 'Run Code' below to see the output. Then, change the code to get R to print &quot;Hello &lt;your name&gt;&quot;.</p>
+<p>Have a look and click ‘Run Code’ below to see the output. Then, change the code to get R to print “Hello &lt;your name&gt;”.</p>
 <div class="tutorial-exercise" data-label="foundations-input" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Hello World example
 hello_world &lt;- &quot;Hello World&quot;
@@ -171,12 +171,12 @@ print(hello_world)</code></pre>
 <h3>Basic Data Types</h3>
 <p>R has some basic/primitive data types:</p>
 <ul>
-<li><strong>Character</strong>, also called strings, are written in single <code>'</code> or double <code>&quot;</code> quotes around text, numbers, or symbols. It may be necessary to store a &quot;number&quot; as a character object, e.g. CHI numbers to preserve formatting. <em>Example:</em> <code>&quot;Hello World!&quot;</code></li>
+<li><strong>Character</strong>, also called strings, are written in single <code>'</code> or double <code>"</code> quotes around text, numbers, or symbols. It may be necessary to store a “number” as a character object, e.g. CHI numbers to preserve formatting. <em>Example:</em> <code>"Hello World!"</code></li>
 <li><strong>Numerical</strong> type holds the whole set of real numbers. A subset of the numerical type is <strong>integer</strong>, this is created by appending an <code>L</code> to the end of the number. <em>Example:</em> <code>123.5</code></li>
-<li><strong>Logical</strong> (Boolean) can be <code>TRUE</code>, <code>FALSE</code>, <code>T</code>, or <code>F</code>, other variations (e.g. lowercase) will result in an error. <em>Example:</em> <code>TRUE</code></li>
-<li><strong>Complex</strong> stores complex number objects, e.g. imaginary numbers. <em>Example:</em> <code>2i</code></li>
+<li><strong>Logical</strong> (Boolean) can be <code>TRUE</code>, <code>FALSE</code>, <code>T</code>, or <code>F</code>, other variations (e.g. lowercase) will result in an error. <em>Example:</em> <code>TRUE</code></li>
+<li><strong>Complex</strong> stores complex number objects, e.g. imaginary numbers. <em>Example:</em> <code>2i</code></li>
 </ul>
-<p>Have a look and click 'Run Code' below to see the output. <code>typeof()</code> is a function that returns the argument's basic data type, <code>is.&lt;data_type&gt;()</code> returns a Boolean <code>TRUE</code> or <code>FALSE</code> depending on whether the argument provided is the data type in the name of the function.</p>
+<p>Have a look and click ‘Run Code’ below to see the output. <code>typeof()</code> is a function that returns the argument’s basic data type, <code>is.&lt;data_type&gt;()</code> returns a Boolean <code>TRUE</code> or <code>FALSE</code> depending on whether the argument provided is the data type in the name of the function.</p>
 <div class="tutorial-exercise" data-label="foundations-basic-types" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>typeof(&quot;Hello World&quot;)
 is.numeric(123.5)
@@ -186,13 +186,13 @@ print(typeof(2 + 2i))</code></pre>
 </div>
 <div id="section-type-conversion" class="section level3">
 <h3>Type Conversion</h3>
-<p>It's sometimes necessary to convert from one basic data type to another. For example, we may receive a data-set with Boolean values stored as <code>1</code> and <code>0</code> or lowercase <code>true</code> and <code>false</code>. The function <code>as.&lt;data_type&gt;()</code> performs this function for us with some considerations required:</p>
+<p>It’s sometimes necessary to convert from one basic data type to another. For example, we may receive a data-set with Boolean values stored as <code>1</code> and <code>0</code> or lowercase <code>true</code> and <code>false</code>. The function <code>as.&lt;data_type&gt;()</code> performs this function for us with some considerations required:</p>
 <ul>
 <li><code>as.character()</code> conversions tend to succeed without fault.</li>
 <li><code>as.numeric()</code> - <code>TRUE</code> and <code>FALSE</code> become <code>1</code> and <code>0</code>, character types need to be formatted correctly.</li>
 <li><code>as.logical()</code> - all numeric values except <code>0</code> become <code>TRUE</code>, character values can be upper, lower, or proper case versions.</li>
 </ul>
-<p>Have a look and click 'Run Code' below to see the output.</p>
+<p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="foundations-type-conversion" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>as.character(123.5)
 as.numeric(&quot;123.5&quot;) 
@@ -207,7 +207,7 @@ as.logical(&quot;False&quot;)</code></pre>
 <colgroup>
 <col width="6%" />
 <col width="27%" />
-<col width="65%" />
+<col width="66%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -270,14 +270,14 @@ as.logical(&quot;False&quot;)</code></pre>
 <li><strong>Factors</strong> are used to represent categorical data</li>
 <li><strong>Data Frames</strong> store tabular data, each column contains one variable, each row contains an observation</li>
 </ul>
-<p>It's possible to use <code>str()</code> to get an overview and description of the data structure</p>
+<p>It’s possible to use <code>str()</code> to get an overview and description of the data structure</p>
 <div id="section-vectors" class="section level4">
 <h4>Vectors</h4>
 <ul>
-<li>Create: <code>vector(&quot;&lt;data_type&gt;&quot;, &lt;length&gt;)</code> or <code>c(...)</code></li>
+<li>Create: <code>vector("&lt;data_type&gt;", &lt;length&gt;)</code> or <code>c(...)</code></li>
 <li>Access: <code>&lt;vector_name&gt;[&lt;index&gt;]</code></li>
 </ul>
-<p>Have a look and click 'Run Code' below to see the output.</p>
+<p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="foundations-structures-vector" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>vector(&quot;logical&quot;, 4)
 c(&quot;a&quot;, &quot;c&quot;, &quot;f&quot;, &quot;b&quot;)[1]
@@ -292,7 +292,7 @@ c(2, 5, 1, &quot;abc&quot;)[2]</code></pre>
 <li>Sub-list: <code>&lt;list_name&gt;[&lt;index&gt;]</code></li>
 <li>Access: <code>&lt;list_name&gt;[[&lt;index&gt;]]</code></li>
 </ul>
-<p>Have a look and click 'Run Code' below to see the output.</p>
+<p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="foundations-structures-list" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>list(&quot;abc&quot;, 4, FALSE)[1:2]
 list(list(2, 3), &quot;abc&quot;)[2]</code></pre>
@@ -300,13 +300,13 @@ list(list(2, 3), &quot;abc&quot;)[2]</code></pre>
 </div>
 <div id="section-naming-lists" class="section level5">
 <h5>Naming Lists</h5>
-<p>It's possible to name list items, this can be done during creation or after with the <code>names()</code> function.</p>
+<p>It’s possible to name list items, this can be done during creation or after with the <code>names()</code> function.</p>
 <ul>
-<li>At creation: <code>list(&quot;&lt;name&gt;&quot;, = &lt;item&gt;)</code></li>
-<li>After creation: <code>names(&lt;list_name&gt;) &lt;- c(&quot;&lt;name&gt;&quot;)</code></li>
+<li>At creation: <code>list("&lt;name&gt;", = &lt;item&gt;)</code></li>
+<li>After creation: <code>names(&lt;list_name&gt;) &lt;- c("&lt;name&gt;")</code></li>
 </ul>
-<p>This adds the ability to access list items with the <code>$</code> operator and using the list item's name.</p>
-<p>Have a look and click 'Run Code' below to see the output.</p>
+<p>This adds the ability to access list items with the <code>$</code> operator and using the list item’s name.</p>
+<p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="foundations-structures-list-naming" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>x &lt;- list(&quot;Ch&quot; = &quot;a&quot;, &quot;Nm&quot; = 2) 
 names(x) &lt;- c(&quot;Char&quot;, &quot;Num&quot;) 
@@ -321,7 +321,7 @@ x$Char</code></pre>
 <li>Create: <code>matrix(&lt;data&gt;, nrow = &lt;int&gt;, ncol = &lt;int&gt;)</code></li>
 <li>Access: <code>&lt;matrix_name&gt;[&lt;row_num&gt;, &lt;col_num&gt;]</code></li>
 </ul>
-<p>Have a look and click 'Run Code' below to see the output.</p>
+<p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="foundations-structures-matrix" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>x &lt;- matrix(1:6, 2, 3) 
 x
@@ -335,7 +335,7 @@ x[2, 3]</code></pre>
 <li>Create: <code>factor(c(...))</code></li>
 <li>Levels: <code>factor(c(...), levels = c(...))</code></li>
 </ul>
-<p>Have a look and click 'Run Code' below to see the output.</p>
+<p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="foundations-structures-factors" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>factor_ex &lt;- factor(c(&quot;low&quot;, &quot;high&quot;, &quot;medium&quot;, &quot;high&quot;, &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;))
 factor_ex
@@ -347,11 +347,11 @@ levels(factor_ex)</code></pre>
 <div id="section-data-frames" class="section level4">
 <h4>Data Frames</h4>
 <ul>
-<li>Create: <code>data.frame(&quot;&lt;name&gt;&quot; = &lt;element(s)&gt;)</code></li>
+<li>Create: <code>data.frame("&lt;name&gt;" = &lt;element(s)&gt;)</code></li>
 <li>Subset: <code>[]</code></li>
 <li>Access: <code>[[]]</code> or <code>$</code></li>
 </ul>
-<p>Have a look and click 'Run Code' below to see the output.</p>
+<p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="foundations-structures-dataframe" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>data.frame(name = c(&quot;Harry&quot;, &quot;Sarah&quot;), score = c(62, 91))</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false}</script>
@@ -394,18 +394,18 @@ levels(factor_ex)</code></pre>
 <div id="section-packages" class="section level2">
 <h2>Packages</h2>
 <p>Packages expand and improve the functionality of R with functions. Packages may be necessary for complex, repetitive, or exceptionally large tasks.</p>
-<p>To use packages, they must first be installed on your system. This only needs to be done once, it's like installing new software on your computer. Packages are installed by using <code>install.packages(&quot;&lt;package_name&gt;&quot;)</code>.</p>
+<p>To use packages, they must first be installed on your system. This only needs to be done once, it’s like installing new software on your computer. Packages are installed by using <code>install.packages("&lt;package_name&gt;")</code>.</p>
 <p>To utilise the functions within a package, they have to be loaded for each new session of R. This is done with <code>library(&lt;package_name&gt;)</code>. <em>Another function that loads packages is <code>require(&lt;package_name&gt;)</code>, however, this will not halt the execution of a program where an error occurs and is typically only used within other functions with supporting code.</em></p>
-<p>When loading a package, it is common that a warning (not an error) will be thrown. This warning is when a function within the package has the same name as another function already available in the R session (potentially from base R or another package). The most recent package's function will &quot;mask&quot; the other. To be explicit on the function to use, you can use <code>&lt;package_name&gt;::&lt;function&gt;()</code>, e.g. <code>dplyr::filter()</code>.</p>
+<p>When loading a package, it is common that a warning (not an error) will be thrown. This warning is when a function within the package has the same name as another function already available in the R session (potentially from base R or another package). The most recent package’s function will “mask” the other. To be explicit on the function to use, you can use <code>&lt;package_name&gt;::&lt;function&gt;()</code>, e.g. <code>dplyr::filter()</code>.</p>
 <p></br></p>
 <div id="section-tidyverse" class="section level4">
 <h4>Tidyverse</h4>
 <div class="tidyverse-logo">
 <p><img src="images/r-packages-tidyverse.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
-<p>Tidyverse is a suite of packages and have a common theme throughout. We’ll look at a couple of the Tidyverse packages later in [Wrangle]. It is not recommended to load Tidyverse in its entirety though, but rather each package that you’ll specifically use (e.g. <code>dplyr</code>). Tidyverse has grown dramatically so loading the whole suite will unnecessarily utilise a lot of resource.</p>
+<p>Tidyverse is a suite of packages and have a common theme throughout. We’ll look at a couple of the Tidyverse packages later in [Wrangle]. It is not recommended to load Tidyverse in its entirety though, but rather each package that you’ll specifically use (e.g. <code>dplyr</code>). Tidyverse has grown dramatically so loading the whole suite will unnecessarily utilise a lot of resource.</p>
 <p></br></p>
-<p>While it's not possible to install packages on this course page, you can load them, dplyr has been pre-loaded for you and the below is a typical output.</p>
+<p>While it’s not possible to install packages on this course page, you can load them, dplyr has been pre-loaded for you and the below is a typical output.</p>
 <pre class="r"><code>library(dplyr)</code></pre>
 <pre class="r"><code>Attaching package: &#39;dplyr&#39;
 
@@ -416,32 +416,29 @@ The following objects are masked from &#39;package:stats&#39;:
 The following objects are masked from &#39;package:base&#39;:
   
   intersect, setdiff, setequal, union</code></pre>
-<p>You can see that <code>dplyr</code> has the same function names as in a package called <code>stats</code>, <code>filter()</code> and <code>log()</code>, and from <code>base</code>, <code>intersect()</code>, <code>setdiff()</code>, <code>setequal()</code>, and <code>union()</code>. As <code>dplyr</code> was the latest package to be loaded, the functions from <code>dplyr</code> &quot;mask&quot; the functions from the other packages.</p>
+<p>You can see that <code>dplyr</code> has the same function names as in a package called <code>stats</code>, <code>filter()</code> and <code>log()</code>, and from <code>base</code>, <code>intersect()</code>, <code>setdiff()</code>, <code>setequal()</code>, and <code>union()</code>. As <code>dplyr</code> was the latest package to be loaded, the functions from <code>dplyr</code> “mask” the functions from the other packages.</p>
 <p></br></p>
 </div>
 <div id="section-phsmethods" class="section level4">
 <h4>PHSMethods</h4>
-<p>PHS have developed a package, <code>phsmethods</code>, with the aim to tackle some of the most common tasks, e.g. dealing with CHI numbers and working with postcodes.</p>
+<p>PHS have developed a package, <code>phsmethods</code>, with the aim to tackle some of the most common tasks, e.g. dealing with CHI numbers and working with postcodes.</p>
 </div>
 </div>
 <div id="section-rstudio" class="section level2">
 <h2>RStudio</h2>
-<div class="figure">
-<img src="https://www.youtube.com/watch?v=n3uue28FD0w" />
-
-</div>
+<p><img src="https://www.youtube.com/watch?v=n3uue28FD0w" /></p>
 </div>
 <div id="section-data-flow" class="section level2">
 <h2>Data Flow</h2>
-<p>The chances are, that when you're working in R, you'll be working with some kind of data-set. The typical workflow involves bringing that data in, exploring, wrangling, creating visualisations, and then creating some kind of output. This workflow is outlined below with important foundations for projects to follow.</p>
+<p>The chances are, that when you’re working in R, you’ll be working with some kind of data-set. The typical workflow involves bringing that data in, exploring, wrangling, creating visualisations, and then creating some kind of output. This workflow is outlined below with important foundations for projects to follow.</p>
 <p><img src="images/r-workflow.png" width="100%" style="display: block; margin: auto;" /></p>
-<p><em>Unfortunately, it's not possible have the code exercises in this course reach directories for reading and writing code. To test these functions for yourself, the data we'll be working with is available <a href="https://github.com/Public-Health-Scotland/learnr-intro/tree/master/data">here</a> on GitHub. The data will be pre-loaded for you in later exercises.</em></p>
+<p><em>Unfortunately, it’s not possible have the code exercises in this course reach directories for reading and writing code. To test these functions for yourself, the data we’ll be working with is available <a href="https://github.com/Public-Health-Scotland/learnr-intro/tree/master/data">here</a> on GitHub. The data will be pre-loaded for you in later exercises.</em></p>
 <div id="section-working-directory" class="section level3">
 <h3>Working Directory</h3>
-<p>Base R has it's own functions for navigating your working directory:</p>
+<p>Base R has it’s own functions for navigating your working directory:</p>
 <ul>
 <li>Current working directory: <code>getwd()</code></li>
-<li>Set new working directory: <code>setwd(&quot;&lt;filepath&gt;&quot;)</code></li>
+<li>Set new working directory: <code>setwd("&lt;filepath&gt;")</code></li>
 </ul>
 <p>However, the recommended method is using the <code>here</code> package. This gives us the <code>here()</code> function which works similar to <code>getwd()</code> but is more forgiving in how it searches for files and directories.</p>
 <p>RStudio also provides options through the user interface for navigating directories. Also, other commands, such as <code>ls()</code> are available in R.</p>
@@ -450,8 +447,8 @@ The following objects are masked from &#39;package:base&#39;:
 <h3>CSV</h3>
 <p>Working with CSVs requires the use of an R package, the recommended package to use is <code>readr</code>.</p>
 <ul>
-<li>Read: <code>read_csv(&quot;&lt;filepath&gt;&quot;)</code></li>
-<li>Write: <code>write_csv(&lt;object&gt;, &quot;&lt;filepath&gt;&quot;)</code></li>
+<li>Read: <code>read_csv("&lt;filepath&gt;")</code></li>
+<li>Write: <code>write_csv(&lt;object&gt;, "&lt;filepath&gt;")</code></li>
 </ul>
 <pre class="r"><code>library(readr)
 borders_csv &lt;- read_csv(&quot;data/Borders.csv&quot;)</code></pre>
@@ -460,8 +457,8 @@ borders_csv &lt;- read_csv(&quot;data/Borders.csv&quot;)</code></pre>
 <h3>SPSS</h3>
 <p>Working with SPSS files requires the use of an R package, the recommended package to use is <code>haven</code>.</p>
 <ul>
-<li>Read: <code>read_sav(&quot;&lt;filepath&gt;&quot;)</code></li>
-<li>Write: <code>write_sav(&lt;object&gt;, &quot;&lt;filepath&gt;&quot;)</code></li>
+<li>Read: <code>read_sav("&lt;filepath&gt;")</code></li>
+<li>Write: <code>write_sav(&lt;object&gt;, "&lt;filepath&gt;")</code></li>
 </ul>
 <pre class="r"><code>library(haven)
 borders_spss &lt;- read_sav(&quot;data/Borders.sav&quot;)</code></pre>
@@ -469,8 +466,8 @@ borders_spss &lt;- read_sav(&quot;data/Borders.sav&quot;)</code></pre>
 <div id="section-rds" class="section level3">
 <h3>RDS</h3>
 <ul>
-<li>Read: <code>readRDS(&quot;&lt;filepath&gt;&quot;)</code></li>
-<li>Write: <code>saveRDS(&lt;object&gt;, &quot;&lt;filepath&gt;&quot;)</code></li>
+<li>Read: <code>readRDS("&lt;filepath&gt;")</code></li>
+<li>Write: <code>saveRDS(&lt;object&gt;, "&lt;filepath&gt;")</code></li>
 </ul>
 <pre class="r"><code>borders_rds &lt;- readRDS(&quot;data/borders.rds&quot;)</code></pre>
 </div>
@@ -478,7 +475,7 @@ borders_spss &lt;- read_sav(&quot;data/Borders.sav&quot;)</code></pre>
 <h3>Web</h3>
 <p>The packages/functions used will vary depending on the structure of the data hosted on the web. This example uses a CSV so the process in very similar to before.</p>
 <ul>
-<li>Read: <code>read_csv(&quot;&lt;filepath&gt;&quot;)</code></li>
+<li>Read: <code>read_csv("&lt;filepath&gt;")</code></li>
 </ul>
 <pre class="r"><code>library(readr)
 borders_csv &lt;- read_csv(&quot;https://www.opendata.nhs.scot/dataset/cbd1802e-0e04-4282-88eb-d7bdcfb120f0/resource/c698f450-eeed-41a0-88f7-c1e40a568acc/download/current_nhs_hospitals_in_scotland_010720.csv&quot;)</code></pre>
@@ -554,12 +551,12 @@ pwd = .rs.askForPassword(&quot;SMRA Password:&quot;))</code></pre>
 <div class="tidyverse-logo">
 <p><img src="images/r-packages-dplyr.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
-<p>In <a href="#packages">Packages</a> we spoke about Tidyverse, a suite of packages for data exploration, manipulation, and visualisation. Within the suite of packages, we get <code>dplyr</code>, the grammar of data manipulation. This package provides as with a set of &quot;verbs&quot; to help solve most data manipulation challenges:</p>
+<p>In <a href="#section-packages">Packages</a> we spoke about Tidyverse, a suite of packages for data exploration, manipulation, and visualisation. Within the suite of packages, we get <code>dplyr</code>, the grammar of data manipulation. This package provides as with a set of “verbs” to help solve most data manipulation challenges:</p>
 <p></br></p>
 <p><code>filter()</code> <code>mutate()</code> <code>arrange()</code> <code>select()</code> <code>group_by()</code> <code>summarise()</code> <code>count()</code> <code>rename()</code> <code>recode()</code></p>
 <div id="section-pipe-operator" class="section level3">
 <h3>Pipe Operator</h3>
-<p>Before going on to the functions that make up <code>dplyr</code>, we need to talk about the pipe <code>%&gt;%</code> (shortcut: <code>ctrl</code> + <code>shift</code> + <code>M</code>). This is used to link functions together, passing the result of the previous into the next. Using the pipe makes R code more readable and prevents extensive parenthesis building up with multiple function calls. An example is below, you can see the results are the same. Don't worry too much about the functions, we get into that next (<code>dplyr</code> has been loaded).</p>
+<p>Before going on to the functions that make up <code>dplyr</code>, we need to talk about the pipe <code>%&gt;%</code> (shortcut: <code>ctrl</code> + <code>shift</code> + <code>M</code>). This is used to link functions together, passing the result of the previous into the next. Using the pipe makes R code more readable and prevents extensive parenthesis building up with multiple function calls. An example is below, you can see the results are the same. Don’t worry too much about the functions, we get into that next (<code>dplyr</code> has been loaded).</p>
 <div class="tutorial-exercise" data-label="pipe-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Not using pipe operator
 arrange(filter(borders_data, HospitalCode == &quot;B120H&quot;), Dateofbirth)
@@ -577,7 +574,7 @@ borders_data %&gt;%
 <ul>
 <li><code>filter(&lt;data&gt;, &lt;logical_expression&gt;)</code></li>
 </ul>
-<p>Filter the <code>borders_data</code> data-set to where <code>HospitalCode</code> is &quot;B120H&quot; and <code>LengthOfStay</code> is more than 10. Use the hint button if you need some help.</p>
+<p>Filter the <code>borders_data</code> data-set to where <code>HospitalCode</code> is “B120H” and <code>LengthOfStay</code> is more than 10. Use the hint button if you need some help.</p>
 <div class="tutorial-exercise" data-label="filter-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
@@ -604,7 +601,7 @@ borders_data %&gt;%
 <ul>
 <li><code>mutate(&lt;data&gt;, &lt;nol-col&gt; = &lt;expression&gt;</code></li>
 </ul>
-<p>Create a new column in <code>border</code> that is equal to <code>LengthOfStay</code> divided by 2. Name this column <code>los_div2</code>. Use the hint button if you need some help.</p>
+<p>Create a new column in <code>borders_data</code> that is equal to <code>LengthOfStay</code> divided by 2. Name this column <code>los_div2</code>. Use the hint button if you need some help.</p>
 <div class="tutorial-exercise" data-label="mutate-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
@@ -679,10 +676,10 @@ borders_data %&gt;%
 </div>
 <div id="section-knowledge-check-1" class="section level3">
 <h3>Knowledge Check</h3>
-<p>Let's put some of your new knowledge into action. Using the <code>borders_data</code> data-set, answer the questions below.</p>
+<p>Let’s put some of your new knowledge into action. Using the <code>borders_data</code> data-set, answer the questions below.</p>
 <ul>
 <li>What patients had a <code>LengthOfStay</code> of between 2 and 10 days?</li>
-<li>Of these patients, which were under <code>Specialty</code> &quot;E12&quot; or &quot;C8&quot;?</li>
+<li>Of these patients, which were under <code>Specialty</code> “E12” or “C8”?</li>
 <li>Remove all columns from the output other than <code>URI</code>, <code>Specialty</code>, and <code>LengthOfStay</code>.</li>
 <li>Order by <code>Length Of Stay</code></li>
 </ul>
@@ -706,7 +703,7 @@ borders_data %&gt;%
 <ul>
 <li><code>group_by(&lt;data&gt;, &lt;col_name&gt;)</code></li>
 </ul>
-<p>We're not performing another operation but to see that it works, this is the output of <code>group_by()</code> on <code>borders_data</code> by <code>HospitalCode</code>. Notice the <code>&quot;Groups: HospitalCode[48]&quot;</code> output.</p>
+<p>We’re not performing another operation but to see that it works, this is the output of <code>group_by()</code> on <code>borders_data</code> by <code>HospitalCode</code>. Notice the <code>"Groups: HospitalCode[48]"</code> output.</p>
 <pre class="r"><code>borders_data %&gt;%
   group_by(HospitalCode)</code></pre>
 <pre class="r"><code># A tibble: 25,299 x 14
@@ -725,7 +722,7 @@ borders_data %&gt;%
 10    10 B120H        A1            1 J969           NA         19500112        20150423        20150423
 # … with 25,289 more rows, and 5 more variables: Sex &lt;dbl&gt;, Postcode &lt;chr&gt;, LinkNo &lt;dbl&gt;,
 #   LengthOfStay &lt;dbl&gt;, HBRes &lt;chr&gt;</code></pre>
-<p>Let's go and make some use of the <code>group_by()</code> function now.</p>
+<p>Let’s go and make some use of the <code>group_by()</code> function now.</p>
 </div>
 <div id="section-summarise" class="section level3">
 <h3>Summarise</h3>
@@ -797,7 +794,7 @@ borders_data %&gt;%
 <ul>
 <li><code>rename(&lt;data&gt;, &lt;new_name&gt; = &lt;existing_name&gt;)</code></li>
 </ul>
-<p>The column <code>Dateofbirth</code> in <code>borders_data</code> doesn't follow the style guide, rename it to <code>date_of_birth</code>. Use the hint button if you need some help.</p>
+<p>The column <code>Dateofbirth</code> in <code>borders_data</code> doesn’t follow the style guide, rename it to <code>date_of_birth</code>. Use the hint button if you need some help.</p>
 <div class="tutorial-exercise" data-label="rename-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
@@ -818,9 +815,9 @@ borders_data %&gt;%
 <h3>Recode</h3>
 <p>Changes values within a column:</p>
 <ul>
-<li><code>mutate(&lt;col_name&gt; = recode(&lt;col_name&gt;, &quot;&lt;existing_code&gt;&quot; = &quot;&lt;new_code&gt;&quot;))</code></li>
+<li><code>mutate(&lt;col_name&gt; = recode(&lt;col_name&gt;, "&lt;existing_code&gt;" = "&lt;new_code&gt;"))</code></li>
 </ul>
-<p>The <code>HospitalCode</code> &quot;B102H&quot; in <code>borders_data</code> needs to be changed to &quot;B102A&quot;. Use the hint button if you need some help.</p>
+<p>The <code>HospitalCode</code> “B102H” in <code>borders_data</code> needs to be changed to “B102A”. Use the hint button if you need some help.</p>
 <div class="tutorial-exercise" data-label="recode-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
@@ -853,8 +850,8 @@ borders_data %&gt;%
 </ul>
 <p><img src="images/r-joining-overview.png" width="100%" style="display: block; margin: auto;" /></p>
 <ul>
-<li><code>left_join</code> - taking all records from the &quot;left&quot;, <code>data_1</code>, and adding matched records from the &quot;right&quot;, <code>data_2</code>, introducing <code>na</code> where the &quot;right&quot;, <code>data_2</code> had no matching records</li>
-<li><code>right_join</code> - taking all records from the &quot;right&quot;, <code>data_2</code>, and adding matched records from the &quot;left&quot;, <code>data_1</code>, introducing <code>na</code> where the &quot;left&quot;, <code>data_1</code> had no matching records</li>
+<li><code>left_join</code> - taking all records from the “left”, <code>data_1</code>, and adding matched records from the “right”, <code>data_2</code>, introducing <code>na</code> where the “right”, <code>data_2</code> had no matching records</li>
+<li><code>right_join</code> - taking all records from the “right”, <code>data_2</code>, and adding matched records from the “left”, <code>data_1</code>, introducing <code>na</code> where the “left”, <code>data_1</code> had no matching records</li>
 <li><code>inner_join</code> - producing only records where there were matches on both given data sets</li>
 <li><code>full_join</code> - retaining all records from both data sets and introducing <code>na</code> on either one where there was no matching records</li>
 </ul>
@@ -960,8 +957,8 @@ custom_bar_plot</code></pre>
 <h3>Knowledge Checking</h3>
 <p>Using the loaded <code>borders_data</code> data-set:</p>
 <ol style="list-style-type: decimal">
-<li>Filter the data-set to show only records from <code>HospitalCode</code> &quot;B109H&quot;, name this new data-set &quot;borders_b109h&quot;</li>
-<li>Create a histogram for patient's <code>LengthOfStay</code>, call this plot &quot;b109h_los_hist&quot;</li>
+<li>Filter the data-set to show only records from <code>HospitalCode</code> “B109H”, name this new data-set “borders_b109h”</li>
+<li>Create a histogram for patient’s <code>LengthOfStay</code>, call this plot “b109h_los_hist”</li>
 <li>Add axis labels and a title to your histogram</li>
 </ol>
 <div class="tutorial-exercise" data-label="plots-exercise" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
@@ -990,7 +987,7 @@ b109H_los_hist</code></pre>
 <div class="tidyverse-logo">
 <p><img src="images/r-packages-rmarkdown.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
-<p>RMarkdown allows for the production of fully reproducible documents, with R (and other language) 'chunks' included. It supports many static and dynamic outputs, including PDF, MS Word, HTML, books, presentation, even this course is written using RMarkdown (and Shiny). RMarkdown is currently used across PHS in RAP publications, infographics, and more.</p>
+<p>RMarkdown allows for the production of fully reproducible documents, with R (and other language) ‘chunks’ included. It supports many static and dynamic outputs, including PDF, MS Word, HTML, books, presentation, even this course is written using RMarkdown (and Shiny). RMarkdown is currently used across PHS in RAP publications, infographics, and more.</p>
 <p></br></p>
 </div>
 <div id="section-shiny" class="section level4">
@@ -1004,12 +1001,12 @@ b109H_los_hist</code></pre>
 </div>
 <div id="section-review-feedback" class="section level2">
 <h2>Review &amp; Feedback</h2>
-<p>Now it's time to embed your new knowledge and skills, expand with related technologies (e.g. git), and when you're ready <em>Take R Further</em> with more training opportunities.</p>
+<p>Now it’s time to embed your new knowledge and skills, expand with related technologies (e.g. git), and when you’re ready <em>Take R Further</em> with more training opportunities.</p>
 <div id="section-help" class="section level4">
 <h4>Help</h4>
 <ul>
 <li>Vignettes (Help) / <code>?&lt;function_name&gt;</code></li>
-<li>Google / Stack Overflow (tag queries with &quot;[r]&quot;)</li>
+<li>Google / Stack Overflow (tag queries with “[r]”)</li>
 <li><a href="https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&amp;tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a">R User Group Teams</a> / <a href="https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&amp;tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a">Technical Queries</a></li>
 <li><a href="mailto:phs.transformingpublishing@nhs.net?subject=Introduction%20to%20R%20Training%20Online%20-%20Help">Transforming Publishing Team email</a></li>
 </ul>
@@ -1119,29 +1116,53 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath", "# Original Date: Aug 2020", 
+"# Version of R: 3.6.1", "", "library(learnr)", "library(gradethis)", 
+"library(stringr)", "library(readr)", "library(haven)", "library(dplyr)", 
+"library(ggplot2)", "knitr::opts_chunk$set(echo = FALSE)", "", 
+"tutorial_options(", "  exercise.checker = gradethis::grade_learnr", 
+")", "", "borders_data <- readRDS(\"www/data/borders.rds\")", 
+"borders_age_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
+"baby5 <- read_csv(\"www/data/Baby5.csv\")", "baby6 <- read_csv(\"www/data/Baby6.csv\")"
+), overwrite = FALSE)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath", "# Original Date: Aug 2020", 
+"# Version of R: 3.6.1", "", "library(learnr)", "library(gradethis)", 
+"library(stringr)", "library(readr)", "library(haven)", "library(dplyr)", 
+"library(ggplot2)", "knitr::opts_chunk$set(echo = FALSE)", "", 
+"tutorial_options(", "  exercise.checker = gradethis::grade_learnr", 
+")", "", "borders_data <- readRDS(\"www/data/borders.rds\")", 
+"borders_age_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
+"baby5 <- read_csv(\"www/data/Baby5.csv\")", "baby6 <- read_csv(\"www/data/Baby6.csv\")"
+), overwrite = FALSE)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "intro-quiz-1", 
     question = structure("Which of the following can R help to produce?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_2011135", 
+    "character")), answers = list(structure(list(id = "lnr_ans_f03f5f9", 
         option = "Tidy Data", value = "Tidy Data", label = structure("Tidy Data", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ac27ef7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_df93fc8", 
         option = "Dashboards", value = "Dashboards", label = structure("Dashboards", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c38a721", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_78af01", 
         option = "Static/Interactive Reports", value = "Static/Interactive Reports", 
         label = structure("Static/Interactive Reports", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cbaa82d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9526eb8", 
         option = "Web Apps", value = "Web Apps", label = structure("Web Apps", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_52eafa", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d063623", 
         option = "Magic", value = "Magic", label = structure("Magic", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("It may seem like R is magic but unfortunately not", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_185f60d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ff1c627", 
         option = "Databases", value = "Databases", label = structure("Databases", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_41d0726", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8951680", 
         option = "Presentations", value = "Presentations", label = structure("Presentations", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1153,7 +1174,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich of the following can R help to produce?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1534831049.78529, options = list()), class = c("learnr_checkbox", 
+    seed = 143885156.932998, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
@@ -1165,8 +1186,7 @@ output$`tutorial-exercise-foundations-input-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-input", list(setup = NULL, chunks = list(list(label = "foundations-input", 
-    code = "# Hello World example\nhello_world <- \"Hello World\"\n\nprint(hello_world)", 
+learnr:::store_exercise_cache("foundations-input", list(chunks = list(list(label = "foundations-input", code = "# Hello World example\nhello_world <- \"Hello World\"\n\nprint(hello_world)", 
     opts = list(label = "\"foundations-input\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
 "  pass_if(~ startsWith(.result, \"Hello\") & .result != \"Hello World\"),", 
@@ -1189,8 +1209,17 @@ learnr:::store_exercise_cache("foundations-input", list(setup = NULL, chunks = l
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-input", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-input", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = c("# Hello World example", 
         "hello_world <- \"Hello World\"", "", "print(hello_world)"
         ), params.src = "foundations-input, exercise=TRUE", fig.num = 0, 
@@ -1205,8 +1234,7 @@ output$`tutorial-exercise-foundations-basic-types-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-basic-types", list(setup = NULL, chunks = list(list(label = "foundations-basic-types", 
-    code = "typeof(\"Hello World\")\nis.numeric(123.5)\nprint(typeof(2 + 2i))", 
+learnr:::store_exercise_cache("foundations-basic-types", list(chunks = list(list(label = "foundations-basic-types", code = "typeof(\"Hello World\")\nis.numeric(123.5)\nprint(typeof(2 + 2i))", 
     opts = list(label = "\"foundations-basic-types\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -1225,9 +1253,18 @@ learnr:::store_exercise_cache("foundations-basic-types", list(setup = NULL, chun
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-basic-types", exercise = TRUE, out.width.px = 624, 
-        out.height.px = 384, code = c("typeof(\"Hello World\")", 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-basic-types", exercise = TRUE, 
+        out.width.px = 624, out.height.px = 384, code = c("typeof(\"Hello World\")", 
         "is.numeric(123.5)", "print(typeof(2 + 2i))"), params.src = "foundations-basic-types, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -1240,7 +1277,7 @@ output$`tutorial-exercise-foundations-type-conversion-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-type-conversion", list(setup = NULL, chunks = list(list(label = "foundations-type-conversion", 
+learnr:::store_exercise_cache("foundations-type-conversion", list(chunks = list(list(label = "foundations-type-conversion", 
     code = "as.character(123.5)\nas.numeric(\"123.5\") \nas.logical(\"False\")", 
     opts = list(label = "\"foundations-type-conversion\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
@@ -1260,8 +1297,17 @@ learnr:::store_exercise_cache("foundations-type-conversion", list(setup = NULL, 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-type-conversion", exercise = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-type-conversion", exercise = TRUE, 
         out.width.px = 624, out.height.px = 384, code = c("as.character(123.5)", 
         "as.numeric(\"123.5\") ", "as.logical(\"False\")"), params.src = "foundations-type-conversion, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
@@ -1275,7 +1321,7 @@ output$`tutorial-exercise-foundations-structures-vector-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-structures-vector", list(setup = NULL, chunks = list(list(label = "foundations-structures-vector", 
+learnr:::store_exercise_cache("foundations-structures-vector", list(chunks = list(list(label = "foundations-structures-vector", 
     code = "vector(\"logical\", 4)\nc(\"a\", \"c\", \"f\", \"b\")[1]\nc(2, 5, 1, \"abc\")[2]", 
     opts = list(label = "\"foundations-structures-vector\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
@@ -1295,8 +1341,17 @@ learnr:::store_exercise_cache("foundations-structures-vector", list(setup = NULL
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-structures-vector", exercise = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-structures-vector", exercise = TRUE, 
         out.width.px = 624, out.height.px = 384, code = c("vector(\"logical\", 4)", 
         "c(\"a\", \"c\", \"f\", \"b\")[1]", "c(2, 5, 1, \"abc\")[2]"
         ), params.src = "foundations-structures-vector, exercise=TRUE", 
@@ -1311,7 +1366,7 @@ output$`tutorial-exercise-foundations-structures-list-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-structures-list", list(setup = NULL, chunks = list(list(label = "foundations-structures-list", 
+learnr:::store_exercise_cache("foundations-structures-list", list(chunks = list(list(label = "foundations-structures-list", 
     code = "list(\"abc\", 4, FALSE)[1:2]\nlist(list(2, 3), \"abc\")[2]", 
     opts = list(label = "\"foundations-structures-list\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
@@ -1331,8 +1386,17 @@ learnr:::store_exercise_cache("foundations-structures-list", list(setup = NULL, 
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-structures-list", exercise = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-structures-list", exercise = TRUE, 
         out.width.px = 624, out.height.px = 384, code = c("list(\"abc\", 4, FALSE)[1:2]", 
         "list(list(2, 3), \"abc\")[2]"), params.src = "foundations-structures-list, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
@@ -1346,7 +1410,7 @@ output$`tutorial-exercise-foundations-structures-list-naming-output` <- renderUI
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-structures-list-naming", list(setup = NULL, chunks = list(list(label = "foundations-structures-list-naming", 
+learnr:::store_exercise_cache("foundations-structures-list-naming", list(chunks = list(list(label = "foundations-structures-list-naming", 
     code = "x <- list(\"Ch\" = \"a\", \"Nm\" = 2) \nnames(x) <- c(\"Char\", \"Num\") \nx$Char", 
     opts = list(label = "\"foundations-structures-list-naming\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
@@ -1366,8 +1430,17 @@ learnr:::store_exercise_cache("foundations-structures-list-naming", list(setup =
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-structures-list-naming", exercise = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-structures-list-naming", exercise = TRUE, 
         out.width.px = 624, out.height.px = 384, code = c("x <- list(\"Ch\" = \"a\", \"Nm\" = 2) ", 
         "names(x) <- c(\"Char\", \"Num\") ", "x$Char"), params.src = "foundations-structures-list-naming, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
@@ -1381,7 +1454,7 @@ output$`tutorial-exercise-foundations-structures-matrix-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-structures-matrix", list(setup = NULL, chunks = list(list(label = "foundations-structures-matrix", 
+learnr:::store_exercise_cache("foundations-structures-matrix", list(chunks = list(list(label = "foundations-structures-matrix", 
     code = "x <- matrix(1:6, 2, 3) \nx\nx[2, 3]", opts = list(
         label = "\"foundations-structures-matrix\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
@@ -1401,8 +1474,17 @@ learnr:::store_exercise_cache("foundations-structures-matrix", list(setup = NULL
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-structures-matrix", exercise = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-structures-matrix", exercise = TRUE, 
         out.width.px = 624, out.height.px = 384, code = c("x <- matrix(1:6, 2, 3) ", 
         "x", "x[2, 3]"), params.src = "foundations-structures-matrix, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
@@ -1416,7 +1498,7 @@ output$`tutorial-exercise-foundations-structures-factors-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-structures-factors", list(setup = NULL, chunks = list(list(label = "foundations-structures-factors", 
+learnr:::store_exercise_cache("foundations-structures-factors", list(chunks = list(list(label = "foundations-structures-factors", 
     code = "factor_ex <- factor(c(\"low\", \"high\", \"medium\", \"high\", \"low\", \"medium\", \"high\"))\nfactor_ex\nfactor_ex <- factor(factor_ex, levels = c(\"low\", \"medium\", \"high\"))\nlevels(factor_ex)", 
     opts = list(label = "\"foundations-structures-factors\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
@@ -1436,8 +1518,17 @@ learnr:::store_exercise_cache("foundations-structures-factors", list(setup = NUL
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-structures-factors", exercise = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-structures-factors", exercise = TRUE, 
         out.width.px = 624, out.height.px = 384, code = c("factor_ex <- factor(c(\"low\", \"high\", \"medium\", \"high\", \"low\", \"medium\", \"high\"))", 
         "factor_ex", "factor_ex <- factor(factor_ex, levels = c(\"low\", \"medium\", \"high\"))", 
         "levels(factor_ex)"), params.src = "foundations-structures-factors, exercise=TRUE", 
@@ -1452,7 +1543,7 @@ output$`tutorial-exercise-foundations-structures-dataframe-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("foundations-structures-dataframe", list(setup = NULL, chunks = list(list(label = "foundations-structures-dataframe", 
+learnr:::store_exercise_cache("foundations-structures-dataframe", list(chunks = list(list(label = "foundations-structures-dataframe", 
     code = "data.frame(name = c(\"Harry\", \"Sarah\"), score = c(62, 91))", 
     opts = list(label = "\"foundations-structures-dataframe\"", 
         exercise = "TRUE"), engine = "r")), code_check = NULL, 
@@ -1472,8 +1563,17 @@ learnr:::store_exercise_cache("foundations-structures-dataframe", list(setup = N
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "foundations-structures-dataframe", exercise = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "foundations-structures-dataframe", exercise = TRUE, 
         out.width.px = 624, out.height.px = 384, code = "data.frame(name = c(\"Harry\", \"Sarah\"), score = c(62, 91))", 
         params.src = "foundations-structures-dataframe, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
@@ -1482,22 +1582,22 @@ learnr:::store_exercise_cache("foundations-structures-dataframe", list(setup = N
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-1", 
     question = structure("What will <code>c(&#39;abc&#39;, 5, TRUE, 123.5)[3]<\u002fcode> return?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_ab44d25", 
+    "character")), answers = list(structure(list(id = "lnr_ans_5bd4776", 
         option = "`TRUE`", value = "`TRUE`", label = structure("<code>TRUE<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("This is a vector so only holds one basic data type.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_897f236", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_49eb78f", 
         option = "`5`", value = "`5`", label = structure("<code>5<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_38febf5", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f215071", 
         option = "`123.5`", value = "`123.5`", label = structure("<code>123.5<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system and this is a vector so only holds one basic data type.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_fcee715", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b837177", 
         option = "`'123.5'`", value = "`'123.5'`", label = structure("<code>&#39;123.5&#39;<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_bafd12", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_fadaeab", 
         option = "`'TRUE'`", value = "`'TRUE'`", label = structure("<code>&#39;TRUE&#39;<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1509,27 +1609,27 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-1-answer", question = "foundations-structures-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat will <code>c(&#39;abc&#39;, 5, TRUE, 123.5)[3]<\u002fcode> return?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 831611079.612751, options = list()), class = c("learnr_radio", 
+    seed = 60858844.9716604, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "foundations-structures-quiz-2", 
     question = structure("How do you return the second element from this list (not a sub-list)? (Select all that apply) <code>example_list &lt;- list(&#39;Number&#39; = 123, &#39;List&#39; = list(1, 2, 3), TRUE, FALSE)<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_53d25e", 
+    "character")), answers = list(structure(list(id = "lnr_ans_f25e5d9", 
         option = "`example_list[2]`", value = "`example_list[2]`", 
         label = structure("<code>example_list[2]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("Remember it&#39;s the element to be returned, not a sub-list", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4643643", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b5ed045", 
         option = "`example_list[[2]]`", value = "`example_list[[2]]`", 
         label = structure("<code>example_list[[2]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a761f56", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f82bc40", 
         option = "`example_list$List`", value = "`example_list$List`", 
         label = structure("<code>example_list$List<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_22962e9", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_33ac113", 
         option = "`c(1, 2, 3)`", value = "`c(1, 2, 3)`", label = structure("<code>c(1, 2, 3)<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1541,23 +1641,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "foundations-structures-quiz-2-answer", question = "foundations-structures-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nHow do you return the second element from this list (not a sub-list)? (Select all that apply) <code>example_list &lt;- list(&#39;Number&#39; = 123, &#39;List&#39; = list(1, 2, 3), TRUE, FALSE)<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 432665689.298524, options = list()), class = c("learnr_checkbox", 
+    seed = 346458436.338668, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-3", 
     question = structure("What result did Zac get? <code>patient_list &lt;- data.frame(name = c(&#39;Tom&#39;, &#39;Jen&#39;, &#39;Zac&#39;, &#39;Kat&#39;), \n result = c(97.6, 54.3, 21.0, 83.8))<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_fcd9b0e", 
+    "character")), answers = list(structure(list(id = "lnr_ans_883e411", 
         option = "97.6", value = "97.6", label = structure("97.6", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c994e99", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7e0dbf", 
         option = "54.3", value = "54.3", label = structure("54.3", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4daafbe", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d0f0ffb", 
         option = "21.0", value = "21.0", label = structure("21.0", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d37ccb9", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e74dcbe", 
         option = "83.8", value = "83.8", label = structure("83.8", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1569,27 +1669,27 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-3-answer", question = "foundations-structures-quiz-3"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat result did Zac get? <code>patient_list &lt;- data.frame(name = c(&#39;Tom&#39;, &#39;Jen&#39;, &#39;Zac&#39;, &#39;Kat&#39;), \n result = c(97.6, 54.3, 21.0, 83.8))<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 34980871.4837108, options = list()), class = c("learnr_radio", 
+    seed = 2143130348.00203, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-4", 
     question = structure("How do you get the 2nd, 3rd, and 4th item from this list? <code>example_list &lt;- list(&#39;x&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;y&#39;, &#39;z&#39;)<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_34e4234", 
+    "character")), answers = list(structure(list(id = "lnr_ans_b58c5b", 
         option = "`example_list[2:4]`", value = "`example_list[2:4]`", 
         label = structure("<code>example_list[2:4]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1a7affb", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f648e10", 
         option = "`example_list[1:3]`", value = "`example_list[1:3]`", 
         label = structure("<code>example_list[1:3]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f74949", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_15f9296", 
         option = "`example_list[[2:4]]`", value = "`example_list[[2:4]]`", 
         label = structure("<code>example_list[[2:4]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_abed251", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_62ae393", 
         option = "`example_list[[1:3]]`", value = "`example_list[[1:3]]`", 
         label = structure("<code>example_list[[1:3]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
@@ -1602,7 +1702,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-4-answer", question = "foundations-structures-quiz-4"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nHow do you get the 2nd, 3rd, and 4th item from this list? <code>example_list &lt;- list(&#39;x&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;y&#39;, &#39;z&#39;)<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1890547547.61965, options = list()), class = c("learnr_radio", 
+    seed = 808352283.123582, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -1614,7 +1714,7 @@ output$`tutorial-exercise-mean-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("mean", list(setup = NULL, chunks = list(list(label = "mean", code = "borders_data", 
+learnr:::store_exercise_cache("mean", list(chunks = list(list(label = "mean", code = "borders_data", 
     opts = list(label = "\"mean\"", exercise = "TRUE", exercise.eval = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure("grade_code()", chunk_opts = list(
     label = "mean-check")), solution = structure("mean(borders_data$LengthOfStay)", chunk_opts = list(
@@ -1633,10 +1733,20 @@ learnr:::store_exercise_cache("mean", list(setup = NULL, chunks = list(list(labe
     warning = TRUE, error = FALSE, message = TRUE, render = NULL, 
     ref.label = NULL, child = NULL, engine = "r", split = FALSE, 
     include = TRUE, purl = TRUE, max.print = 1000, tutorial = TRUE, 
-    exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-    label = "mean", exercise = TRUE, exercise.eval = TRUE, out.width.px = 624, 
-    out.height.px = 384, code = "borders_data", params.src = "mean, exercise=TRUE, exercise.eval=TRUE", 
-    fig.num = 0, exercise.df_print = "paged"), engine = "r"))
+    exercise.checker = function (label = NULL, solution_code = NULL, 
+        user_code = NULL, check_code = NULL, envir_result = NULL, 
+        evaluate_result = NULL, envir_prep = NULL, last_value = NULL, 
+        ...) 
+    {
+        (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+            solution_code = solution_code, user_code = user_code, 
+            check_code = check_code, envir_result = envir_result, 
+            evaluate_result = evaluate_result, envir_prep = envir_prep, 
+            last_value = last_value, ...)
+    }, label = "mean", exercise = TRUE, exercise.eval = TRUE, 
+    out.width.px = 624, out.height.px = 384, code = "borders_data", 
+    params.src = "mean, exercise=TRUE, exercise.eval=TRUE", fig.num = 0, 
+    exercise.df_print = "paged"), engine = "r"))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -1647,10 +1757,10 @@ output$`tutorial-exercise-freq-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("freq", list(setup = NULL, chunks = list(list(label = "freq", code = "", 
-    opts = list(label = "\"freq\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, check = structure("grade_code()", chunk_opts = list(
-        label = "freq-check")), solution = structure("addmargins(table(borders_data$HospitalCode, borders_data$Sex))", chunk_opts = list(
+learnr:::store_exercise_cache("freq", list(chunks = list(list(label = "freq", code = "", opts = list(
+    label = "\"freq\"", exercise = "TRUE"), engine = "r")), code_check = NULL, 
+    check = structure("grade_code()", chunk_opts = list(label = "freq-check")), 
+    solution = structure("addmargins(table(borders_data$HospitalCode, borders_data$Sex))", chunk_opts = list(
         label = "freq-solution")), options = list(eval = FALSE, 
         echo = TRUE, results = "markup", tidy = FALSE, tidy.opts = NULL, 
         collapse = FALSE, prompt = FALSE, comment = NA, highlight = FALSE, 
@@ -1667,8 +1777,17 @@ learnr:::store_exercise_cache("freq", list(setup = NULL, chunks = list(list(labe
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "freq", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "freq", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "freq, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -1681,8 +1800,7 @@ output$`tutorial-exercise-pipe-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("pipe-example", list(setup = NULL, chunks = list(list(label = "pipe-example", 
-    code = "# Not using pipe operator\narrange(filter(borders_data, HospitalCode == \"B120H\"), Dateofbirth)\n\n# With pipe operator\nborders_data %>%\n  filter(HospitalCode == \"B120H\") %>%\n  arrange(Dateofbirth)", 
+learnr:::store_exercise_cache("pipe-example", list(chunks = list(list(label = "pipe-example", code = "# Not using pipe operator\narrange(filter(borders_data, HospitalCode == \"B120H\"), Dateofbirth)\n\n# With pipe operator\nborders_data %>%\n  filter(HospitalCode == \"B120H\") %>%\n  arrange(Dateofbirth)", 
     opts = list(label = "\"pipe-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -1701,8 +1819,17 @@ learnr:::store_exercise_cache("pipe-example", list(setup = NULL, chunks = list(l
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "pipe-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "pipe-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = c("# Not using pipe operator", 
         "arrange(filter(borders_data, HospitalCode == \"B120H\"), Dateofbirth)", 
         "", "# With pipe operator", "borders_data %>%", "  filter(HospitalCode == \"B120H\") %>%", 
@@ -1718,8 +1845,8 @@ output$`tutorial-exercise-filter-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("filter-example", list(setup = NULL, chunks = list(list(label = "filter-example", 
-    code = "", opts = list(label = "\"filter-example\"", exercise = "TRUE"), 
+learnr:::store_exercise_cache("filter-example", list(chunks = list(list(label = "filter-example", code = "", 
+    opts = list(label = "\"filter-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
 "  pass_if(~ identical(as.character(.result$URI[1]), \"28\") & identical(as.character(.result$URI[1000]), \"12598\")),", 
 "  fail_if(~ identical(as.character(.result$URI[1]), \"4\"), \"Did you forget to include LengthOfStay?\"),", 
@@ -1744,8 +1871,17 @@ learnr:::store_exercise_cache("filter-example", list(setup = NULL, chunks = list
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "filter-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "filter-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "filter-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -1758,8 +1894,8 @@ output$`tutorial-exercise-mutate-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("mutate-example", list(setup = NULL, chunks = list(list(label = "mutate-example", 
-    code = "", opts = list(label = "\"mutate-example\"", exercise = "TRUE"), 
+learnr:::store_exercise_cache("mutate-example", list(chunks = list(list(label = "mutate-example", code = "", 
+    opts = list(label = "\"mutate-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
 "  pass_if(~ identical(as.character(.result$los_div2[1]), \"2\") & identical(as.character(.result$los_div2[1000]), \"4.5\")),", 
 "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "mutate-example-check")), 
@@ -1781,8 +1917,17 @@ learnr:::store_exercise_cache("mutate-example", list(setup = NULL, chunks = list
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "mutate-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "mutate-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "mutate-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -1795,8 +1940,8 @@ output$`tutorial-exercise-arrange-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("arrange-example", list(setup = NULL, chunks = list(list(label = "arrange-example", 
-    code = "", opts = list(label = "\"arrange-example\"", exercise = "TRUE"), 
+learnr:::store_exercise_cache("arrange-example", list(chunks = list(list(label = "arrange-example", code = "", 
+    opts = list(label = "\"arrange-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
 "  pass_if(~ identical(as.character(.result$URI[1]), \"1763\") & identical(as.character(.result$URI[1000]), \"19971\")),", 
 "  fail_if(~ identical(as.character(.result$URI[1]), \"7503\"), \"Did you arrange in descending order?\"),", 
@@ -1819,8 +1964,17 @@ learnr:::store_exercise_cache("arrange-example", list(setup = NULL, chunks = lis
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "arrange-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "arrange-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "arrange-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -1833,8 +1987,8 @@ output$`tutorial-exercise-select-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("select-example", list(setup = NULL, chunks = list(list(label = "select-example", 
-    code = "", opts = list(label = "\"select-example\"", exercise = "TRUE"), 
+learnr:::store_exercise_cache("select-example", list(chunks = list(list(label = "select-example", code = "", 
+    opts = list(label = "\"select-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
 "  pass_if(~ (!\"Postcode\" %in% colnames(.result)) & (c(\"URI\", \"HospitalCode\", \"Specialty\", \"MOP\", \"Main_Condition\", \"Main_op\", \"Dateofbirth\", \"DateofAdmission\", \"DateofDischarge\", \"Sex\", \"LinkNo\", \"LengthOfStay\", \"HBRes\") %in% colnames(.result))),", 
 "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "select-example-check")), 
@@ -1856,8 +2010,17 @@ learnr:::store_exercise_cache("select-example", list(setup = NULL, chunks = list
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "select-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "select-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "select-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -1870,32 +2033,41 @@ output$`tutorial-exercise-wrangle-1-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("wrangle-1", list(setup = NULL, chunks = list(list(label = "wrangle-1", code = "", 
-    opts = list(label = "\"wrangle-1\"", exercise = "TRUE"), 
-    engine = "r")), code_check = NULL, check = structure("grade_code()", chunk_opts = list(
-    label = "wrangle-1-check")), solution = structure(c("borders_data %>%", 
-"  filter(LengthOfStay >= 2 & LengthOfStay <= 10) %>%", "  filter(Specialty == \"E12\" | Specialty == \"C8\") %>%", 
-"  select(URI, Specialty, LengthOfStay) %>%", "  arrange(LengthOfStay)"
-), chunk_opts = list(label = "wrangle-1-solution")), options = list(
-    eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
-    tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
-    highlight = FALSE, strip.white = TRUE, size = "normalsize", 
-    background = "#F7F7F7", cache = 0, cache.path = "Intro_cache/html/", 
-    cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, autodep = FALSE, 
-    cache.rebuild = FALSE, fig.keep = "high", fig.show = "asis", 
-    fig.align = "default", fig.path = "Intro_files/figure-html/", 
-    dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
-    fig.width = 6.5, fig.height = 4, fig.env = "figure", fig.cap = NULL, 
-    fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, fig.pos = "", 
-    out.width = 624, out.height = NULL, out.extra = NULL, fig.retina = 2, 
-    external = TRUE, sanitize = FALSE, interval = 1, aniopts = "controls,loop", 
-    warning = TRUE, error = FALSE, message = TRUE, render = NULL, 
-    ref.label = NULL, child = NULL, engine = "r", split = FALSE, 
-    include = TRUE, purl = TRUE, max.print = 1000, tutorial = TRUE, 
-    exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-    label = "wrangle-1", exercise = TRUE, out.width.px = 624, 
-    out.height.px = 384, code = "", params.src = "wrangle-1, exercise=TRUE", 
-    fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
+learnr:::store_exercise_cache("wrangle-1", list(chunks = list(list(label = "wrangle-1", code = "", opts = list(
+    label = "\"wrangle-1\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, check = structure("grade_code()", chunk_opts = list(
+        label = "wrangle-1-check")), solution = structure(c("borders_data %>%", 
+    "  filter(LengthOfStay >= 2 & LengthOfStay <= 10) %>%", "  filter(Specialty == \"E12\" | Specialty == \"C8\") %>%", 
+    "  select(URI, Specialty, LengthOfStay) %>%", "  arrange(LengthOfStay)"
+    ), chunk_opts = list(label = "wrangle-1-solution")), options = list(
+        eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+        tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+        highlight = FALSE, strip.white = TRUE, size = "normalsize", 
+        background = "#F7F7F7", cache = 0, cache.path = "Intro_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "Intro_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "wrangle-1", exercise = TRUE, out.width.px = 624, 
+        out.height.px = 384, code = "", params.src = "wrangle-1, exercise=TRUE", 
+        fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -1906,8 +2078,8 @@ output$`tutorial-exercise-summarise-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("summarise-example", list(setup = NULL, chunks = list(list(label = "summarise-example", 
-    code = "", opts = list(label = "\"summarise-example\"", exercise = "TRUE"), 
+learnr:::store_exercise_cache("summarise-example", list(chunks = list(list(label = "summarise-example", code = "", 
+    opts = list(label = "\"summarise-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
 "  pass_if(~ identical(as.character(.result$HospitalCode[1]), \"A210H\") & identical(as.character(.result$mean_los[1]), \"2\")),", 
 "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "summarise-example-check")), 
@@ -1929,8 +2101,17 @@ learnr:::store_exercise_cache("summarise-example", list(setup = NULL, chunks = l
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "summarise-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "summarise-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "summarise-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -1943,12 +2124,11 @@ output$`tutorial-exercise-count-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("count-example", list(setup = NULL, chunks = list(list(label = "count-example", 
-    code = "", opts = list(label = "\"count-example\"", exercise = "TRUE"), 
-    engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
-"  pass_if(~ identical(as.character(.result$Specialty[1]), \"A1\") & identical(as.character(.result$n[2]), \"3762\")),", 
-"  fail_if(~ identical(as.character(.result$n[2]), \"294\"), \"Did you forget to sort in descending order?\"),", 
-"  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "count-example-check")), 
+learnr:::store_exercise_cache("count-example", list(chunks = list(list(label = "count-example", code = "", opts = list(
+    label = "\"count-example\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, check = structure(c("grade_result(", "  pass_if(~ identical(as.character(.result$Specialty[1]), \"A1\") & identical(as.character(.result$n[2]), \"3762\")),", 
+    "  fail_if(~ identical(as.character(.result$n[2]), \"294\"), \"Did you forget to sort in descending order?\"),", 
+    "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "count-example-check")), 
     solution = structure(c("borders_data %>%", "  count(Specialty, sort = TRUE)"
     ), chunk_opts = list(label = "count-example-solution")), 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -1967,8 +2147,17 @@ learnr:::store_exercise_cache("count-example", list(setup = NULL, chunks = list(
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "count-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "count-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "count-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -1981,8 +2170,8 @@ output$`tutorial-exercise-rename-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("rename-example", list(setup = NULL, chunks = list(list(label = "rename-example", 
-    code = "", opts = list(label = "\"rename-example\"", exercise = "TRUE"), 
+learnr:::store_exercise_cache("rename-example", list(chunks = list(list(label = "rename-example", code = "", 
+    opts = list(label = "\"rename-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
 "  pass_if(~ (!\"Dateofbirth\" %in% colnames(.result)) & (c(\"URI\", \"HospitalCode\", \"Specialty\", \"MOP\", \"Main_Condition\", \"Main_op\", \"date_of_birth\", \"DateofAdmission\", \"DateofDischarge\", \"Postcode\", \"Sex\", \"LinkNo\", \"LengthOfStay\", \"HBRes\") %in% colnames(.result))),", 
 "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "rename-example-check")), 
@@ -2004,8 +2193,17 @@ learnr:::store_exercise_cache("rename-example", list(setup = NULL, chunks = list
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "rename-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "rename-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "rename-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -2018,8 +2216,8 @@ output$`tutorial-exercise-recode-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("recode-example", list(setup = NULL, chunks = list(list(label = "recode-example", 
-    code = "", opts = list(label = "\"recode-example\"", exercise = "TRUE"), 
+learnr:::store_exercise_cache("recode-example", list(chunks = list(list(label = "recode-example", code = "", 
+    opts = list(label = "\"recode-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
 "  pass_if(~ (!\"B102H\" %in% .result$HospitalCode) & (\"B102A\" %in% .result$HospitalCode)),", 
 "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "recode-example-check")), 
@@ -2041,8 +2239,17 @@ learnr:::store_exercise_cache("recode-example", list(setup = NULL, chunks = list
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "recode-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "recode-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "recode-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -2055,13 +2262,12 @@ output$`tutorial-exercise-join-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("join-example", list(setup = NULL, chunks = list(list(label = "join-example", 
-    code = "", opts = list(label = "\"join-example\"", exercise = "TRUE"), 
-    engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
-"  pass_if(~ identical(as.character(.result$BABYNAME[1]), \"Julie\") & identical(as.character(.result$SURNAME[8]), \"MacArthur\") & identical(as.character(.result$DOB[3]), \"1/6/2017\") & !\"FAMILYID.y\" %in% colnames(.result)),", 
-"  fail_if(~ identical(as.character(.result$DOB.x[1]), \"1/15/2017\"), \"Did you forget DOB as a common variable?\"),", 
-"  fail_if(~ identical(as.character(.result$FAMILYID.y[1]), \"1\"), \"Did you forget FAMILYID as a common variable?\"),", 
-"  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "join-example-check")), 
+learnr:::store_exercise_cache("join-example", list(chunks = list(list(label = "join-example", code = "", opts = list(
+    label = "\"join-example\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, check = structure(c("grade_result(", "  pass_if(~ identical(as.character(.result$BABYNAME[1]), \"Julie\") & identical(as.character(.result$SURNAME[8]), \"MacArthur\") & identical(as.character(.result$DOB[3]), \"1/6/2017\") & !\"FAMILYID.y\" %in% colnames(.result)),", 
+    "  fail_if(~ identical(as.character(.result$DOB.x[1]), \"1/15/2017\"), \"Did you forget DOB as a common variable?\"),", 
+    "  fail_if(~ identical(as.character(.result$FAMILYID.y[1]), \"1\"), \"Did you forget FAMILYID as a common variable?\"),", 
+    "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "join-example-check")), 
     solution = structure("left_join(baby5, baby6, by = c(\"FAMILYID\", \"DOB\"))", chunk_opts = list(
         label = "join-example-solution")), options = list(eval = FALSE, 
         echo = TRUE, results = "markup", tidy = FALSE, tidy.opts = NULL, 
@@ -2079,8 +2285,17 @@ learnr:::store_exercise_cache("join-example", list(setup = NULL, chunks = list(l
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "join-example", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "join-example", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = "", params.src = "join-example, exercise=TRUE", 
         fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -2093,32 +2308,41 @@ output$`tutorial-exercise-wrangle-2-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("wrangle-2", list(setup = NULL, chunks = list(list(label = "wrangle-2", code = "", 
-    opts = list(label = "\"wrangle-2\"", exercise = "TRUE"), 
-    engine = "r")), code_check = NULL, check = structure("grade_code()", chunk_opts = list(
-    label = "wrangle-2-check")), solution = structure(c("borders_data %>%", 
-"  select(URI, Specialty, Dateofbirth) %>%", "  arrange(Specialty) %>%", 
-"  filter(is.na(Dateofbirth) == TRUE) %>%", "  mutate(Specialty = recode(Specialty, \"A1\" = \"General Medicine\"))"
-), chunk_opts = list(label = "wrangle-2-solution")), options = list(
-    eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
-    tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
-    highlight = FALSE, strip.white = TRUE, size = "normalsize", 
-    background = "#F7F7F7", cache = 0, cache.path = "Intro_cache/html/", 
-    cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, autodep = FALSE, 
-    cache.rebuild = FALSE, fig.keep = "high", fig.show = "asis", 
-    fig.align = "default", fig.path = "Intro_files/figure-html/", 
-    dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
-    fig.width = 6.5, fig.height = 4, fig.env = "figure", fig.cap = NULL, 
-    fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, fig.pos = "", 
-    out.width = 624, out.height = NULL, out.extra = NULL, fig.retina = 2, 
-    external = TRUE, sanitize = FALSE, interval = 1, aniopts = "controls,loop", 
-    warning = TRUE, error = FALSE, message = TRUE, render = NULL, 
-    ref.label = NULL, child = NULL, engine = "r", split = FALSE, 
-    include = TRUE, purl = TRUE, max.print = 1000, tutorial = TRUE, 
-    exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-    label = "wrangle-2", exercise = TRUE, out.width.px = 624, 
-    out.height.px = 384, code = "", params.src = "wrangle-2, exercise=TRUE", 
-    fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
+learnr:::store_exercise_cache("wrangle-2", list(chunks = list(list(label = "wrangle-2", code = "", opts = list(
+    label = "\"wrangle-2\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, check = structure("grade_code()", chunk_opts = list(
+        label = "wrangle-2-check")), solution = structure(c("borders_data %>%", 
+    "  select(URI, Specialty, Dateofbirth) %>%", "  arrange(Specialty) %>%", 
+    "  filter(is.na(Dateofbirth) == TRUE) %>%", "  mutate(Specialty = recode(Specialty, \"A1\" = \"General Medicine\"))"
+    ), chunk_opts = list(label = "wrangle-2-solution")), options = list(
+        eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+        tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+        highlight = FALSE, strip.white = TRUE, size = "normalsize", 
+        background = "#F7F7F7", cache = 0, cache.path = "Intro_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "Intro_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "wrangle-2", exercise = TRUE, out.width.px = 624, 
+        out.height.px = 384, code = "", params.src = "wrangle-2, exercise=TRUE", 
+        fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -2129,7 +2353,7 @@ output$`tutorial-exercise-line-graph-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("line-graph", list(setup = NULL, chunks = list(list(label = "line-graph", code = "# Define the data\ndata <- data.frame(\n  x = c(1, 3, 2, 4),\n  y = c(4, 8, 7, 11))\n\n# Plot the data\nline_plot <- ggplot(data, aes(x, y)) +\n  geom_line() +\n  geom_point()\n\nline_plot", 
+learnr:::store_exercise_cache("line-graph", list(chunks = list(list(label = "line-graph", code = "# Define the data\ndata <- data.frame(\n  x = c(1, 3, 2, 4),\n  y = c(4, 8, 7, 11))\n\n# Plot the data\nline_plot <- ggplot(data, aes(x, y)) +\n  geom_line() +\n  geom_point()\n\nline_plot", 
     opts = list(label = "\"line-graph\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -2148,8 +2372,17 @@ learnr:::store_exercise_cache("line-graph", list(setup = NULL, chunks = list(lis
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "line-graph", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "line-graph", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = c("# Define the data", "data <- data.frame(", 
         "  x = c(1, 3, 2, 4),", "  y = c(4, 8, 7, 11))", "", 
         "# Plot the data", "line_plot <- ggplot(data, aes(x, y)) +", 
@@ -2166,7 +2399,7 @@ output$`tutorial-exercise-bar-plot-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("bar-plot", list(setup = NULL, chunks = list(list(label = "bar-plot", code = "bar_plot <- ggplot(borders_age_data) +\n  geom_bar(aes(x = admissionday))\n\nbar_plot", 
+learnr:::store_exercise_cache("bar-plot", list(chunks = list(list(label = "bar-plot", code = "bar_plot <- ggplot(borders_age_data) +\n  geom_bar(aes(x = admissionday))\n\nbar_plot", 
     opts = list(label = "\"bar-plot\"", exercise = "TRUE"), engine = "r")), 
     code_check = NULL, check = NULL, solution = NULL, options = list(
         eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
@@ -2184,8 +2417,17 @@ learnr:::store_exercise_cache("bar-plot", list(setup = NULL, chunks = list(list(
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "bar-plot", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "bar-plot", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = c("bar_plot <- ggplot(borders_age_data) +", 
         "  geom_bar(aes(x = admissionday))", "", "bar_plot"), 
         params.src = "bar-plot, exercise=TRUE", fig.num = 0, 
@@ -2200,8 +2442,7 @@ output$`tutorial-exercise-scatter-plot-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("scatter-plot", list(setup = NULL, chunks = list(list(label = "scatter-plot", 
-    code = "scatter_plot <- ggplot(borders_age_data, aes(x = ageonadmission,\n                                        y = lengthofstay1)) +\n  geom_point()\n\nscatter_plot", 
+learnr:::store_exercise_cache("scatter-plot", list(chunks = list(list(label = "scatter-plot", code = "scatter_plot <- ggplot(borders_age_data, aes(x = ageonadmission,\n                                        y = lengthofstay1)) +\n  geom_point()\n\nscatter_plot", 
     opts = list(label = "\"scatter-plot\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -2220,8 +2461,17 @@ learnr:::store_exercise_cache("scatter-plot", list(setup = NULL, chunks = list(l
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "scatter-plot", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "scatter-plot", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = c("scatter_plot <- ggplot(borders_age_data, aes(x = ageonadmission,", 
         "                                        y = lengthofstay1)) +", 
         "  geom_point()", "", "scatter_plot"), params.src = "scatter-plot, exercise=TRUE", 
@@ -2236,8 +2486,7 @@ output$`tutorial-exercise-custom-plot-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("custom-plot", list(setup = NULL, chunks = list(list(label = "custom-plot", 
-    code = "custom_bar_plot <- ggplot(borders_age_data) +\n  geom_bar(aes(x = admissionday),\n           fill = \"magenta4\",\n           width = 0.5) +\n  xlab(\"Admission Day\") +\n  ylab(\"Number of Admissions\") +\n  ggtitle(\"Distribution of Admissions\")\n\ncustom_bar_plot", 
+learnr:::store_exercise_cache("custom-plot", list(chunks = list(list(label = "custom-plot", code = "custom_bar_plot <- ggplot(borders_age_data) +\n  geom_bar(aes(x = admissionday),\n           fill = \"magenta4\",\n           width = 0.5) +\n  xlab(\"Admission Day\") +\n  ylab(\"Number of Admissions\") +\n  ggtitle(\"Distribution of Admissions\")\n\ncustom_bar_plot", 
     opts = list(label = "\"custom-plot\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -2256,8 +2505,17 @@ learnr:::store_exercise_cache("custom-plot", list(setup = NULL, chunks = list(li
         aniopts = "controls,loop", warning = TRUE, error = FALSE, 
         message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-        label = "custom-plot", exercise = TRUE, out.width.px = 624, 
+        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
+            solution_code = NULL, user_code = NULL, check_code = NULL, 
+            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
+            last_value = NULL, ...) 
+        {
+            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+                solution_code = solution_code, user_code = user_code, 
+                check_code = check_code, envir_result = envir_result, 
+                evaluate_result = evaluate_result, envir_prep = envir_prep, 
+                last_value = last_value, ...)
+        }, label = "custom-plot", exercise = TRUE, out.width.px = 624, 
         out.height.px = 384, code = c("custom_bar_plot <- ggplot(borders_age_data) +", 
         "  geom_bar(aes(x = admissionday),", "           fill = \"magenta4\",", 
         "           width = 0.5) +", "  xlab(\"Admission Day\") +", 
@@ -2274,8 +2532,8 @@ output$`tutorial-exercise-plots-exercise-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("plots-exercise", list(setup = NULL, chunks = list(list(label = "plots-exercise", 
-    code = "", opts = list(label = "\"plots-exercise\"", exercise = "TRUE"), 
+learnr:::store_exercise_cache("plots-exercise", list(chunks = list(list(label = "plots-exercise", code = "", 
+    opts = list(label = "\"plots-exercise\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = structure("grade_code()", chunk_opts = list(
     label = "plots-exercise-check")), solution = structure(c("# Filter the data for HospitalCode B109H", 
 "borders_b109h <- borders_data %>%", "  filter(HospitalCode == \"B109H\")", 
@@ -2298,8 +2556,17 @@ learnr:::store_exercise_cache("plots-exercise", list(setup = NULL, chunks = list
     warning = TRUE, error = FALSE, message = TRUE, render = NULL, 
     ref.label = NULL, child = NULL, engine = "r", split = FALSE, 
     include = TRUE, purl = TRUE, max.print = 1000, tutorial = TRUE, 
-    exercise.checker = "function (label = NULL, solution_code = NULL, user_code = NULL, \n    check_code = NULL, envir_result = NULL, evaluate_result = NULL, \n    envir_prep = NULL, last_value = NULL, ...) \n{\n    (utils::getFromNamespace(\"grade_learnr_\", \"gradethis\"))(label = label, \n        solution_code = solution_code, user_code = user_code, \n        check_code = check_code, envir_result = envir_result, \n        evaluate_result = evaluate_result, envir_prep = envir_prep, \n        last_value = last_value, ...)\n}", 
-    label = "plots-exercise", exercise = TRUE, out.width.px = 624, 
+    exercise.checker = function (label = NULL, solution_code = NULL, 
+        user_code = NULL, check_code = NULL, envir_result = NULL, 
+        evaluate_result = NULL, envir_prep = NULL, last_value = NULL, 
+        ...) 
+    {
+        (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+            solution_code = solution_code, user_code = user_code, 
+            check_code = check_code, envir_result = envir_result, 
+            evaluate_result = evaluate_result, envir_prep = envir_prep, 
+            last_value = last_value, ...)
+    }, label = "plots-exercise", exercise = TRUE, out.width.px = 624, 
     out.height.px = 384, code = "", params.src = "plots-exercise, exercise=TRUE", 
     fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -2310,7 +2577,7 @@ learnr:::store_exercise_cache("plots-exercise", list(setup = NULL, chunks = list
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62]}},"value":[{"type":"character","attributes":{},"value":["backports","base","checkmate","colorspace","compiler","crayon","curl","datasets","digest","dplyr","ellipsis","evaluate","fastmap","forcats","generics","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","jsonlite","knitr","later","learnr","lifecycle","magrittr","markdown","methods","mime","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","rlang","rmarkdown","rprojroot","scales","shiny","stats","stringi","stringr","tibble","tidyselect","tools","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["1.1.9","3.6.1","2.0.0","1.4-1","3.6.1","1.3.4","4.3","3.6.1","0.6.25","1.0.0","0.3.1","0.14","1.0.1","0.5.0","0.0.2","3.3.1","1.4.1","0.1.0.9004","3.6.1","3.6.1","3.6.1","0.3.0","2.3.1","0.8","0.5.3","0.5.0.9000","1.5.1","1.5.4","1.7.0","1.29","1.1.0.1","0.10.1.9006","0.2.0","1.5","1.1","3.6.1","0.9","0.5.0","1.4.4","2.0.3","1.1.1","0.3.4","2.4.1","1.0.5","1.3.1","0.4.7","2.3","1.3-2","1.1.1","1.5.0","3.6.1","1.4.6","1.4.0","3.0.1","1.1.0","3.6.1","3.6.1","0.3.1","2.2.0","0.16","1.8-4","2.2.1"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62]}},"value":[{"type":"character","attributes":{},"value":["backports","base","checkmate","colorspace","compiler","crayon","curl","datasets","digest","dplyr","ellipsis","evaluate","fastmap","forcats","generics","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","haven","highr","hms","htmltools","htmlwidgets","httpuv","jsonlite","knitr","later","learnr","lifecycle","magrittr","markdown","methods","mime","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","rlang","rmarkdown","rprojroot","scales","shiny","stats","stringi","stringr","tibble","tidyselect","tools","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["1.1.8","3.6.0","2.0.0","1.4-1","3.6.0","1.3.4","4.3","3.6.0","0.6.25","1.0.1","0.3.1","0.14","1.0.1","0.5.0","0.0.2","3.3.2","1.4.1","0.1.0.9004","3.6.0","3.6.0","3.6.0","0.3.0","2.3.1","0.8","0.5.3","0.5.0.9000","1.5.1","1.5.4","1.7.0","1.29","1.1.0.1","0.10.1.9006","0.2.0","1.5","1.1","3.6.0","0.9","0.5.0","1.4.6","2.0.3","1.1.1","0.3.4","2.4.1","1.0.5","1.3.1","0.4.7","2.3","1.3-2","1.1.1","1.5.0","3.6.0","1.4.6","1.4.0","3.0.3","1.1.0","3.6.0","3.6.0","0.3.2","2.2.0","0.16","1.8-4","2.2.1"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>

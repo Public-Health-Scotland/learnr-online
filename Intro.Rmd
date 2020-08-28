@@ -570,7 +570,7 @@ Adds new variables that are functions of existing variables:
 
 * `mutate(<data>, <nol-col> = <expression>`
 
-Create a new column in `border` that is equal to `LengthOfStay` divided by 2. Name this column `los_div2`. Use the hint button if you need some help.
+Create a new column in `borders_data` that is equal to `LengthOfStay` divided by 2. Name this column `los_div2`. Use the hint button if you need some help.
 
 ```{r mutate-example, exercise=TRUE}
 
