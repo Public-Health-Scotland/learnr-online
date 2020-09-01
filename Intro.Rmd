@@ -972,12 +972,19 @@ Another opportunity to exercise your new skills:
 borders_data %>%
   select(URI, Specialty, Dateofbirth) %>%
   arrange(Specialty) %>%
-  filter(is.na(Dateofbirth) == TRUE) %>%
+  filter(is.na(Dateofbirth) == FALSE) %>%
   mutate(Specialty = recode(Specialty, "A1" = "General Medicine"))
 ```
 
 ```{r wrangle-2-check}
-grade_code()
+grade_result(
+  fail_if(~ identical(as.character(.result$HospitalCode[1]), "B120H"), "Did you select the right columns?"),
+  pass_if(~ identical(as.character(.result$URI[1]), "7") & identical(as.character(.result$Specialty[1]), "General Medicine") & identical(as.character(.result$Dateofbirth[1]), "19360306") & identical(as.character(.result$Dateofbirth[1000]), "19731006")),
+  fail_if(~ identical(as.character(.result$Specialty[1]), "E12"), "Did you arrange the data frame by Specialty?"),
+  fail_if(~ identical(as.character(.result$Dateofbirth[1000]), "19700114"), "Did you exclude na values from Dateofbirth?"),
+  fail_if(~ identical(as.character(.result$Specialty[1]), "A1"), "Did you recode specialty A1 to be General Medicine?"),
+  fail_if(~ TRUE)
+)
 ```
 
 
