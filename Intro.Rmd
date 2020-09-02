@@ -701,7 +701,13 @@ borders_data %>%
 ```
 
 ```{r wrangle-1-check}
-grade_code()
+grade_result(
+  fail_if(~ identical(as.character(.result$HospitalCode[1]), "B114H"), "Did you select the right columns?"),
+  fail_if(~ identical(as.character(.result$URI[1000]), "5980"), "Did you filter from 2 up to and including 10?"),
+  fail_if(~ identical(as.character(.result$URI[1000]), "15061"), "Did you filter from including 2 up to 10?"),
+  pass_if(~ identical(as.character(.result$URI[1]), "2") & identical(as.character(.result$Specialty[1]), "E12") & identical(as.character(.result$LengthOfStay[1]), "2") & identical(as.character(.result$URI[985]), "24791")),
+  fail_if(~ TRUE)
+)
 ```
 
 
