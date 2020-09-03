@@ -568,7 +568,7 @@ grade_result(
 
 Adds new variables that are functions of existing variables:
 
-* `mutate(<data>, <nol-col> = <expression>`
+* `mutate(<data>, <nol-col>) = <expression>`
 
 Create a new column in `borders_data` that is equal to `LengthOfStay` divided by 2. Name this column `los_div2`. Use the hint button if you need some help.
 
