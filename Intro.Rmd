@@ -967,7 +967,7 @@ Another opportunity to exercise your new skills:
 
 * Select the URI, Specialty, and Dateofbirth columns from `borders_data`
 * Arrange this data in ascending order by `Specialty`
-* Exclude the records with a missing `Dateofbirth`
+* Exclude the records with a missing `Dateofbirth` (*Hint: run `?filter` and look for the "Useful filter functions" section*)
 * Finally, recode `Specialty` “A1” to be “General Medicine”
 
 ``` {r wrangle-2, exercise=TRUE}
