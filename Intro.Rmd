@@ -90,7 +90,7 @@ knitr::include_graphics("images/r-foundations-structure.png")
 
 Below is an example of R code, it includes various types of R syntax:
 
-* `# Hello World example` - **comments** are just for us humans and ignored by R. They help to aid understanding of code, think more "why" than "what". 
+* `# Hello World example` - **comments** are just for us humans and ignored by R. They help to aid understanding of code, think more "why" than "what". Comments are created using the `#` symbol at the start of a line. 
 * `hello_world` - **variables** are names (containers) we give to 'objects'.
 * `<-` - **assignment operator** (shortcut: `alt` + `-`) is how we give variables their content.
 * `"Hello World"` - **character** / string (`'` or `"`) is one of the *basic data types* in R, we go over the others next.
