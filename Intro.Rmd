@@ -45,6 +45,15 @@ Welcome to an Introduction to R. This course is designed as a self-led introduct
 knitr::include_graphics("images/r-intro-pathway-2.png")
 ```
 
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
 ### What is R?
 
 * A programming language widely used for data analysis, statistics, and graphics
