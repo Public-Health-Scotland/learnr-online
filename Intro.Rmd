@@ -127,7 +127,7 @@ grade_result(
 R has some basic/primitive data types:
 
 * **Character**, also called strings, are written in single `'` or double `"` quotes around text, numbers, or symbols. It may be necessary to store a "number" as a character object, e.g. CHI numbers to preserve formatting. *Example:* `"Hello World!"`
-* **Numerical** type holds the whole set of real numbers. A subset of the numerical type is **integer**, this is created by appending an `L` to the end of the number. *Example:* `123.5`
+* **Numerical** type holds the whole set of real numbers. *Example:* `321` or `123.5`
 * **Logical** (Boolean) can be `TRUE`, `FALSE`, `T`, or `F`, other variations (e.g. lowercase) will result in an error.  *Example:* `TRUE`
 * **Complex** stores complex number objects, e.g. imaginary numbers. *Example:* `2i`
 
