@@ -49,6 +49,7 @@ knitr::include_graphics("images/r-intro-pathway-2.png")
   <h4>Course Info</h4>
   <ul>
     <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
     <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
   </ul>
 </div>
@@ -375,12 +376,12 @@ knitr::include_graphics("images/r-workflow.png")
 
 ### Working Directory
 
-Base R has it's own functions for navigating your working directory:
+The working directory is the current directory/file associated with your project. Working directories allow for more efficient file paths that are *relative* to your working directory. This is associated with the use of [R Projects](https://r4ds.had.co.nz/workflow-projects.html). Base R has it's own functions for navigating your working directory:
 
 * Current working directory: `getwd()`
 * Set new working directory: `setwd("<filepath>")`
 
-However, the recommended method is using the `here` package. This gives us the `here()` function which works similar to `getwd()` but is more forgiving in how it searches for files and directories.
+However, the recommended method is **using the `here` package**. This gives us the `here()` function which works similar to `getwd()` but is more forgiving in how it searches for files and directories.
 
 RStudio also provides options through the user interface for navigating directories. Also, other commands, such as `ls()` are available in R. 
 
