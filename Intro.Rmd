@@ -206,7 +206,7 @@ c(2, 5, 1, "abc")[2]
 Have a look and click 'Run Code' below to see the output.
 
 ```{r foundations-structures-list, exercise=TRUE}
-list("abc", 4, FALSE)[1:2]
+list("abc", 4, FALSE, 2.5)[1:2]
 list(list(2, 3), "abc")[2]
 ```
 
