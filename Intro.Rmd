@@ -536,11 +536,14 @@ borders_data %>%
   arrange(Dateofbirth)
 ```
 
+In each example for all the following `dplyr` functions, the pure function will be given first and then the second point will be how it's used with a pipe.
+
 ### Filter
 
 Picks cases based on their values:
 
 * `filter(<data>, <logical_expression>)`
+* With pipe: `<data> %>% filter(<logical_expression>)`
 
 Filter the `borders_data` data-set to where `HospitalCode` is "B120H" and `LengthOfStay` is more than 10. Use the hint button if you need some help.
 
@@ -582,7 +585,8 @@ grade_result(
 
 Adds new variables that are functions of existing variables:
 
-* `mutate(<data>, <nol-col>) = <expression>`
+* `mutate(<data>, <new-col> = <expression>)`
+* With pipe: `<data> %>% mutate(<new-col> = <expression>)`
 
 Create a new column in `borders_data` that is equal to `LengthOfStay` divided by 2. Name this column `los_div2`. Use the hint button if you need some help.
 
@@ -623,6 +627,7 @@ Orders rows in ascending order:
 
 * `arrange(<data>, <variables>)`
 * `arrange(desc(<data>), <variables>)` to sort in descending order
+* With pipe: `<data> %>% arrange(<variables>)`
 
 Sort `borders_data` by `HospitalCode`. Use the hint button if you need some help.
 
@@ -657,7 +662,8 @@ grade_result(
 
 Picks variables based on their names:
 
-* `select(<data>, <expression>)`
+* `select(<data>, <variable>)`
+* With pipe: `<data> %>% select(<variable>)`
 * pre-pend `-` to a variable to remove
 
 Remove the `Postcode` variable from `borders_data`. Use the hint button if you need some help.
@@ -732,6 +738,7 @@ grade_result(
 Groups variables to perform other operations:
 
 * `group_by(<data>, <col_name>)`
+* With pipe: `<data> %>% group_by(<col_name>)`
 
 We're not performing another operation but to see that it works, this is the output of `group_by()` on `borders_data` by `HospitalCode`. Notice the `"Groups: HospitalCode[48]"` output. This shows 48 groups, this means `HospitalCode` has 48 unique values. 
 
@@ -766,6 +773,7 @@ Let's go and make some use of the `group_by()` function now.
 Reduces multiple values down to a single summary:
 
 * `summarise(<data>, <name> = <expression>)`
+* With pipe: `<data> %>% summarise(<name> = <expression>)`
 
 What is the average `LengthOfStay` (name this `mean_los`) by `HospitalCode` in `borders_data`. Use the hint button if you need some help.
 
@@ -815,6 +823,7 @@ grade_result(
 Useful for running frequencies, this calls `group_by()` and produces counts for specified column:
 
 * `count(<data>, <variables>)`
+* With pipe: `<data> %>% count(<variables>)`
 * sort by descending order using `sort = TRUE` as an argument
 
 What is the count of `Specialty` in `borders_data`, displayed in descending order. Use the hint button if you need some help.
@@ -856,6 +865,7 @@ grade_result(
 Renames specific columns in a data frame:
 
 * `rename(<data>, <new_name> = <existing_name>)`
+* With pipe: `<data> %>% rename(<new_name> = <existing_name>)`
 
 The column `Dateofbirth` in `borders_data` doesn't follow the style guide, rename it to `date_of_birth`. Use the hint button if you need some help.
 
@@ -887,9 +897,10 @@ grade_result(
 
 ### Recode
 
-Changes values within a column:
+Changes values within a column. Recode typically needs to be used within a `mutate()` function:
 
-* `mutate(<col_name> = recode(<col_name>, "<existing_code>" = "<new_code>"))`
+* `mutate(<data>, <col_name> = recode(<col_name>, "<existing_code>" = "<new_code>"))`
+* With pipe: `<data> %>% mutate(<col_name> = recode(<col_name>, "<existing_code>" = "<new_code>"))`
 
 The `HospitalCode` "B102H" in `borders_data` needs to be changed to "B102A". Use the hint button if you need some help.
 
