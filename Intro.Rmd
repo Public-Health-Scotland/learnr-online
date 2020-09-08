@@ -411,6 +411,8 @@ borders_spss <- read_sav("data/Borders.sav")
 
 ### RDS
 
+RDS (R Data Single) stores a single R object. 
+
 * Read: `readRDS("<filepath>")`
 * Write: `saveRDS(<object>, "<filepath>")`
 
@@ -617,10 +619,10 @@ grade_result(
 
 ### Arrange
 
-Changes the ordering of rows:
+Orders rows in ascending order:
 
 * `arrange(<data>, <variables>)`
-* `desc()` to sort in descending order
+* `arrange(desc(<data>), <variables>)` to sort in descending order
 
 Sort `borders_data` by `HospitalCode`. Use the hint button if you need some help.
 
