@@ -24,4 +24,4 @@ These applications are hosted online and provide functionality around quizzes an
 
 ## Get in touch
 
-* Email: phs.transformingpublishing@nhs.net
+* Email: phs.transformingpublishing@phs.scot
