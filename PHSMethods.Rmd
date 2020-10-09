@@ -30,3 +30,58 @@ tutorial_options(
 ```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
 knitr::include_graphics("images/phs-logo.png")
 ```
+
+
+## Introduction
+
+Welcome to PHS Methods training. This course is designed as a self-led introduction to the internally developed `phsmethods` package for use in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. The course is split with a section for each function in the package.
+
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li>You can select which parts of the course you want to do. If you're here to learn something specific or you're already comfortable with a particular section, you can skip it.</li>
+    <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
+
+## age_group()
+
+`age_group()` categorises ages into groups.
+
+
+## chi_check()
+
+`chi_check()` assesses the validity of a CHI number.
+
+
+## chi_pad()
+
+`chi_pad()` adds a leading zero (`0`) to nine-digit CHI numbers.
+
+
+## file_size()
+
+`file_size()` returns the names and sizes of files in a directory.
+
+
+## fin_year()
+
+`fin_year()` assigns a date to a financial year in the format `YYYY/YY`.
+
+
+## match_area()
+
+`match_area()` converts geography codes into area names.
+
+
+## postcode()
+
+`postcode()` formats improperly recorded postcodes.
+
+
+## Quarters
+
+This section contains the `qtr()`, `qtr_end()`, `qtr_next()`, and `qtr_prev()` which are used to assign dates to quarters.
