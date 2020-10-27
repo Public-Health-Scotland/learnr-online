@@ -17,7 +17,7 @@ These applications are hosted online and provide functionality around quizzes an
 ### Files
   * `.gitignore` - tells git what files and folders *not* to track or upload to GitHub
   * `Intro.Rmd` - RMarkdown file containing all necessary code to build app
-  * `Intro.html` - Generated HTML from building app
+  * `Intro.html` - generated HTML from building app
   * `PHS-LearnR.Proj` - R project
   * `README.md` - this page
 
