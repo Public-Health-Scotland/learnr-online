@@ -3,7 +3,7 @@ title: "PHS Methods"
 output: 
   learnr::tutorial:
     css: "css/style.css"
-    progressive: true
+    progressive: false
     allow_skip: true
 runtime: shiny_prerendered
 ---
@@ -46,7 +46,6 @@ Welcome to PHS Methods training. This course is designed as a self-led introduct
 </div>
 </br>
 
-
 ### Overview
 
 The package, `phsmethods`, can be used on desktop and server versions of RStudio. It contains functions for common analytical tasks in Public Health Scotland (PHS). The package is also intended to be in continuous development, with contributions to fixing typos, bugs, and even new functions are all very much encouraged. To learn more about contributing, see [this section on GitHub](https://github.com/Public-Health-Scotland/phsmethods#contributing-to-phsmethods).
@@ -54,6 +53,37 @@ The package, `phsmethods`, can be used on desktop and server versions of RStudio
 These are the current functions in the package which are included in this training app. As more functions are added, the aim is to include them here too. As such, this training can be treated as modular and each section is self-contained:
 
 [`age_group()`](#age_group) [`chi_check()`](#chi_check) [`chi_pad()`](#chi_pad) [`file_size()`](#file_size) [`fin_year()`](#fin_year) [`match_area()`](#match_area) [`postcode()`](#postcode) and the [quarters](#quarters) functions.
+
+### How to Use
+
+The `phsmethods` package is just like any other package. However, it is not *currently* hosted on CRAN which means it needs to be installed from GitHub **or** a local copy of the GitHub repo. These methods are outlined below to get you started. Once the package is installed, it will show in your list of packages on RStudio.
+
+#### Install from GitHub
+
+For this method, the package `remotes` is required. If you don't already have this installed, it's on CRAN so run `install.packages("remotes")`. The `phsmethods` package can then be installed on RStudio from GitHub with:
+
+```{r phsmethods-install, include=TRUE, echo = TRUE, message=FALSE, warning=FALSE}
+remotes::install_github("Public-Health-Scotland/phsmethods", upgrade = "never")
+```
+
+#### Install from Local Copy
+
+It may be necessary to install from a local copy. This is most likely the case if you want to install on RStudio Desktop and network security settings are preventing access to the `remotes::install_github()` function. You'll still need the `remotes` package installed, as above, so if you don't have it installed, run `install.packages("remotes")`. Then, there's 2 steps:
+
+1. Download a [zip of the GitHub repo](https://github.com/Public-Health-Scotland/phsmethods/archive/master.zip)
+2. Run the following code, replacing `<>` with the file-path of the zipped file (remember to remove the `<>` symbols too.):
+
+```{r phsmethods-install-local, eval=FALSE, echo = TRUE}
+remotes::install_local("<FILEPATH OF ZIPPED FILE>/phsmethods-master.zip", upgrade = "never")
+```
+
+#### Load
+
+At this point, it's just the same as any other installed package, just run `library()` when you want to use it in your current session:
+
+```{r phsmethods-load, include=TRUE, echo = TRUE, message=FALSE, warning=FALSE}
+library(phsmethods)
+```
 
 
 ## age_group()
