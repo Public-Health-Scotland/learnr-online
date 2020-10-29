@@ -205,7 +205,7 @@ age_group(ages)</code></pre>
 <li>first 6 digits represent a valid date</li>
 <li>the checksum digit is correct</li>
 </ul>
-<p>The result of <code>chi_check()</code> is a character string. Depending on the validity of the CHI number, it will return one of the follow:</p>
+<p>The result of <code>chi_check()</code> is a character string. Depending on the validity of the CHI number, it will return one of the following:</p>
 <ul>
 <li>‘Valid CHI’</li>
 <li>‘Invalid character(s) present’</li>
@@ -217,9 +217,9 @@ age_group(ages)</code></pre>
 </ul>
 <p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="chi_check-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>chi_numbers &lt;- c(&quot;0101011237&quot;, &quot;3213201234&quot;, &quot;123456789&quot;, &quot;12345678900&quot;, &quot;010120123?&quot;)
+<pre class="text"><code>chi_numbers_check &lt;- c(&quot;0101011237&quot;, &quot;3213201234&quot;, &quot;123456789&quot;, &quot;12345678900&quot;, &quot;010120123?&quot;)
 
-chi_check(chi_numbers)</code></pre>
+chi_check(chi_numbers_check)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false}</script>
 </div>
 <p><div class="panel-heading tutorial-quiz-title">Quiz</div><div class="panel panel-default">
@@ -380,7 +380,7 @@ output$`tutorial-exercise-chi_check-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("chi_check-example", list(chunks = list(list(label = "chi_check-example", code = "chi_numbers <- c(\"0101011237\", \"3213201234\", \"123456789\", \"12345678900\", \"010120123?\")\n\nchi_check(chi_numbers)", 
+learnr:::store_exercise_cache("chi_check-example", list(chunks = list(list(label = "chi_check-example", code = "chi_numbers_check <- c(\"0101011237\", \"3213201234\", \"123456789\", \"12345678900\", \"010120123?\")\n\nchi_check(chi_numbers_check)", 
     opts = list(label = "\"chi_check-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -410,37 +410,37 @@ learnr:::store_exercise_cache("chi_check-example", list(chunks = list(list(label
                 evaluate_result = evaluate_result, envir_prep = envir_prep, 
                 last_value = last_value, ...)
         }, label = "chi_check-example", exercise = TRUE, out.width.px = 624, 
-        out.height.px = 384, code = c("chi_numbers <- c(\"0101011237\", \"3213201234\", \"123456789\", \"12345678900\", \"010120123?\")", 
-        "", "chi_check(chi_numbers)"), params.src = "chi_check-example, exercise=TRUE", 
+        out.height.px = 384, code = c("chi_numbers_check <- c(\"0101011237\", \"3213201234\", \"123456789\", \"12345678900\", \"010120123?\")", 
+        "", "chi_check(chi_numbers_check)"), params.src = "chi_check-example, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "chi_check-quiz-1", 
     question = structure("What is the result of checking this CHI number <code>2611210001<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_5fdfc69", 
+    "character")), answers = list(structure(list(id = "lnr_ans_eee0c86", 
         option = "Valid CHI", value = "Valid CHI", label = structure("Valid CHI", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f473a99", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3c20d61", 
         option = "Invalid character(s) present", value = "Invalid character(s) present", 
         label = structure("Invalid character(s) present", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_29a442f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3803a23", 
         option = "Too many characters", value = "Too many characters", 
         label = structure("Too many characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e506ad", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cc20b7e", 
         option = "Too few characters", value = "Too few characters", 
         label = structure("Too few characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a05048a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_64bbea6", 
         option = "Invalid date", value = "Invalid date", label = structure("Invalid date", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4432c3e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_31c9acc", 
         option = "Invalid checksum", value = "Invalid checksum", 
         label = structure("Invalid checksum", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b8980a7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9dfcf1e", 
         option = "Missing", value = "Missing", label = structure("Missing", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -452,7 +452,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "chi_check-quiz-1-answer", question = "chi_check-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the result of checking this CHI number <code>2611210001<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1555283062.27576, options = list()), class = c("learnr_radio", 
+    seed = 179930216.416213, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  

@@ -134,7 +134,7 @@ These are the criteria `chi_check()` validates:
 - first 6 digits represent a valid date
 - the checksum digit is correct
 
-The result of `chi_check()` is a character string. Depending on the validity of the CHI number, it will return one of the follow:
+The result of `chi_check()` is a character string. Depending on the validity of the CHI number, it will return one of the following:
 
 - 'Valid CHI'
 - 'Invalid character(s) present'
@@ -147,9 +147,9 @@ The result of `chi_check()` is a character string. Depending on the validity of 
 Have a look and click 'Run Code' below to see the output.
 
 ```{r chi_check-example, exercise=TRUE}
-chi_numbers <- c("0101011237", "3213201234", "123456789", "12345678900", "010120123?")
+chi_numbers_check <- c("0101011237", "3213201234", "123456789", "12345678900", "010120123?")
 
-chi_check(chi_numbers)
+chi_check(chi_numbers_check)
 ```
 
 ```{r chi_check-quiz}
