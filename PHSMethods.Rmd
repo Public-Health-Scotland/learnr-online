@@ -187,7 +187,66 @@ chi_pad(chi_numbers_pad)
 
 ## file_size()
 
-`file_size()` returns the names and sizes of files in a directory.
+The `file_size()` function takes a file-path, with an optional regular expression pattern, and returns the names and sizes of files in that file-path which match the given pattern. The function takes 2 arguments:
+
+- `filepath` - a character string denoting a file-path (*default is working directory, `getwd()`*)
+- `pattern` - an optional character string denoting a [regular expression](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html) pattern (*default is `NULL`*). For more on regular expressions, see this [Jumping Rivers blog post](https://www.jumpingrivers.com/blog/regular-expressions-every-r-programmer-should-know/).
+
+The sizes of files with certain extensions are returned with the type of file prefixed. For example, the size of a 12 KB `.xlsx` file is returned as 'Excel 12 KB'. File sizes are returned as the appropriate multiple of the unit byte (bytes (B), kilobytes (KB), megabytes (MB), etc.). Each multiple is taken to be 1,024 units of the preceding denomination. The complete list of handled file extensions and their output prefixes are as follows:
+
+- `.xls`, `.xlsb`, `.xlsm` and `.xlsx` files are prefixed with *'Excel'*
+- `.csv` files are prefixed with *'CSV'*
+- `.sav` and `.zsav` files are prefixed with *'SPSS'*
+- `.doc`, `.docm` and `.docx` files are prefixed with *'Word'*
+- `.rds` files are prefixed with *'RDS'*
+- `.txt` files are prefixed with *'Text',*
+- `.fst` files are prefixed with *'FST',*
+- `.pdf` files are prefixed with *'PDF',*
+- `.tsv` files are prefixed with *'TSV',*
+- `.html` files are prefixed with *'HTML',*
+- `.ppt`, `.pptm` and `.pptx` files are prefixed with *'PowerPoint',*
+- `.md` files are prefixed with *'Markdown'*
+
+Files with extensions not contained within this list will have their size returned with no prefix. To request that a certain extension be explicitly catered for, please create an issue on [GitHub](https://github.com/Health-SocialCare-Scotland/phsmethods/issues).
+
+The output from the function is a tibble listing the names of files within `filepath` which match `pattern` and their respective sizes. The column names of this tibble are `'name'` and `'size'`. If no pattern is specified, `file_size()` returns the names and sizes of all files within `filepath.` File names and sizes are returned in alphabetical order of file name. Sub-folders contained within `filepath` will return a file size of '0 B'. If `filepath` is an empty folder, or `pattern` matches no files within `filepath`, `file_size()` returns NULL.
+
+*Unfortunately, it's not possible to have the code exercises in this course reach directories. So a run example with output is given below.*
+
+```{r file_size-example, eval=FALSE, echo = TRUE}
+file_size(pattern = "\\.xlsx$")
+```
+
+```{r file_size-example-output, eval=FALSE, echo = TRUE}
+# A tibble: 3 x 2
+  name             size       
+  <chr>            <chr>      
+1 aa.xls           Excel 6 KB
+2 borders.xlsx     Excel 4 KB 
+3 fife.xlsx        Excel 2 KB
+```
+
+```{r file_size-quiz}
+quiz(
+  question("What file types are **not** prefixed by `file_size()`?",
+    answer("Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)"),
+    answer("SPSS (`.sav` and `.zsav`)"),
+    answer("Markdown (`.md`)"),
+    answer("RMarkdown (.Rmd`)", correct = TRUE),
+    incorrect = "Not quite. Have a look at the list above.",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("Which file size will not be returned by `file_size()`?",
+    answer("0 B"),
+    answer("256 B"),
+    answer("1250 B", correct = TRUE),
+    answer("20 KB"),
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
 
 
 ## fin_year()

@@ -245,7 +245,51 @@ chi_pad(chi_numbers_pad)</code></pre>
 </div>
 <div id="section-file_size" class="section level2">
 <h2>file_size()</h2>
-<p><code>file_size()</code> returns the names and sizes of files in a directory.</p>
+<p>The <code>file_size()</code> function takes a file-path, with an optional regular expression pattern, and returns the names and sizes of files in that file-path which match the given pattern. The function takes 2 arguments:</p>
+<ul>
+<li><code>filepath</code> - a character string denoting a file-path (<em>default is working directory, <code>getwd()</code></em>)</li>
+<li><code>pattern</code> - an optional character string denoting a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html">regular expression</a> pattern (<em>default is <code>NULL</code></em>). For more on regular expressions, see this <a href="https://www.jumpingrivers.com/blog/regular-expressions-every-r-programmer-should-know/">Jumping Rivers blog post</a>.</li>
+</ul>
+<p>The sizes of files with certain extensions are returned with the type of file prefixed. For example, the size of a 12 KB <code>.xlsx</code> file is returned as ‘Excel 12 KB’. File sizes are returned as the appropriate multiple of the unit byte (bytes (B), kilobytes (KB), megabytes (MB), etc.). Each multiple is taken to be 1,024 units of the preceding denomination. The complete list of handled file extensions and their output prefixes are as follows:</p>
+<ul>
+<li><code>.xls</code>, <code>.xlsb</code>, <code>.xlsm</code> and <code>.xlsx</code> files are prefixed with <em>‘Excel’</em></li>
+<li><code>.csv</code> files are prefixed with <em>‘CSV’</em></li>
+<li><code>.sav</code> and <code>.zsav</code> files are prefixed with <em>‘SPSS’</em></li>
+<li><code>.doc</code>, <code>.docm</code> and <code>.docx</code> files are prefixed with <em>‘Word’</em></li>
+<li><code>.rds</code> files are prefixed with <em>‘RDS’</em></li>
+<li><code>.txt</code> files are prefixed with <em>‘Text’,</em></li>
+<li><code>.fst</code> files are prefixed with <em>‘FST’,</em></li>
+<li><code>.pdf</code> files are prefixed with <em>‘PDF’,</em></li>
+<li><code>.tsv</code> files are prefixed with <em>‘TSV’,</em></li>
+<li><code>.html</code> files are prefixed with <em>‘HTML’,</em></li>
+<li><code>.ppt</code>, <code>.pptm</code> and <code>.pptx</code> files are prefixed with <em>‘PowerPoint’,</em></li>
+<li><code>.md</code> files are prefixed with <em>‘Markdown’</em></li>
+</ul>
+<p>Files with extensions not contained within this list will have their size returned with no prefix. To request that a certain extension be explicitly catered for, please create an issue on <a href="https://github.com/Health-SocialCare-Scotland/phsmethods/issues">GitHub</a>.</p>
+<p>The output from the function is a tibble listing the names of files within <code>filepath</code> which match <code>pattern</code> and their respective sizes. The column names of this tibble are <code>'name'</code> and <code>'size'</code>. If no pattern is specified, <code>file_size()</code> returns the names and sizes of all files within <code>filepath.</code> File names and sizes are returned in alphabetical order of file name. Sub-folders contained within <code>filepath</code> will return a file size of ‘0 B’. If <code>filepath</code> is an empty folder, or <code>pattern</code> matches no files within <code>filepath</code>, <code>file_size()</code> returns NULL.</p>
+<p><em>Unfortunately, it’s not possible to have the code exercises in this course reach directories. So a run example with output is given below.</em></p>
+<pre class="r"><code>file_size(pattern = &quot;\\.xlsx$&quot;)</code></pre>
+<pre class="r"><code># A tibble: 3 x 2
+  name             size       
+  &lt;chr&gt;            &lt;chr&gt;      
+1 aa.xls           Excel 6 KB
+2 borders.xlsx     Excel 4 KB 
+3 fife.xlsx        Excel 2 KB</code></pre>
+<p><div class="panel-heading tutorial-quiz-title">Quiz</div><div class="panel panel-default">
+<div data-label="file_size-quiz-1" class="tutorial-question panel-body">
+<div id="file_size-quiz-1-answer_container" class="shiny-html-output"></div>
+<div id="file_size-quiz-1-message_container" class="shiny-html-output"></div>
+<div id="file_size-quiz-1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div><div class="panel panel-default">
+<div data-label="file_size-quiz-2" class="tutorial-question panel-body">
+<div id="file_size-quiz-2-answer_container" class="shiny-html-output"></div>
+<div id="file_size-quiz-2-message_container" class="shiny-html-output"></div>
+<div id="file_size-quiz-2-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div></p>
 </div>
 <div id="section-fin_year" class="section level2">
 <h2>fin_year()</h2>
@@ -418,29 +462,29 @@ learnr:::store_exercise_cache("chi_check-example", list(chunks = list(list(label
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "chi_check-quiz-1", 
     question = structure("What is the result of checking this CHI number <code>2611210001<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_eee0c86", 
+    "character")), answers = list(structure(list(id = "lnr_ans_8755093", 
         option = "Valid CHI", value = "Valid CHI", label = structure("Valid CHI", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3c20d61", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_56bc60c", 
         option = "Invalid character(s) present", value = "Invalid character(s) present", 
         label = structure("Invalid character(s) present", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3803a23", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3a2dfda", 
         option = "Too many characters", value = "Too many characters", 
         label = structure("Too many characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cc20b7e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9a7e685", 
         option = "Too few characters", value = "Too few characters", 
         label = structure("Too few characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_64bbea6", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_63c597c", 
         option = "Invalid date", value = "Invalid date", label = structure("Invalid date", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_31c9acc", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3dfd92c", 
         option = "Invalid checksum", value = "Invalid checksum", 
         label = structure("Invalid checksum", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9dfcf1e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_af7bcc", 
         option = "Missing", value = "Missing", label = structure("Missing", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -452,7 +496,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "chi_check-quiz-1-answer", question = "chi_check-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the result of checking this CHI number <code>2611210001<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 179930216.416213, options = list()), class = c("learnr_radio", 
+    seed = 1173382903.9536, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -497,6 +541,67 @@ learnr:::store_exercise_cache("chi_pad-example", list(chunks = list(list(label =
         out.height.px = 384, code = c("chi_numbers_pad <- c(\"101011237\", \"101201234\", \"3213201234\", \"123223\", \"abcdefghi\", \"12345tuvw\")", 
         "", "chi_pad(chi_numbers_pad)"), params.src = "chi_pad-example, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "file_size-quiz-1", 
+    question = structure("What file types are <strong>not<\u002fstrong> prefixed by <code>file_size()<\u002fcode>?", html = TRUE, class = c("html", 
+    "character")), answers = list(structure(list(id = "lnr_ans_9b29a31", 
+        option = "Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)", 
+        value = "Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)", 
+        label = structure("Excel (<code>.xls<\u002fcode>, <code>.xlsb<\u002fcode>, <code>.xlsm<\u002fcode> and <code>.xlsx<\u002fcode>)", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5a05d3f", 
+        option = "SPSS (`.sav` and `.zsav`)", value = "SPSS (`.sav` and `.zsav`)", 
+        label = structure("SPSS (<code>.sav<\u002fcode> and <code>.zsav<\u002fcode>)", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_57c0fa7", 
+        option = "Markdown (`.md`)", value = "Markdown (`.md`)", 
+        label = structure("Markdown (<code>.md<\u002fcode>)", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9c42c0a", 
+        option = "RMarkdown (.Rmd`)", value = "RMarkdown (.Rmd`)", 
+        label = structure("RMarkdown (.Rmd`)", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
+    "character")), try_again = structure("Try Again", html = TRUE, class = c("html", 
+    "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+    "character")), try_again = structure("Not quite. Have a look at the list above.", html = TRUE, class = c("html", 
+    "character")), incorrect = structure("Not quite. Have a look at the list above.", html = TRUE, class = c("html", 
+    "character")), message = NULL, post_message = NULL), ids = list(
+        answer = "file_size-quiz-1-answer", question = "file_size-quiz-1"), 
+    loading = structure("<strong>Loading:<\u002fstrong> \nWhat file types are <strong>not<\u002fstrong> prefixed by <code>file_size()<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
+    "character")), random_answer_order = TRUE, allow_retry = TRUE, 
+    seed = 1575833633.7662, options = list()), class = c("learnr_radio", 
+"tutorial_question")))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "file_size-quiz-2", 
+    question = structure("Which file size will not be returned by <code>file_size()<\u002fcode>?", html = TRUE, class = c("html", 
+    "character")), answers = list(structure(list(id = "lnr_ans_f52c6f1", 
+        option = "0 B", value = "0 B", label = structure("0 B", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f416e6b", 
+        option = "256 B", value = "256 B", label = structure("256 B", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_99e457e", 
+        option = "1250 B", value = "1250 B", label = structure("1250 B", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4b0213a", 
+        option = "20 KB", value = "20 KB", label = structure("20 KB", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
+    "character")), try_again = structure("Try Again", html = TRUE, class = c("html", 
+    "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+    "character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+    "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+    "character")), message = NULL, post_message = NULL), ids = list(
+        answer = "file_size-quiz-2-answer", question = "file_size-quiz-2"), 
+    loading = structure("<strong>Loading:<\u002fstrong> \nWhich file size will not be returned by <code>file_size()<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
+    "character")), random_answer_order = TRUE, allow_retry = TRUE, 
+    seed = 2082418350.5303, options = list()), class = c("learnr_radio", 
+"tutorial_question")))
 </script>
  <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="dependencies">
