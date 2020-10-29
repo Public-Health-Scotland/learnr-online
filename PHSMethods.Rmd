@@ -116,8 +116,58 @@ grade_result(
 
 ## chi_check()
 
-`chi_check()` assesses the validity of a CHI number.
+The CHI (Community Health Index) is a register of all patients in NHS Scotland. Each CHI number is a unique, 10-digit, identifier assigned to each patient on the index. 
 
+- **Digits 1 - 6** are a patients date of birth in DDMMYY format. As an example of a check, the first number must be 3 or less.
+- **Digits 7 - 8** are additional digits to create the unique number.
+- **Digit 9** identifies a patient's sex, odd for men, even for women. 
+- **Digit 10** is a check digit, denoted 'checksum'.
+
+The function, `chi_check()`, takes a CHI number or a vector of CHI numbers with a `character` class (see why `character below). It returns feedback on the validity of the CHI number(s) and, if found to be invalid, provides detail on why. The function only takes one argument, and that's the CHI number(s).
+
+*While a CHI number is made exclusively of numeric digits, it cannot be stored as a `numeric` class. This is because a leading `0` in numeric values are silently dropped. For this reason, `chi_check()` accepts input values of `character` class only. A leading `0` can be added to a 9-digit CHI number using [`chi_pad()`](#chi_pad).*
+
+These are the criteria `chi_check()` validates:
+
+- no non-numeric characters
+- 10 digits in length
+- first 6 digits represent a valid date
+- the checksum digit is correct
+
+The result of `chi_check()` is a character string. Depending on the validity of the CHI number, it will return one of the follow:
+
+- 'Valid CHI'
+- 'Invalid character(s) present'
+- 'Too many characters'
+- 'Too few characters'
+- 'Invalid date'
+- 'Invalid checksum'
+- 'Missing'
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r chi_check-example, exercise=TRUE}
+chi_numbers <- c("0101011237", "3213201234", "123456789", "12345678900", "010120123?")
+
+chi_check(chi_numbers)
+```
+
+```{r chi_check-quiz}
+quiz(
+  question("What is the result of checking this CHI number `2611210001`",
+    answer("Valid CHI"),
+    answer("Invalid character(s) present"),
+    answer("Too many characters"),
+    answer("Too few characters"),
+    answer("Invalid date"),
+    answer("Invalid checksum", correct = TRUE),
+    answer("Missing"),
+    incorrect = "Not quite. Try running the CHI number in the code chunk above.",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
 
 ## chi_pad()
 
