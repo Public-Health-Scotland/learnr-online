@@ -47,6 +47,15 @@ Welcome to PHS Methods training. This course is designed as a self-led introduct
 </br>
 
 
+### Overview
+
+The package, `phsmethods`, can be used on desktop and server versions of RStudio. It contains functions for common analytical tasks in Public Health Scotland (PHS). The package is also intended to be in continuous development, with contributions to fixing typos, bugs, and even new functions are all very much encouraged. To learn more about contributing, see [this section on GitHub](https://github.com/Public-Health-Scotland/phsmethods#contributing-to-phsmethods).
+
+These are the current functions in the package which are included in this training app. As more functions are added, the aim is to include them here too. As such, this training can be treated as modular and each section is self-contained:
+
+[`age_group()`](#age_group) [`chi_check()`](#chi_check) [`chi_pad()`](#chi_pad) [`file_size()`](#file_size) [`fin_year()`](#fin_year) [`match_area()`](#match_area) [`postcode()`](#postcode) and the [quarters](#quarters) functions.
+
+
 ## age_group()
 
 `age_group()` categorises ages into groups.
