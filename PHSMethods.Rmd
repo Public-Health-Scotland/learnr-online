@@ -88,7 +88,30 @@ library(phsmethods)
 
 ## age_group()
 
-`age_group()` categorises ages into groups.
+The function, `age_group()`, categorises ages into groups. The function takes a number of arguments:
+
+- `x` - a vector of numeric values
+- `from` - the start of the smallest age group (*default is 0*)
+- `to` - the end of the largest age group (*default is 90*)
+- `by` - the size of the age groups (*default is 5*)
+- `as_factor` - the default behaviour is to return a character vector, assigning `TRUE` to this argument will return a factor vector instead (*default is FALSE*)
+
+**If `to` is not a multiple of `by`, it'll be rounded down to the nearest multiple of `by`.**
+
+Have a look and click 'Run Code' below to see the output. Then, change the code to return age groups from 0 to 80 in groups of 10.
+
+```{r age_group-example, exercise=TRUE}
+ages <- c(54, 7, 77, 1, 26, 101)
+
+age_group(ages)
+```
+
+```{r age_group-example-check}
+grade_result(
+  pass_if(~ identical(.result, c("50-59", "0-9", "70-79", "0-9", "20-29", "80+"))),
+  fail_if(~ TRUE)
+)
+```
 
 
 ## chi_check()
