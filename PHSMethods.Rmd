@@ -169,9 +169,20 @@ quiz(
 )
 ```
 
+
 ## chi_pad()
 
-`chi_pad()` adds a leading zero (`0`) to nine-digit CHI numbers.
+The CHI (Community Health Index) is a register of all patients in NHS Scotland. Each CHI number is a unique, 10-digit, identifier assigned to each patient on the index. The first 6 digits are a patients date of birth in DDMMYY format. Depending on the source, CHI numbers may have a missing leading `0`.
+
+*While a CHI number is made exclusively of numeric digits, it cannot be stored as a `numeric` class. This is because a leading `0` in numeric values are silently dropped. For this reason, `chi_check()` accepts input values of `character` class only. A leading `0` can be added to a 9-digit CHI number using [`chi_pad()`](#chi_pad).*
+
+The function, `chi_pad()`, takes a CHI number with `character` class and, if it's 9 digits, adds a leading zero (`0`). Any values provided which are not a string comprised of 9 numeric digits are left unchanged. The function only takes one argument, and that's the CHI number(s).
+
+```{r chi_pad-example, exercise=TRUE}
+chi_numbers_pad <- c("101011237", "101201234", "3213201234", "123223", "abcdefghi", "12345tuvw")
+
+chi_pad(chi_numbers_pad)
+```
 
 
 ## file_size()
