@@ -304,7 +304,31 @@ match_area(areas)
 
 ## postcode()
 
-`postcode()` formats improperly recorded postcodes.
+The `postcode()` function takes a character string or vector of character strings, extracts the input values which adhere to the standard UK postcode format (with or without spaces), and formats by assigning the appropriate spacing to them (for pc7 and pc8 formats) and ensures all letters are capitalised. The function takes two arguments:
+
+- `x`- a character string or vector of character strings. This input is validated and must be in the standard UK postcode format (excluding case and spacing). Any values not in this format will result in an `NA` and warning (warnings will not prevent the execution of a whole vector, compared to errors which will stop all execution of the function). Warnings are also generated where input contains lower case letters to explain that they will be capitalised.
+- `format` - a character string to determine the desired output format. Options are 'pc7' and 'pc8' (*default is 'pc7'*)
+
+- **pc7** - character string of length 7. 7 character postcodes have no space, 6 character postcodes have 1 space after the 2nd character, 5 character postcodes have 2 spaces after the 2nd character.
+- **pc8** - character string of maximum length 8. All postcodes have 1 space before the last 3 characters.
+
+The standard format for UK postcodes is:
+
+- 1/2 letters - followed by
+- 1 number - followed by
+- 1 letter or number (optional) - followed by
+- 1 number - followed by
+- 2 letters
+
+*[UK government regulations](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/283357/ILRSpecification2013_14Appendix_C_Dec2012_v1.pdf) mandate which letters and numbers can be used in specific sections of a postcode. However, these regulations are liable to change over time. For this reason, `postcode()` does not validate whether a given postcode actually exists, or whether specific numbers and letters are being used in the appropriate places. It only assesses whether the given input is consistent with the above format and, if so, assigns the appropriate amount of spacing and capitalises any lower case letters.*
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r postcode-example, exercise=TRUE}
+postcodes <- c("G26QE", "KA89NB", "PA152TY", "G 4 2 9 B A", "g207al", "Dg98bS", "DD37J    y")
+
+postcode(postcodes)
+```
 
 
 ## Quarters
