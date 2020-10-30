@@ -251,7 +251,15 @@ quiz(
 
 ## fin_year()
 
-`fin_year()` assigns a date to a financial year in the format `YYYY/YY`.
+The function, `fin_year()`, takes a date and assigns to a financial year in the PHS specified format `YYYY/YY`, e.g. 2017/18. The function takes only 1 argument, the date. The date which is supplied must be in the class `Date` or `POSIXct`, `as.Date()`, `lubridate::dmy()` and `as.POSIXct()` are examples of functions which can be used to store dates as an appropriate class.
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r fin_year-example, exercise=TRUE}
+dates <- lubridate::dmy(c(21012017, 04042017, 17112017))
+
+fin_year(dates)
+```
 
 
 ## match_area()
