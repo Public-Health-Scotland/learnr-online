@@ -266,7 +266,40 @@ fin_year(dates)
 
 ## match_area()
 
-`match_area()` converts geography codes into area names.
+The function, `match_area()`, converts geography codes (or a vector of geography codes), matches to the single corresponding value in the [`area_lookup` dataset](https://github.com/Public-Health-Scotland/phsmethods/blob/master/data-raw/area_lookup.R), and returns the equivalent area name(s). The function only takes 1 argument, the geography code(s).
+
+Current and previous versions of geography codes (e.g. 2014 and 2019 Health Boards) are catered for. The standard 9 digit geography codes are the only exempted by:
+
+- `RA2701`: No Fixed Abode
+- `RA2702`: Rest of UK (Outside Scotland)
+- `RA2703`: Outside the UK
+- `RA2704`: Unknown Residency
+
+The `match_area()` function handles codes related to:
+
+- Health Boards
+- Council Areas
+- Health and Social Care Partnerships
+- Intermediate Zones, Data Zones (2001 and 2011)
+- Electoral Wards
+- Scottish Parliamentary Constituencies
+- UK Parliamentary Constituencies
+- Travel to work areas
+- National Parks
+- Community Health Partnerships
+- Localities (S19)
+- Settlements (S20)
+- Scotland
+
+If an exact match is not found in the `area_lookup` dataset, an `NA` value will be returned. The exact matching is sensitive to both case and spacing. If an unexpected result is produced, it's worth comparing the input data to the `area_lookup` dataset for any differences.
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r match_area-example, exercise=TRUE}
+areas <- c("S02000656", "S02001042", "S08000020", "S12000013", "S13002605")
+
+match_area(areas)
+```
 
 
 ## postcode()
