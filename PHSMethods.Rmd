@@ -178,6 +178,8 @@ The CHI (Community Health Index) is a register of all patients in NHS Scotland. 
 
 The function, `chi_pad()`, takes a CHI number with `character` class and, if it's 9 digits, adds a leading zero (`0`). Any values provided which are not a string comprised of 9 numeric digits are left unchanged. The function only takes one argument, and that's the CHI number(s).
 
+Have a look and click 'Run Code' below to see the output.
+
 ```{r chi_pad-example, exercise=TRUE}
 chi_numbers_pad <- c("101011237", "101201234", "3213201234", "123223", "abcdefghi", "12345tuvw")
 
@@ -232,7 +234,7 @@ quiz(
     answer("Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)"),
     answer("SPSS (`.sav` and `.zsav`)"),
     answer("Markdown (`.md`)"),
-    answer("RMarkdown (.Rmd`)", correct = TRUE),
+    answer("RMarkdown (`.Rmd`)", correct = TRUE),
     incorrect = "Not quite. Have a look at the list above.",
     allow_retry = TRUE,
     random_answer_order = TRUE
