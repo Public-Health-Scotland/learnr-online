@@ -19,6 +19,7 @@ library(stringr)
 library(readr)
 library(haven)
 library(dplyr)
+library(phsmethods)
 knitr::opts_chunk$set(echo = FALSE)
 
 tutorial_options(
@@ -333,4 +334,89 @@ postcode(postcodes)
 
 ## Quarters
 
-This section contains the `qtr()`, `qtr_end()`, `qtr_next()`, and `qtr_prev()` which are used to assign dates to quarters.
+This section contains [`qtr()`](), [`qtr_end()`](), [`qtr_next()`](), and [`qtr_prev()`]() which are used to assign dates to quarters. The `qtr` functions take a date input and calculates the relevant quarter-related value from it. They all return the year as part of its value:
+
+- `qtr()` returns the current quarter
+- `qtr_end()` returns the last month in the quarter
+- `qtr_next()` returns the next quarter
+- `qtr_prev()` returns the previous quarter
+
+Each variant of the functions takes 2 arguments:
+
+- `date` - a date supplied with `date` class.
+- `format` - a character string specifying the format the quarter should be displayed in. Valid options are 'long' (e.g. January to March 2018) and 'short' (e.g. Jan-Mar 2018). (*Default is 'long'*).
+
+Quarters are defined as:
+
+- January to March / Jan-Mar
+- April to June / Apr-Jun
+- July to September / Jul-Sep
+- October to December / Oct-Dec
+
+### qtr()
+
+Have a look and click 'Run Code' below to see the output. The default format is 'long', can you change the output to be 'short'?
+
+```{r qtr-example, exercise=TRUE}
+qtr_eg_dates <- lubridate::dmy(c(26032012, 04052012, 23092012))
+
+qtr(qtr_eg_dates)
+```
+
+```{r qtr-example-check}
+grade_result(
+  pass_if(~ identical(.result, c("Jan-Mar 2012", "Apr-Jun 2012", "Jul-Sep 2012"))),
+  fail_if(~ TRUE)
+)
+```
+
+### qtr_end()
+
+Have a look and click 'Run Code' below to see the output. The default format is 'long', can you change the output to be 'short'?
+
+```{r qtr_end-example, exercise=TRUE}
+qtr_eg_dates <- lubridate::dmy(c(26032012, 04052012, 23092012))
+
+qtr_end(qtr_eg_dates)
+```
+
+```{r qtr_end-example-check}
+grade_result(
+  pass_if(~ identical(.result, c("Mar 2012", "Jun 2012", "Sep 2012"))),
+  fail_if(~ TRUE)
+)
+```
+
+### qtr_next()
+
+Have a look and click 'Run Code' below to see the output. The default format is 'long', can you change the output to be 'short'?
+
+```{r qtr_next-example, exercise=TRUE}
+qtr_eg_dates <- lubridate::dmy(c(26032012, 04052012, 23092012))
+
+qtr_next(qtr_eg_dates)
+```
+
+```{r qtr_next-example-check}
+grade_result(
+  pass_if(~ identical(.result, c("Apr-Jun 2012", "Jul-Sep 2012", "Oct-Dec 2012"))),
+  fail_if(~ TRUE)
+)
+```
+
+### qtr_prev()
+
+Have a look and click 'Run Code' below to see the output.
+
+```{r qtr_prev-example, exercise=TRUE}
+qtr_eg_dates <- lubridate::dmy(c(26032012, 04052012, 23092012))
+
+qtr_prev(qtr_eg_dates)
+```
+
+```{r qtr_prev-example-check}
+grade_result(
+  pass_if(~ identical(.result, c("Oct-Dec 2011", "Jan-Mar 2012", "Apr-Jun 2012"))),
+  fail_if(~ TRUE)
+)
+```
