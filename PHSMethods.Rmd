@@ -370,6 +370,7 @@ qtr(qtr_eg_dates)
 ```{r qtr-example-check}
 grade_result(
   pass_if(~ identical(.result, c("Jan-Mar 2012", "Apr-Jun 2012", "Jul-Sep 2012"))),
+  fail_if(~ identical(.result, c("January to March 2012", "April to June 2012", "July to September 2012")), message = "Try changing the output format to be short."),
   fail_if(~ TRUE)
 )
 ```
@@ -389,6 +390,7 @@ qtr_end(qtr_eg_dates)
 ```{r qtr_end-example-check}
 grade_result(
   pass_if(~ identical(.result, c("Mar 2012", "Jun 2012", "Sep 2012"))),
+  fail_if(~ identical(.result, c("March 2012", "June 2012", "September 2012")), message = "Try changing the output format to be short."),
   fail_if(~ TRUE)
 )
 ```
@@ -408,6 +410,7 @@ qtr_next(qtr_eg_dates)
 ```{r qtr_next-example-check}
 grade_result(
   pass_if(~ identical(.result, c("Apr-Jun 2012", "Jul-Sep 2012", "Oct-Dec 2012"))),
+  fail_if(~ identical(.result, c("April to June 2012", "July to September 2012", "October to December 2012")), message = "Try changing the output format to be short."),
   fail_if(~ TRUE)
 )
 ```
@@ -427,6 +430,7 @@ qtr_prev(qtr_eg_dates)
 ```{r qtr_prev-example-check}
 grade_result(
   pass_if(~ identical(.result, c("Oct-Dec 2011", "Jan-Mar 2012", "Apr-Jun 2012"))),
+  fail_if(~ identical(.result, c("October to December 2011", "January to March 2012", "April to June 2012")), message = "Try changing the output format to be short."),
   fail_if(~ TRUE)
 )
 ```
