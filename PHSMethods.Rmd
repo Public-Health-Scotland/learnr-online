@@ -178,7 +178,7 @@ quiz(
 
 The CHI (Community Health Index) is a register of all patients in NHS Scotland. Each CHI number is a unique, 10-digit, identifier assigned to each patient on the index. The first 6 digits are a patients date of birth in DDMMYY format. Depending on the source, CHI numbers may have a missing leading `0`.
 
-*While a CHI number is made exclusively of numeric digits, it cannot be stored as a `numeric` class. This is because a leading `0` in numeric values are silently dropped. For this reason, `chi_check()` accepts input values of `character` class only. A leading `0` can be added to a 9-digit CHI number using [`chi_pad()`](#chi_pad).*
+*While a CHI number is made exclusively of numeric digits, it cannot be stored as a `numeric` class. This is because a leading `0` in numeric values are silently dropped. For this reason, `chi_check()` accepts input values of `character` class only. A leading `0` can be added to a 9-digit CHI number using [`chi_pad()`](#chi_pad).* **The function does not check for validity, in this case the [`chi_check()`](#chi_check) function should be used.**
 
 The function, `chi_pad()`, takes a CHI number with `character` class and, if it's 9 digits, adds a leading zero (`0`). Any values provided which are not a string comprised of 9 numeric digits are left unchanged. The function only takes one argument, and that's the CHI number(s).
 
@@ -332,6 +332,24 @@ Have a look and click 'Run Code' below to see the output. Read the warnings outp
 postcodes <- c("G26QE", "KA89NB", "PA152TY", "G 4 2 9 B A", "g207al", "Dg98bS", "DD37J    y", "80210")
 
 postcode(postcodes)
+```
+
+#### Exercise 
+
+Have a look and click 'Run Code' below to see the output. The default format is 'pc7', change the output to be 'pc8'?
+
+```{r pc8-example, exercise=TRUE}
+postcodes_pc8 <- c("G26QE", "KA89NB", "PA152TY", "G 4 2 9 B A", "g207al", "Dg98bS", "DD37J    y", "80210")
+
+postcode(postcodes_pc8)
+```
+
+```{r pc8-example-check}
+grade_result(
+  pass_if(~ identical(.result, c("G2 6QE", "KA8 9NB", "PA15 2TY", "G42 9BA", "G20 7AL", "DG9 8BS", "DD3 7JY", NA))),
+  fail_if(~ identical(.result, c("G2  6QE", "KA8 9NB", "PA152TY", "G42 9BA", "G20 7AL", "DG9 8BS", "DD3 7JY", NA)), message = "Try changing the output format to be pc8."),
+  fail_if(~ TRUE)
+)
 ```
 
 
