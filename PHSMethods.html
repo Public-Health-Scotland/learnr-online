@@ -359,9 +359,9 @@ match_area(areas)</code></pre>
 <li>2 letters</li>
 </ul>
 <p><em><a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/283357/ILRSpecification2013_14Appendix_C_Dec2012_v1.pdf">UK government regulations</a> mandate which letters and numbers can be used in specific sections of a postcode. However, these regulations are liable to change over time. For this reason, <code>postcode()</code> does not validate whether a given postcode actually exists, or whether specific numbers and letters are being used in the appropriate places. It only assesses whether the given input is consistent with the above format and, if so, assigns the appropriate amount of spacing and capitalises any lower case letters.</em></p>
-<p>Have a look and click ‘Run Code’ below to see the output.</p>
+<p>Have a look and click ‘Run Code’ below to see the output. Read the warnings output and see if you can understand where they’ve come from.</p>
 <div class="tutorial-exercise" data-label="postcode-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>postcodes &lt;- c(&quot;G26QE&quot;, &quot;KA89NB&quot;, &quot;PA152TY&quot;, &quot;G 4 2 9 B A&quot;, &quot;g207al&quot;, &quot;Dg98bS&quot;, &quot;DD37J    y&quot;)
+<pre class="text"><code>postcodes &lt;- c(&quot;G26QE&quot;, &quot;KA89NB&quot;, &quot;PA152TY&quot;, &quot;G 4 2 9 B A&quot;, &quot;g207al&quot;, &quot;Dg98bS&quot;, &quot;DD37J    y&quot;, &quot;80210&quot;)
 
 postcode(postcodes)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false}</script>
@@ -601,29 +601,29 @@ learnr:::store_exercise_cache("chi_check-example", list(chunks = list(list(label
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "chi_check-quiz-1", 
     question = structure("What is the result of checking this CHI number <code>2611210001<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_abf934", 
+    "character")), answers = list(structure(list(id = "lnr_ans_cdb5960", 
         option = "Valid CHI", value = "Valid CHI", label = structure("Valid CHI", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_76cc5a3", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7e11066", 
         option = "Invalid character(s) present", value = "Invalid character(s) present", 
         label = structure("Invalid character(s) present", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d62680", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c4ce404", 
         option = "Too many characters", value = "Too many characters", 
         label = structure("Too many characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7c46c7f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9a2210a", 
         option = "Too few characters", value = "Too few characters", 
         label = structure("Too few characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_fa32700", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a87531e", 
         option = "Invalid date", value = "Invalid date", label = structure("Invalid date", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_31a90c5", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5a51300", 
         option = "Invalid checksum", value = "Invalid checksum", 
         label = structure("Invalid checksum", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_efa5d03", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ae85c75", 
         option = "Missing", value = "Missing", label = structure("Missing", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -635,7 +635,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "chi_check-quiz-1-answer", question = "chi_check-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the result of checking this CHI number <code>2611210001<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1790535251.66622, options = list()), class = c("learnr_radio", 
+    seed = 461869884.284925, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -685,20 +685,20 @@ learnr:::store_exercise_cache("chi_pad-example", list(chunks = list(list(label =
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "file_size-quiz-1", 
     question = structure("What file types are <strong>not<\u002fstrong> prefixed by <code>file_size()<\u002fcode>?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_5a08e09", 
+    "character")), answers = list(structure(list(id = "lnr_ans_bbc1b3e", 
         option = "Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)", 
         value = "Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)", 
         label = structure("Excel (<code>.xls<\u002fcode>, <code>.xlsb<\u002fcode>, <code>.xlsm<\u002fcode> and <code>.xlsx<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_240c84d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8011981", 
         option = "SPSS (`.sav` and `.zsav`)", value = "SPSS (`.sav` and `.zsav`)", 
         label = structure("SPSS (<code>.sav<\u002fcode> and <code>.zsav<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_eebf284", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cc6ea29", 
         option = "Markdown (`.md`)", value = "Markdown (`.md`)", 
         label = structure("Markdown (<code>.md<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2f28b2f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_dbb8bd7", 
         option = "RMarkdown (`.Rmd`)", value = "RMarkdown (`.Rmd`)", 
         label = structure("RMarkdown (<code>.Rmd<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
@@ -711,23 +711,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "file_size-quiz-1-answer", question = "file_size-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat file types are <strong>not<\u002fstrong> prefixed by <code>file_size()<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 642548843.70079, options = list()), class = c("learnr_radio", 
+    seed = 1436981288.83085, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "file_size-quiz-2", 
     question = structure("Which file size will not be returned by <code>file_size()<\u002fcode>?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_121ec2c", 
+    "character")), answers = list(structure(list(id = "lnr_ans_b05d3a0", 
         option = "0 B", value = "0 B", label = structure("0 B", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_77bf44d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5c8637c", 
         option = "256 B", value = "256 B", label = structure("256 B", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_28b087f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3afe175", 
         option = "1250 B", value = "1250 B", label = structure("1250 B", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_922ff", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ef0f48d", 
         option = "20 KB", value = "20 KB", label = structure("20 KB", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -739,7 +739,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "file_size-quiz-2-answer", question = "file_size-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich file size will not be returned by <code>file_size()<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1832758914.14656, options = list()), class = c("learnr_radio", 
+    seed = 496444243.268825, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -837,7 +837,7 @@ output$`tutorial-exercise-postcode-example-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("postcode-example", list(chunks = list(list(label = "postcode-example", code = "postcodes <- c(\"G26QE\", \"KA89NB\", \"PA152TY\", \"G 4 2 9 B A\", \"g207al\", \"Dg98bS\", \"DD37J    y\")\n\npostcode(postcodes)", 
+learnr:::store_exercise_cache("postcode-example", list(chunks = list(list(label = "postcode-example", code = "postcodes <- c(\"G26QE\", \"KA89NB\", \"PA152TY\", \"G 4 2 9 B A\", \"g207al\", \"Dg98bS\", \"DD37J    y\", \"80210\")\n\npostcode(postcodes)", 
     opts = list(label = "\"postcode-example\"", exercise = "TRUE"), 
     engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
     options = list(eval = FALSE, echo = TRUE, results = "markup", 
@@ -867,7 +867,7 @@ learnr:::store_exercise_cache("postcode-example", list(chunks = list(list(label 
                 evaluate_result = evaluate_result, envir_prep = envir_prep, 
                 last_value = last_value, ...)
         }, label = "postcode-example", exercise = TRUE, out.width.px = 624, 
-        out.height.px = 384, code = c("postcodes <- c(\"G26QE\", \"KA89NB\", \"PA152TY\", \"G 4 2 9 B A\", \"g207al\", \"Dg98bS\", \"DD37J    y\")", 
+        out.height.px = 384, code = c("postcodes <- c(\"G26QE\", \"KA89NB\", \"PA152TY\", \"G 4 2 9 B A\", \"g207al\", \"Dg98bS\", \"DD37J    y\", \"80210\")", 
         "", "postcode(postcodes)"), params.src = "postcode-example, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
 </script>

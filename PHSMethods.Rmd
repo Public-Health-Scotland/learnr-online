@@ -326,10 +326,10 @@ The standard format for UK postcodes is:
 
 *[UK government regulations](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/283357/ILRSpecification2013_14Appendix_C_Dec2012_v1.pdf) mandate which letters and numbers can be used in specific sections of a postcode. However, these regulations are liable to change over time. For this reason, `postcode()` does not validate whether a given postcode actually exists, or whether specific numbers and letters are being used in the appropriate places. It only assesses whether the given input is consistent with the above format and, if so, assigns the appropriate amount of spacing and capitalises any lower case letters.*
 
-Have a look and click 'Run Code' below to see the output.
+Have a look and click 'Run Code' below to see the output. Read the warnings output and see if you can understand where they've come from.
 
 ```{r postcode-example, exercise=TRUE}
-postcodes <- c("G26QE", "KA89NB", "PA152TY", "G 4 2 9 B A", "g207al", "Dg98bS", "DD37J    y")
+postcodes <- c("G26QE", "KA89NB", "PA152TY", "G 4 2 9 B A", "g207al", "Dg98bS", "DD37J    y", "80210")
 
 postcode(postcodes)
 ```
