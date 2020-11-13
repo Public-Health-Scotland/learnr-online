@@ -91,7 +91,7 @@ library(phsmethods)
 
 The function, `age_group()`, categorises ages into groups. The function takes a number of arguments:
 
-- `x` - a vector of numeric values
+- `x` - a vector of numeric values (e.g. `c(1, 2, 3, 21, 18, 88, 91)`)
 - `from` - the start of the smallest age group (*default is 0*)
 - `to` - the end of the largest age group (*default is 90*)
 - `by` - the size of the age groups (*default is 5*)

@@ -172,7 +172,7 @@ The course will also show progress through sections, a green tick will appear on
 <h2>age_group()</h2>
 <p>The function, <code>age_group()</code>, categorises ages into groups. The function takes a number of arguments:</p>
 <ul>
-<li><code>x</code> - a vector of numeric values</li>
+<li><code>x</code> - a vector of numeric values (e.g. <code>c(1, 2, 3, 21, 18, 88, 91)</code>)</li>
 <li><code>from</code> - the start of the smallest age group (<em>default is 0</em>)</li>
 <li><code>to</code> - the end of the largest age group (<em>default is 90</em>)</li>
 <li><code>by</code> - the size of the age groups (<em>default is 5</em>)</li>
@@ -601,29 +601,29 @@ learnr:::store_exercise_cache("chi_check-example", list(chunks = list(list(label
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "chi_check-quiz-1", 
     question = structure("What is the result of checking this CHI number <code>2611210001<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_cdb5960", 
+    "character")), answers = list(structure(list(id = "lnr_ans_2d6ebe9", 
         option = "Valid CHI", value = "Valid CHI", label = structure("Valid CHI", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7e11066", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7ee11d7", 
         option = "Invalid character(s) present", value = "Invalid character(s) present", 
         label = structure("Invalid character(s) present", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c4ce404", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_37220a2", 
         option = "Too many characters", value = "Too many characters", 
         label = structure("Too many characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9a2210a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_65ad6b8", 
         option = "Too few characters", value = "Too few characters", 
         label = structure("Too few characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a87531e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_25589a5", 
         option = "Invalid date", value = "Invalid date", label = structure("Invalid date", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5a51300", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7eacabc", 
         option = "Invalid checksum", value = "Invalid checksum", 
         label = structure("Invalid checksum", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ae85c75", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8321e8", 
         option = "Missing", value = "Missing", label = structure("Missing", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -635,7 +635,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "chi_check-quiz-1-answer", question = "chi_check-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the result of checking this CHI number <code>2611210001<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 461869884.284925, options = list()), class = c("learnr_radio", 
+    seed = 263221883.377428, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -685,20 +685,20 @@ learnr:::store_exercise_cache("chi_pad-example", list(chunks = list(list(label =
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "file_size-quiz-1", 
     question = structure("What file types are <strong>not<\u002fstrong> prefixed by <code>file_size()<\u002fcode>?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_bbc1b3e", 
+    "character")), answers = list(structure(list(id = "lnr_ans_bbf897c", 
         option = "Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)", 
         value = "Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)", 
         label = structure("Excel (<code>.xls<\u002fcode>, <code>.xlsb<\u002fcode>, <code>.xlsm<\u002fcode> and <code>.xlsx<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8011981", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_33c4ec2", 
         option = "SPSS (`.sav` and `.zsav`)", value = "SPSS (`.sav` and `.zsav`)", 
         label = structure("SPSS (<code>.sav<\u002fcode> and <code>.zsav<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cc6ea29", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6d8e06e", 
         option = "Markdown (`.md`)", value = "Markdown (`.md`)", 
         label = structure("Markdown (<code>.md<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_dbb8bd7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e291a11", 
         option = "RMarkdown (`.Rmd`)", value = "RMarkdown (`.Rmd`)", 
         label = structure("RMarkdown (<code>.Rmd<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
@@ -711,23 +711,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "file_size-quiz-1-answer", question = "file_size-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat file types are <strong>not<\u002fstrong> prefixed by <code>file_size()<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1436981288.83085, options = list()), class = c("learnr_radio", 
+    seed = 748691047.151364, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "file_size-quiz-2", 
     question = structure("Which file size will not be returned by <code>file_size()<\u002fcode>?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_b05d3a0", 
+    "character")), answers = list(structure(list(id = "lnr_ans_465ba8b", 
         option = "0 B", value = "0 B", label = structure("0 B", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5c8637c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_78f1d67", 
         option = "256 B", value = "256 B", label = structure("256 B", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3afe175", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_374946b", 
         option = "1250 B", value = "1250 B", label = structure("1250 B", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ef0f48d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_70f812a", 
         option = "20 KB", value = "20 KB", label = structure("20 KB", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -739,7 +739,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "file_size-quiz-2-answer", question = "file_size-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich file size will not be returned by <code>file_size()<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 496444243.268825, options = list()), class = c("learnr_radio", 
+    seed = 729404355.660345, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
