@@ -112,6 +112,7 @@ age_group(ages)
 ```{r age_group-example-check}
 grade_result(
   pass_if(~ identical(.result, c("50-59", "0-9", "70-79", "0-9", "20-29", "80+"))),
+  fail_if(~ identical(.result, c("50-54", "5-9", "75-79", "0-4", "25-29", "90+")), message = "Have you changed the groups? Read the exercise again and use the list of arguments above to construct the right function."),
   fail_if(~ TRUE)
 )
 ```
