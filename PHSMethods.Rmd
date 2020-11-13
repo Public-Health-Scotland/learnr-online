@@ -99,6 +99,8 @@ The function, `age_group()`, categorises ages into groups. The function takes a 
 
 **If `to` is not a multiple of `by`, it'll be rounded down to the nearest multiple of `by`.**
 
+#### Exercise
+
 Have a look and click 'Run Code' below to see the output. Then, change the code to return age groups from 0 to 80 in groups of 10.
 
 ```{r age_group-example, exercise=TRUE}
@@ -355,6 +357,8 @@ Quarters are defined as:
 
 ### qtr()
 
+#### Exercise 
+
 Have a look and click 'Run Code' below to see the output. The default format is 'long', can you change the output to be 'short'?
 
 ```{r qtr-example, exercise=TRUE}
@@ -371,6 +375,8 @@ grade_result(
 ```
 
 ### qtr_end()
+
+#### Exercise 
 
 Have a look and click 'Run Code' below to see the output. The default format is 'long', can you change the output to be 'short'?
 
@@ -389,6 +395,8 @@ grade_result(
 
 ### qtr_next()
 
+#### Exercise 
+
 Have a look and click 'Run Code' below to see the output. The default format is 'long', can you change the output to be 'short'?
 
 ```{r qtr_next-example, exercise=TRUE}
@@ -405,6 +413,8 @@ grade_result(
 ```
 
 ### qtr_prev()
+
+#### Exercise 
 
 Have a look and click 'Run Code' below to see the output.
 

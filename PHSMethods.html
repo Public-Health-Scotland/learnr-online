@@ -179,12 +179,15 @@ The course will also show progress through sections, a green tick will appear on
 <li><code>as_factor</code> - the default behaviour is to return a character vector, assigning <code>TRUE</code> to this argument will return a factor vector instead (<em>default is FALSE</em>)</li>
 </ul>
 <p><strong>If <code>to</code> is not a multiple of <code>by</code>, it’ll be rounded down to the nearest multiple of <code>by</code>.</strong></p>
+<div id="section-exercise" class="section level4">
+<h4>Exercise</h4>
 <p>Have a look and click ‘Run Code’ below to see the output. Then, change the code to return age groups from 0 to 80 in groups of 10.</p>
 <div class="tutorial-exercise" data-label="age_group-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>ages &lt;- c(54, 7, 77, 1, 26, 101)
 
 age_group(ages)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
+</div>
 </div>
 </div>
 <div id="section-chi_check" class="section level2">
@@ -387,6 +390,8 @@ postcode(postcodes)</code></pre>
 </ul>
 <div id="section-qtr" class="section level3">
 <h3>qtr()</h3>
+<div id="section-exercise-1" class="section level4">
+<h4>Exercise</h4>
 <p>Have a look and click ‘Run Code’ below to see the output. The default format is ‘long’, can you change the output to be ‘short’?</p>
 <div class="tutorial-exercise" data-label="qtr-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>qtr_eg_dates &lt;- lubridate::dmy(c(26032012, 04052012, 23092012))
@@ -395,8 +400,11 @@ qtr(qtr_eg_dates)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
 </div>
+</div>
 <div id="section-qtr_end" class="section level3">
 <h3>qtr_end()</h3>
+<div id="section-exercise-2" class="section level4">
+<h4>Exercise</h4>
 <p>Have a look and click ‘Run Code’ below to see the output. The default format is ‘long’, can you change the output to be ‘short’?</p>
 <div class="tutorial-exercise" data-label="qtr_end-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>qtr_eg_dates &lt;- lubridate::dmy(c(26032012, 04052012, 23092012))
@@ -405,8 +413,11 @@ qtr_end(qtr_eg_dates)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
 </div>
+</div>
 <div id="section-qtr_next" class="section level3">
 <h3>qtr_next()</h3>
+<div id="section-exercise-3" class="section level4">
+<h4>Exercise</h4>
 <p>Have a look and click ‘Run Code’ below to see the output. The default format is ‘long’, can you change the output to be ‘short’?</p>
 <div class="tutorial-exercise" data-label="qtr_next-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>qtr_eg_dates &lt;- lubridate::dmy(c(26032012, 04052012, 23092012))
@@ -415,8 +426,11 @@ qtr_next(qtr_eg_dates)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
 </div>
+</div>
 <div id="section-qtr_prev" class="section level3">
 <h3>qtr_prev()</h3>
+<div id="section-exercise-4" class="section level4">
+<h4>Exercise</h4>
 <p>Have a look and click ‘Run Code’ below to see the output.</p>
 <div class="tutorial-exercise" data-label="qtr_prev-example" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>qtr_eg_dates &lt;- lubridate::dmy(c(26032012, 04052012, 23092012))
@@ -586,29 +600,29 @@ learnr:::store_exercise_cache("chi_check-example", list(chunks = list(list(label
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "chi_check-quiz-1", 
     question = structure("What is the result of checking this CHI number <code>2611210001<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_35cb6af", 
+    "character")), answers = list(structure(list(id = "lnr_ans_9c22de6", 
         option = "Valid CHI", value = "Valid CHI", label = structure("Valid CHI", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f509cb2", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ce7f8e7", 
         option = "Invalid character(s) present", value = "Invalid character(s) present", 
         label = structure("Invalid character(s) present", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a96771c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b2c533", 
         option = "Too many characters", value = "Too many characters", 
         label = structure("Too many characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cd08516", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5df1eb0", 
         option = "Too few characters", value = "Too few characters", 
         label = structure("Too few characters", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e9b3b42", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3717912", 
         option = "Invalid date", value = "Invalid date", label = structure("Invalid date", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3351fc7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d50d669", 
         option = "Invalid checksum", value = "Invalid checksum", 
         label = structure("Invalid checksum", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1437cdd", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ae11a4d", 
         option = "Missing", value = "Missing", label = structure("Missing", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -620,7 +634,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "chi_check-quiz-1-answer", question = "chi_check-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the result of checking this CHI number <code>2611210001<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 773241806.139931, options = list()), class = c("learnr_radio", 
+    seed = 40443726.9811669, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -670,20 +684,20 @@ learnr:::store_exercise_cache("chi_pad-example", list(chunks = list(list(label =
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "file_size-quiz-1", 
     question = structure("What file types are <strong>not<\u002fstrong> prefixed by <code>file_size()<\u002fcode>?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_efd21ac", 
+    "character")), answers = list(structure(list(id = "lnr_ans_4754f29", 
         option = "Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)", 
         value = "Excel (`.xls`, `.xlsb`, `.xlsm` and `.xlsx`)", 
         label = structure("Excel (<code>.xls<\u002fcode>, <code>.xlsb<\u002fcode>, <code>.xlsm<\u002fcode> and <code>.xlsx<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b5b8774", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8071c42", 
         option = "SPSS (`.sav` and `.zsav`)", value = "SPSS (`.sav` and `.zsav`)", 
         label = structure("SPSS (<code>.sav<\u002fcode> and <code>.zsav<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4d1ec7f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8797537", 
         option = "Markdown (`.md`)", value = "Markdown (`.md`)", 
         label = structure("Markdown (<code>.md<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4e1842c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d7c1ce8", 
         option = "RMarkdown (`.Rmd`)", value = "RMarkdown (`.Rmd`)", 
         label = structure("RMarkdown (<code>.Rmd<\u002fcode>)", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
@@ -696,23 +710,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "file_size-quiz-1-answer", question = "file_size-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat file types are <strong>not<\u002fstrong> prefixed by <code>file_size()<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 493185114.770343, options = list()), class = c("learnr_radio", 
+    seed = 1338935871.37651, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "file_size-quiz-2", 
     question = structure("Which file size will not be returned by <code>file_size()<\u002fcode>?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_ad418cf", 
+    "character")), answers = list(structure(list(id = "lnr_ans_ae2e3b2", 
         option = "0 B", value = "0 B", label = structure("0 B", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1aa7184", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2600448", 
         option = "256 B", value = "256 B", label = structure("256 B", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1732368", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6f6f021", 
         option = "1250 B", value = "1250 B", label = structure("1250 B", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5b682a3", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c1389d2", 
         option = "20 KB", value = "20 KB", label = structure("20 KB", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -724,7 +738,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "file_size-quiz-2-answer", question = "file_size-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich file size will not be returned by <code>file_size()<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 2084805049.02919, options = list()), class = c("learnr_radio", 
+    seed = 914743804.574039, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -1046,6 +1060,7 @@ learnr:::store_exercise_cache("qtr_prev-example", list(chunks = list(list(label 
 {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57]}},"value":[{"type":"character","attributes":{},"value":["backports","base","checkmate","compiler","crayon","curl","datasets","digest","dplyr","ellipsis","evaluate","fastmap","forcats","generics","glue","gradethis","graphics","grDevices","haven","hms","htmltools","htmlwidgets","httpuv","jsonlite","knitr","later","learnr","lifecycle","magrittr","markdown","methods","mime","phsmethods","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","remotes","rlang","rmarkdown","rprojroot","shiny","stats","stringi","stringr","tibble","tidyselect","tools","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["1.1.8","3.6.0","2.0.0","3.6.0","1.3.4","4.3","3.6.0","0.6.25","1.0.1","0.3.1","0.14","1.0.1","0.5.0","0.0.2","1.4.1","0.1.0.9004","3.6.0","3.6.0","2.3.1","0.5.3","0.5.0.9000","1.5.1","1.5.4","1.7.0","1.29","1.1.0.1","0.10.1.9006","0.2.0","1.5","1.1","3.6.0","0.9","0.2.0","1.4.6","2.0.3","1.1.1","0.3.4","2.4.1","1.0.5","1.3.1","2.2.0","0.4.7","2.3","1.3-2","1.5.0","3.6.0","1.4.6","1.4.0","3.0.3","1.1.0","3.6.0","3.6.0","0.3.2","2.2.0","0.16","1.8-4","2.2.1"]}]}]}
 </script>
 <!--/html_preserve-->
+</div>
 </div>
 </div>
 
