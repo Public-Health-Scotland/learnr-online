@@ -63,7 +63,7 @@ The `phsmethods` package is just like any other package. However, it is not *cur
 
 For this method, the package `remotes` is required. If you don't already have this installed, it's on CRAN so run `install.packages("remotes")`. The `phsmethods` package can then be installed on RStudio from GitHub with:
 
-```{r phsmethods-install, include=TRUE, echo = TRUE, message=FALSE, warning=FALSE}
+```{r phsmethods-install, include=TRUE, echo = TRUE, eval = FALSE, message=FALSE, warning=FALSE}
 remotes::install_github("Public-Health-Scotland/phsmethods", upgrade = "never")
 ```
 
