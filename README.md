@@ -5,7 +5,7 @@
 These applications are hosted online and provide functionality around quizzes and interactive code chunks. 
 
 * [Introduction to R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/Intro.Rmd) - learning R from the basics, including its integration to PHS; workflow, tools, templates, and other resources. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-intro/.
-* [PHS Methods](https://github.com/Public-Health-Scotland/learnr-online/blob/master/PHSMethods.Rmd) - learning the internally developed R package, `phsmethods`. *This training is currently under development.*
+* [PHS Methods](https://github.com/Public-Health-Scotland/learnr-online/blob/master/PHSMethods.Rmd) - learning the internally developed R package, `phsmethods`. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-phsmethods/  
 
 ### Directories
   As this is a shiny prerendered project, only certain filenames are accessible from within the app. These are outlined below:
