@@ -32,7 +32,7 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-Welcome to an Introduction to Data Visualisation in R. This course is designed as a self-led introduction for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code.
+Welcome to an Introduction to Data Visualisation in R. This course is designed as a self-led introduction for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code (building your own visualisations). This course focusses on the use of the package `ggplot2` but will introduce some concepts from `plotly`.
 
 <div class="info_box">
   <h4>Course Info</h4>
@@ -43,3 +43,34 @@ Welcome to an Introduction to Data Visualisation in R. This course is designed a
   </ul>
 </div>
 </br>
+
+### What is Data Visualisation?
+
+Data visualisation is an essential skill across the spectrum of data science. It is a form of graphical data analysis, which emphasises the accurate representation and interpretation of data. On the other hand, data viz also relies on good design choices, not only to make the outputs attractive but also aiding the understanding of the results. 
+
+There are two main types of data viz:
+
+* **Exploratory** - easily generated, data-heavy, intended for a small specialist audience. This use case here is for graphical data analysis.
+* **Explanatory** - labour intensive, data specific, and intended for a broad audience. This use case could be in publications or presentations.
+
+*Render 2 plots to visualise the difference?*
+
+```{r intro-quiz}
+quiz(
+  question("Let's get started. Which of the following are exploratory plots typically NOT?",
+    answer("Pretty", correct = TRUE),
+    answer("Meant for a specialist audience"),
+    answer("Data-heavy"),
+    answer("Rough first drafts"),
+    answer("Part of our data science toolkit as graphical data analysis"),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+
+
+
+
