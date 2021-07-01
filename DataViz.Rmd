@@ -14,14 +14,18 @@ runtime: shiny_prerendered
 
 library(learnr)
 library(gradethis)
+library(readr)
 library(dplyr)
 library(ggplot2)
-library(plotly)
+library(magrittr)
+library(tidyr)
 knitr::opts_chunk$set(echo = FALSE)
 
 tutorial_options(
   exercise.checker = gradethis::grade_learnr
 )
+
+borders_data <- read_csv("www/data/BORDERS (inc Age).csv")
 
 ```
 
@@ -71,6 +75,45 @@ quiz(
 ```
 
 
+## Foundations
 
+We're going to use the package `ggplot2` for most of this course. So, let's start by building a plot to see what all of this is about. We can then take the code apart bit by bit to understand what's going on (and what's possible). Feel free to adjust the code and see how it affects the output.
 
+```{r prepare-foundations-plot1}
+borders_data_plot <- borders_data %>%
+  filter(Sex %in% c("Male", "Female"),
+         ageonadmission >= 0) %>% 
+  drop_na(Sex)
+```
 
+```{r foundations-plot1, exercise=TRUE, exercise.setup='prepare-foundations-plot1', warning=FALSE}
+library(ggplot2)
+
+borders_data_plot %>%
+  ggplot() +
+  geom_point(aes(x = ageonadmission, y = LengthOfStay, colour = Sex), 
+             alpha = 0.5) +
+  theme_minimal() +
+  ylab("Length of Stay (days)") +
+  xlab("Age on Admission (years)") +
+  ggtitle("Length of Stay by Age on Admission")
+
+```
+
+There we have it, in just a few lines of code, we've created a plot. You may even have already worked out what some of the code does. We're now going to take a step back to understand how all of this comes together. 
+
+It comes from an underlying grammar of graphics, a framework which follows a layered approach to describe and construct visualisations or graphics in a structured manner. There are 7 grammatical elements:
+
+```{r, echo=FALSE}
+graphics_grammar_table <- data.frame(
+  "Element" = c("**Data**", "**Aesthetics**", "**Geometries**", "**Themes**", "**Statistics**", "**Coordinates**", "**Facets**"),
+  "Description" = c("The data-set being plotted.", "The scales/axes based on the data dimensions. Any form of encoding, including size, shape, color and so on which are useful for plotting multiple data dimensions.", "These are popularly known as ‘geoms’. This would cover the way we would depict the data points on the visualisation. Should it be points, bars, lines and so on.", "The additional, non-data, ink on our outputs. These add value and make things look pretty.", "Statistical measures in the visualisation like measures of central tendency, spread, confidence intervals.", "What kind of a coordinate system should the visualization be based on?", "Subplots based on specific data dimensions."),
+  "Common Options" = c("", "<code>x-axis</code> <code>y-axis</code> <code>colour</code> <code>fill</code> <code>size</code> <code>labels</code> <code>alpha</code> <code>shape</code> <code>line-width</code> <code>line-type</code>", "<code>point</code> <code>line</code> <code>histogram</code> <code>bar</code>", "", "<code>binning</code> <code>smoothing</code> <code>descriptive</code> <code>inferential</code>", "<code>cartesian</code> <code>fixed</code> <code>polar</code> <code>limits</code>", "<code>columns</code> <code>rows</code>"),
+  check.names = FALSE
+)
+
+knitr::kable(graphics_grammar_table)
+
+```
+
+Using only the first 4 layers (data, aesthetics, geometries, and themes), we'll be able to create publication-quality plots. The final 3 layers will be explored at a higher level for those who are interested.
