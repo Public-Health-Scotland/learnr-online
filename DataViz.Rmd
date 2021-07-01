@@ -17,6 +17,7 @@ library(gradethis)
 library(readr)
 library(dplyr)
 library(ggplot2)
+library(datasauRus)
 library(magrittr)
 library(tidyr)
 knitr::opts_chunk$set(echo = FALSE)
@@ -73,6 +74,59 @@ quiz(
   )
 )
 ```
+
+
+### Ineffective Data Visualisation
+
+Visualising data is an art as much as a science. There are a number of issues to be aware of, including presenting multi-dimensional data, human perception and accessibility, and just generally misleading presentations. 
+
+Let's take these visualisations as an example, what do you think is common across all of them?
+
+```{r datasauRus, echo=FALSE}
+ggplot(datasaurus_dozen, aes(x=x, y=y))+
+    geom_point(colour = "#433683", alpha = 0.5) +
+    theme_void() +
+    theme(legend.position = "none", aspect.ratio = 1) +
+    facet_wrap(~dataset, ncol=5)
+```
+
+```{r datasaurus-quiz}
+quiz(
+  question("What are the common features across these sets of data?",
+    answer("Mean", correct = TRUE),
+    answer("Standard Deviation", correct = TRUE),
+    answer("Correlation", correct = TRUE),
+    correct = "That's right, summary statistics for all the datasets are the same.",
+    incorrect = "Is that all?",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+
+### Effective Data Visualisation
+
+The previous visualisations are a *fun* variant on Anscombe's Quartet, called the [The Datasaurus Dozen](https://www.autodesk.com/research/publications/same-stats-different-graphs). The summary statistics are shown below:
+
+```{r datasaurus-stats, echo=FALSE}
+datasaurus_dozen %>% 
+    group_by(dataset) %>% 
+    summarize(
+      mean_x    = mean(x),
+      mean_y    = mean(y),
+      std_dev_x = sd(x),
+      std_dev_y = sd(y),
+      corr_x_y  = cor(x, y)
+    ) %>%
+  mutate(across(2:6, round, 3))
+```
+
+The key takeaway should be to model your data, visualise to understand your data attributes. However, there are also other considerations for how plot's should be:
+
+* **Conceptually** correct - data is represented visually in a way that makes sense.
+* **Technically** correct - details of the data representation are complete and accurate.
+* **Aesthetically** correct - data is represented in a visually pleasing way.
 
 
 ## Foundations

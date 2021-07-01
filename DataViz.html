@@ -145,6 +145,36 @@ The course will also show progress through sections, a green tick will appear on
 </div>
 </div>
 </div>
+<div id="section-ineffective-data-visualisation" class="section level3">
+<h3>Ineffective Data Visualisation</h3>
+<p>Visualising data is an art as much as a science. There are a number of issues to be aware of, including presenting multi-dimensional data, human perception and accessibility, and just generally misleading presentations.</p>
+<p>Let’s take these visualisations as an example, what do you think is common across all of them?</p>
+<p><img src="DataViz_files/figure-html/datasauRus-1.png" width="624" /></p>
+<p><div class="panel-heading tutorial-quiz-title"><span data-i18n="text.quiz">Quiz</span></div></p>
+<div class="panel panel-default">
+<div data-label="datasaurus-quiz-1" class="tutorial-question panel-body">
+<div id="datasaurus-quiz-1-answer_container" class="shiny-html-output"></div>
+<div id="datasaurus-quiz-1-message_container" class="shiny-html-output"></div>
+<div id="datasaurus-quiz-1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+</div>
+<div id="section-effective-data-visualisation" class="section level3">
+<h3>Effective Data Visualisation</h3>
+<p>The previous visualisations are a <em>fun</em> variant on Anscombe’s Quartet, called the <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs">The Datasaurus Dozen</a>. The summary statistics are shown below:</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["dataset"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mean_x"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean_y"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["std_dev_x"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["std_dev_y"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["corr_x_y"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"away","2":"54.266","3":"47.835","4":"16.770","5":"26.940","6":"-0.064"},{"1":"bullseye","2":"54.269","3":"47.831","4":"16.769","5":"26.936","6":"-0.069"},{"1":"circle","2":"54.267","3":"47.838","4":"16.760","5":"26.930","6":"-0.068"},{"1":"dino","2":"54.263","3":"47.832","4":"16.765","5":"26.935","6":"-0.064"},{"1":"dots","2":"54.260","3":"47.840","4":"16.768","5":"26.930","6":"-0.060"},{"1":"h_lines","2":"54.261","3":"47.830","4":"16.766","5":"26.940","6":"-0.062"},{"1":"high_lines","2":"54.269","3":"47.835","4":"16.767","5":"26.940","6":"-0.069"},{"1":"slant_down","2":"54.268","3":"47.836","4":"16.767","5":"26.936","6":"-0.069"},{"1":"slant_up","2":"54.266","3":"47.831","4":"16.769","5":"26.939","6":"-0.069"},{"1":"star","2":"54.267","3":"47.840","4":"16.769","5":"26.930","6":"-0.063"},{"1":"v_lines","2":"54.270","3":"47.837","4":"16.770","5":"26.938","6":"-0.069"},{"1":"wide_lines","2":"54.267","3":"47.832","4":"16.770","5":"26.938","6":"-0.067"},{"1":"x_shape","2":"54.260","3":"47.840","4":"16.770","5":"26.930","6":"-0.066"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>The key takeaway should be to model your data, visualise to understand your data attributes. However, there are also other considerations for how plot’s should be:</p>
+<ul>
+<li><strong>Conceptually</strong> correct - data is represented visually in a way that makes sense.</li>
+<li><strong>Technically</strong> correct - details of the data representation are complete and accurate.</li>
+<li><strong>Aesthetically</strong> correct - data is represented in a visually pleasing way.</li>
+</ul>
+</div>
 </div>
 <div id="section-foundations" class="section level2">
 <h2>Foundations</h2>
@@ -225,6 +255,7 @@ library(gradethis)
 library(readr)
 library(dplyr)
 library(ggplot2)
+library(datasauRus)
 library(magrittr)
 library(tidyr)
 knitr::opts_chunk$set(echo = FALSE)
@@ -254,57 +285,61 @@ session$onSessionEnded(function() {
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath", "# Original Date: June 2021", 
 "", "library(learnr)", "library(gradethis)", "library(readr)", 
-"library(dplyr)", "library(ggplot2)", "library(magrittr)", "library(tidyr)", 
-"knitr::opts_chunk$set(echo = FALSE)", "", "tutorial_options(", 
-"  exercise.checker = gradethis::grade_learnr", ")", "", "borders_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
+"library(dplyr)", "library(ggplot2)", "library(datasauRus)", 
+"library(magrittr)", "library(tidyr)", "knitr::opts_chunk$set(echo = FALSE)", 
+"", "tutorial_options(", "  exercise.checker = gradethis::grade_learnr", 
+")", "", "borders_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
 ""), overwrite = FALSE)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath", "# Original Date: June 2021", 
 "", "library(learnr)", "library(gradethis)", "library(readr)", 
-"library(dplyr)", "library(ggplot2)", "library(magrittr)", "library(tidyr)", 
-"knitr::opts_chunk$set(echo = FALSE)", "", "tutorial_options(", 
-"  exercise.checker = gradethis::grade_learnr", ")", "", "borders_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
+"library(dplyr)", "library(ggplot2)", "library(datasauRus)", 
+"library(magrittr)", "library(tidyr)", "knitr::opts_chunk$set(echo = FALSE)", 
+"", "tutorial_options(", "  exercise.checker = gradethis::grade_learnr", 
+")", "", "borders_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
 ""), overwrite = FALSE)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath", "# Original Date: June 2021", 
 "", "library(learnr)", "library(gradethis)", "library(readr)", 
-"library(dplyr)", "library(ggplot2)", "library(magrittr)", "library(tidyr)", 
-"knitr::opts_chunk$set(echo = FALSE)", "", "tutorial_options(", 
-"  exercise.checker = gradethis::grade_learnr", ")", "", "borders_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
+"library(dplyr)", "library(ggplot2)", "library(datasauRus)", 
+"library(magrittr)", "library(tidyr)", "knitr::opts_chunk$set(echo = FALSE)", 
+"", "tutorial_options(", "  exercise.checker = gradethis::grade_learnr", 
+")", "", "borders_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
 ""), overwrite = FALSE)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath", "# Original Date: June 2021", 
 "", "library(learnr)", "library(gradethis)", "library(readr)", 
-"library(dplyr)", "library(ggplot2)", "library(magrittr)", "library(tidyr)", 
-"knitr::opts_chunk$set(echo = FALSE)", "", "tutorial_options(", 
-"  exercise.checker = gradethis::grade_learnr", ")", "", "borders_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
+"library(dplyr)", "library(ggplot2)", "library(datasauRus)", 
+"library(magrittr)", "library(tidyr)", "knitr::opts_chunk$set(echo = FALSE)", 
+"", "tutorial_options(", "  exercise.checker = gradethis::grade_learnr", 
+")", "", "borders_data <- read_csv(\"www/data/BORDERS (inc Age).csv\")", 
 ""), overwrite = FALSE)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "intro-quiz-1", 
     question = structure("Let&#39;s get started. Which of the following are exploratory plots typically NOT?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_4c6c80", 
+    "character")), answers = list(structure(list(id = "lnr_ans_786912d", 
         option = "Pretty", value = "Pretty", label = structure("Pretty", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1223289", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8dffdc7", 
         option = "Meant for a specialist audience", value = "Meant for a specialist audience", 
         label = structure("Meant for a specialist audience", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_49858e7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_60bc50", 
         option = "Data-heavy", value = "Data-heavy", label = structure("Data-heavy", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d7672bb", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9e370fc", 
         option = "Rough first drafts", value = "Rough first drafts", 
         label = structure("Rough first drafts", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_17b2e59", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5cf978d", 
         option = "Part of our data science toolkit as graphical data analysis", 
         value = "Part of our data science toolkit as graphical data analysis", 
         label = structure("Part of our data science toolkit as graphical data analysis", html = TRUE, class = c("html", 
@@ -318,7 +353,33 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nLet&#39;s get started. Which of the following are exploratory plots typically NOT?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1336577245.87761, options = list()), class = c("learnr_radio", 
+    seed = 338932569.842172, options = list()), class = c("learnr_radio", 
+"tutorial_question")))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "datasaurus-quiz-1", 
+    question = structure("What are the common features across these sets of data?", html = TRUE, class = c("html", 
+    "character")), answers = list(structure(list(id = "lnr_ans_efda24c", 
+        option = "Mean", value = "Mean", label = structure("Mean", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8516186", 
+        option = "Standard Deviation", value = "Standard Deviation", 
+        label = structure("Standard Deviation", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_161196", 
+        option = "Correlation", value = "Correlation", label = structure("Correlation", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+    "character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+    "character"))), messages = list(correct = structure("That&#39;s right, summary statistics for all the datasets are the same.", html = TRUE, class = c("html", 
+    "character")), try_again = structure("Is that all?", html = TRUE, class = c("html", 
+    "character")), incorrect = structure("Is that all?", html = TRUE, class = c("html", 
+    "character")), message = NULL, post_message = NULL), ids = list(
+        answer = "datasaurus-quiz-1-answer", question = "datasaurus-quiz-1"), 
+    loading = structure("<strong>Loading:<\u002fstrong> \nWhat are the common features across these sets of data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
+    "character")), random_answer_order = TRUE, allow_retry = TRUE, 
+    seed = 1760069995.1804, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
@@ -372,7 +433,7 @@ learnr:::store_exercise_cache("foundations-plot1", list(setup = "borders_data_pl
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","bslib","checkmate","cli","colorspace","compiler","crayon","curl","datasets","DBI","digest","dplyr","ellipsis","evaluate","fansi","fastmap","generics","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","highr","hms","htmltools","htmlwidgets","httpuv","jquerylib","jsonlite","knitr","later","learnr","lifecycle","magrittr","markdown","methods","mime","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","rlang","rmarkdown","rprojroot","rstudioapi","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tools","utf8","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.2.1","4.0.5","0.2.5.1","2.0.0","2.5.0","2.0-1","4.0.5","1.4.1","4.3.1","4.0.5","1.1.1","0.6.27","1.0.6","0.3.2","0.14","0.4.2","1.1.0","0.1.0","3.3.3","1.4.2","0.2.3.9001","4.0.5","4.0.5","4.0.5","0.3.0","0.9","1.1.0","0.5.1.9005","1.5.3","1.6.1","0.1.4","1.7.2","1.33","1.2.0","0.10.1.9009","1.0.0","2.0.1","1.1","4.0.5","0.10","0.5.0","1.6.1","2.0.3","1.2.0.1","0.3.4","2.5.0","1.0.6","1.4.0","0.4.11.9000","2.8","2.0.2","0.13","0.4.0","1.1.1","1.6.0","4.0.5","1.6.2","1.4.0","3.1.2","1.1.3","1.1.1","4.0.5","1.2.1","4.0.5","0.3.8","2.4.2","0.23","1.8-4","2.2.1"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","bslib","checkmate","cli","colorspace","compiler","crayon","curl","datasauRus","datasets","DBI","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","generics","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","highr","hms","htmltools","htmlwidgets","httpuv","jquerylib","jsonlite","knitr","labeling","later","learnr","lifecycle","magrittr","markdown","methods","mime","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","rlang","rmarkdown","rprojroot","rstudioapi","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tools","utf8","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.2.1","4.0.5","0.2.5.1","2.0.0","2.5.0","2.0-1","4.0.5","1.4.1","4.3.1","0.1.4","4.0.5","1.1.1","0.6.27","1.0.6","0.3.2","0.14","0.4.2","2.1.0","1.1.0","0.1.0","3.3.3","1.4.2","0.2.3.9001","4.0.5","4.0.5","4.0.5","0.3.0","0.9","1.1.0","0.5.1.9005","1.5.3","1.6.1","0.1.4","1.7.2","1.33","0.4.2","1.2.0","0.10.1.9009","1.0.0","2.0.1","1.1","4.0.5","0.10","0.5.0","1.6.1","2.0.3","1.2.0.1","0.3.4","2.5.0","1.0.6","1.4.0","0.4.11.9000","2.8","2.0.2","0.13","0.4.0","1.1.1","1.6.0","4.0.5","1.6.2","1.4.0","3.1.2","1.1.3","1.1.1","4.0.5","1.2.1","4.0.5","0.3.8","2.4.2","0.23","1.8-4","2.2.1"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>
