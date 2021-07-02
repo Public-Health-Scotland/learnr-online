@@ -154,6 +154,8 @@ borders_data_plot %>%
 
 ```
 
+</br>
+
 There we have it, in just a few lines of code, we've created a plot. You may even have already worked out what some of the code does. We're now going to take a step back to understand how all of this comes together. 
 
 It comes from an underlying grammar of graphics, a framework which follows a layered approach to describe and construct visualisations or graphics in a structured manner. There are 7 grammatical elements:
@@ -170,4 +172,16 @@ knitr::kable(graphics_grammar_table)
 
 ```
 
+</br>
+
+<div class="viz-layers">
+```{r viz-layers, echo=FALSE, fig.align='center', out.width="90%"}
+knitr::include_graphics("images/data-viz/layers.png")
+```
+</div>
+
+This shows how the layers of the grammar of graphics build up. It's also important to know that while data is required, the layers above become more optional (not every plot needs additional statistical measures). The use of these layers will depend on the use of the visualisation, the audience, and even the medium it's being shared on (i.e., web, pdf, image). You may also see similar representations with slightly different names or ordering.
+
 Using only the first 4 layers (data, aesthetics, geometries, and themes), we'll be able to create publication-quality plots. The final 3 layers will be explored at a higher level for those who are interested.
+
+</br>

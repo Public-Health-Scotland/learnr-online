@@ -192,6 +192,7 @@ borders_data_plot %&gt;%
   ggtitle(&quot;Length of Stay by Age on Admission&quot;)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 <p>There we have it, in just a few lines of code, we’ve created a plot. You may even have already worked out what some of the code does. We’re now going to take a step back to understand how all of this comes together.</p>
 <p>It comes from an underlying grammar of graphics, a framework which follows a layered approach to describe and construct visualisations or graphics in a structured manner. There are 7 grammatical elements:</p>
 <table>
@@ -245,7 +246,13 @@ borders_data_plot %&gt;%
 </tr>
 </tbody>
 </table>
-Using only the first 4 layers (data, aesthetics, geometries, and themes), we’ll be able to create publication-quality plots. The final 3 layers will be explored at a higher level for those who are interested. 
+<p></br></p>
+<div class="viz-layers">
+<p><img src="images/data-viz/layers.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<p>This shows how the layers of the grammar of graphics build up. It’s also important to know that while data is required, the layers above become more optional (not every plot needs additional statistical measures). The use of these layers will depend on the use of the visualisation, the audience, and even the medium it’s being shared on (i.e., web, pdf, image). You may also see similar representations with slightly different names or ordering.</p>
+<p>Using only the first 4 layers (data, aesthetics, geometries, and themes), we’ll be able to create publication-quality plots. The final 3 layers will be explored at a higher level for those who are interested.</p>
+</br> 
 <script type="application/shiny-prerendered" data-context="server-start">
 # Author: Russell McCreath
 # Original Date: June 2021
@@ -325,21 +332,21 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "intro-quiz-1", 
     question = structure("Let&#39;s get started. Which of the following are exploratory plots typically NOT?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_786912d", 
+    "character")), answers = list(structure(list(id = "lnr_ans_9ec0d88", 
         option = "Pretty", value = "Pretty", label = structure("Pretty", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8dffdc7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_bd22921", 
         option = "Meant for a specialist audience", value = "Meant for a specialist audience", 
         label = structure("Meant for a specialist audience", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_60bc50", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2101e79", 
         option = "Data-heavy", value = "Data-heavy", label = structure("Data-heavy", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9e370fc", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_49e5b8e", 
         option = "Rough first drafts", value = "Rough first drafts", 
         label = structure("Rough first drafts", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5cf978d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cd3d344", 
         option = "Part of our data science toolkit as graphical data analysis", 
         value = "Part of our data science toolkit as graphical data analysis", 
         label = structure("Part of our data science toolkit as graphical data analysis", html = TRUE, class = c("html", 
@@ -353,21 +360,21 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nLet&#39;s get started. Which of the following are exploratory plots typically NOT?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 338932569.842172, options = list()), class = c("learnr_radio", 
+    seed = 500879669.76676, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "datasaurus-quiz-1", 
     question = structure("What are the common features across these sets of data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_efda24c", 
+    "character")), answers = list(structure(list(id = "lnr_ans_9167f4d", 
         option = "Mean", value = "Mean", label = structure("Mean", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8516186", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8bc0423", 
         option = "Standard Deviation", value = "Standard Deviation", 
         label = structure("Standard Deviation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_161196", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3fc391d", 
         option = "Correlation", value = "Correlation", label = structure("Correlation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -379,7 +386,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "datasaurus-quiz-1-answer", question = "datasaurus-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat are the common features across these sets of data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1760069995.1804, options = list()), class = c("learnr_checkbox", 
+    seed = 1161474980.45915, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
