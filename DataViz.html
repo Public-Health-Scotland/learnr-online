@@ -165,7 +165,7 @@ The course will also show progress through sections, a green tick will appear on
 <p>The previous visualisations are a <em>fun</em> variant on Anscombe’s Quartet, called the <a href="https://www.autodesk.com/research/publications/same-stats-different-graphs">The Datasaurus Dozen</a>. The summary statistics are shown below:</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["dataset"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mean_x"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean_y"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["std_dev_x"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["std_dev_y"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["corr_x_y"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"away","2":"54.266","3":"47.835","4":"16.770","5":"26.940","6":"-0.064"},{"1":"bullseye","2":"54.269","3":"47.831","4":"16.769","5":"26.936","6":"-0.069"},{"1":"circle","2":"54.267","3":"47.838","4":"16.760","5":"26.930","6":"-0.068"},{"1":"dino","2":"54.263","3":"47.832","4":"16.765","5":"26.935","6":"-0.064"},{"1":"dots","2":"54.260","3":"47.840","4":"16.768","5":"26.930","6":"-0.060"},{"1":"h_lines","2":"54.261","3":"47.830","4":"16.766","5":"26.940","6":"-0.062"},{"1":"high_lines","2":"54.269","3":"47.835","4":"16.767","5":"26.940","6":"-0.069"},{"1":"slant_down","2":"54.268","3":"47.836","4":"16.767","5":"26.936","6":"-0.069"},{"1":"slant_up","2":"54.266","3":"47.831","4":"16.769","5":"26.939","6":"-0.069"},{"1":"star","2":"54.267","3":"47.840","4":"16.769","5":"26.930","6":"-0.063"},{"1":"v_lines","2":"54.270","3":"47.837","4":"16.770","5":"26.938","6":"-0.069"},{"1":"wide_lines","2":"54.267","3":"47.832","4":"16.770","5":"26.938","6":"-0.067"},{"1":"x_shape","2":"54.260","3":"47.840","4":"16.770","5":"26.930","6":"-0.066"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["dataset"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mean_x"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean_y"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["std_dev_x"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["std_dev_y"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["corr_x_y"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"away","2":"54.266","3":"47.835","4":"16.770","5":"26.940","6":"-0.064"},{"1":"bullseye","2":"54.269","3":"47.831","4":"16.769","5":"26.936","6":"-0.069"},{"1":"circle","2":"54.267","3":"47.838","4":"16.760","5":"26.930","6":"-0.068"},{"1":"dino","2":"54.263","3":"47.832","4":"16.765","5":"26.935","6":"-0.064"},{"1":"dots","2":"54.260","3":"47.840","4":"16.768","5":"26.930","6":"-0.060"},{"1":"h_lines","2":"54.261","3":"47.830","4":"16.766","5":"26.940","6":"-0.062"},{"1":"high_lines","2":"54.269","3":"47.835","4":"16.767","5":"26.940","6":"-0.069"},{"1":"slant_down","2":"54.268","3":"47.836","4":"16.767","5":"26.936","6":"-0.069"},{"1":"slant_up","2":"54.266","3":"47.831","4":"16.769","5":"26.939","6":"-0.069"},{"1":"star","2":"54.267","3":"47.840","4":"16.769","5":"26.930","6":"-0.063"},{"1":"v_lines","2":"54.270","3":"47.837","4":"16.770","5":"26.938","6":"-0.069"},{"1":"wide_lines","2":"54.267","3":"47.832","4":"16.770","5":"26.938","6":"-0.067"},{"1":"x_shape","2":"54.260","3":"47.840","4":"16.770","5":"26.930","6":"-0.066"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[14],"max":[14]},"pages":{}}}
   </script>
 </div>
 <p>The key takeaway should be to model your data, visualise to understand your data attributes. However, there are also other considerations for how plot’s should be:</p>
@@ -257,7 +257,7 @@ borders_data_plot %&gt;%
 <div id="section-data" class="section level2">
 <h2>Data</h2>
 <p>This is going to be a short section but important nonetheless. The basis for any visualisation is the data, however it’s rarely useful to look at the numbers and characters that make up a dataset. Some visualisation is required to show relationships.</p>
-<p>As mentioned, we’re going to mainly use the <code>ggplot2</code> package in this course. There are a few reasons for this but it breaks down to being able to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember. However, a requirement for using the package effectively is that the data must be <a href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy data</a>. <em>This can be summarised as observations in rows and variables as columns</em></p>
+<p>As mentioned, we’re going to mainly use the <code>ggplot2</code> package in this course. There are a few reasons for this but it breaks down to being able to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember. However, a requirement for using the package effectively is that the data must be <a href="https://vita.had.co.nz/papers/tidy-data.pdf">tidy data</a>. <em>This can be summarised as observations in rows and variables as columns</em>. Have a look at the <a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a> package to explore how to make data tidy in the Tidyverse.</p>
 <p>The dataset we used in the last exercise and will continue popping up is the borders training dataset. Have a look at its structure below using <code>glimpse()</code> (a tidy-output of <code>str()</code>).</p>
 <div class="tutorial-exercise" data-label="data-view" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>___(borders_data)</code></pre>
@@ -356,21 +356,21 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "intro-quiz-1", 
     question = structure("Let&#39;s get started. Which of the following are exploratory plots typically NOT?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_8d7c331", 
+    "character")), answers = list(structure(list(id = "lnr_ans_6d49c3f", 
         option = "Pretty", value = "Pretty", label = structure("Pretty", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_93b061b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4797e1e", 
         option = "Meant for a specialist audience", value = "Meant for a specialist audience", 
         label = structure("Meant for a specialist audience", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_bee64c3", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9567093", 
         option = "Data-heavy", value = "Data-heavy", label = structure("Data-heavy", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3c422a3", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d340d1e", 
         option = "Rough first drafts", value = "Rough first drafts", 
         label = structure("Rough first drafts", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_444cf5f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f5d2ba8", 
         option = "Part of our data science toolkit as graphical data analysis", 
         value = "Part of our data science toolkit as graphical data analysis", 
         label = structure("Part of our data science toolkit as graphical data analysis", html = TRUE, class = c("html", 
@@ -384,21 +384,21 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nLet&#39;s get started. Which of the following are exploratory plots typically NOT?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 91257159.9575051, options = list()), class = c("learnr_radio", 
+    seed = 936221548.564038, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "datasaurus-quiz-1", 
     question = structure("What are the common features across these sets of data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_a81d12e", 
+    "character")), answers = list(structure(list(id = "lnr_ans_e448723", 
         option = "Mean", value = "Mean", label = structure("Mean", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_260ab87", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4b19dd4", 
         option = "Standard Deviation", value = "Standard Deviation", 
         label = structure("Standard Deviation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_63d9a57", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ce23dac", 
         option = "Correlation", value = "Correlation", label = structure("Correlation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -410,7 +410,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "datasaurus-quiz-1-answer", question = "datasaurus-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat are the common features across these sets of data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1776091996.67294, options = list()), class = c("learnr_checkbox", 
+    seed = 1802031130.66086, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  

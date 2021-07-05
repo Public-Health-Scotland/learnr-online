@@ -109,7 +109,7 @@ quiz(
 
 The previous visualisations are a *fun* variant on Anscombe's Quartet, called the [The Datasaurus Dozen](https://www.autodesk.com/research/publications/same-stats-different-graphs). The summary statistics are shown below:
 
-```{r datasaurus-stats, echo=FALSE}
+```{r datasaurus-stats, echo=FALSE, rows.print=14}
 datasaurus_dozen %>% 
     group_by(dataset) %>% 
     summarize(
@@ -191,7 +191,7 @@ Using only the first 4 layers (data, aesthetics, geometries, and themes), we'll 
 
 This is going to be a short section but important nonetheless. The basis for any visualisation is the data, however it's rarely useful to look at the numbers and characters that make up a dataset. Some visualisation is required to show relationships. 
 
-As mentioned, we're going to mainly use the `ggplot2` package in this course. There are a few reasons for this but it breaks down to being able to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember. However, a requirement for using the package effectively is that the data must be [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf). *This can be summarised as observations in rows and variables as columns*
+As mentioned, we're going to mainly use the `ggplot2` package in this course. There are a few reasons for this but it breaks down to being able to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember. However, a requirement for using the package effectively is that the data must be [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf). *This can be summarised as observations in rows and variables as columns*. Have a look at the [`tidyr`](https://tidyr.tidyverse.org/) package to explore how to make data tidy in the Tidyverse.
 
 The dataset we used in the last exercise and will continue popping up is the borders training dataset. Have a look at its structure below using `glimpse()` (a tidy-output of `str()`).
 
@@ -215,3 +215,4 @@ borders_data %>%
   ylab("Age on Admission (years)") +
   ggtitle("Boxplot of Patient Age on Admission by Specialty Grouping")
 ```
+
