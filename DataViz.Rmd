@@ -82,7 +82,7 @@ Visualising data is an art as much as a science. There are a number of issues to
 
 Let's take these visualisations as an example, what do you think is common across all of them?
 
-```{r datasauRus, echo=FALSE}
+```{r datasauRus-plot, echo=FALSE}
 ggplot(datasaurus_dozen, aes(x=x, y=y))+
     geom_point(colour = "#433683", alpha = 0.5) +
     theme_void() +
@@ -133,14 +133,14 @@ The key takeaway should be to model your data, visualise to understand your data
 
 We're going to use the package `ggplot2` for most of this course. So, let's start by building a plot to see what all of this is about. We can then take the code apart bit by bit to understand what's going on (and what's possible). Feel free to adjust the code and see how it affects the output.
 
-```{r prepare-foundations-plot1}
+```{r prepare-foundations-plot}
 borders_data_plot <- borders_data %>%
   filter(Sex %in% c("Male", "Female"),
          ageonadmission >= 0) %>% 
   drop_na(Sex)
 ```
 
-```{r foundations-plot1, exercise=TRUE, exercise.setup='prepare-foundations-plot1', warning=FALSE}
+```{r foundations-plot, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
 library(ggplot2)
 
 borders_data_plot %>%
@@ -185,3 +185,33 @@ This shows how the layers of the grammar of graphics build up. It's also importa
 Using only the first 4 layers (data, aesthetics, geometries, and themes), we'll be able to create publication-quality plots. The final 3 layers will be explored at a higher level for those who are interested.
 
 </br>
+
+
+## Data
+
+This is going to be a short section but important nonetheless. The basis for any visualisation is the data, however it's rarely useful to look at the numbers and characters that make up a dataset. Some visualisation is required to show relationships. 
+
+As mentioned, we're going to mainly use the `ggplot2` package in this course. There are a few reasons for this but it breaks down to being able to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember. However, a requirement for using the package effectively is that the data must be [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf). *This can be summarised as observations in rows and variables as columns*
+
+The dataset we used in the last exercise and will continue popping up is the borders training dataset. Have a look at its structure below using `glimpse()` (a tidy-output of `str()`).
+
+```{r data-view, exercise=TRUE}
+___(borders_data)
+
+```
+
+```{r data-view-hint-1}
+glimpse(borders_data)
+
+```
+
+Let's build another plot too. Run the code below and feel free to play around with it. We'll learn how it all comes together in the next chapters. Just remember we're using that tidy data as our solid foundation.
+
+```{r data-plot, exercise=TRUE, warning=FALSE}
+borders_data %>%
+  ggplot(aes(x = spec_1, y = ageonadmission)) +
+  geom_boxplot(outlier.colour = "magenta4") +
+  xlab("Specialty Grouping") +
+  ylab("Age on Admission (years)") +
+  ggtitle("Boxplot of Patient Age on Admission by Specialty Grouping")
+```
