@@ -183,9 +183,10 @@ The course will also show progress through sections, a green tick will appear on
 <pre class="text"><code>library(ggplot2)
 
 borders_data_plot %&gt;%
-  ggplot() +
-  geom_point(aes(x = ageonadmission, y = LengthOfStay, colour = Sex), 
-             alpha = 0.5) +
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point(alpha = 0.5) +
   theme_minimal() +
   ylab(&quot;Length of Stay (days)&quot;) +
   xlab(&quot;Age on Admission (years)&quot;) +
@@ -266,10 +267,11 @@ borders_data_plot %&gt;%
 <div class="tutorial-exercise-support" data-label="data-view-hint-1" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>glimpse(borders_data)</code></pre>
 </div>
-<p>Let’s build another plot too. Run the code below and feel free to play around with it. We’ll learn how it all comes together in the next chapters. Just remember we’re using that tidy data as our solid foundation.</p>
+<p>Let’s build another plot too. Run the code below and feel free to play around with it. We’ll learn how it all comes together in the next chapters. Just remember we’re using that tidy data as our solid foundation which is piped in as the first argument to <code>ggplot()</code>:</p>
 <div class="tutorial-exercise" data-label="data-plot" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>borders_data %&gt;%
-  ggplot(aes(x = spec_1, y = ageonadmission)) +
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission)) +
   geom_boxplot(outlier.colour = &quot;magenta4&quot;) +
   xlab(&quot;Specialty Grouping&quot;) +
   ylab(&quot;Age on Admission (years)&quot;) +
@@ -356,21 +358,21 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "intro-quiz-1", 
     question = structure("Let&#39;s get started. Which of the following are exploratory plots typically NOT?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_6d49c3f", 
+    "character")), answers = list(structure(list(id = "lnr_ans_73d0fe4", 
         option = "Pretty", value = "Pretty", label = structure("Pretty", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4797e1e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_793daaa", 
         option = "Meant for a specialist audience", value = "Meant for a specialist audience", 
         label = structure("Meant for a specialist audience", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9567093", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_50c109b", 
         option = "Data-heavy", value = "Data-heavy", label = structure("Data-heavy", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d340d1e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_94062a", 
         option = "Rough first drafts", value = "Rough first drafts", 
         label = structure("Rough first drafts", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f5d2ba8", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_561aef1", 
         option = "Part of our data science toolkit as graphical data analysis", 
         value = "Part of our data science toolkit as graphical data analysis", 
         label = structure("Part of our data science toolkit as graphical data analysis", html = TRUE, class = c("html", 
@@ -384,21 +386,21 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nLet&#39;s get started. Which of the following are exploratory plots typically NOT?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 936221548.564038, options = list()), class = c("learnr_radio", 
+    seed = 1016846715.52649, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "datasaurus-quiz-1", 
     question = structure("What are the common features across these sets of data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_e448723", 
+    "character")), answers = list(structure(list(id = "lnr_ans_739c0ca", 
         option = "Mean", value = "Mean", label = structure("Mean", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4b19dd4", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6345545", 
         option = "Standard Deviation", value = "Standard Deviation", 
         label = structure("Standard Deviation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ce23dac", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5ff463a", 
         option = "Correlation", value = "Correlation", label = structure("Correlation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -410,7 +412,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "datasaurus-quiz-1-answer", question = "datasaurus-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat are the common features across these sets of data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1802031130.66086, options = list()), class = c("learnr_checkbox", 
+    seed = 295669080.862318, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
@@ -425,7 +427,7 @@ output$`tutorial-exercise-foundations-plot-output` <- renderUI({
 learnr:::store_exercise_cache("foundations-plot", list(setup = "borders_data_plot <- borders_data %>%\n  filter(Sex %in% c(\"Male\", \"Female\"),\n         ageonadmission >= 0) %>% \n  drop_na(Sex)", 
     chunks = list(list(label = "prepare-foundations-plot", code = "borders_data_plot <- borders_data %>%\n  filter(Sex %in% c(\"Male\", \"Female\"),\n         ageonadmission >= 0) %>% \n  drop_na(Sex)", 
         opts = list(label = "\"prepare-foundations-plot\""), 
-        engine = "r"), list(label = "foundations-plot", code = "library(ggplot2)\n\nborders_data_plot %>%\n  ggplot() +\n  geom_point(aes(x = ageonadmission, y = LengthOfStay, colour = Sex), \n             alpha = 0.5) +\n  theme_minimal() +\n  ylab(\"Length of Stay (days)\") +\n  xlab(\"Age on Admission (years)\") +\n  ggtitle(\"Length of Stay by Age on Admission\")\n", 
+        engine = "r"), list(label = "foundations-plot", code = "library(ggplot2)\n\nborders_data_plot %>%\n  ggplot(aes(x = ageonadmission, \n             y = LengthOfStay, \n             colour = Sex)) +\n  geom_point(alpha = 0.5) +\n  theme_minimal() +\n  ylab(\"Length of Stay (days)\") +\n  xlab(\"Age on Admission (years)\") +\n  ggtitle(\"Length of Stay by Age on Admission\")\n", 
         opts = list(label = "\"foundations-plot\"", exercise = "TRUE", 
             exercise.setup = "\"prepare-foundations-plot\"", 
             warning = "FALSE"), engine = "r")), code_check = NULL, 
@@ -450,10 +452,10 @@ learnr:::store_exercise_cache("foundations-plot", list(setup = "borders_data_plo
         exercise.error.check.code = "gradethis_error_checker()", 
         label = "foundations-plot", exercise = TRUE, exercise.setup = "prepare-foundations-plot", 
         code = c("library(ggplot2)", "", "borders_data_plot %>%", 
-        "  ggplot() +", "  geom_point(aes(x = ageonadmission, y = LengthOfStay, colour = Sex), ", 
-        "             alpha = 0.5) +", "  theme_minimal() +", 
-        "  ylab(\"Length of Stay (days)\") +", "  xlab(\"Age on Admission (years)\") +", 
-        "  ggtitle(\"Length of Stay by Age on Admission\")", 
+        "  ggplot(aes(x = ageonadmission, ", "             y = LengthOfStay, ", 
+        "             colour = Sex)) +", "  geom_point(alpha = 0.5) +", 
+        "  theme_minimal() +", "  ylab(\"Length of Stay (days)\") +", 
+        "  xlab(\"Age on Admission (years)\") +", "  ggtitle(\"Length of Stay by Age on Admission\")", 
         ""), out.width.px = 624, out.height.px = 384, params.src = "foundations-plot, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
 </script>
@@ -501,7 +503,7 @@ output$`tutorial-exercise-data-plot-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache("data-plot", list(setup = NULL, chunks = list(list(label = "data-plot", code = "borders_data %>%\n  ggplot(aes(x = spec_1, y = ageonadmission)) +\n  geom_boxplot(outlier.colour = \"magenta4\") +\n  xlab(\"Specialty Grouping\") +\n  ylab(\"Age on Admission (years)\") +\n  ggtitle(\"Boxplot of Patient Age on Admission by Specialty Grouping\")", 
+learnr:::store_exercise_cache("data-plot", list(setup = NULL, chunks = list(list(label = "data-plot", code = "borders_data %>%\n  ggplot(aes(x = spec_1, \n             y = ageonadmission)) +\n  geom_boxplot(outlier.colour = \"magenta4\") +\n  xlab(\"Specialty Grouping\") +\n  ylab(\"Age on Admission (years)\") +\n  ggtitle(\"Boxplot of Patient Age on Admission by Specialty Grouping\")", 
     opts = list(label = "\"data-plot\"", exercise = "TRUE", warning = "FALSE"), 
     engine = "r")), code_check = NULL, error_check = NULL, check = NULL, 
     solution = NULL, options = list(eval = FALSE, echo = TRUE, 
@@ -524,9 +526,9 @@ learnr:::store_exercise_cache("data-plot", list(setup = NULL, chunks = list(list
         exercise.checker = "function (...) \n{\n    lifecycle::deprecate_soft(\"0.2.2\", \"grade_learnr()\", \"gradethis_exercise_checker()\")\n    gradethis_exercise_checker(...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
         label = "data-plot", exercise = TRUE, code = c("borders_data %>%", 
-        "  ggplot(aes(x = spec_1, y = ageonadmission)) +", "  geom_boxplot(outlier.colour = \"magenta4\") +", 
-        "  xlab(\"Specialty Grouping\") +", "  ylab(\"Age on Admission (years)\") +", 
-        "  ggtitle(\"Boxplot of Patient Age on Admission by Specialty Grouping\")"
+        "  ggplot(aes(x = spec_1, ", "             y = ageonadmission)) +", 
+        "  geom_boxplot(outlier.colour = \"magenta4\") +", "  xlab(\"Specialty Grouping\") +", 
+        "  ylab(\"Age on Admission (years)\") +", "  ggtitle(\"Boxplot of Patient Age on Admission by Specialty Grouping\")"
         ), out.width.px = 624, out.height.px = 384, params.src = "data-plot, exercise=TRUE, warning=FALSE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
 </script>

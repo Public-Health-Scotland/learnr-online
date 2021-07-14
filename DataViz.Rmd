@@ -144,9 +144,10 @@ borders_data_plot <- borders_data %>%
 library(ggplot2)
 
 borders_data_plot %>%
-  ggplot() +
-  geom_point(aes(x = ageonadmission, y = LengthOfStay, colour = Sex), 
-             alpha = 0.5) +
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point(alpha = 0.5) +
   theme_minimal() +
   ylab("Length of Stay (days)") +
   xlab("Age on Admission (years)") +
@@ -205,14 +206,17 @@ glimpse(borders_data)
 
 ```
 
-Let's build another plot too. Run the code below and feel free to play around with it. We'll learn how it all comes together in the next chapters. Just remember we're using that tidy data as our solid foundation.
+Let's build another plot too. Run the code below and feel free to play around with it. We'll learn how it all comes together in the next chapters. Just remember we're using that tidy data as our solid foundation which is piped in as the first argument to `ggplot()`:
 
 ```{r data-plot, exercise=TRUE, warning=FALSE}
 borders_data %>%
-  ggplot(aes(x = spec_1, y = ageonadmission)) +
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission)) +
   geom_boxplot(outlier.colour = "magenta4") +
   xlab("Specialty Grouping") +
   ylab("Age on Admission (years)") +
   ggtitle("Boxplot of Patient Age on Admission by Specialty Grouping")
 ```
+
+
 
