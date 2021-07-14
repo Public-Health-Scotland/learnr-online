@@ -20,6 +20,8 @@ library(ggplot2)
 library(datasauRus)
 library(magrittr)
 library(tidyr)
+library(kableExtra)
+
 knitr::opts_chunk$set(echo = FALSE)
 
 tutorial_options(
@@ -163,13 +165,30 @@ It comes from an underlying grammar of graphics, a framework which follows a lay
 
 ```{r, echo=FALSE}
 graphics_grammar_table <- data.frame(
-  "Element" = c("**Data**", "**Aesthetics**", "**Geometries**", "**Themes**", "**Statistics**", "**Coordinates**", "**Facets**"),
-  "Description" = c("The data-set being plotted.", "The scales/axes based on the data dimensions. Any form of encoding, including size, shape, color and so on which are useful for plotting multiple data dimensions.", "These are popularly known as ‘geoms’. This would cover the way we would depict the data points on the visualisation. Should it be points, bars, lines and so on.", "The additional, non-data, ink on our outputs. These add value and make things look pretty.", "Statistical measures in the visualisation like measures of central tendency, spread, confidence intervals.", "What kind of a coordinate system should the visualization be based on?", "Subplots based on specific data dimensions."),
-  "Common Options" = c("", "<code>x-axis</code> <code>y-axis</code> <code>colour</code> <code>fill</code> <code>size</code> <code>labels</code> <code>alpha</code> <code>shape</code> <code>line-width</code> <code>line-type</code>", "<code>point</code> <code>line</code> <code>histogram</code> <code>bar</code>", "", "<code>binning</code> <code>smoothing</code> <code>descriptive</code> <code>inferential</code>", "<code>cartesian</code> <code>fixed</code> <code>polar</code> <code>limits</code>", "<code>columns</code> <code>rows</code>"),
+  "Element" = c("**Data**", 
+                "**Aesthetics**", 
+                "**Geometries**", 
+                "**Themes**", 
+                "**Statistics**", 
+                "**Coordinates**",
+                "**Facets**"),
+  "Description" = c("The data-set being plotted.", 
+                    "The scales/axes based on the data dimensions. Any form of encoding, including size, shape, color and so on which are useful for plotting multiple data dimensions.", 
+                    "These are popularly known as ‘geoms’. This would cover the way we would depict the data points on the visualisation. Should it be points, bars, lines and so on.", 
+                    "The additional, non-data, ink on our outputs. These add value and make things look pretty.", 
+                    "Statistical measures in the visualisation like measures of central tendency, spread, confidence intervals.", 
+                    "What kind of a coordinate system should the visualization be based on?", 
+                    "Subplots based on specific data dimensions."),
+  "Common Options" = c("", 
+                       "`x-axis` `y-axis` `colour` `fill` `size` `labels` `alpha` `shape` `line-width` `line-type`",
+                       "`point` `line` `histogram` `bar`", "", "`binning` `smoothing` `descriptive` `inferential`",
+                       "`cartesian` `fixed` `polar` `limits`", 
+                       "`columns` `rows`"),
   check.names = FALSE
 )
 
-knitr::kable(graphics_grammar_table)
+kableExtra::kbl(graphics_grammar_table) %>%
+  kable_paper(full_width = FALSE)
 
 ```
 
@@ -217,6 +236,5 @@ borders_data %>%
   ylab("Age on Admission (years)") +
   ggtitle("Boxplot of Patient Age on Admission by Specialty Grouping")
 ```
-
 
 
