@@ -213,7 +213,7 @@ This is going to be a short section but important nonetheless. The basis for any
 
 As mentioned, we're going to mainly use the `ggplot2` package in this course. There are a few reasons for this but it breaks down to being able to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember. However, a requirement for using the package effectively is that the data must be [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf). *This can be summarised as observations in rows and variables as columns*. Have a look at the [`tidyr`](https://tidyr.tidyverse.org/) package to explore how to make data tidy in the Tidyverse.
 
-The dataset we used in the last exercise and will continue popping up is the borders training dataset. Have a look at its structure below using `glimpse()` (a tidy-output of `str()`).
+The dataset used in the last exercise is the borders training dataset and will continue popping up throughout this course. Have a look at its structure below using `glimpse()` (a tidy-output of `str()`).
 
 ```{r data-view, exercise=TRUE}
 ___(borders_data)
@@ -238,3 +238,489 @@ borders_data %>%
 ```
 
 
+## Aesthetics
+
+Aesthetic mappings describe how properties of the data connect with features of the graph, such as distance along an axis, size of points, or colour. Aesthetic mappings are how dimensions of the data are visualised, commonly through the `x` and `y` axes, more dimensions could be added by including colour, different types of line or shapes, etc. The `aes()` function connects data with what we see on the graph by defining aesthetic mappings and will be one of the most often used functions when you're creating data visualisations. 
+
+The `aes()` function is passed after the data to the `ggplot()` function. However, it is often used as the first argument of the next layer, a geometry function, (e.g. `geom_line()`). When passed on the geometry layer, different mappings can be used across different geometries (overlaying a line on a bar chart for instance). We will keep `aes()` alongside our data inside the `ggplot()` function which means it'll be used as the default mapping for all layers of the output. 
+
+Let's look at our first example:
+
+1. Our data, `borders_data_plot` is piped into the `ggplot()` function. 
+2. Aesthetic mappings are added to the `ggplot()` function, defining our `x` and `y` variable mappings. 
+3. A 3rd dimension is visualised by mapping colour to another variable.
+4. The geometry layer (a scatter plot here) is added on (using `+`) to create an output.
+
+``` {r aesthetics-plot, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point()
+```
+
+
+### Mappings
+
+In addition to the `x`, `y`, and colour aesthetics, there are a number of other options. These are dictated somewhat by the choice of geometry used but allow the visuals to be improved and further dimensions to be added to the plot. These are some typical visible aesthetics:
+
+```{r, echo=FALSE}
+aesthetic_map_table <- data.frame(
+  "Aesthetic" = c("**`x`**", 
+                  "**`y`**", 
+                  "**`colour`**", 
+                  "**`fill`**", 
+                  "**`size`**", 
+                  "**`alpha`**", 
+                  "**`linetype`**", 
+                  "**`shape`**", 
+                  "**`labels`**"),
+  "Description" = c("The `x` axis position", 
+                    "The `y` axis position", 
+                    "Colour of points, outlines of other geoms", 
+                    "The colour of the fill", 
+                    "Area or radius of points, thickness of lines", 
+                    "The level of transparency (out of 1)", 
+                    "The pattern used for drawing lines (solid, dashed, dotdash, etc.)", 
+                    "The shape of points, some of which allow a `fill` to be specified", 
+                    "Text on the plot or axes")
+)
+
+kableExtra::kbl(aesthetic_map_table) %>%
+  kable_paper(full_width = FALSE)
+
+```
+
+We can use some of these aesthetic mappings to refer to continuous or categorical data. However, some are restricted to categorical. Can you tell which of these pairs would only suit categorical data?
+
+```{r aesthetic-quiz}
+quiz(
+  question("Which aesthetics are only applicable to categorical data?",
+    answer("`colour` and `fill`"),
+    answer("`alpha` and `size`"),
+    answer("`label` and `shape`", correct = TRUE),
+    answer("`alpha` and `label`"),
+    answer("`x` and `y`"),
+    incorrect = "Categorical data has a finite set of options which can be divided into groups/labelled. Have another go!",
+    correct = "Brilliant! Continuous data works on a scale and should be represented by a smooth spectrum. Categorical data, however, needs some defined, finite, property.",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+
+#### Mappings vs. Attributes
+
+Many of these aesthetics function as both aesthetic mappings but also attributes. This is something to watch out for as it's a common mistake. To declare an attribute, determining how something looks (e.g. changing the alpha of every point, not mapping to a variable) it should be defined as part of the geom and not in the `aes()` function.
+
+Let's take an example. Using the same code as above, change the colour of points to be "dark green" for all points. Use the hint button if you need some guidance.
+
+``` {r aesthetics1, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point()
+```
+
+``` {r aesthetics1-hint-1}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay)) +
+  geom_point(colour = ___)
+```
+
+``` {r aesthetics1-solution}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay)) +
+  geom_point(colour = "dark green")
+```
+
+``` {r aesthetics1-check}
+grade_code()
+```
+
+
+### Modifying Aesthetics
+
+While we now know how to map data to aesthetics, it may still be necessary to make further modifications. For instance, if there is a lot of overlapping data points, the chosen aesthetic may hide valuable insights. It's also important to remember that each of the aesthetics is a scale and may need to be fine tuned, like changing the limits of an axis to start at 0. As each of the modifications will impact a particular geometry layer, these modifications are called as part of that layer (i.e. `geom_<type>`) and not within the `aes()` function.
+
+
+#### Positions
+
+It's quite common to adjust position, this is how you can account for overlapping data. The default position is "identity" which means that it takes the value exactly as it is in the data to position within the plot. There are a number of other options available though:
+
+```{r, echo=FALSE}
+position_mods_table <- data.frame(
+  "Function" = c("**`position_dodge()`** **`position_dodge2()`**", 
+                 "**`position_identity()`**", 
+                 "**`position_jitter()`**", 
+                 "**`position_jitterdodge()`**", 
+                 "**`position_nudge()`**", 
+                 "**`position_stack()`**", 
+                 "**`position_fill()`**"),
+  "Description" = c("Dodge overlapping objects side-to-side, preserving the vertical position. The `position_dodge()` version requires a grouping in the data, `position_dodge2()` doesn't", 
+                    "No adjustment to position *(default)*", 
+                    "A pseudo-randomisation of points to seperate them", 
+                    "Simultaneously dodge and jitter", 
+                    "Nudge points a fixed distance", 
+                    "Stacks bars on top of each other", 
+                    "Stacks bars and standardises each stack to have constant height")
+)
+
+kableExtra::kbl(position_mods_table) %>%
+  kable_paper(full_width = FALSE)
+
+```
+
+These functions are passed to the `position` argument within a geometry layer function. If we take the first example and add a jitter to the points, it would look like this:
+
+``` {r, eval=FALSE, echo=TRUE}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point(position = position_jitter())
+```
+
+Let's look at our data set from the first example and compare specialty grouping (`spec_1`) against `LengthOfStay` (run the code chunk below to see the plot). We can see that we have a lot of overlapping data points so it's difficult to really gather any insights from this. Let's do a few things:
+
+1. Add a new dimension to map `Sex` to colour.
+2. Apply both jitter and dodge.
+3. Add an alpha attribute and set the value to '0.5'.
+
+``` {r aesthetics2, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay)) +
+  geom_point()
+```
+
+``` {r aesthetics2-hint-1}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             ___ = ___)) +
+  geom_point()
+```
+
+``` {r aesthetics2-hint-2}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point()
+```
+
+``` {r aesthetics2-hint-3}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point(___ = ___)
+```
+
+``` {r aesthetics2-hint-4}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point(position = position_jitterdodge())
+```
+
+``` {r aesthetics2-hint-5}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point(position = position_jitterdodge(),
+             ___ = ___)
+```
+
+``` {r aesthetics2-solution}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point(position = position_jitterdodge(),
+             alpha = 0.5)
+```
+
+``` {r aesthetics2-check}
+grade_code()
+```
+
+
+#### Scale
+
+Scales are how aesthetics are set up and control the visual properties of the data values. We can access all the scales with the `scale_<name>_<data_type>` functions, which is immediately followed by which scale we want to modify. The third part of the function name is to match the type of data (e.g. discrete or continuous). Each of these functions will then have further arguments to alter the appearance of the output. There are also 'helper' type functions for common adjustments to labels and limits. The commonly used options are shown below:
+
+```{r, echo=FALSE}
+scale_mods_table <- data.frame(
+  "Type" = c("Helper",
+             "Helper",
+             "Helper",
+             "Helper",
+             "Helper",
+             "Axes",
+             "Axes",
+             "Colour & Fill",
+             "Colour & Fill",
+             "Shape",
+             "Shape",
+             "Line",
+             "Line",
+             "Size",
+             "Size"),
+  "Function" = c("**`labs()`**",
+                 "**`xlab()`** **`ylab()`**",
+                 "**`ggtitle()`**",
+                 "**`lims()`**",
+                 "**`xlim()`** **`ylim()`**",
+                 "**`scale_x_continuous()`** **`scale_y_continuous()`**",
+                 "**`scale_x_discrete()`** **`scale_y_discrete()`**",
+                 "**`scale_colour_continuous()`** **`scale_fill_continuous()`**",
+                 "**`scale_colour_discrete()`** **`scale_fill_discrete()`**",
+                 "**`scale_shape()`**",
+                 "**`scale_shape_manual()`**",
+                 "**`scale_linetype_binned()`**",
+                 "**`scale_linetype_discrete()`**",
+                 "**`scale_size()`**",
+                 "**`scale_radius()`**"),
+  "Description" = c("Modify any label on the plot",
+                    "Modify the label for the x or y axis",
+                    "Modify the title and subtitle for the plot",
+                    "Set scale limits",
+                    "Set scale limits for the x or y axis",
+                    "Position of scales for continuous data",
+                    "Position of scales for discrete data",
+                    "Colour and fill scales for continous data",
+                    "Colour and fill scales for discrete data",
+                    "Mapping no more than 6 discrete variables to shapes",
+                    "Manually setting the shape mappings from levels in the data to aesthetic values",
+                    "Scale for line patterns/types. Continuous values cannot be mapped to line types unless `scale_linetype_binned()` is used. *As linetypes have no inherent order, this is not advised.*",
+                    "Scale for line patterns/types",
+                    "Scales for area (commonly used for points and text)",
+                    "Scales for radius"),
+  "Arguments" = c("`...` (for any aesthetic-value pair), `title`, `subtitle`, `caption`, `alt`",
+                  "`label`",
+                  "`title` `subtitle`",
+                  "`...` (for an aesthetic-value pair)",
+                  "`...` (2 numeric values specifying the left/lower and right/upper limits, one value can be left as `NA`)",
+                  "`name` `breaks` `minor_breaks` `n.breaks` `labels` `limits` `expand` `trans` `position`",
+                  "`...` `palette` `breaks` `limit` `drop` `name` `labels` `expand` `position`",
+                  "`...` `type` (one of 'gradient', 'viridis', or a function that returns a continous colour scale)",
+                  "`...` `type` (one of a character vector or list of colour codes, or a function that returns a discrete colour/fill scale)",
+                  "`...` `palette` `breaks` `limits` `drop` `na.translate` `name` `labels`",
+                  "`...` `palette` `limits` `drop` `na.translate` `name` `labels`",
+                  "`...` `palette` `breaks` `limits` `drop` `na.translate` `name` `labels`",
+                  "`...` `palette` `breaks` `limits` `drop` `na.translate` `name` `labels`",
+                  "`name` `breaks` `labels` `limits` `range` `trans` `guide`",
+                  "`name` `breaks` `labels` `limits` `range` `trans` `guide`")
+  
+)
+
+kableExtra::kbl(scale_mods_table) %>%
+  kable_paper(full_width = FALSE) %>%
+  collapse_rows(columns = 1)
+```
+
+To apply these functions, they are added on to the rest of the code with `+`. So, taking the previous example, we can add an axis name like so:
+
+```{r, eval=FALSE, echo=TRUE}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point(position = position_jitter()) +
+  scale_x_continuous(name = "Age on Admission (Years)")
+```
+
+There is so much in that table (and that's not everything, even the possible arguments has been trimmed down for this) but remember it's not about remembering how to do everything, it's just knowing the possibilities. Remember, references are available and you can always use `?<function>` in the R console to get the help pages up.
+
+So, let's put some of this into practice. Here, the data has been filtered to only include data relating to specialty group "H" or "J" and at Hospital Code "B120H". Let's tidy up the plot using the scale functions (not the helper functions) we now know about:
+
+1. The variable names aren't easy to read and should be updated. Let's make the x-axis "Specialty Grouping" and the y-axis "Age on Admission (Years)".
+2. It could be said that the visualisation is misleading due to the y-axis limits. Fix this by specifying the lower limit to be 0. This needs a length-2 vector (i.e. `c(x, y)`), remember the upper limit.
+3. Let's also use some PHS colours rather than the defaults. Set "Female" (the first value) to be "#76B843" and "Male" (the second value) to be "#3A3776".
+4. Finally, give the plot a title using `ggtitle()`. Let's call it "Boxplot of Age on Admission for Specialty Grouping H & J \\n in Borders General Hospital". (*The "\\n" is a special character that forces a new line, something that may be necessary in longer titles as ggplot doesn't automatically wrap the text*).
+
+
+``` {r aesthetics3, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot()
+```
+
+```{r aesthetics3-hint-1}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  ___(___ = ___) +
+  ___(___ = ___)
+```
+
+```{r aesthetics3-hint-2}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)")
+```
+
+```{r aesthetics3-hint-3}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", ___ = c(___, ___))
+```
+
+```{r aesthetics3-hint-4}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA))
+```
+
+```{r aesthetics3-hint-5}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) + 
+  ___(___ = c(___, ___))
+```
+
+```{r aesthetics3-hint-6}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) + 
+  scale_colour_discrete(___ = c(___, ___))
+```
+
+```{r aesthetics3-hint-7}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) + 
+  scale_colour_discrete(type = c("#76B843", "#3A3776"))
+```
+
+```{r aesthetics3-hint-8}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) + 
+  scale_colour_discrete(type = c("#76B843", "#3A3776")) + 
+  ___(___)
+```
+
+``` {r aesthetics3-solution}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() +
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) +
+  scale_colour_discrete(type = c("#76B843", "#3A3776")) + 
+  ggtitle("Boxplot of Age on Admission for Specialty Grouping H & J \n in Borders General Hospital")
+```
+
+``` {r aesthetics3-check}
+grade_code()
+```
+
+
+
+
+### Final Thoughts & Best Practice
+
+While there is a certain amount of creative know-how, it's also important to follow guidance that has been created. This will help form the most suitable presentation of data that is accessible, aligns with outputs produced across the organisation, and meets the needs and expectations of your audience.
+
+Forms follows function - the best visualisations serve a purpose. This depends on your audience; you may be confirming your own suspicions, starting to analyse the data you have, or you may be trying to inform a lay reader of specific results. The priority is to always generate accurate and efficient representations of the data, otherwise it's rubbish. After that, we can be concerned about creating something that is visually interesting and appealing.
+
+**Guiding Principles**
+
+* **Always** consider the audience and purpose of every visualisation
+* **Always** be accurate and efficient
+* **Never** misrepresent or obscure data
+* **Never** confuse viewers with complexity
+
+
+#### Knowledge Check
+
+```{r aesthetics-quiz}
+quiz(
+  question("What is the command that controls the opacity of geoms?",
+    answer("Alpha", correct = TRUE),
+    answer("Beta"),
+    answer("Delta"),
+    answer("Gamma"),
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("What of these options can be used to account for overlapping data points (select 2)?",
+    answer("`position_dodge()`", correct = TRUE),
+    answer("`position_jitter()`", correct = TRUE),
+    answer("`position_move()`"),
+    answer("`position_dance()`"),
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("What could we use to add another dimension to our visualisation if the data item is continuous?",
+    answer("Fill", correct = TRUE),
+    answer("Shape"),
+    answer("Line Type"),
+    answer("Texture"),
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+    )
+)
+```
