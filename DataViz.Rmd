@@ -61,8 +61,6 @@ There are two main types of data viz:
 * **Exploratory** - easily generated, data-heavy, intended for a small specialist audience. This use case here is for graphical data analysis.
 * **Explanatory** - labour intensive, data specific, and intended for a broad audience. This use case could be in publications or presentations.
 
-*Render 2 plots to visualise the difference?*
-
 ```{r intro-quiz}
 quiz(
   question("Let's get started. Which of the following are exploratory plots typically NOT?",
@@ -774,8 +772,8 @@ different data mappings for each geom. We'll continue with defining `aes()` as p
 
 ``` {r, echo=TRUE, message=FALSE}
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
-  geom_point() + 
-  geom_smooth()
+  geom_point(position = position_jitter(), alpha = 0.5) + 
+  geom_smooth(colour = "#76B843")
 ```
 
 
@@ -865,3 +863,20 @@ sp_child_immunisations_data %>%
   scale_x_continuous(name = "Year", n.breaks = 7) + 
   scale_colour_discrete(name = "Immunisation")
 ```
+
+``` {r geom3-check}
+grade_code()
+```
+
+
+## Themes
+
+Stuff about themes
+
+
+## Interactivity
+
+Introduction to Plotly
+
+
+## Review & Feedback
