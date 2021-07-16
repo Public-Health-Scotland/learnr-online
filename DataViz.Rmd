@@ -29,6 +29,7 @@ tutorial_options(
 )
 
 borders_data <- read_csv("www/data/BORDERS (inc Age).csv")
+sp_child_immunisations_data <- read_csv("www/data/scotpho_childhood_immunisations.csv")
 
 ```
 
@@ -678,8 +679,6 @@ grade_code()
 ```
 
 
-
-
 ### Final Thoughts & Best Practice
 
 While there is a certain amount of creative know-how, it's also important to follow guidance that has been created. This will help form the most suitable presentation of data that is accessible, aligns with outputs produced across the organisation, and meets the needs and expectations of your audience.
@@ -723,4 +722,146 @@ quiz(
     random_answer_order = TRUE
     )
 )
+```
+
+
+## Geometry
+
+The 3rd (essential) layer is the geometry (`geom`) layer. We've already seen this in action throughout our previous examples so you may have worked out what it does and how to use it. However, this is where we determine what type of plot it's going to be. There are about 50 options to chose from, but as you can probably imagine, you're much more likely to use a select few:
+
+```{r, echo=FALSE}
+geometries_table <- data.frame(
+  "Group" = c("Scatter",
+              "Scatter",
+              "Scatter",
+              "Bar",
+              "Bar",
+              "Bar",
+              "Line",
+              "Line",
+              "Other"
+             ),
+  "Function" = c("**`geom_point()`**",
+                 "**`geom_jitter()`**",
+                 "**`geom_count()`**",
+                 "**`geom_histogram()`**",
+                 "**`geom_bar()`**",
+                 "**`geom_col()`**",
+                 "**`geom_line()`**",
+                 "**`geom_path()`**",
+                 "**`geom_smooth()`**"
+                 ),
+  "Description" = c("This is the foundation for the next 2 variations. Scatterplots are the most useful for displaying the relationship between 2 continuous variables. You can map another variable to `size` which will create a bubble chart from this.",
+                    "A convenient shortcut for specifying jitter as the position. Adding a small amount of random variation to the location of points, useful for handling overplotting.",
+                    "Counting the number of observations at each location.",
+                    "A specialised version of bar plots. Showing the binned distribution of a continuous variable.",
+                    "A bar with the height proportional to the number of cases in each group.",
+                    "A bar with the height representing values in the data.",
+                    "Connect observations based on the order on the x-axis.",
+                    "Connect observations based on the order which they appear in the data.",
+                    "Aiding in the visualisation of patterns where overplotting is an issue."
+                    )
+  
+)
+
+kableExtra::kbl(geometries_table) %>%
+  kable_paper(full_width = FALSE) %>%
+  collapse_rows(columns = 1)
+```
+
+With the layered approach, we can add multiple geoms to the same plot, just like another layer. If we remember back to the section on aesthetics, we can define the mappings within the geom layer which will allow us to use
+different data mappings for each geom. We'll continue with defining `aes()` as part of the `ggplot()` call though. Let's see what 2 geoms will allow us to do:
+
+``` {r, echo=TRUE, message=FALSE}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+
+### Scatter Plots
+
+Scatter plots have been quite common throughout this course so far. That's because they're generally useful, particularly in the exploratory side of data visualisation. 
+
+Let's have a look at another scatter plot. This time there will be an obvious (albeit predictable) split in the data. Let's pull knowledge from the previous sections and create the full block of code. Don't worry, you'll still have guided steps and hints to help.
+
+The data we're looking at has been filtered for you. We're looking at Specialties "AM" (Palliative Medicine) and "AF" (Paediatrics). We're going to create a scatter plot to see how age (on admission) impacts length of stay. Have a think about how you would expect this plot to look and then follow the steps below to see if you were right:
+
+1. Set up the `ggplot()` function and add the aesthetic mappings ("ageonadmission" and "LengthOfStay").
+2. Add a 3rd dimension to visualise "Specialty" with colour.
+3. Make it a scatter plot with a jitter modification using the `position` argument.
+4. Rename the legend labels to "Palliative" and "Paediatrics". (*Hint: they're discrete and mapped to colour, think about the order you write them too.*)
+5. Change the axis labels to "Age" and "Length of Stay", you can use the helper functions for this.
+
+``` {r geom1, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF"))
+```
+
+``` {r geom1-solution}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) + 
+  scale_colour_discrete(labels = c("Paediatrics", "Palliative")) + 
+  xlab("Age") +
+  ylab("Length of Stay")
+```
+
+``` {r geom1-check}
+grade_code()
+```
+
+
+### Histograms
+
+Visualising the distribution of a single continuous variable by dividing the axis into bins and counting the number of observations in each bin. Let's create a histogram now:
+
+1. Set up the `ggplot()` function and add the aesthetic mappings ("ageonadmission").
+2. Add a 3rd dimension to visualise "Sex" with fill (colour would be an outline rather than *fill* the space).
+3. Make it a histogram plot. If we look at this, we should note that bars are automatically stacked but this isn't obvious. Change the position to *dodge*.
+4. We'll also see the automatic message about bin width. We could probably make this clearer by setting bin width to 10.
+5. Change the axis labels to "Age" and "Count", you can use the helper functions for this.
+
+``` {r geom2, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF"))
+```
+
+``` {r geom2-solution}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) +
+  geom_histogram(binwidth = 10, 
+                 position = position_dodge()) +
+  xlab("Age") +
+  ylab("Count")
+```
+
+``` {r geom2-check}
+grade_code()
+```
+
+
+### Line Graph
+
+Connecting observations in order of the variable on the x-axis, line graphs are used particularly in time trends. So let's mix it up by using a new data set for this section and see how childhood immunisation uptake has varied over a number of years.
+
+1. Set up the `ggplot()` function and add the aesthetic mappings ("year" and "measure").
+2. Add a 3rd dimension to visualise the immunisation with colour.
+3. Make it a line graph.
+4. Immediately, we can notice what looks to a big difference in uptake between the immunisations. However, if we look at the limits on the y-axis, this could mislead us. So, let's change the limits. We want it to start at 0 but what would the upper limit be? While we're at it, let's change the name so it shows "Uptake (%)".
+5. The x-axis only has tick labels for a few years but we have 14 in our data. The function has tried to minimise clutter but let's show 7 breaks which will be easier for to read. We can also update the name at the same time, call the x-axis "Year".
+6. Finally, the legend's title is lower case and doesn't look very presentable. Let's make it proper case (*hint: the lenend is describing a discrete colour object*).
+
+``` {r geom3, exercise=TRUE}
+sp_child_immunisations_data
+```
+
+``` {r geom3-solution}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation")
 ```
