@@ -1148,3 +1148,22 @@ ggplotly(hosp_admissions)
 
 
 ## Review & Feedback
+
+#### References
+
+* Tidyverse, ggplot2 reference - [ggplot2.tidyverse.org/reference/](https://ggplot2.tidyverse.org/reference/)
+* R for Data Science, Chapter 3: Data visualisation - [r4ds.had.co.nz/data-visualisation.html](https://r4ds.had.co.nz/data-visualisation.html)
+* ggplot2: elegant graphics for data analysis - [ggplot2-book.org/](https://ggplot2-book.org/)
+* Plotly in R - [plotly-r.com/](https://plotly-r.com/)
+
+
+#### Help
+
+* Vignettes (Help) / `?<function_name>`
+* Google / Stack Overflow (tag queries with "[r]", "[ggplot]")
+* [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
+* [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
+
+#### Feedback
+
+<iframe width="100%" height="2300" src="https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5JmibxHi_yzZ9Pvduh8IqoF_5UMDFWSlZPUU40RkZaTE1YM0tTTVVWVVVQVSQlQCN0PWcu&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
