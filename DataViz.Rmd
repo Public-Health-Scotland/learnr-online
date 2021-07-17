@@ -1122,7 +1122,29 @@ Outisde of the built-in themes, there are also packages with additional themes. 
 
 ## Interactivity
 
-Introduction to Plotly
+So far, we've gone into quite a bit of detail about creating visualisations. Although so far, all of these have been static. This works well with visualisations that are going to be in presentations or documents (they themselves tend to be static). However, when presenting the visualisation to users in a digital format, we can add interactivity. Doing this will allow the user to actively explore the visualisation and get more from it. We'll use `plotly` to do this. There are 2 main ways of creating a plotly object:
+
+* Directly initialising the object using `plot_ly()`
+* Transforming a ggplot2 object 
+
+Using the plotly functions to create visualisations is based on the same grammar of graphics and has its advantages. However, this requires slightly different syntax when we can go with the second option. Even with this option, and if you learn more about plotly, you can mix and match to get the best of both worlds. Let's explore `ggplotly()`. 
+
+```{r plotly1, exercise=TRUE, exercise.setup='prepare-foundations-plot', message=FALSE}
+hosp_admissions <- borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) +
+  geom_histogram(binwidth = 10, 
+                 position = position_dodge()) +
+  scale_fill_discrete(type = c("#88478B", "#3A3776")) +
+  xlab("Age") +
+  ylab("Count") +
+  ggtitle("Age Distribution of Borders Hospital Admissions", subtitle = "") + theme(plot.title = element_text(colour = "#3A3776"),
+        axis.title = element_text(colour = "#88478B"),
+        legend.title = element_text(colour = "#88478B"),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"))
+
+ggplotly(hosp_admissions)
+```
 
 
 ## Review & Feedback
