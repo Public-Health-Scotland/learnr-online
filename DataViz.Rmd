@@ -123,6 +123,8 @@ datasaurus_dozen %>%
   mutate(across(2:6, round, 3))
 ```
 
+</br>
+
 The key takeaway should be to model your data, visualise to understand your data attributes. However, there are also other considerations for how plot's should be:
 
 * **Conceptually** correct - data is represented visually in a way that makes sense.
@@ -199,9 +201,9 @@ knitr::include_graphics("images/data-viz/layers.png")
 ```
 </div>
 
-This shows how the layers of the grammar of graphics build up. It's also important to know that while data is required, the layers above become more optional (not every plot needs additional statistical measures). The use of these layers will depend on the use of the visualisation, the audience, and even the medium it's being shared on (i.e., web, pdf, image). You may also see similar representations with slightly different names or ordering.
+This shows how the layers of the grammar of graphics build up. It's also important to know that while data is required, the top layers become optional (not every plot needs additional statistical measures). The use of these layers will depend on the use of the visualisation, the audience, and even the medium it's being shared on (i.e., web, pdf, image). You may also see similar representations with slightly different names or ordering.
 
-Using only the first 4 layers (data, aesthetics, geometries, and themes), we'll be able to create publication-quality plots. The final 3 layers will be explored at a higher level for those who are interested.
+Using only the first 4 layers (data, aesthetics, geometries, and themes), we'll be able to create publication-quality plots. The final 3 layers won't be explored in this course.
 
 </br>
 
@@ -258,6 +260,8 @@ borders_data_plot %>%
   geom_point()
 ```
 
+</br>
+
 
 ### Mappings
 
@@ -290,6 +294,8 @@ kableExtra::kbl(aesthetic_map_table) %>%
 
 ```
 
+</br>
+
 We can use some of these aesthetic mappings to refer to continuous or categorical data. However, some are restricted to categorical. Can you tell which of these pairs would only suit categorical data?
 
 ```{r aesthetic-quiz}
@@ -308,6 +314,7 @@ quiz(
 )
 ```
 
+</br>
 
 #### Mappings vs. Attributes
 
@@ -341,11 +348,13 @@ borders_data_plot %>%
 grade_code()
 ```
 
+</br>
 
 ### Modifying Aesthetics
 
 While we now know how to map data to aesthetics, it may still be necessary to make further modifications. For instance, if there is a lot of overlapping data points, the chosen aesthetic may hide valuable insights. It's also important to remember that each of the aesthetics is a scale and may need to be fine tuned, like changing the limits of an axis to start at 0. As each of the modifications will impact a particular geometry layer, these modifications are called as part of that layer (i.e. `geom_<type>`) and not within the `aes()` function.
 
+</br>
 
 #### Positions
 
@@ -373,6 +382,8 @@ kableExtra::kbl(position_mods_table) %>%
   kable_paper(full_width = FALSE)
 
 ```
+
+</br>
 
 These functions are passed to the `position` argument within a geometry layer function. If we take the first example and add a jitter to the points, it would look like this:
 
@@ -451,6 +462,7 @@ borders_data_plot %>%
 grade_code()
 ```
 
+</br>
 
 #### Scale
 
@@ -525,6 +537,8 @@ kableExtra::kbl(scale_mods_table) %>%
   kable_paper(full_width = FALSE) %>%
   collapse_rows(columns = 1)
 ```
+
+</br>
 
 To apply these functions, they are added on to the rest of the code with `+`. So, taking the previous example, we can add an axis name like so:
 
@@ -690,6 +704,7 @@ Forms follows function - the best visualisations serve a purpose. This depends o
 * **Never** misrepresent or obscure data
 * **Never** confuse viewers with complexity
 
+</br>
 
 #### Knowledge Check
 
@@ -766,6 +781,8 @@ kableExtra::kbl(geometries_table) %>%
   kable_paper(full_width = FALSE) %>%
   collapse_rows(columns = 1)
 ```
+
+</br>
 
 With the layered approach, we can add multiple geoms to the same plot, just like another layer. If we remember back to the section on aesthetics, we can define the mappings within the geom layer which will allow us to use
 different data mappings for each geom. We'll continue with defining `aes()` as part of the `ggplot()` call though. Let's see what 2 geoms will allow us to do:
@@ -933,6 +950,7 @@ kableExtra::kbl(theme_funcs_table) %>%
   collapse_rows(columns = 1:2)
 ```
 
+</br>
 
 These functions then map to one of these arguments. There are 3 types with an extra function to blank out objects:
 
@@ -954,6 +972,8 @@ kableExtra::kbl(theme_elems_table) %>%
   kable_paper(full_width = FALSE)
 ```
 
+</br>
+
 Let's take our histogram from the section on geoms and make some theme changes. Look over the code and see if you can work out what will happen then run it. After, feel free to make changes and play around with the code to learn more.
 
 ``` {r theme1, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
@@ -971,6 +991,8 @@ borders_data_plot %>%
         panel.background = element_blank(),
         panel.grid.major.y = element_line(colour = "light grey"))
 ```
+
+</br>
 
 Now, over to you. Let's take the line graph from the geom section and apply some theme changes:
 
@@ -1009,6 +1031,7 @@ sp_child_immunisations_data %>%
 grade_code()
 ```
 
+</br>
 
 ### Theme Object
 
@@ -1038,6 +1061,8 @@ phs_theme_hist <- theme(plot.title = element_text(colour = "#3A3776", family = "
 hosp_admissions + phs_theme_hist
  
 ```
+
+</br>
 
 Back over to you. Let's take the line graph from before and create a theme object. The code created from before is provided, and assigned to `immunisation_uptake_plot`.
 
@@ -1084,6 +1109,7 @@ immunisation_uptake_plot + phs_theme_line + theme(legend.position = c(.9, .2))
 grade_code()
 ```
 
+</br>
 
 #### Built-In & External Themes
 

@@ -167,6 +167,7 @@ The course will also show progress through sections, a green tick will appear on
 {"columns":[{"label":["dataset"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mean_x"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean_y"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["std_dev_x"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["std_dev_y"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["corr_x_y"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"away","2":"54.266","3":"47.835","4":"16.770","5":"26.940","6":"-0.064"},{"1":"bullseye","2":"54.269","3":"47.831","4":"16.769","5":"26.936","6":"-0.069"},{"1":"circle","2":"54.267","3":"47.838","4":"16.760","5":"26.930","6":"-0.068"},{"1":"dino","2":"54.263","3":"47.832","4":"16.765","5":"26.935","6":"-0.064"},{"1":"dots","2":"54.260","3":"47.840","4":"16.768","5":"26.930","6":"-0.060"},{"1":"h_lines","2":"54.261","3":"47.830","4":"16.766","5":"26.940","6":"-0.062"},{"1":"high_lines","2":"54.269","3":"47.835","4":"16.767","5":"26.940","6":"-0.069"},{"1":"slant_down","2":"54.268","3":"47.836","4":"16.767","5":"26.936","6":"-0.069"},{"1":"slant_up","2":"54.266","3":"47.831","4":"16.769","5":"26.939","6":"-0.069"},{"1":"star","2":"54.267","3":"47.840","4":"16.769","5":"26.930","6":"-0.063"},{"1":"v_lines","2":"54.270","3":"47.837","4":"16.770","5":"26.938","6":"-0.069"},{"1":"wide_lines","2":"54.267","3":"47.832","4":"16.770","5":"26.938","6":"-0.067"},{"1":"x_shape","2":"54.260","3":"47.840","4":"16.770","5":"26.930","6":"-0.066"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[14],"max":[14]},"pages":{}}}
   </script>
 </div>
+<p></br></p>
 <p>The key takeaway should be to model your data, visualise to understand your data attributes. However, there are also other considerations for how plot’s should be:</p>
 <ul>
 <li><strong>Conceptually</strong> correct - data is represented visually in a way that makes sense.</li>
@@ -291,8 +292,8 @@ Subplots based on specific data dimensions.
 <div class="viz-layers">
 <p><img src="images/data-viz/layers.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
-<p>This shows how the layers of the grammar of graphics build up. It’s also important to know that while data is required, the layers above become more optional (not every plot needs additional statistical measures). The use of these layers will depend on the use of the visualisation, the audience, and even the medium it’s being shared on (i.e., web, pdf, image). You may also see similar representations with slightly different names or ordering.</p>
-<p>Using only the first 4 layers (data, aesthetics, geometries, and themes), we’ll be able to create publication-quality plots. The final 3 layers will be explored at a higher level for those who are interested.</p>
+<p>This shows how the layers of the grammar of graphics build up. It’s also important to know that while data is required, the top layers become optional (not every plot needs additional statistical measures). The use of these layers will depend on the use of the visualisation, the audience, and even the medium it’s being shared on (i.e., web, pdf, image). You may also see similar representations with slightly different names or ordering.</p>
+<p>Using only the first 4 layers (data, aesthetics, geometries, and themes), we’ll be able to create publication-quality plots. The final 3 layers won’t be explored in this course.</p>
 <p></br></p>
 </div>
 <div id="section-data" class="section level2">
@@ -338,6 +339,7 @@ Subplots based on specific data dimensions.
   geom_point()</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 <div id="section-mappings" class="section level3">
 <h3>Mappings</h3>
 <p>In addition to the <code>x</code>, <code>y</code>, and colour aesthetics, there are a number of other options. These are dictated somewhat by the choice of geometry used but allow the visuals to be improved and further dimensions to be added to the plot. These are some typical visible aesthetics:</p>
@@ -427,6 +429,7 @@ Text on the plot or axes
 </tr>
 </tbody>
 </table>
+<p></br></p>
 <p>We can use some of these aesthetic mappings to refer to continuous or categorical data. However, some are restricted to categorical. Can you tell which of these pairs would only suit categorical data?</p>
 <p><div class="panel-heading tutorial-quiz-title"><span data-i18n="text.quiz">Quiz</span></div></p>
 <div class="panel panel-default">
@@ -437,6 +440,7 @@ Text on the plot or axes
 <script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
 </div>
 </div>
+<p></br></p>
 <div id="section-mappings-vs.-attributes" class="section level4">
 <h4>Mappings vs. Attributes</h4>
 <p>Many of these aesthetics function as both aesthetic mappings but also attributes. This is something to watch out for as it’s a common mistake. To declare an attribute, determining how something looks (e.g. changing the alpha of every point, not mapping to a variable) it should be defined as part of the geom and not in the <code>aes()</code> function.</p>
@@ -461,11 +465,13 @@ Text on the plot or axes
              y = LengthOfStay)) +
   geom_point(colour = &quot;dark green&quot;)</code></pre>
 </div>
+<p></br></p>
 </div>
 </div>
 <div id="section-modifying-aesthetics" class="section level3">
 <h3>Modifying Aesthetics</h3>
 <p>While we now know how to map data to aesthetics, it may still be necessary to make further modifications. For instance, if there is a lot of overlapping data points, the chosen aesthetic may hide valuable insights. It’s also important to remember that each of the aesthetics is a scale and may need to be fine tuned, like changing the limits of an axis to start at 0. As each of the modifications will impact a particular geometry layer, these modifications are called as part of that layer (i.e. <code>geom_&lt;type&gt;</code>) and not within the <code>aes()</code> function.</p>
+<p></br></p>
 <div id="section-positions" class="section level4">
 <h4>Positions</h4>
 <p>It’s quite common to adjust position, this is how you can account for overlapping data. The default position is “identity” which means that it takes the value exactly as it is in the data to position within the plot. There are a number of other options available though:</p>
@@ -539,6 +545,7 @@ Stacks bars and standardises each stack to have constant height
 </tr>
 </tbody>
 </table>
+<p></br></p>
 <p>These functions are passed to the <code>position</code> argument within a geometry layer function. If we take the first example and add a jitter to the points, it would look like this:</p>
 <pre class="r"><code>borders_data_plot %&gt;%
   ggplot(aes(x = ageonadmission, 
@@ -602,6 +609,7 @@ Stacks bars and standardises each stack to have constant height
   geom_point(position = position_jitterdodge(),
              alpha = 0.5)</code></pre>
 </div>
+<p></br></p>
 </div>
 <div id="section-scale" class="section level4">
 <h4>Scale</h4>
@@ -809,6 +817,7 @@ Scales for radius
 </tr>
 </tbody>
 </table>
+<p></br></p>
 <p>To apply these functions, they are added on to the rest of the code with <code>+</code>. So, taking the previous example, we can add an axis name like so:</p>
 <pre class="r"><code>borders_data_plot %&gt;%
   ggplot(aes(x = ageonadmission, 
@@ -953,6 +962,7 @@ Scales for radius
 <li><strong>Never</strong> misrepresent or obscure data</li>
 <li><strong>Never</strong> confuse viewers with complexity</li>
 </ul>
+<p></br></p>
 <div id="section-knowledge-check" class="section level4">
 <h4>Knowledge Check</h4>
 <p><div class="panel-heading tutorial-quiz-title"><span data-i18n="text.quiz">Quiz</span></div></p>
@@ -1087,6 +1097,7 @@ Aiding in the visualisation of patterns where overplotting is an issue.
 </tr>
 </tbody>
 </table>
+<p></br></p>
 <p>With the layered approach, we can add multiple geoms to the same plot, just like another layer. If we remember back to the section on aesthetics, we can define the mappings within the geom layer which will allow us to use different data mappings for each geom. We’ll continue with defining <code>aes()</code> as part of the <code>ggplot()</code> call though. Let’s see what 2 geoms will allow us to do:</p>
 <pre class="r"><code>ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
   geom_point(position = position_jitter(), alpha = 0.5) + 
@@ -1298,6 +1309,7 @@ Rect
 </tr>
 </tbody>
 </table>
+<p></br></p>
 <p>These functions then map to one of these arguments. There are 3 types with an extra function to blank out objects:</p>
 <table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
 <thead>
@@ -1344,6 +1356,7 @@ Arguments
 </tr>
 </tbody>
 </table>
+<p></br></p>
 <p>Let’s take our histogram from the section on geoms and make some theme changes. Look over the code and see if you can work out what will happen then run it. After, feel free to make changes and play around with the code to learn more.</p>
 <div class="tutorial-exercise" data-label="theme1" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>borders_data_plot %&gt;%
@@ -1361,6 +1374,7 @@ Arguments
         panel.grid.major.y = element_line(colour = &quot;light grey&quot;))</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 <p>Now, over to you. Let’s take the line graph from the geom section and apply some theme changes:</p>
 <ol style="list-style-type: decimal">
 <li>Every plot should have a title, let’s add one using the helper function, calling it “Childhood Immunisation Uptake in Scotland”. Give it the colour “#3A3776” and make it bold.</li>
@@ -1393,6 +1407,7 @@ Arguments
         legend.background = element_rect(colour = &quot;#88478B&quot;),
         legend.position = c(.9, .2))</code></pre>
 </div>
+<p></br></p>
 <div id="section-theme-object" class="section level3">
 <h3>Theme Object</h3>
 <p>We’ve just seen how to customise every part of the plot. If we’re going to be using multiple plots in the same publication or presentation though, it’ll be better to have visual consistency across them all. Creating a theme from scratch can be a detailed process that would be better to not have to repeat for each plot. This is where a theme layer object can be used. You can then add further customisation that’s not included in the theme object if necessary.</p>
@@ -1419,6 +1434,7 @@ phs_theme_hist &lt;- theme(plot.title = element_text(colour = &quot;#3A3776&quot
 hosp_admissions + phs_theme_hist</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 <p>Back over to you. Let’s take the line graph from before and create a theme object. The code created from before is provided, and assigned to <code>immunisation_uptake_plot</code>.</p>
 <ol style="list-style-type: decimal">
 <li>Create a theme object called <code>phs_theme_line</code> and include all the theme customisation from the line graph.</li>
@@ -1459,6 +1475,7 @@ phs_theme_line &lt;- theme(plot.title = element_text(colour = &quot;#3A3776&quot
         
 immunisation_uptake_plot + phs_theme_line + theme(legend.position = c(.9, .2))</code></pre>
 </div>
+<p></br></p>
 <div id="section-built-in-external-themes" class="section level4">
 <h4>Built-In &amp; External Themes</h4>
 <p>There are a number of built-in themes to make our lives easier, these all have the format <code>theme_&lt;name&gt;()</code>. The default theme is <code>theme_grey()</code>. The aim of this theme is to have little visual impact, providing something that fits with the flow of a publication. These are all the in-built options available:</p>
@@ -1704,21 +1721,21 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "intro-quiz-1", 
     question = structure("Let&#39;s get started. Which of the following are exploratory plots typically NOT?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_ae96b8", 
+    "character")), answers = list(structure(list(id = "lnr_ans_99f0c59", 
         option = "Pretty", value = "Pretty", label = structure("Pretty", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b8ab6a4", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_25100e8", 
         option = "Meant for a specialist audience", value = "Meant for a specialist audience", 
         label = structure("Meant for a specialist audience", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_36e0f6d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_750f69b", 
         option = "Data-heavy", value = "Data-heavy", label = structure("Data-heavy", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_31d7872", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3145fbc", 
         option = "Rough first drafts", value = "Rough first drafts", 
         label = structure("Rough first drafts", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4afdf79", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7f07a7f", 
         option = "Part of our data science toolkit as graphical data analysis", 
         value = "Part of our data science toolkit as graphical data analysis", 
         label = structure("Part of our data science toolkit as graphical data analysis", html = TRUE, class = c("html", 
@@ -1732,21 +1749,21 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nLet&#39;s get started. Which of the following are exploratory plots typically NOT?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 958298714.553757, options = list()), class = c("learnr_radio", 
+    seed = 1244516615.92048, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "datasaurus-quiz-1", 
     question = structure("What are the common features across these sets of data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_e792a02", 
+    "character")), answers = list(structure(list(id = "lnr_ans_32560a1", 
         option = "Mean", value = "Mean", label = structure("Mean", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d85aed6", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ca7eb4d", 
         option = "Standard Deviation", value = "Standard Deviation", 
         label = structure("Standard Deviation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_fa556fb", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8dc41f7", 
         option = "Correlation", value = "Correlation", label = structure("Correlation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1758,7 +1775,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "datasaurus-quiz-1-answer", question = "datasaurus-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat are the common features across these sets of data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 362647573.831129, options = list()), class = c("learnr_checkbox", 
+    seed = 961923688.052069, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
@@ -1924,23 +1941,23 @@ learnr:::store_exercise_cache("aesthetics-plot", list(setup = "borders_data_plot
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetic-quiz-1", 
     question = structure("Which aesthetics are only applicable to categorical data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_78edf7a", 
+    "character")), answers = list(structure(list(id = "lnr_ans_f3c6a42", 
         option = "`colour` and `fill`", value = "`colour` and `fill`", 
         label = structure("<code>colour<\u002fcode> and <code>fill<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ca224f2", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4a82dd1", 
         option = "`alpha` and `size`", value = "`alpha` and `size`", 
         label = structure("<code>alpha<\u002fcode> and <code>size<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_691c54c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e9181b2", 
         option = "`label` and `shape`", value = "`label` and `shape`", 
         label = structure("<code>label<\u002fcode> and <code>shape<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f5a994c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_de1d9ef", 
         option = "`alpha` and `label`", value = "`alpha` and `label`", 
         label = structure("<code>alpha<\u002fcode> and <code>label<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_db622b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1cd91d0", 
         option = "`x` and `y`", value = "`x` and `y`", label = structure("<code>x<\u002fcode> and <code>y<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1952,7 +1969,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetic-quiz-1-answer", question = "aesthetic-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich aesthetics are only applicable to categorical data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 11958548.4944314, options = list()), class = c("learnr_radio", 
+    seed = 1640181405.23623, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -2102,16 +2119,16 @@ learnr:::store_exercise_cache("aesthetics3", list(setup = "borders_data_plot <- 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetics-quiz-1", 
     question = structure("What is the command that controls the opacity of geoms?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_46b7f2c", 
+    "character")), answers = list(structure(list(id = "lnr_ans_8bf69e7", 
         option = "Alpha", value = "Alpha", label = structure("Alpha", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d253d3d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7e071d5", 
         option = "Beta", value = "Beta", label = structure("Beta", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_185caf", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f81d5f2", 
         option = "Delta", value = "Delta", label = structure("Delta", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_452b789", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_36c358c", 
         option = "Gamma", value = "Gamma", label = structure("Gamma", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2123,26 +2140,26 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetics-quiz-1-answer", question = "aesthetics-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the command that controls the opacity of geoms?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 628677406.207249, options = list()), class = c("learnr_radio", 
+    seed = 1602362685.25384, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "aesthetics-quiz-2", 
     question = structure("What of these options can be used to account for overlapping data points (select 2)?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_39140f2", 
+    "character")), answers = list(structure(list(id = "lnr_ans_87a8109", 
         option = "`position_dodge()`", value = "`position_dodge()`", 
         label = structure("<code>position_dodge()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9c4ea42", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cb88432", 
         option = "`position_jitter()`", value = "`position_jitter()`", 
         label = structure("<code>position_jitter()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_81711c8", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7dc533d", 
         option = "`position_move()`", value = "`position_move()`", 
         label = structure("<code>position_move()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9092f3b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_74b7b11", 
         option = "`position_dance()`", value = "`position_dance()`", 
         label = structure("<code>position_dance()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
@@ -2155,23 +2172,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "aesthetics-quiz-2-answer", question = "aesthetics-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat of these options can be used to account for overlapping data points (select 2)?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 2059424562.54101, options = list()), class = c("learnr_checkbox", 
+    seed = 1926947697.60269, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetics-quiz-3", 
     question = structure("What could we use to add another dimension to our visualisation if the data item is continuous?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_39a27a7", 
+    "character")), answers = list(structure(list(id = "lnr_ans_dd28475", 
         option = "Fill", value = "Fill", label = structure("Fill", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f0e0e04", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c766e46", 
         option = "Shape", value = "Shape", label = structure("Shape", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7cc2585", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c744622", 
         option = "Line Type", value = "Line Type", label = structure("Line Type", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4b48373", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f95fa82", 
         option = "Texture", value = "Texture", label = structure("Texture", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2183,7 +2200,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetics-quiz-3-answer", question = "aesthetics-quiz-3"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat could we use to add another dimension to our visualisation if the data item is continuous?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1308187259.89083, options = list()), class = c("learnr_radio", 
+    seed = 855872978.601453, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
