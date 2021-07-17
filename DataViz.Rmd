@@ -849,7 +849,7 @@ Connecting observations in order of the variable on the x-axis, line graphs are 
 3. Make it a line graph.
 4. Immediately, we can notice what looks to a big difference in uptake between the immunisations. However, if we look at the limits on the y-axis, this could mislead us. So, let's change the limits. We want it to start at 0 but what would the upper limit be? While we're at it, let's change the name so it shows "Uptake (%)".
 5. The x-axis only has tick labels for a few years but we have 14 in our data. The function has tried to minimise clutter but let's show 7 breaks which will be easier for to read. We can also update the name at the same time, call the x-axis "Year".
-6. Finally, the legend's title is lower case and doesn't look very presentable. Let's make it proper case (*hint: the lenend is describing a discrete colour object*).
+6. Finally, the legend's title is lower case and doesn't look very presentable. Let's make it proper case (*hint: the legend is describing a discrete colour object*).
 
 ``` {r geom3, exercise=TRUE}
 sp_child_immunisations_data
@@ -871,7 +871,253 @@ grade_code()
 
 ## Themes
 
-Stuff about themes
+It's time to make things pretty, this is last step in creating publication ready visualisations. The themes layer control the non-data related ink on the plot, the visual elements that are not directly part of the data. 
+
+Every element can be individually changed. For instance, a typical plot would have text elements for the plot title, subtitle, caption, axis titles, legend titles, etc. Lines refer to all tick marks, grid lines, axis lines, etc. and the rectangles are typically the spaces/boxes each of the other elements live in. Each of these elements has its own unique name and we can access each of these directly through the `theme()` function. It's not necessary to alter each individually though, each function inherits in a hierarchy (e.g., `text` -> `axis.title` -> `axis.title.x` -> `axis.title.x.bottom`). A few common options are shown in the table below:
+
+```{r, echo=FALSE}
+theme_funcs_table <- data.frame(
+  "Type" = c("Text",
+             "Text",
+             "Text",
+             "Text",
+             "Text",
+             "Text",
+             "Line",
+             "Line",
+             "Line",
+             "Line",
+             "Line",
+             "Line",
+             "Rect",
+             "Rect",
+             "Rect"
+             ),
+  "Top Level Function" = c("**`axis.title()`**",
+                           "**`axis.title()`**",
+                           "**`axis.text()`**",
+                           "**`axis.text()`**",
+                           "**`legend.text()`**",
+                           "**`plot.title()`**",
+                           "**`axis.ticks()`**",
+                           "**`axis.ticks()`**",
+                           "**`axis.line()`**",
+                           "**`axis.line()`**",
+                           "**`panel.grid()`**",
+                           "**`panel.grid()`**",
+                           "**`legend.background()`**",
+                           "**`panel.background()`**",
+                           "**`plot.background()`**"
+                           ),
+  "2nd Level Function" = c("**`axis.title.x()`**",
+                           "**`axis.title.y()`**",
+                           "**`axis.text.x()`**",
+                           "**`axis.text.y()`**",
+                           "",
+                           "",
+                           "**`axis.ticks.x()`**",
+                           "**`axis.ticks.y()`**",
+                           "**`axis.line.x()`**",
+                           "**`axis.line.y()`**",
+                           "**`panel.grid.major()`**",
+                           "**`panel.grid.minor()`**",
+                           "",
+                           "",
+                           ""
+                           ),
+  check.names = FALSE
+)
+
+kableExtra::kbl(theme_funcs_table) %>%
+  kable_paper(full_width = FALSE) %>%
+  collapse_rows(columns = 1:2)
+```
+
+
+These functions then map to one of these arguments. There are 3 types with an extra function to blank out objects:
+
+```{r, echo=FALSE}
+theme_elems_table <- data.frame(
+  "Function" = c("**`element_text()`**",
+                 "**`element_line()`**",
+                 "**`element_rect()`**",
+                 "***`element_blank()`***"
+                 ),
+  "Arguments" = c("`family` `face` `colour` `size` `hjust` `vjust` `angle` `lineheight` `margin` `debug`",
+                  "`colour` `size` `linetype` `lineend` `arrow`",
+                  "`fill` `colour` `size` `linetype`",
+                  ""
+                  )
+)
+
+kableExtra::kbl(theme_elems_table) %>%
+  kable_paper(full_width = FALSE)
+```
+
+Let's take our histogram from the section on geoms and make some theme changes. Look over the code and see if you can work out what will happen then run it. After, feel free to make changes and play around with the code to learn more.
+
+``` {r theme1, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) +
+  geom_histogram(binwidth = 10, 
+                 position = position_dodge()) +
+  scale_fill_discrete(type = c("#88478B", "#3A3776")) +
+  xlab("Age") +
+  ylab("Count") +
+  ggtitle("Age Distribution of Borders Hospital Admissions", subtitle = "") +
+  theme(plot.title = element_text(colour = "#3A3776", family = "sans"),
+        axis.title = element_text(colour = "#88478B"),
+        legend.title = element_text(colour = "#88478B"),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"))
+```
+
+Now, over to you. Let's take the line graph from the geom section and apply some theme changes:
+
+1. Every plot should have a title, let's add one using the helper function, calling it "Childhood Immunisation Uptake in Scotland". Give it the colour "#3A3776" and make it bold.
+2. This isn't in themes but change the colour of the lines to be "#76B843" (for 6 in 1) and "#1A8DC1" (for MMR). We're starting to give this a PHS brand makeover.
+3. Let's remove the grey background too but the white gridlines will need to be changed to help maintain readability. Make the major gridline's colour "grey90", and minor gridline's colour "grey95".
+4. It's looking a bit plain so add a border colour of "#88478B" to the legend.
+5. Since the plot is quite bare, why don't we overlay the legend on the plot. A position of 0.9, 0.2 should make it in the bottom right.
+
+``` {r theme2, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation")
+```
+
+```{r theme2-solution}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"),
+        legend.position = c(.9, .2))
+```
+
+```{r theme2-check}
+grade_code()
+```
+
+
+### Theme Object
+
+We've just seen how to customise every part of the plot. If we're going to be using multiple plots in the same publication or presentation though, it'll be better to have visual consistency across them all. Creating a theme from scratch can be a detailed process that would be better to not have to repeat for each plot. This is where a theme layer object can be used. You can then add further customisation that's not included in the theme object if necessary.
+
+As an example, here's the theme layer object for the histogram created before.
+
+``` {r theme3, exercise=TRUE, exercise.setup='prepare-foundations-plot', exercise.lines=20}
+# Foundation plot assigned to hosp_admission
+hosp_admissions <- borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) +
+  geom_histogram(binwidth = 10, 
+                 position = position_dodge()) +
+  scale_fill_discrete(type = c("#88478B", "#3A3776")) +
+  xlab("Age") +
+  ylab("Count") +
+  ggtitle("Age Distribution of Borders Hospital Admissions", subtitle = "")
+
+# Theme object assigned to phs_theme_hist
+phs_theme_hist <- theme(plot.title = element_text(colour = "#3A3776", family = "sans"),
+        axis.title = element_text(colour = "#88478B"),
+        legend.title = element_text(colour = "#88478B"),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"))
+
+# Adding theme object to plot and displaying output
+hosp_admissions + phs_theme_hist
+ 
+```
+
+Back over to you. Let's take the line graph from before and create a theme object. The code created from before is provided, and assigned to `immunisation_uptake_plot`.
+
+1. Create a theme object called `phs_theme_line` and include all the theme customisation from the line graph.
+2. Not all line graphs will be able to have the legend overlaid in the same way. So, let's take that out of the object.
+3. Output `immunisation_uptake_plot` and add the theme object, `phs_theme_line`.
+4. Add back in the customisation for overlaying the plot. The position was 0.9, 0.2.
+
+```{r theme4, exercise=TRUE}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"),
+        legend.position = c(.9, .2))
+```
+
+``` {r theme4-solution}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland")
+
+phs_theme_line <- theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"))
+        
+immunisation_uptake_plot + phs_theme_line + theme(legend.position = c(.9, .2))
+```
+
+``` {r theme4-check}
+grade_code()
+```
+
+
+#### Built-In & External Themes
+
+There are a number of built-in themes to make our lives easier, these all have the format `theme_<name>()`. The default theme is `theme_grey()`. The aim of this theme is to have little visual impact, providing something that fits with the flow of a publication. These are all the in-built options available:
+
+```{r, echo=FALSE}
+theme_builtin_table <- data.frame(
+  "Function" = c("**`theme_grey()`**",
+                 "**`theme_bw()`**",
+                 "**`theme_linedraw()`**",
+                 "**`theme_light()`**",
+                 "**`theme_dark()`**",
+                 "**`theme_minimal()`**",
+                 "**`theme_classic()`**",
+                 "**`theme_void()`**"
+                 ),
+  "Description" = c("The *default* theme with a light grey background and white gridlines.",
+                    "A variation on `theme_grey()` that uses a white background and thin grey gridlines.",
+                    "A theme with only black lines of various widths on white backgrounds, suggesting a line drawing.",
+                    "Similar to `theme_linedraw()` but with light grey lines and axes, focussing attention on the data.",
+                    "Like `theme_light()` with a dark background.",
+                    "A minimalistic theme with no background annotations.",
+                    "A classic-looking theme, with x and y axis lines and no gridlines.",
+                    "A completely empty theme."
+                  )
+)
+
+kableExtra::kbl(theme_builtin_table) %>%
+  kable_paper(full_width = FALSE)
+```
+
+</br>
+
+Outisde of the built-in themes, there are also packages with additional themes. The [`ggthemes`](https://mran.microsoft.com/snapshot/2017-02-04/web/packages/ggthemes/vignettes/ggthemes.html) package for instance has many themes to simplify the process of creating visually appealing plots. *PHS is also in the process of creating its own themes package.*
 
 
 ## Interactivity
