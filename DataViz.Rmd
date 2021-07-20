@@ -696,7 +696,7 @@ grade_code()
 
 While there is a certain amount of creative know-how, it's also important to follow guidance that has been created. This will help form the most suitable presentation of data that is accessible, aligns with outputs produced across the organisation, and meets the needs and expectations of your audience.
 
-Forms follows function - the best visualisations serve a purpose. This depends on your audience; you may be confirming your own suspicions, starting to analyse the data you have, or you may be trying to inform a lay reader of specific results. The priority is to always generate accurate and efficient representations of the data, otherwise it's rubbish. After that, we can be concerned about creating something that is visually interesting and appealing.
+Forms follows function - the best visualisations serve a purpose. This depends on your audience; you may be confirming your own suspicions, starting to analyse the data you have, or you may be trying to inform a lay reader of specific results. The priority is to always generate accurate and efficient representations of the data. After that, we can be concerned about creating something that is visually interesting and appealing.
 
 **Guiding Principles**
 
