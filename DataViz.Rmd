@@ -1,0 +1,1568 @@
+---
+title: "Data Visualisation in R"
+output: 
+  learnr::tutorial:
+    css: "css/style.css"
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+# Author: Russell McCreath
+# Original Date: June 2021
+
+library(learnr)
+library(gradethis)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(datasauRus)
+library(magrittr)
+library(tidyr)
+library(kableExtra)
+library(plotly)
+
+knitr::opts_chunk$set(echo = FALSE)
+
+tutorial_options(
+  exercise.checker = gradethis::grade_learnr
+)
+
+borders_data <- read_csv("www/data/BORDERS (inc Age).csv")
+sp_child_immunisations_data <- read_csv("www/data/scotpho_childhood_immunisations.csv")
+
+```
+
+```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
+knitr::include_graphics("images/phs-logo.png")
+```
+
+
+## Introduction
+
+Welcome to an Introduction to Data Visualisation in R. This course is designed as a self-led introduction for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code (building your own visualisations). This course focusses on the use of the package `ggplot2` but will introduce some concepts from `plotly`.
+
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li><strong>Prerequisite:</strong> [Introduction to R](https://scotland.shinyapps.io/phs-learnr-intro/)</li>
+    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
+### What is Data Visualisation?
+
+Data visualisation is an essential skill across the spectrum of data science. It is a form of graphical data analysis, which emphasises the accurate representation and interpretation of data. On the other hand, data viz also relies on good design choices, not only to make the outputs attractive but also aiding the understanding of the results. 
+
+There are two main types of data viz:
+
+* **Exploratory** - easily generated, data-heavy, intended for a small specialist audience. This use case here is for graphical data analysis.
+* **Explanatory** - labour intensive, data specific, and intended for a broad audience. This use case could be in publications or presentations.
+
+```{r intro-quiz}
+quiz(
+  question("Let's get started. Which of the following are exploratory plots typically NOT?",
+    answer("Pretty", correct = TRUE),
+    answer("Meant for a specialist audience"),
+    answer("Data-heavy"),
+    answer("Rough first drafts"),
+    answer("Part of our data science toolkit as graphical data analysis"),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+
+### Ineffective Data Visualisation
+
+Visualising data is an art as much as a science. There are a number of issues to be aware of, including presenting multi-dimensional data, human perception and accessibility, and just generally misleading presentations. 
+
+Let's take these visualisations as an example, what do you think is common across all of them?
+
+```{r datasauRus-plot, echo=FALSE}
+ggplot(datasaurus_dozen, aes(x=x, y=y))+
+    geom_point(colour = "#433683", alpha = 0.5) +
+    theme_void() +
+    theme(legend.position = "none", aspect.ratio = 1) +
+    facet_wrap(~dataset, ncol=5)
+```
+
+```{r datasaurus-quiz}
+quiz(
+  question("What are the common features across these sets of data?",
+    answer("Mean", correct = TRUE),
+    answer("Standard Deviation", correct = TRUE),
+    answer("Correlation", correct = TRUE),
+    correct = "That's right, summary statistics for all the datasets are the same.",
+    incorrect = "Is that all?",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+
+### Effective Data Visualisation
+
+The previous visualisations are a *fun* variant on Anscombe's Quartet, called the [The Datasaurus Dozen](https://www.autodesk.com/research/publications/same-stats-different-graphs). The summary statistics are shown below:
+
+```{r datasaurus-stats, echo=FALSE, rows.print=14}
+datasaurus_dozen %>% 
+    group_by(dataset) %>% 
+    summarize(
+      mean_x    = mean(x),
+      mean_y    = mean(y),
+      std_dev_x = sd(x),
+      std_dev_y = sd(y),
+      corr_x_y  = cor(x, y)
+    ) %>%
+  mutate(across(2:6, round, 3))
+```
+
+</br>
+
+The key takeaway should be to model your data, visualise to understand your data attributes. However, there are also other considerations for how plot's should be:
+
+* **Conceptually** correct - data is represented visually in a way that makes sense.
+* **Technically** correct - details of the data representation are complete and accurate.
+* **Aesthetically** correct - data is represented in a visually pleasing way.
+
+
+## Foundations
+
+We're going to use the package `ggplot2` for most of this course. So, let's start by building a plot to see what all of this is about. We can then take the code apart bit by bit to understand what's going on (and what's possible). Feel free to adjust the code and see how it affects the output.
+
+```{r prepare-foundations-plot}
+borders_data_plot <- borders_data %>%
+  filter(Sex %in% c("Male", "Female"),
+         ageonadmission >= 0) %>% 
+  drop_na(Sex)
+```
+
+```{r foundations-plot, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+library(ggplot2)
+
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point(alpha = 0.5) +
+  theme_minimal() +
+  ylab("Length of Stay (days)") +
+  xlab("Age on Admission (years)") +
+  ggtitle("Length of Stay by Age on Admission")
+
+```
+
+</br>
+
+There we have it, in just a few lines of code, we've created a plot. You may even have already worked out what some of the code does. Did you notice that each section is added on using a `+`? We're now going to take a step back to understand how all of this comes together. 
+
+It comes from an underlying grammar of graphics, a framework which follows a layered approach to describe and construct visualisations or graphics in a structured manner. There are 7 grammatical elements:
+
+```{r, echo=FALSE}
+graphics_grammar_table <- data.frame(
+  "Element" = c("**Data**", 
+                "**Aesthetics**", 
+                "**Geometries**", 
+                "**Themes**", 
+                "**Statistics**", 
+                "**Coordinates**",
+                "**Facets**"),
+  "Description" = c("The data-set being plotted.", 
+                    "The scales/axes based on the data dimensions. Any form of encoding, including size, shape, color and so on which are useful for plotting multiple data dimensions.", 
+                    "These are popularly known as ‘geoms’. This would cover the way we would depict the data points on the visualisation. Should it be points, bars, lines and so on.", 
+                    "The additional, non-data, ink on our outputs. These add value and make things look pretty.", 
+                    "Statistical measures in the visualisation like measures of central tendency, spread, confidence intervals.", 
+                    "What kind of a coordinate system should the visualization be based on?", 
+                    "Subplots based on specific data dimensions."),
+  "Common Options" = c("", 
+                       "`x-axis` `y-axis` `colour` `fill` `size` `labels` `alpha` `shape` `line-width` `line-type`",
+                       "`point` `line` `histogram` `bar`", "", "`binning` `smoothing` `descriptive` `inferential`",
+                       "`cartesian` `fixed` `polar` `limits`", 
+                       "`columns` `rows`"),
+  check.names = FALSE
+)
+
+kableExtra::kbl(graphics_grammar_table) %>%
+  kable_paper(full_width = FALSE)
+
+```
+
+</br>
+
+<div class="viz-layers">
+```{r viz-layers, echo=FALSE, fig.align='center', out.width="90%"}
+knitr::include_graphics("images/data-viz/layers.png")
+```
+</div>
+
+This shows how the layers of the grammar of graphics build up. It's also important to know that while data is required, the top layers become optional (not every plot needs additional statistical measures). The use of these layers will depend on the use of the visualisation, the audience, and even the medium it's being shared on (i.e., web, pdf, image). You may also see similar representations with slightly different names or ordering.
+
+Using only the first 4 layers (data, aesthetics, geometries, and themes), we'll be able to create publication-quality plots. The final 3 layers won't be explored in this course.
+
+</br>
+
+
+## Data
+
+This is going to be a short section but important nonetheless. The basis for any visualisation is the data, however it's rarely useful to look at the numbers and characters that make up a dataset. Some visualisation is required to show relationships. 
+
+As mentioned, we're going to mainly use the `ggplot2` package in this course. There are a few reasons for this but it breaks down to being able to create relatively complex and aesthetically pleasing plots using syntax that is intuitive and comparatively easy to remember. However, a requirement for using the package effectively is that the data must be [tidy data](https://vita.had.co.nz/papers/tidy-data.pdf). *This can be summarised as observations in rows and variables as columns*. Have a look at the [`tidyr`](https://tidyr.tidyverse.org/) package to explore how to make data tidy in the Tidyverse.
+
+The dataset used in the last exercise is the borders training dataset and will continue popping up throughout this course. Have a look at its structure below using `glimpse()` (a tidy-output of `str()`).
+
+```{r data-view, exercise=TRUE}
+___(borders_data)
+
+```
+
+```{r data-view-hint-1}
+glimpse(borders_data)
+
+```
+
+Let's build another plot too. Run the code below and feel free to play around with it. We'll learn how it all comes together in the next chapters. Just remember we're using that tidy data as our solid foundation which is piped in as the first argument to `ggplot()`, the following layers are then added on using that `+` operator:
+
+```{r data-plot, exercise=TRUE, warning=FALSE}
+borders_data %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission)) +
+  geom_boxplot(outlier.colour = "magenta4") +
+  xlab("Specialty Grouping") +
+  ylab("Age on Admission (years)") +
+  ggtitle("Boxplot of Patient Age on Admission by Specialty Grouping")
+```
+
+
+## Aesthetics
+
+Aesthetic mappings describe how properties of the data connect with features of the graph, such as distance along an axis, size of points, or colour. Aesthetic mappings are how dimensions of the data are visualised, commonly through the `x` and `y` axes, more dimensions could be added by including colour, different types of line or shapes, etc. The `aes()` function connects data with what we see on the graph by defining aesthetic mappings and will be one of the most often used functions when you're creating data visualisations. 
+
+The `aes()` function is passed after the data to the `ggplot()` function. However, it is often used as the first argument of the next layer, a geometry function, (e.g. `geom_line()`). When passed on the geometry layer, different mappings can be used across different geometries (overlaying a line on a bar chart for instance). We will keep `aes()` alongside our data inside the `ggplot()` function which means it'll be used as the default mapping for all layers of the output. 
+
+Let's look at our first example:
+
+1. Our data, `borders_data_plot` is piped into the `ggplot()` function. 
+2. Aesthetic mappings are added to the `ggplot()` function, defining our `x` and `y` variable mappings. 
+3. A 3rd dimension is visualised by mapping colour to another variable.
+4. The geometry layer (a scatter plot here) is added on (using `+`) to create an output.
+
+``` {r aesthetics-plot, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point()
+```
+
+</br>
+
+
+### Mappings
+
+In addition to the `x`, `y`, and colour aesthetics, there are a number of other options. These are dictated somewhat by the choice of geometry used but allow the visuals to be improved and further dimensions to be added to the plot. These are some typical visible aesthetics:
+
+```{r, echo=FALSE}
+aesthetic_map_table <- data.frame(
+  "Aesthetic" = c("**`x`**", 
+                  "**`y`**", 
+                  "**`colour`**", 
+                  "**`fill`**", 
+                  "**`size`**", 
+                  "**`alpha`**", 
+                  "**`linetype`**", 
+                  "**`shape`**", 
+                  "**`labels`**"),
+  "Description" = c("The `x` axis position", 
+                    "The `y` axis position", 
+                    "Colour of points, outlines of other geoms", 
+                    "The colour of the fill", 
+                    "Area or radius of points, thickness of lines", 
+                    "The level of transparency (out of 1)", 
+                    "The pattern used for drawing lines (solid, dashed, dotdash, etc.)", 
+                    "The shape of points, some of which allow a `fill` to be specified", 
+                    "Text on the plot or axes")
+)
+
+kableExtra::kbl(aesthetic_map_table) %>%
+  kable_paper(full_width = FALSE)
+
+```
+
+</br>
+
+We can use some of these aesthetic mappings to refer to continuous or categorical data. However, some are restricted to categorical. Can you tell which of these pairs would only suit categorical data?
+
+```{r aesthetic-quiz}
+quiz(
+  question("Which aesthetics are only applicable to categorical data?",
+    answer("`colour` and `fill`"),
+    answer("`alpha` and `size`"),
+    answer("`label` and `shape`", correct = TRUE),
+    answer("`alpha` and `label`"),
+    answer("`x` and `y`"),
+    incorrect = "Categorical data has a finite set of options which can be divided into groups/labelled. Have another go!",
+    correct = "Brilliant! Continuous data works on a scale and should be represented by a smooth spectrum. Categorical data, however, needs some defined, finite, property.",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+</br>
+
+#### Mappings vs. Attributes
+
+Many of these aesthetics function as both aesthetic mappings but also attributes. This is something to watch out for as it's a common mistake. To declare an attribute, determining how something looks (e.g. changing the alpha of every point, not mapping to a variable) it should be defined as part of the geom and not in the `aes()` function.
+
+Let's take an example. Using the same code as above, change the colour of points to be "dark green" for all points. Use the hint button if you need some guidance.
+
+``` {r aesthetics1, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point()
+```
+
+``` {r aesthetics1-hint-1}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay)) +
+  geom_point(colour = ___)
+```
+
+``` {r aesthetics1-solution}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay)) +
+  geom_point(colour = "dark green")
+```
+
+``` {r aesthetics1-check}
+grade_code()
+```
+
+</br>
+
+### Modifying Aesthetics
+
+While we now know how to map data to aesthetics, it may still be necessary to make further modifications. For instance, if there is a lot of overlapping data points, the chosen aesthetic may hide valuable insights. It's also important to remember that each of the aesthetics is a scale and may need to be fine tuned, like changing the limits of an axis to start at 0. As each of the modifications will impact a particular geometry layer, these modifications are called as part of that layer (i.e. `geom_<type>`) and not within the `aes()` function.
+
+</br>
+
+#### Positions
+
+It's quite common to adjust position, this is how you can account for overlapping data. The default position is "identity" which means that it takes the value exactly as it is in the data to position within the plot. There are a number of other options available though:
+
+```{r, echo=FALSE}
+position_mods_table <- data.frame(
+  "Function" = c("**`position_dodge()`** **`position_dodge2()`**", 
+                 "**`position_identity()`**", 
+                 "**`position_jitter()`**", 
+                 "**`position_jitterdodge()`**", 
+                 "**`position_nudge()`**", 
+                 "**`position_stack()`**", 
+                 "**`position_fill()`**"),
+  "Description" = c("Dodge overlapping objects side-to-side, preserving the vertical position. The `position_dodge()` version requires a grouping in the data, `position_dodge2()` doesn't", 
+                    "No adjustment to position *(default)*", 
+                    "A pseudo-randomisation of points to seperate them", 
+                    "Simultaneously dodge and jitter", 
+                    "Nudge points a fixed distance", 
+                    "Stacks bars on top of each other", 
+                    "Stacks bars and standardises each stack to have constant height")
+)
+
+kableExtra::kbl(position_mods_table) %>%
+  kable_paper(full_width = FALSE)
+
+```
+
+</br>
+
+These functions are passed to the `position` argument within a geometry layer function. If we take the first example and add a jitter to the points, it would look like this:
+
+``` {r, eval=FALSE, echo=TRUE}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point(position = position_jitter())
+```
+
+Let's look at our data set from the first example and compare specialty grouping (`spec_1`) against `LengthOfStay` (run the code chunk below to see the plot). We can see that we have a lot of overlapping data points so it's difficult to really gather any insights from this. Let's do a few things:
+
+1. Add a new dimension to map `Sex` to colour.
+2. Apply both jitter and dodge.
+3. Add an alpha attribute and set the value to '0.5'.
+
+``` {r aesthetics2, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay)) +
+  geom_point()
+```
+
+``` {r aesthetics2-hint-1}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             ___ = ___)) +
+  geom_point()
+```
+
+``` {r aesthetics2-hint-2}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point()
+```
+
+``` {r aesthetics2-hint-3}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point(___ = ___)
+```
+
+``` {r aesthetics2-hint-4}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point(position = position_jitterdodge())
+```
+
+``` {r aesthetics2-hint-5}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point(position = position_jitterdodge(),
+             ___ = ___)
+```
+
+``` {r aesthetics2-solution}
+borders_data_plot %>%
+  ggplot(aes(x = spec_1, 
+             y = LengthOfStay,
+             colour = Sex)) +
+  geom_point(position = position_jitterdodge(),
+             alpha = 0.5)
+```
+
+``` {r aesthetics2-check}
+grade_code()
+```
+
+</br>
+
+#### Scale
+
+Scales are how aesthetics are set up and control the visual properties of the data values. We can access all the scales with the `scale_<name>_<data_type>` functions, which is immediately followed by which scale we want to modify. The third part of the function name is to match the type of data (e.g. discrete or continuous). Each of these functions will then have further arguments to alter the appearance of the output. There are also 'helper' type functions for common adjustments to labels and limits. The commonly used options are shown below:
+
+```{r, echo=FALSE}
+scale_mods_table <- data.frame(
+  "Type" = c("Helper",
+             "Helper",
+             "Helper",
+             "Helper",
+             "Helper",
+             "Axes",
+             "Axes",
+             "Colour & Fill",
+             "Colour & Fill",
+             "Shape",
+             "Shape",
+             "Line",
+             "Line",
+             "Size",
+             "Size"),
+  "Function" = c("**`labs()`**",
+                 "**`xlab()`** **`ylab()`**",
+                 "**`ggtitle()`**",
+                 "**`lims()`**",
+                 "**`xlim()`** **`ylim()`**",
+                 "**`scale_x_continuous()`** **`scale_y_continuous()`**",
+                 "**`scale_x_discrete()`** **`scale_y_discrete()`**",
+                 "**`scale_colour_continuous()`** **`scale_fill_continuous()`**",
+                 "**`scale_colour_discrete()`** **`scale_fill_discrete()`**",
+                 "**`scale_shape()`**",
+                 "**`scale_shape_manual()`**",
+                 "**`scale_linetype_binned()`**",
+                 "**`scale_linetype_discrete()`**",
+                 "**`scale_size()`**",
+                 "**`scale_radius()`**"),
+  "Description" = c("Modify any label on the plot",
+                    "Modify the label for the x or y axis",
+                    "Modify the title and subtitle for the plot",
+                    "Set scale limits",
+                    "Set scale limits for the x or y axis",
+                    "Position of scales for continuous data",
+                    "Position of scales for discrete data",
+                    "Colour and fill scales for continous data",
+                    "Colour and fill scales for discrete data",
+                    "Mapping no more than 6 discrete variables to shapes",
+                    "Manually setting the shape mappings from levels in the data to aesthetic values",
+                    "Scale for line patterns/types. Continuous values cannot be mapped to line types unless `scale_linetype_binned()` is used. *As linetypes have no inherent order, this is not advised.*",
+                    "Scale for line patterns/types",
+                    "Scales for area (commonly used for points and text)",
+                    "Scales for radius"),
+  "Arguments" = c("`...` (for any aesthetic-value pair), `title`, `subtitle`, `caption`, `alt`",
+                  "`label`",
+                  "`title` `subtitle`",
+                  "`...` (for an aesthetic-value pair)",
+                  "`...` (2 numeric values specifying the left/lower and right/upper limits, one value can be left as `NA`)",
+                  "`name` `breaks` `minor_breaks` `n.breaks` `labels` `limits` `expand` `trans` `position`",
+                  "`...` `palette` `breaks` `limit` `drop` `name` `labels` `expand` `position`",
+                  "`...` `type` (one of 'gradient', 'viridis', or a function that returns a continous colour scale)",
+                  "`...` `type` (one of a character vector or list of colour codes, or a function that returns a discrete colour/fill scale)",
+                  "`...` `palette` `breaks` `limits` `drop` `na.translate` `name` `labels`",
+                  "`...` `palette` `limits` `drop` `na.translate` `name` `labels`",
+                  "`...` `palette` `breaks` `limits` `drop` `na.translate` `name` `labels`",
+                  "`...` `palette` `breaks` `limits` `drop` `na.translate` `name` `labels`",
+                  "`name` `breaks` `labels` `limits` `range` `trans` `guide`",
+                  "`name` `breaks` `labels` `limits` `range` `trans` `guide`")
+  
+)
+
+kableExtra::kbl(scale_mods_table) %>%
+  kable_paper(full_width = FALSE) %>%
+  collapse_rows(columns = 1)
+```
+
+</br>
+
+To apply these functions, they are added on to the rest of the code with `+`. So, taking the previous example, we can add an axis name like so:
+
+```{r, eval=FALSE, echo=TRUE}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, 
+             y = LengthOfStay, 
+             colour = Sex)) +
+  geom_point(position = position_jitter()) +
+  scale_x_continuous(name = "Age on Admission (Years)")
+```
+
+There is so much in that table (and that's not everything, even the possible arguments has been trimmed down for this) but remember it's not about remembering how to do everything, it's just knowing the possibilities. Remember, references are available and you can always use `?<function>` in the R console to get the help pages up.
+
+So, let's put some of this into practice. Here, the data has been filtered to only include data relating to specialty group "H" or "J" and at Hospital Code "B120H". Let's tidy up the plot using the scale functions (not the helper functions) we now know about:
+
+1. The variable names aren't easy to read and should be updated. Let's make the x-axis "Specialty Grouping" and the y-axis "Age on Admission (Years)".
+2. It could be said that the visualisation is misleading due to the y-axis limits. Fix this by specifying the lower limit to be 0. This needs a length-2 vector (i.e. `c(x, y)`), remember the upper limit.
+3. Let's also use some PHS colours rather than the defaults. Set "Female" (the first value) to be "#76B843" and "Male" (the second value) to be "#3A3776".
+4. Finally, give the plot a title using `ggtitle()`. Let's call it "Boxplot of Age on Admission for Specialty Grouping H & J \\n in Borders General Hospital". (*The "\\n" is a special character that forces a new line, something that may be necessary in longer titles as ggplot doesn't automatically wrap the text*).
+
+
+``` {r aesthetics3, exercise=TRUE, exercise.setup='prepare-foundations-plot', warning=FALSE}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot()
+```
+
+```{r aesthetics3-hint-1}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  ___(___ = ___) +
+  ___(___ = ___)
+```
+
+```{r aesthetics3-hint-2}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)")
+```
+
+```{r aesthetics3-hint-3}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", ___ = c(___, ___))
+```
+
+```{r aesthetics3-hint-4}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA))
+```
+
+```{r aesthetics3-hint-5}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) + 
+  ___(___ = c(___, ___))
+```
+
+```{r aesthetics3-hint-6}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) + 
+  scale_colour_discrete(___ = c(___, ___))
+```
+
+```{r aesthetics3-hint-7}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) + 
+  scale_colour_discrete(type = c("#76B843", "#3A3776"))
+```
+
+```{r aesthetics3-hint-8}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() + 
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) + 
+  scale_colour_discrete(type = c("#76B843", "#3A3776")) + 
+  ___(___)
+```
+
+``` {r aesthetics3-solution}
+borders_data_plot %>%
+  filter(HospitalCode == "B120H",
+         spec_1 %in% c("H", "J")) %>%
+  ggplot(aes(x = spec_1, 
+             y = ageonadmission,
+             colour = Sex)) +
+  geom_boxplot() +
+  scale_x_discrete(name = "Specialty Grouping") +
+  scale_y_continuous(name = "Age on Admission (Years)", limits = c(0, NA)) +
+  scale_colour_discrete(type = c("#76B843", "#3A3776")) + 
+  ggtitle("Boxplot of Age on Admission for Specialty Grouping H & J \n in Borders General Hospital")
+```
+
+``` {r aesthetics3-check}
+grade_code()
+```
+
+
+### Final Thoughts & Best Practice
+
+While there is a certain amount of creative know-how, it's also important to follow guidance that has been created. This will help form the most suitable presentation of data that is accessible, aligns with outputs produced across the organisation, and meets the needs and expectations of your audience.
+
+Forms follows function - the best visualisations serve a purpose. This depends on your audience; you may be confirming your own suspicions, starting to analyse the data you have, or you may be trying to inform a lay reader of specific results. The priority is to always generate accurate and efficient representations of the data. After that, we can be concerned about creating something that is visually interesting and appealing.
+
+**Guiding Principles**
+
+* **Always** consider the audience and purpose of every visualisation
+* **Always** be accurate and efficient
+* **Never** misrepresent or obscure data
+* **Never** confuse viewers with complexity
+
+</br>
+
+#### Knowledge Check
+
+```{r aesthetics-quiz}
+quiz(
+  question("What is the command that controls the opacity of geoms?",
+    answer("Alpha", correct = TRUE),
+    answer("Beta"),
+    answer("Delta"),
+    answer("Gamma"),
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("What of these options can be used to account for overlapping data points (select 2)?",
+    answer("`position_dodge()`", correct = TRUE),
+    answer("`position_jitter()`", correct = TRUE),
+    answer("`position_move()`"),
+    answer("`position_dance()`"),
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("What could we use to add another dimension to our visualisation if the data item is continuous?",
+    answer("Fill", correct = TRUE),
+    answer("Shape"),
+    answer("Line Type"),
+    answer("Texture"),
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+    )
+)
+```
+
+
+## Geometry
+
+The 3rd (essential) layer is the geometry (`geom`) layer. We've already seen this in action throughout our previous examples so you may have worked out what it does and how to use it. However, this is where we determine what type of plot it's going to be. There are about 50 options to chose from, but as you can probably imagine, you're much more likely to use a select few:
+
+```{r, echo=FALSE}
+geometries_table <- data.frame(
+  "Group" = c("Scatter",
+              "Scatter",
+              "Scatter",
+              "Bar",
+              "Bar",
+              "Bar",
+              "Line",
+              "Line",
+              "Other"
+             ),
+  "Function" = c("**`geom_point()`**",
+                 "**`geom_jitter()`**",
+                 "**`geom_count()`**",
+                 "**`geom_histogram()`**",
+                 "**`geom_bar()`**",
+                 "**`geom_col()`**",
+                 "**`geom_line()`**",
+                 "**`geom_path()`**",
+                 "**`geom_smooth()`**"
+                 ),
+  "Description" = c("This is the foundation for the next 2 variations. Scatterplots are the most useful for displaying the relationship between 2 continuous variables. You can map another variable to `size` which will create a bubble chart from this.",
+                    "A convenient shortcut for specifying jitter as the position. Adding a small amount of random variation to the location of points, useful for handling overplotting.",
+                    "Counting the number of observations at each location.",
+                    "A specialised version of bar plots. Showing the binned distribution of a continuous variable.",
+                    "A bar with the height proportional to the number of cases in each group.",
+                    "A bar with the height representing values in the data.",
+                    "Connect observations based on the order on the x-axis.",
+                    "Connect observations based on the order which they appear in the data.",
+                    "Aiding in the visualisation of patterns/smoothed models where overplotting (large numbers of data points overlapping in a single area) is an issue."
+                    )
+  
+)
+
+kableExtra::kbl(geometries_table) %>%
+  kable_paper(full_width = FALSE) %>%
+  collapse_rows(columns = 1)
+```
+
+</br>
+
+With the layered approach, we can add multiple geoms to the same plot, just like another layer. If we remember back to the section on aesthetics, we can define the mappings within the geom layer which will allow us to use
+different data mappings for each geom. We'll continue with defining `aes()` as part of the `ggplot()` call though. Let's see what 2 geoms will allow us to do:
+
+``` {r, echo=TRUE, message=FALSE}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(position = position_jitter(), alpha = 0.5) + 
+  geom_smooth(colour = "#76B843")
+```
+
+
+### Scatter Plots
+
+Scatter plots have been quite common throughout this course so far. That's because they're generally useful, particularly in the exploratory side of data visualisation. 
+
+Let's have a look at another scatter plot. This time there will be an obvious (albeit predictable) split in the data. Let's pull knowledge from the previous sections and create the full block of code. Don't worry, you'll still have guided steps and hints to help.
+
+The data we're looking at has been filtered for you. We're looking at Specialties "AM" (Palliative Medicine) and "AF" (Paediatrics). We're going to create a scatter plot to see how age (on admission) impacts length of stay. Have a think about how you would expect this plot to look and then follow the steps below to see if you were right:
+
+1. Set up the `ggplot()` function and add the aesthetic mappings ("ageonadmission" and "LengthOfStay").
+2. Add a 3rd dimension to visualise "Specialty" with colour.
+3. Make it a scatter plot with a jitter modification using the `position` argument.
+4. Rename the legend labels to "Palliative" and "Paediatrics". (*Hint: they're discrete and mapped to colour, think about the order you write them too.*)
+5. Change the axis labels to "Age" and "Length of Stay", you can use the helper functions for this.
+
+``` {r geom1, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF"))
+```
+
+``` {r geom1-hint-1}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(___(___ = ___, ___ = ___))
+```
+
+``` {r geom1-hint-2}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay))
+```
+
+``` {r geom1-hint-3}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty))
+```
+
+``` {r geom1-hint-4}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  ___(position = ___)
+```
+
+``` {r geom1-hint-5}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter())
+```
+
+``` {r geom1-hint-6}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c("___", "___"))
+```
+
+``` {r geom1-hint-7}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c("Paediatrics", "Palliative"))
+```
+
+``` {r geom1-hint-8}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c("Paediatrics", "Palliative")) +
+  xlab("___") +
+  ylab("___")
+```
+
+``` {r geom1-solution}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) + 
+  scale_colour_discrete(labels = c("Paediatrics", "Palliative")) + 
+  xlab("Age") +
+  ylab("Length of Stay")
+```
+
+``` {r geom1-check}
+grade_code()
+```
+
+
+### Histograms
+
+Visualising the distribution of a single continuous variable by dividing the axis into bins and counting the number of observations in each bin. Let's create a histogram now:
+
+1. Set up the `ggplot()` function and add the aesthetic mappings ("ageonadmission").
+2. Add a 3rd dimension to visualise "Sex" with fill (colour would be an outline rather than *fill* the space).
+3. Make it a histogram plot. If we look at this, we should note that bars are automatically stacked but this isn't obvious. Change the position to *dodge*.
+4. We'll also see the automatic message about bin width. We could probably make this clearer by setting bin width to 10.
+5. Change the axis labels to "Age" and "Count", you can use the helper functions for this.
+
+``` {r geom2, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+borders_data_plot
+```
+
+``` {r geom2-hint-1}
+borders_data_plot %>%
+  ggplot(___)
+```
+
+``` {r geom2-hint-2}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission))
+```
+
+``` {r geom2-hint-3}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex))
+```
+
+``` {r geom2-hint-4}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(___)
+```
+
+``` {r geom2-hint-5}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(position = position_dodge())
+```
+
+``` {r geom2-hint-6}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge())
+```
+
+``` {r geom2-hint-7}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge()) +
+  xlab("___") +
+  ylab("___")
+```
+
+``` {r geom2-hint-8}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge()) +
+  xlab("Age") +
+  ylab("Count")
+```
+
+``` {r geom2-solution}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) +
+  geom_histogram(binwidth = 10, 
+                 position = position_dodge()) +
+  xlab("Age") +
+  ylab("Count")
+```
+
+``` {r geom2-check}
+grade_code()
+```
+
+
+### Line Graph
+
+Connecting observations in order of the variable on the x-axis, line graphs are used particularly in time trends. So let's mix it up by using a new data set for this section and see how childhood immunisation uptake has varied over a number of years.
+
+1. Set up the `ggplot()` function and add the aesthetic mappings ("year" and "measure").
+2. Add a 3rd dimension to visualise the immunisation with colour.
+3. Make it a line graph.
+4. Immediately, we can notice what looks to a big difference in uptake between the immunisations. However, if we look at the limits on the y-axis, this could mislead us. So, let's change the limits. We want it to start at 0 but what would the upper limit be? While we're at it, let's change the name so it shows "Uptake (%)".
+5. The x-axis only has tick labels for a few years but we have 14 in our data. The function has tried to minimise clutter but let's show 7 breaks which will be easier for to read. We can also update the name at the same time, call the x-axis "Year".
+6. Finally, the legend's title is lower case and doesn't look very presentable. Let's make it proper case (*hint: the legend is describing a discrete colour object*).
+
+``` {r geom3, exercise=TRUE}
+sp_child_immunisations_data
+```
+
+``` {r geom3-hint-1}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure))
+```
+
+``` {r geom3-hint-2}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation))
+```
+
+``` {r geom3-hint-3}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line()
+```
+
+``` {r geom3-hint-4}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(___, limits = ___) +
+```
+
+``` {r geom3-hint-5}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100))
+```
+
+``` {r geom3-hint-6}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(___, ___ = ___)
+```
+
+``` {r geom3-hint-7}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7)
+```
+
+``` {r geom3-hint-8}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) +
+  scale_colour_discrete(___)
+```
+
+``` {r geom3-solution}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) +
+  scale_colour_discrete(name = "Immunisation")
+```
+
+``` {r geom3-check}
+grade_code()
+```
+
+
+## Themes
+
+It's time to make things pretty, this is last step in creating publication ready visualisations. The themes layer control the non-data related ink on the plot, the visual elements that are not directly part of the data. 
+
+Every element can be individually changed. For instance, a typical plot would have text elements for the plot title, subtitle, caption, axis titles, legend titles, etc. Lines refer to all tick marks, grid lines, axis lines, etc. and the rectangles are typically the spaces/boxes each of the other elements live in. Each of these elements has its own unique name and we can access each of these directly through the `theme()` function. It's not necessary to alter each individually though, each function inherits in a hierarchy (e.g., `text` -> `axis.title` -> `axis.title.x` -> `axis.title.x.bottom`). A few common options are shown in the table below:
+
+```{r, echo=FALSE}
+theme_funcs_table <- data.frame(
+  "Type" = c("Text",
+             "Text",
+             "Text",
+             "Text",
+             "Text",
+             "Text",
+             "Line",
+             "Line",
+             "Line",
+             "Line",
+             "Line",
+             "Line",
+             "Rect",
+             "Rect",
+             "Rect"
+             ),
+  "Top Level Function" = c("**`axis.title()`**",
+                           "**`axis.title()`**",
+                           "**`axis.text()`**",
+                           "**`axis.text()`**",
+                           "**`legend.text()`**",
+                           "**`plot.title()`**",
+                           "**`axis.ticks()`**",
+                           "**`axis.ticks()`**",
+                           "**`axis.line()`**",
+                           "**`axis.line()`**",
+                           "**`panel.grid()`**",
+                           "**`panel.grid()`**",
+                           "**`legend.background()`**",
+                           "**`panel.background()`**",
+                           "**`plot.background()`**"
+                           ),
+  "2nd Level Function" = c("**`axis.title.x()`**",
+                           "**`axis.title.y()`**",
+                           "**`axis.text.x()`**",
+                           "**`axis.text.y()`**",
+                           "",
+                           "",
+                           "**`axis.ticks.x()`**",
+                           "**`axis.ticks.y()`**",
+                           "**`axis.line.x()`**",
+                           "**`axis.line.y()`**",
+                           "**`panel.grid.major()`**",
+                           "**`panel.grid.minor()`**",
+                           "",
+                           "",
+                           ""
+                           ),
+  check.names = FALSE
+)
+
+kableExtra::kbl(theme_funcs_table) %>%
+  kable_paper(full_width = FALSE) %>%
+  collapse_rows(columns = 1:2)
+```
+
+</br>
+
+These functions then map to one of these arguments. There are 3 types with an extra function to blank out objects:
+
+```{r, echo=FALSE}
+theme_elems_table <- data.frame(
+  "Function" = c("**`element_text()`**",
+                 "**`element_line()`**",
+                 "**`element_rect()`**",
+                 "***`element_blank()`***"
+                 ),
+  "Arguments" = c("`family` `face` `colour` `size` `hjust` `vjust` `angle` `lineheight` `margin` `debug`",
+                  "`colour` `size` `linetype` `lineend` `arrow`",
+                  "`fill` `colour` `size` `linetype`",
+                  ""
+                  )
+)
+
+kableExtra::kbl(theme_elems_table) %>%
+  kable_paper(full_width = FALSE)
+```
+
+</br>
+
+Let's take our histogram from the section on geoms and make some theme changes. Look over the code and see if you can work out what will happen then run it. After, feel free to make changes and play around with the code to learn more.
+
+``` {r theme1, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) +
+  geom_histogram(binwidth = 10, 
+                 position = position_dodge()) +
+  scale_fill_discrete(type = c("#88478B", "#3A3776")) +
+  xlab("Age") +
+  ylab("Count") +
+  ggtitle("Age Distribution of Borders Hospital Admissions", subtitle = "") +
+  theme(plot.title = element_text(colour = "#3A3776", family = "sans"),
+        axis.title = element_text(colour = "#88478B"),
+        legend.title = element_text(colour = "#88478B"),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"))
+```
+
+</br>
+
+Now, over to you. Let's take the line graph from the geom section and apply some theme changes:
+
+1. Every plot should have a title, let's add one using the helper function, calling it "Childhood Immunisation Uptake in Scotland". Give it the colour "#3A3776" and make it bold.
+2. This isn't in themes but change the colour of the lines to be "#76B843" (for 6 in 1) and "#1A8DC1" (for MMR). We're starting to give this a PHS brand makeover.
+3. Let's remove the grey background too but the white gridlines will need to be changed to help maintain readability. Make the major gridline's colour "grey90", and minor gridline's colour "grey95".
+4. It's looking a bit plain so add a border colour of "#88478B" to the legend.
+5. Since the plot is quite bare, why don't we overlay the legend on the plot. A position of 0.9, 0.2 should make it in the bottom right.
+
+``` {r theme2, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation")
+```
+
+``` {r theme2-hint-1}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation") +
+  ggtitle(___) +
+  theme(___)
+```
+
+``` {r theme2-hint-2}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation") +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = ___)
+```
+
+``` {r theme2-hint-3}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation") +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(___ = ___, ___ = ___))
+```
+
+``` {r theme2-hint-4}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation") +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"))
+```
+
+``` {r theme2-hint-5}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", ___ = c(___, ___)) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"))
+```
+
+``` {r theme2-hint-6}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"))
+```
+
+``` {r theme2-hint-7}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = ___,
+        panel.grid.major = ___,
+        ___ = ___)
+```
+
+``` {r theme2-hint-8}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(___),
+        panel.grid.minor = element_line(___))
+```
+
+``` {r theme2-hint-9}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"))
+```
+
+``` {r theme2-hint-10}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = ___(___))
+```
+
+``` {r theme2-hint-11}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"))
+```
+
+```{r theme2-solution}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"),
+        legend.position = c(.9, .2))
+```
+
+```{r theme2-check}
+grade_code()
+```
+
+</br>
+
+### Theme Object
+
+We've just seen how to customise every part of the plot. If we're going to be using multiple plots in the same publication or presentation though, it'll be better to have visual consistency across them all. Creating a theme from scratch can be a detailed process that would be better to not have to repeat for each plot. This is where a theme layer object can be used. You can then add further customisation that's not included in the theme object if necessary.
+
+As an example, here's the theme layer object for the histogram created before.
+
+``` {r theme3, exercise=TRUE, exercise.setup='prepare-foundations-plot', exercise.lines=20}
+# Foundation plot assigned to hosp_admission
+hosp_admissions <- borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) +
+  geom_histogram(binwidth = 10, 
+                 position = position_dodge()) +
+  scale_fill_discrete(type = c("#88478B", "#3A3776")) +
+  xlab("Age") +
+  ylab("Count") +
+  ggtitle("Age Distribution of Borders Hospital Admissions", subtitle = "")
+
+# Theme object assigned to phs_theme_hist
+phs_theme_hist <- theme(plot.title = element_text(colour = "#3A3776", family = "sans"),
+        axis.title = element_text(colour = "#88478B"),
+        legend.title = element_text(colour = "#88478B"),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"))
+
+# Adding theme object to plot and displaying output
+hosp_admissions + phs_theme_hist
+ 
+```
+
+</br>
+
+Back over to you. Let's take the line graph from before and create a theme object. The code created from before is provided, and assigned to `immunisation_uptake_plot`.
+
+1. Create a theme object called `phs_theme_line` and include all the theme customisation from the line graph.
+2. Not all line graphs will be able to have the legend overlaid in the same way. So, let's take that out of the object.
+3. Output `immunisation_uptake_plot` and add the theme object, `phs_theme_line`.
+4. Add back in the customisation for overlaying the plot. The position was 0.9, 0.2.
+
+```{r theme4, exercise=TRUE}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"),
+        legend.position = c(.9, .2))
+```
+
+```{r theme4-hint-1}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"),
+        legend.position = c(.9, .2))
+
+phs_theme_line <- theme()
+```
+
+```{r theme4-hint-2}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland")
+
+phs_theme_line <- theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"),
+        legend.position = c(.9, .2))
+```
+
+```{r theme4-hint-3}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland")
+
+phs_theme_line <- theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"))
+```
+
+```{r theme4-hint-4}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland")
+
+phs_theme_line <- theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"))
+
+immunisation_uptake_plot + phs_theme_line
+```
+
+``` {r theme4-solution}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland")
+
+phs_theme_line <- theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"))
+        
+immunisation_uptake_plot + phs_theme_line + theme(legend.position = c(.9, .2))
+```
+
+``` {r theme4-check}
+grade_code()
+```
+
+</br>
+
+#### Built-In & External Themes
+
+There are a number of built-in themes to make our lives easier, these all have the format `theme_<name>()`. The default theme is `theme_grey()`. The aim of this theme is to have little visual impact, providing something that fits with the flow of a publication. These are all the in-built options available:
+
+```{r, echo=FALSE}
+theme_builtin_table <- data.frame(
+  "Function" = c("**`theme_grey()`**",
+                 "**`theme_bw()`**",
+                 "**`theme_linedraw()`**",
+                 "**`theme_light()`**",
+                 "**`theme_dark()`**",
+                 "**`theme_minimal()`**",
+                 "**`theme_classic()`**",
+                 "**`theme_void()`**"
+                 ),
+  "Description" = c("The *default* theme with a light grey background and white gridlines.",
+                    "A variation on `theme_grey()` that uses a white background and thin grey gridlines.",
+                    "A theme with only black lines of various widths on white backgrounds, suggesting a line drawing.",
+                    "Similar to `theme_linedraw()` but with light grey lines and axes, focussing attention on the data.",
+                    "Like `theme_light()` with a dark background.",
+                    "A minimalistic theme with no background annotations.",
+                    "A classic-looking theme, with x and y axis lines and no gridlines.",
+                    "A completely empty theme."
+                  )
+)
+
+kableExtra::kbl(theme_builtin_table) %>%
+  kable_paper(full_width = FALSE)
+```
+
+</br>
+
+Outisde of the built-in themes, there are also packages with additional themes. The [`ggthemes`](https://mran.microsoft.com/snapshot/2017-02-04/web/packages/ggthemes/vignettes/ggthemes.html) package for instance has many themes to simplify the process of creating visually appealing plots. *PHS is also in the process of creating its own themes package.*
+
+
+## Interactivity
+
+So far, we've gone into quite a bit of detail about creating visualisations. Although so far, all of these have been static. This works well with visualisations that are going to be in presentations or documents (they themselves tend to be static). However, when presenting the visualisation to users in a digital format, we can add interactivity. Doing this will allow the user to actively explore the visualisation and get more from it. We'll use `plotly` to do this. There are 2 main ways of creating a plotly object:
+
+* Directly initialising the object using `plot_ly()`
+* Transforming a ggplot2 object 
+
+Using the plotly functions to create visualisations is based on the same grammar of graphics and has its advantages. However, this requires slightly different syntax when we can go with the second option. Even with this option, and if you learn more about plotly, you can mix and match to get the best of both worlds. Let's explore `ggplotly()`. 
+
+```{r plotly1, exercise=TRUE, exercise.setup='prepare-foundations-plot', message=FALSE}
+hosp_admissions <- borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) +
+  geom_histogram(binwidth = 10, 
+                 position = position_dodge()) +
+  scale_fill_discrete(type = c("#88478B", "#3A3776")) +
+  xlab("Age") +
+  ylab("Count") +
+  ggtitle("Age Distribution of Borders Hospital Admissions", subtitle = "") + theme(plot.title = element_text(colour = "#3A3776"),
+        axis.title = element_text(colour = "#88478B"),
+        legend.title = element_text(colour = "#88478B"),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "light grey"))
+
+ggplotly(hosp_admissions)
+```
+
+
+## Review & Feedback
+
+#### References
+
+* Tidyverse, ggplot2 reference - [ggplot2.tidyverse.org/reference/](https://ggplot2.tidyverse.org/reference/)
+* R for Data Science, Chapter 3: Data visualisation - [r4ds.had.co.nz/data-visualisation.html](https://r4ds.had.co.nz/data-visualisation.html)
+* ggplot2: elegant graphics for data analysis - [ggplot2-book.org/](https://ggplot2-book.org/)
+* Plotly in R - [plotly-r.com/](https://plotly-r.com/)
+
+
+#### Help
+
+* Vignettes (Help) / `?<function_name>`
+* Google / Stack Overflow (tag queries with "[r]", "[ggplot]")
+* [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
+* [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
+
+#### Feedback
+
+<iframe width="100%" height="2300" src="https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5JmibxHi_yzZ9Pvduh8IqoF_5UMDFWSlZPUU40RkZaTE1YM0tTTVVWVVVQVSQlQCN0PWcu&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
