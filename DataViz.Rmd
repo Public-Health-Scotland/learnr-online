@@ -21,6 +21,7 @@ library(datasauRus)
 library(magrittr)
 library(tidyr)
 library(kableExtra)
+library(plotly)
 
 knitr::opts_chunk$set(echo = FALSE)
 
