@@ -45,6 +45,7 @@ Welcome to an Introduction to Data Visualisation in R. This course is designed a
 <div class="info_box">
   <h4>Course Info</h4>
   <ul>
+    <li><strong>Prerequisite:</strong> [Introduction to R](https://scotland.shinyapps.io/phs-learnr-intro/)</li>
     <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
     <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
     <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
