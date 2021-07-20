@@ -161,7 +161,7 @@ borders_data_plot %>%
 
 </br>
 
-There we have it, in just a few lines of code, we've created a plot. You may even have already worked out what some of the code does. We're now going to take a step back to understand how all of this comes together. 
+There we have it, in just a few lines of code, we've created a plot. You may even have already worked out what some of the code does. Did you notice that each section is added on using a `+`? We're now going to take a step back to understand how all of this comes together. 
 
 It comes from an underlying grammar of graphics, a framework which follows a layered approach to describe and construct visualisations or graphics in a structured manner. There are 7 grammatical elements:
 
@@ -227,7 +227,7 @@ glimpse(borders_data)
 
 ```
 
-Let's build another plot too. Run the code below and feel free to play around with it. We'll learn how it all comes together in the next chapters. Just remember we're using that tidy data as our solid foundation which is piped in as the first argument to `ggplot()`:
+Let's build another plot too. Run the code below and feel free to play around with it. We'll learn how it all comes together in the next chapters. Just remember we're using that tidy data as our solid foundation which is piped in as the first argument to `ggplot()`, the following layers are then added on using that `+` operator:
 
 ```{r data-plot, exercise=TRUE, warning=FALSE}
 borders_data %>%
