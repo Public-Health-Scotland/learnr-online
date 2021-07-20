@@ -815,6 +815,64 @@ borders_data_plot %>%
   filter(Specialty %in% c("AM", "AF"))
 ```
 
+``` {r geom1-hint-1}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(___(___ = ___, ___ = ___))
+```
+
+``` {r geom1-hint-2}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay))
+```
+
+``` {r geom1-hint-3}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty))
+```
+
+``` {r geom1-hint-4}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  ___(position = ___)
+```
+
+``` {r geom1-hint-5}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter())
+```
+
+``` {r geom1-hint-6}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c("___", "___"))
+```
+
+``` {r geom1-hint-7}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c("Paediatrics", "Palliative"))
+```
+
+``` {r geom1-hint-8}
+borders_data_plot %>%
+  filter(Specialty %in% c("AM", "AF")) %>%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c("Paediatrics", "Palliative")) +
+  xlab("___") +
+  ylab("___")
+```
+
 ``` {r geom1-solution}
 borders_data_plot %>%
   filter(Specialty %in% c("AM", "AF")) %>%
@@ -841,8 +899,59 @@ Visualising the distribution of a single continuous variable by dividing the axi
 5. Change the axis labels to "Age" and "Count", you can use the helper functions for this.
 
 ``` {r geom2, exercise=TRUE, exercise.setup='prepare-foundations-plot'}
+borders_data_plot
+```
+
+``` {r geom2-hint-1}
 borders_data_plot %>%
-  filter(Specialty %in% c("AM", "AF"))
+  ggplot(___)
+```
+
+``` {r geom2-hint-2}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission))
+```
+
+``` {r geom2-hint-3}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex))
+```
+
+``` {r geom2-hint-4}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(___)
+```
+
+``` {r geom2-hint-5}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(position = position_dodge())
+```
+
+``` {r geom2-hint-6}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge())
+```
+
+``` {r geom2-hint-7}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge()) +
+  xlab("___") +
+  ylab("___")
+```
+
+``` {r geom2-hint-8}
+borders_data_plot %>%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge()) +
+  xlab("Age") +
+  ylab("Count")
 ```
 
 ``` {r geom2-solution}
@@ -874,12 +983,67 @@ Connecting observations in order of the variable on the x-axis, line graphs are 
 sp_child_immunisations_data
 ```
 
+``` {r geom3-hint-1}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure))
+```
+
+``` {r geom3-hint-2}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation))
+```
+
+``` {r geom3-hint-3}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line()
+```
+
+``` {r geom3-hint-4}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(___, limits = ___) +
+```
+
+``` {r geom3-hint-5}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100))
+```
+
+``` {r geom3-hint-6}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(___, ___ = ___)
+```
+
+``` {r geom3-hint-7}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7)
+```
+
+``` {r geom3-hint-8}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) +
+  scale_colour_discrete(___)
+```
+
 ``` {r geom3-solution}
 sp_child_immunisations_data %>%
   ggplot(aes(x = year, y = measure, colour = immunisation)) +
   geom_line() +
   scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
-  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_x_continuous(name = "Year", n.breaks = 7) +
   scale_colour_discrete(name = "Immunisation")
 ```
 
@@ -1013,6 +1177,144 @@ sp_child_immunisations_data %>%
   scale_colour_discrete(name = "Immunisation")
 ```
 
+``` {r theme2-hint-1}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation") +
+  ggtitle(___) +
+  theme(___)
+```
+
+``` {r theme2-hint-2}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation") +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = ___)
+```
+
+``` {r theme2-hint-3}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation") +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(___ = ___, ___ = ___))
+```
+
+``` {r theme2-hint-4}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation") +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"))
+```
+
+``` {r theme2-hint-5}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", ___ = c(___, ___)) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"))
+```
+
+``` {r theme2-hint-6}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"))
+```
+
+``` {r theme2-hint-7}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = ___,
+        panel.grid.major = ___,
+        ___ = ___)
+```
+
+``` {r theme2-hint-8}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(___),
+        panel.grid.minor = element_line(___))
+```
+
+``` {r theme2-hint-9}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"))
+```
+
+``` {r theme2-hint-10}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = ___(___))
+```
+
+``` {r theme2-hint-11}
+sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"))
+```
+
 ```{r theme2-solution}
 sp_child_immunisations_data %>%
   ggplot(aes(x = year, y = measure, colour = immunisation)) +
@@ -1087,6 +1389,75 @@ immunisation_uptake_plot <- sp_child_immunisations_data %>%
         panel.grid.minor = element_line(colour = "grey95"),
         legend.background = element_rect(colour = "#88478B"),
         legend.position = c(.9, .2))
+```
+
+```{r theme4-hint-1}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland") +
+  theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"),
+        legend.position = c(.9, .2))
+
+phs_theme_line <- theme()
+```
+
+```{r theme4-hint-2}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland")
+
+phs_theme_line <- theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"),
+        legend.position = c(.9, .2))
+```
+
+```{r theme4-hint-3}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland")
+
+phs_theme_line <- theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"))
+```
+
+```{r theme4-hint-4}
+immunisation_uptake_plot <- sp_child_immunisations_data %>%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = "Uptake (%)", limits = c(0, 100)) +
+  scale_x_continuous(name = "Year", n.breaks = 7) + 
+  scale_colour_discrete(name = "Immunisation", type = c("#76B843", "#1A8DC1")) +
+  ggtitle("Childhood Immunisation Uptake in Scotland")
+
+phs_theme_line <- theme(plot.title = element_text(colour = "#3A3776", face = "bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = "grey90"),
+        panel.grid.minor = element_line(colour = "grey95"),
+        legend.background = element_rect(colour = "#88478B"))
+
+immunisation_uptake_plot + phs_theme_line
 ```
 
 ``` {r theme4-solution}

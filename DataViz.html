@@ -1123,6 +1123,56 @@ Aiding in the visualisation of patterns/smoothed models where overplotting (larg
   filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;))</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<div class="tutorial-exercise-support" data-label="geom1-hint-1" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
+  ggplot(___(___ = ___, ___ = ___))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom1-hint-2" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom1-hint-3" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom1-hint-4" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  ___(position = ___)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom1-hint-5" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter())</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom1-hint-6" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c(&quot;___&quot;, &quot;___&quot;))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom1-hint-7" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c(&quot;Paediatrics&quot;, &quot;Palliative&quot;))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom1-hint-8" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
+  ggplot(aes(x = ageonadmission, y = LengthOfStay, colour = Specialty)) +
+  geom_point(position = position_jitter()) +
+  scale_colour_discrete(labels = c(&quot;Paediatrics&quot;, &quot;Palliative&quot;)) +
+  xlab(&quot;___&quot;) +
+  ylab(&quot;___&quot;)</code></pre>
+</div>
 <div class="tutorial-exercise-support" data-label="geom1-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>borders_data_plot %&gt;%
   filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;)) %&gt;%
@@ -1144,9 +1194,52 @@ Aiding in the visualisation of patterns/smoothed models where overplotting (larg
 <li>Change the axis labels to “Age” and “Count”, you can use the helper functions for this.</li>
 </ol>
 <div class="tutorial-exercise" data-label="geom2" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>borders_data_plot %&gt;%
-  filter(Specialty %in% c(&quot;AM&quot;, &quot;AF&quot;))</code></pre>
+<pre class="text"><code>borders_data_plot</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="geom2-hint-1" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  ggplot(___)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom2-hint-2" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  ggplot(aes(x = ageonadmission))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom2-hint-3" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  ggplot(aes(x = ageonadmission, fill = Sex))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom2-hint-4" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(___)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom2-hint-5" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(position = position_dodge())</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom2-hint-6" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge())</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom2-hint-7" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge()) +
+  xlab(&quot;___&quot;) +
+  ylab(&quot;___&quot;)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom2-hint-8" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>borders_data_plot %&gt;%
+  ggplot(aes(x = ageonadmission, fill = Sex)) + 
+  geom_histogram(binwidth = 10,
+                 position = position_dodge()) +
+  xlab(&quot;Age&quot;) +
+  ylab(&quot;Count&quot;)</code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="geom2-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>borders_data_plot %&gt;%
@@ -1172,12 +1265,59 @@ Aiding in the visualisation of patterns/smoothed models where overplotting (larg
 <pre class="text"><code>sp_child_immunisations_data</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<div class="tutorial-exercise-support" data-label="geom3-hint-1" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom3-hint-2" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom3-hint-3" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line()</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom3-hint-4" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(___, limits = ___) +</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom3-hint-5" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom3-hint-6" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(___, ___ = ___)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom3-hint-7" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="geom3-hint-8" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) +
+  scale_colour_discrete(___)</code></pre>
+</div>
 <div class="tutorial-exercise-support" data-label="geom3-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>sp_child_immunisations_data %&gt;%
   ggplot(aes(x = year, y = measure, colour = immunisation)) +
   geom_line() +
   scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
-  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) +
   scale_colour_discrete(name = &quot;Immunisation&quot;)</code></pre>
 </div>
 </div>
@@ -1395,6 +1535,133 @@ Arguments
   scale_colour_discrete(name = &quot;Immunisation&quot;)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-1" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;) +
+  ggtitle(___) +
+  theme(___)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-2" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = ___)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-3" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(___ = ___, ___ = ___))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-4" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-5" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, ___ = c(___, ___)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-6" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-7" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = ___,
+        panel.grid.major = ___,
+        ___ = ___)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-8" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(___),
+        panel.grid.minor = element_line(___))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-9" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = &quot;grey90&quot;),
+        panel.grid.minor = element_line(colour = &quot;grey95&quot;))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-10" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = &quot;grey90&quot;),
+        panel.grid.minor = element_line(colour = &quot;grey95&quot;),
+        legend.background = ___(___))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme2-hint-11" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = &quot;grey90&quot;),
+        panel.grid.minor = element_line(colour = &quot;grey95&quot;),
+        legend.background = element_rect(colour = &quot;#88478B&quot;))</code></pre>
+</div>
 <div class="tutorial-exercise-support" data-label="theme2-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>sp_child_immunisations_data %&gt;%
   ggplot(aes(x = year, y = measure, colour = immunisation)) +
@@ -1460,6 +1727,71 @@ hosp_admissions + phs_theme_hist</code></pre>
         legend.background = element_rect(colour = &quot;#88478B&quot;),
         legend.position = c(.9, .2))</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="theme4-hint-1" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>immunisation_uptake_plot &lt;- sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;) +
+  theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = &quot;grey90&quot;),
+        panel.grid.minor = element_line(colour = &quot;grey95&quot;),
+        legend.background = element_rect(colour = &quot;#88478B&quot;),
+        legend.position = c(.9, .2))
+
+phs_theme_line &lt;- theme()</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme4-hint-2" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>immunisation_uptake_plot &lt;- sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;)
+
+phs_theme_line &lt;- theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = &quot;grey90&quot;),
+        panel.grid.minor = element_line(colour = &quot;grey95&quot;),
+        legend.background = element_rect(colour = &quot;#88478B&quot;),
+        legend.position = c(.9, .2))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme4-hint-3" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>immunisation_uptake_plot &lt;- sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;)
+
+phs_theme_line &lt;- theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = &quot;grey90&quot;),
+        panel.grid.minor = element_line(colour = &quot;grey95&quot;),
+        legend.background = element_rect(colour = &quot;#88478B&quot;))</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="theme4-hint-4" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>immunisation_uptake_plot &lt;- sp_child_immunisations_data %&gt;%
+  ggplot(aes(x = year, y = measure, colour = immunisation)) +
+  geom_line() +
+  scale_y_continuous(name = &quot;Uptake (%)&quot;, limits = c(0, 100)) +
+  scale_x_continuous(name = &quot;Year&quot;, n.breaks = 7) + 
+  scale_colour_discrete(name = &quot;Immunisation&quot;, type = c(&quot;#76B843&quot;, &quot;#1A8DC1&quot;)) +
+  ggtitle(&quot;Childhood Immunisation Uptake in Scotland&quot;)
+
+phs_theme_line &lt;- theme(plot.title = element_text(colour = &quot;#3A3776&quot;, face = &quot;bold&quot;),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(colour = &quot;grey90&quot;),
+        panel.grid.minor = element_line(colour = &quot;grey95&quot;),
+        legend.background = element_rect(colour = &quot;#88478B&quot;))
+
+immunisation_uptake_plot + phs_theme_line</code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="theme4-solution" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>immunisation_uptake_plot &lt;- sp_child_immunisations_data %&gt;%
@@ -1743,21 +2075,21 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "intro-quiz-1", 
     question = structure("Let&#39;s get started. Which of the following are exploratory plots typically NOT?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_95bbd33", 
+    "character")), answers = list(structure(list(id = "lnr_ans_3cc2af3", 
         option = "Pretty", value = "Pretty", label = structure("Pretty", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3328424", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d856149", 
         option = "Meant for a specialist audience", value = "Meant for a specialist audience", 
         label = structure("Meant for a specialist audience", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5519b70", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_278576b", 
         option = "Data-heavy", value = "Data-heavy", label = structure("Data-heavy", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d554efa", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_bccf27d", 
         option = "Rough first drafts", value = "Rough first drafts", 
         label = structure("Rough first drafts", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_770a9d8", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_93275b7", 
         option = "Part of our data science toolkit as graphical data analysis", 
         value = "Part of our data science toolkit as graphical data analysis", 
         label = structure("Part of our data science toolkit as graphical data analysis", html = TRUE, class = c("html", 
@@ -1771,21 +2103,21 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nLet&#39;s get started. Which of the following are exploratory plots typically NOT?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 806030196.124663, options = list()), class = c("learnr_radio", 
+    seed = 194971777.409209, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "datasaurus-quiz-1", 
     question = structure("What are the common features across these sets of data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_cb3bac3", 
+    "character")), answers = list(structure(list(id = "lnr_ans_3732e30", 
         option = "Mean", value = "Mean", label = structure("Mean", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d2612fe", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3365ec0", 
         option = "Standard Deviation", value = "Standard Deviation", 
         label = structure("Standard Deviation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3d3ad56", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1388f", 
         option = "Correlation", value = "Correlation", label = structure("Correlation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1797,7 +2129,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "datasaurus-quiz-1-answer", question = "datasaurus-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat are the common features across these sets of data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1089709155.49256, options = list()), class = c("learnr_checkbox", 
+    seed = 423419383.80283, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
@@ -1963,23 +2295,23 @@ learnr:::store_exercise_cache("aesthetics-plot", list(setup = "borders_data_plot
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetic-quiz-1", 
     question = structure("Which aesthetics are only applicable to categorical data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_85bb166", 
+    "character")), answers = list(structure(list(id = "lnr_ans_c5d48ca", 
         option = "`colour` and `fill`", value = "`colour` and `fill`", 
         label = structure("<code>colour<\u002fcode> and <code>fill<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_913c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5058e3c", 
         option = "`alpha` and `size`", value = "`alpha` and `size`", 
         label = structure("<code>alpha<\u002fcode> and <code>size<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_39f9a42", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_97a1620", 
         option = "`label` and `shape`", value = "`label` and `shape`", 
         label = structure("<code>label<\u002fcode> and <code>shape<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7b7bbf6", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_987d5a8", 
         option = "`alpha` and `label`", value = "`alpha` and `label`", 
         label = structure("<code>alpha<\u002fcode> and <code>label<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_424519c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c391ed7", 
         option = "`x` and `y`", value = "`x` and `y`", label = structure("<code>x<\u002fcode> and <code>y<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1991,7 +2323,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetic-quiz-1-answer", question = "aesthetic-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich aesthetics are only applicable to categorical data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1476966566.31223, options = list()), class = c("learnr_radio", 
+    seed = 2136672283.50503, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -2141,16 +2473,16 @@ learnr:::store_exercise_cache("aesthetics3", list(setup = "borders_data_plot <- 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetics-quiz-1", 
     question = structure("What is the command that controls the opacity of geoms?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_ccf3077", 
+    "character")), answers = list(structure(list(id = "lnr_ans_638c82b", 
         option = "Alpha", value = "Alpha", label = structure("Alpha", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_56b80c7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e2b4c95", 
         option = "Beta", value = "Beta", label = structure("Beta", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5bf078a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_380dc43", 
         option = "Delta", value = "Delta", label = structure("Delta", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7322113", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1e4dcc6", 
         option = "Gamma", value = "Gamma", label = structure("Gamma", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2162,26 +2494,26 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetics-quiz-1-answer", question = "aesthetics-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the command that controls the opacity of geoms?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 340137520.841611, options = list()), class = c("learnr_radio", 
+    seed = 1631485605.24028, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "aesthetics-quiz-2", 
     question = structure("What of these options can be used to account for overlapping data points (select 2)?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_360f47e", 
+    "character")), answers = list(structure(list(id = "lnr_ans_ad01b1d", 
         option = "`position_dodge()`", value = "`position_dodge()`", 
         label = structure("<code>position_dodge()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4adc738", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_355af75", 
         option = "`position_jitter()`", value = "`position_jitter()`", 
         label = structure("<code>position_jitter()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_329857b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_aa590d2", 
         option = "`position_move()`", value = "`position_move()`", 
         label = structure("<code>position_move()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_75c324e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8714d3d", 
         option = "`position_dance()`", value = "`position_dance()`", 
         label = structure("<code>position_dance()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
@@ -2194,23 +2526,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "aesthetics-quiz-2-answer", question = "aesthetics-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat of these options can be used to account for overlapping data points (select 2)?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 2078267346.53223, options = list()), class = c("learnr_checkbox", 
+    seed = 2056564358.54234, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetics-quiz-3", 
     question = structure("What could we use to add another dimension to our visualisation if the data item is continuous?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_d559053", 
+    "character")), answers = list(structure(list(id = "lnr_ans_b278604", 
         option = "Fill", value = "Fill", label = structure("Fill", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_aa6ba3f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_deb76cc", 
         option = "Shape", value = "Shape", label = structure("Shape", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_47ad55d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e6152be", 
         option = "Line Type", value = "Line Type", label = structure("Line Type", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9b77f89", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_396cae0", 
         option = "Texture", value = "Texture", label = structure("Texture", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2222,7 +2554,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetics-quiz-3-answer", question = "aesthetics-quiz-3"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat could we use to add another dimension to our visualisation if the data item is continuous?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 660560346.192403, options = list()), class = c("learnr_radio", 
+    seed = 740157724.155337, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -2281,7 +2613,7 @@ output$`tutorial-exercise-geom2-output` <- renderUI({
 learnr:::store_exercise_cache("geom2", list(setup = "borders_data_plot <- borders_data %>%\n  filter(Sex %in% c(\"Male\", \"Female\"),\n         ageonadmission >= 0) %>% \n  drop_na(Sex)", 
     chunks = list(list(label = "prepare-foundations-plot", code = "borders_data_plot <- borders_data %>%\n  filter(Sex %in% c(\"Male\", \"Female\"),\n         ageonadmission >= 0) %>% \n  drop_na(Sex)", 
         opts = list(label = "\"prepare-foundations-plot\""), 
-        engine = "r"), list(label = "geom2", code = "borders_data_plot %>%\n  filter(Specialty %in% c(\"AM\", \"AF\"))", 
+        engine = "r"), list(label = "geom2", code = "borders_data_plot", 
         opts = list(label = "\"geom2\"", exercise = "TRUE", exercise.setup = "\"prepare-foundations-plot\""), 
         engine = "r")), code_check = NULL, error_check = NULL, 
     check = structure("grade_code()", chunk_opts = list(label = "geom2-check")), 
@@ -2308,8 +2640,8 @@ learnr:::store_exercise_cache("geom2", list(setup = "borders_data_plot <- border
         exercise.checker = "function (...) \n{\n    lifecycle::deprecate_soft(\"0.2.2\", \"grade_learnr()\", \"gradethis_exercise_checker()\")\n    gradethis_exercise_checker(...)\n}", 
         exercise.error.check.code = "gradethis_error_checker()", 
         label = "geom2", exercise = TRUE, exercise.setup = "prepare-foundations-plot", 
-        code = c("borders_data_plot %>%", "  filter(Specialty %in% c(\"AM\", \"AF\"))"
-        ), out.width.px = 624, out.height.px = 384, params.src = "geom2, exercise=TRUE, exercise.setup='prepare-foundations-plot'", 
+        code = "borders_data_plot", out.width.px = 624, out.height.px = 384, 
+        params.src = "geom2, exercise=TRUE, exercise.setup='prepare-foundations-plot'", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
 </script>
  
@@ -2327,7 +2659,7 @@ learnr:::store_exercise_cache("geom3", list(setup = NULL, chunks = list(list(lab
         label = "geom3-check")), solution = structure(c("sp_child_immunisations_data %>%", 
     "  ggplot(aes(x = year, y = measure, colour = immunisation)) +", 
     "  geom_line() +", "  scale_y_continuous(name = \"Uptake (%)\", limits = c(0, 100)) +", 
-    "  scale_x_continuous(name = \"Year\", n.breaks = 7) + ", 
+    "  scale_x_continuous(name = \"Year\", n.breaks = 7) +", 
     "  scale_colour_discrete(name = \"Immunisation\")"), chunk_opts = list(
         label = "geom3-solution")), options = list(eval = FALSE, 
         echo = TRUE, results = "markup", tidy = FALSE, tidy.opts = NULL, 
