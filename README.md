@@ -6,7 +6,7 @@ These applications are hosted online and provide functionality around quizzes an
 
 * [Introduction to R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/Intro.Rmd) - learning R from the basics, including its integration to PHS; workflow, tools, templates, and other resources. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-intro/.
 * [PHS Methods](https://github.com/Public-Health-Scotland/learnr-online/blob/master/PHSMethods.Rmd) - learning the internally developed R package, `phsmethods`. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-phsmethods/  
-* [Data Visualisation in R](https://github.com/Public-Health-Scotland/learnr-online/tree/data-viz-course) - *in development*.
+* [Data Visualisation in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/DataViz.Rmd) - building on an the Intro to R course, learn data visualisation with `ggplot2` and an introduction to `plotly`. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-dataviz/ 
 
 ### Directories
   As this is a shiny prerendered project, only certain filenames are accessible from within the app. These are outlined below:
@@ -17,8 +17,12 @@ These applications are hosted online and provide functionality around quizzes an
     
 ### Files
   * `.gitignore` - tells git what files and folders *not* to track or upload to GitHub
-  * `Intro.Rmd` - RMarkdown file containing all necessary code to build app
-  * `Intro.html` - generated HTML from building app
+  * `DataViz.Rmd` - RMarkdown file containing all necessary code to build app for data viz course
+  * `DataViz.html` - generated HTML from building app for data viz course
+  * `Intro.Rmd` - RMarkdown file containing all necessary code to build app for intro course
+  * `Intro.html` - generated HTML from building app for intro course
+  * `PHSMethods.Rmd` - RMarkdown file containing all necessary code to build app for phsmethods course
+  * `PHSMethods.html` - generated HTML from building app for phsmethods course
   * `PHS-LearnR.Proj` - R project
   * `README.md` - this page
 
