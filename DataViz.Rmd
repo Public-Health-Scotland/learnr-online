@@ -773,7 +773,7 @@ geometries_table <- data.frame(
                     "A bar with the height representing values in the data.",
                     "Connect observations based on the order on the x-axis.",
                     "Connect observations based on the order which they appear in the data.",
-                    "Aiding in the visualisation of patterns where overplotting is an issue."
+                    "Aiding in the visualisation of patterns/smoothed models where overplotting (large numbers of data points overlapping in a single area) is an issue."
                     )
   
 )

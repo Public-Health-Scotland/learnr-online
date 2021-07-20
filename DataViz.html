@@ -1095,7 +1095,7 @@ Other
 <strong><code>geom_smooth()</code></strong>
 </td>
 <td style="text-align:left;">
-Aiding in the visualisation of patterns where overplotting is an issue.
+Aiding in the visualisation of patterns/smoothed models where overplotting (large numbers of data points overlapping in a single area) is an issue.
 </td>
 </tr>
 </tbody>
@@ -1724,21 +1724,21 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "intro-quiz-1", 
     question = structure("Let&#39;s get started. Which of the following are exploratory plots typically NOT?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_58afb2c", 
+    "character")), answers = list(structure(list(id = "lnr_ans_3ee6e66", 
         option = "Pretty", value = "Pretty", label = structure("Pretty", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_799d516", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2429e2f", 
         option = "Meant for a specialist audience", value = "Meant for a specialist audience", 
         label = structure("Meant for a specialist audience", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_661e51", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cd52e40", 
         option = "Data-heavy", value = "Data-heavy", label = structure("Data-heavy", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2a3e467", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ed85447", 
         option = "Rough first drafts", value = "Rough first drafts", 
         label = structure("Rough first drafts", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ee9c30c", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_866b71a", 
         option = "Part of our data science toolkit as graphical data analysis", 
         value = "Part of our data science toolkit as graphical data analysis", 
         label = structure("Part of our data science toolkit as graphical data analysis", html = TRUE, class = c("html", 
@@ -1752,21 +1752,21 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nLet&#39;s get started. Which of the following are exploratory plots typically NOT?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 977094674.545005, options = list()), class = c("learnr_radio", 
+    seed = 380554717.32279, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "datasaurus-quiz-1", 
     question = structure("What are the common features across these sets of data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_32b2823", 
+    "character")), answers = list(structure(list(id = "lnr_ans_3d85371", 
         option = "Mean", value = "Mean", label = structure("Mean", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_494c29a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c6d46a9", 
         option = "Standard Deviation", value = "Standard Deviation", 
         label = structure("Standard Deviation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f87d3dc", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_23a3381", 
         option = "Correlation", value = "Correlation", label = structure("Correlation", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1778,7 +1778,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "datasaurus-quiz-1-answer", question = "datasaurus-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat are the common features across these sets of data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 836414092.110514, options = list()), class = c("learnr_checkbox", 
+    seed = 1847198138.63983, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
@@ -1944,23 +1944,23 @@ learnr:::store_exercise_cache("aesthetics-plot", list(setup = "borders_data_plot
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetic-quiz-1", 
     question = structure("Which aesthetics are only applicable to categorical data?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_a8b466c", 
+    "character")), answers = list(structure(list(id = "lnr_ans_bef6026", 
         option = "`colour` and `fill`", value = "`colour` and `fill`", 
         label = structure("<code>colour<\u002fcode> and <code>fill<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4446825", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6d2ec3b", 
         option = "`alpha` and `size`", value = "`alpha` and `size`", 
         label = structure("<code>alpha<\u002fcode> and <code>size<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b4d9ce6", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b4d0b43", 
         option = "`label` and `shape`", value = "`label` and `shape`", 
         label = structure("<code>label<\u002fcode> and <code>shape<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2397370", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_92818f9", 
         option = "`alpha` and `label`", value = "`alpha` and `label`", 
         label = structure("<code>alpha<\u002fcode> and <code>label<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a51a4d8", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5a28262", 
         option = "`x` and `y`", value = "`x` and `y`", label = structure("<code>x<\u002fcode> and <code>y<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1972,7 +1972,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetic-quiz-1-answer", question = "aesthetic-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich aesthetics are only applicable to categorical data?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 365899974.329615, options = list()), class = c("learnr_radio", 
+    seed = 182031755.915235, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -2122,16 +2122,16 @@ learnr:::store_exercise_cache("aesthetics3", list(setup = "borders_data_plot <- 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetics-quiz-1", 
     question = structure("What is the command that controls the opacity of geoms?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_4e07b25", 
+    "character")), answers = list(structure(list(id = "lnr_ans_edbb3f", 
         option = "Alpha", value = "Alpha", label = structure("Alpha", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1ff768f", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4cbe2", 
         option = "Beta", value = "Beta", label = structure("Beta", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4459422", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b8434c2", 
         option = "Delta", value = "Delta", label = structure("Delta", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6111feb", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e0a218", 
         option = "Gamma", value = "Gamma", label = structure("Gamma", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2143,26 +2143,26 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetics-quiz-1-answer", question = "aesthetics-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the command that controls the opacity of geoms?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 2117759064.51384, options = list()), class = c("learnr_radio", 
+    seed = 1368319873.86283, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "aesthetics-quiz-2", 
     question = structure("What of these options can be used to account for overlapping data points (select 2)?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_2bf9d24", 
+    "character")), answers = list(structure(list(id = "lnr_ans_cd100d0", 
         option = "`position_dodge()`", value = "`position_dodge()`", 
         label = structure("<code>position_dodge()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_43e3f3e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a8fb3de", 
         option = "`position_jitter()`", value = "`position_jitter()`", 
         label = structure("<code>position_jitter()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8ef831d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5edc196", 
         option = "`position_move()`", value = "`position_move()`", 
         label = structure("<code>position_move()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4c816ba", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b36d2c3", 
         option = "`position_dance()`", value = "`position_dance()`", 
         label = structure("<code>position_dance()<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
@@ -2175,23 +2175,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "aesthetics-quiz-2-answer", question = "aesthetics-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat of these options can be used to account for overlapping data points (select 2)?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1507448686.29804, options = list()), class = c("learnr_checkbox", 
+    seed = 1773165647.17431, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "aesthetics-quiz-3", 
     question = structure("What could we use to add another dimension to our visualisation if the data item is continuous?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_19cae88", 
+    "character")), answers = list(structure(list(id = "lnr_ans_8d1384b", 
         option = "Fill", value = "Fill", label = structure("Fill", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_1376054", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_697d7e4", 
         option = "Shape", value = "Shape", label = structure("Shape", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8f7eaf0", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8a1cea", 
         option = "Line Type", value = "Line Type", label = structure("Line Type", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cca987", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_495afd7", 
         option = "Texture", value = "Texture", label = structure("Texture", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -2203,7 +2203,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "aesthetics-quiz-3-answer", question = "aesthetics-quiz-3"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat could we use to add another dimension to our visualisation if the data item is continuous?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1114388378.48107, options = list()), class = c("learnr_radio", 
+    seed = 1566708926.77044, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
