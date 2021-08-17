@@ -1516,7 +1516,7 @@ kableExtra::kbl(theme_builtin_table) %>%
 
 </br>
 
-Outisde of the built-in themes, there are also packages with additional themes. The [`ggthemes`](https://mran.microsoft.com/snapshot/2017-02-04/web/packages/ggthemes/vignettes/ggthemes.html) package for instance has many themes to simplify the process of creating visually appealing plots. *PHS is also in the process of creating its own themes package.*
+Outside of the built-in themes, there are also packages with additional themes. The [`ggthemes`](https://mran.microsoft.com/snapshot/2017-02-04/web/packages/ggthemes/vignettes/ggthemes.html) package for instance has many themes to simplify the process of creating visually appealing plots. *PHS is also in the process of creating its own themes package.*
 
 
 ## Interactivity
