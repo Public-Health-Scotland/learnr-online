@@ -64,3 +64,9 @@ img {
   min-width: 350px;
   padding-bottom: 10px;
 }
+
+.building-blocks {
+  float: left;
+  width: 400px;
+  padding-top: 10px;
+}

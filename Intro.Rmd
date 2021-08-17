@@ -86,17 +86,34 @@ quiz(
 
 ## Foundations
 
+We're going to start with a high-level overview of programming concepts which will help lay the foundations for building your R skills. We'll then build on these concepts with the specific syntax in R, hopefully having some fun along the way. This graphic shows the structure of the concepts and how they come together to form a program:
+
+<div class = "building-blocks">
+```{r foundations-buildingblocks, echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/r-foundations-buildingblocks.png")
+```
+</div>
+
+1. **Basic data types** - representing fundamental data, like numbers and text.
+
+2. **Complex data types** - taking basic data types and forming more complex, composite data types, e.g. tables.
+
+3. **Variables** - named storage to track "objects" across a program.
+
+4. **Statements** - a complete line of code, made of expressions and operators.
+
+5. **Control Flow** - branching (if statements) and iteration (loops).
+
+6. **Functions** - reusable chunks of code that can take inputs and give outputs.
+
+</br>
+
+
+### R Foundations
+
 Base R is the fundamental language and what we'll explore in this section. 
 
-On top of base R are packages. Packages are bundles of code to expand the functionality of base R; we look at a couple of these later in the course. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own package too, `phsmethods` (a bundle of functions that are common for PHS staff).
-
-It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.
-
-```{r foundations-rstructure, echo=FALSE, fig.align='center', out.width="100%"}
-knitr::include_graphics("images/r-foundations-structure.png")
-```
-
-### Input
+#### Anatomy of a Program
 
 Below is an example of R code, it includes various types of R syntax:
 
@@ -125,6 +142,21 @@ grade_result(
 )
 ```
 
+</br>
+
+#### Style Guide
+
+Maintaining a style guide ensures that code can be more easily shared and understood. The [PHS R Style Guide](https://github.com/Public-Health-Scotland/R-Resources/blob/master/PHS%20R%20style%20guide.md) is the style guidance for everyone using R within PHS. It is designed to allow flexibility for working across different projects but is detailed enough to provide benefit.
+
+A couple of high-level important points to take forward:
+
+* **Naming** - variables and filenames should have meaningful names in *`snake_case`* format, preferring all lower case.
+* **Structure**:
+    * Spaces after commas (just like in English prose).
+    * No spaces before or after parenthesis.
+    * Comments are used to explain code and create sections/structure.
+    * Prefer `"` over `'` for character strings.
+
 ### Basic Data Types
 
 R has some basic/primitive data types:
@@ -142,7 +174,9 @@ is.numeric(123.5)
 print(typeof(2 + 2i))
 ```
 
-### Type Conversion
+</br>
+
+#### Type Conversion
 
 It's sometimes necessary to convert from one basic data type to another. For example, we may receive a data-set with Boolean values stored as `1` and `0` or lowercase `true` and `false`. The function `as.<data_type>()` performs this function for us with some considerations required:
 
@@ -158,7 +192,9 @@ as.numeric("123.5")
 as.logical("False")
 ```
 
-### Operators
+</br>
+
+#### Operators
 
 These operators are common to most programming languages. The table shows the appropriate R syntax in the ‘operator’ column and are shown in order of operation/precedence. In terms of precedence, it is advisable to use brackets to avoid anything ambiguous.
 
@@ -173,7 +209,43 @@ knitr::kable(operators_table)
 
 ```
 
-### Data Structures
+</br>
+
+### Knowledge Check
+
+```{r foundations-basics-quiz}
+quiz(
+  question("What would `typeof(as.logical(0))` return and what is its value?",
+           answer("Numeric - `0`"),
+           answer('Character - `"0"`'),
+           answer("Logical - `TRUE`"),
+           answer("Logical - `FALSE`", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("If `x = 5`, what does this return: `x < 10 || x == 4`?",
+           answer("TRUE", correct = TRUE),
+           answer("FALSE"),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("What makes an **invalid** name for a variable?",
+           answer("Starting with an underscore (`_`)", correct = TRUE),
+           answer("Starting with a dot (`.`)"),
+           answer("Symbols other than an underscore (`_`) or dot (`.`)", correct = TRUE),
+           answer("Starting with a number", correct = TRUE),
+           answer("Reserved names, e.g. `TRUE`", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           )
+)
+```
+
+
+## Data Structures
 
 This is a list of the main data structures (complex data types) available in R:
 
@@ -198,6 +270,8 @@ c("a", "c", "f", "b")[1]
 c(2, 5, 1, "abc")[2]
 ```
 
+</br>
+
 #### Lists
 
 * Create: `list(...)`
@@ -210,6 +284,8 @@ Have a look and click 'Run Code' below to see the output.
 list("abc", 4, FALSE, 2.5)[1:2]
 list(list(2, 3), "abc")[2]
 ```
+
+</br>
 
 ##### Naming Lists
 
@@ -228,6 +304,8 @@ names(x) <- c("Char", "Num")
 x$Char
 ```
 
+</br>
+
 #### Matrices
 
 * Create: `matrix(<data>, nrow = <int>, ncol = <int>)`
@@ -240,6 +318,8 @@ x <- matrix(1:6, 2, 3)
 x
 x[2, 3]
 ```
+
+</br>
 
 #### Factors
 
@@ -255,6 +335,8 @@ factor_ex <- factor(factor_ex, levels = c("low", "medium", "high"))
 levels(factor_ex)
 ```
 
+</br>
+
 #### Data Frames
 
 * Create: `data.frame("<name>" = <element(s)>)`
@@ -266,6 +348,7 @@ Have a look and click 'Run Code' below to see the output.
 ```{r foundations-structures-dataframe, exercise=TRUE}
 data.frame(name = c("Harry", "Sarah"), score = c(62, 91))
 ```
+
 
 ### Knowledge Check
 
@@ -308,6 +391,14 @@ quiz(
 
 
 ## Packages
+
+On top of base R are packages. Packages are bundles of code to expand the functionality of base R; we look at a couple of these later in the course. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own package too, `phsmethods` (a bundle of functions that are common for PHS staff).
+
+It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.
+
+```{r foundations-rstructure, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-foundations-structure.png")
+```
 
 Packages expand and improve the functionality of R with functions. Packages may be necessary for complex, repetitive, or exceptionally large tasks.
 

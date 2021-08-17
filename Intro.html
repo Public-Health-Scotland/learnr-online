@@ -150,12 +150,24 @@ The course will also show progress through sections, a green tick will appear on
 </div>
 <div id="section-foundations" class="section level2">
 <h2>Foundations</h2>
+<p>We’re going to start with a high-level overview of programming concepts which will help lay the foundations for building your R skills. We’ll then build on these concepts with the specific syntax in R, hopefully having some fun along the way. This graphic shows the structure of the concepts and how they come together to form a program:</p>
+<div class="building-blocks">
+<p><img src="images/r-foundations-buildingblocks.png" width="75%" style="display: block; margin: auto;" /></p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p><strong>Basic data types</strong> - representing fundamental data, like numbers and text.</p></li>
+<li><p><strong>Complex data types</strong> - taking basic data types and forming more complex, composite data types, e.g. tables.</p></li>
+<li><p><strong>Variables</strong> - named storage to track “objects” across a program.</p></li>
+<li><p><strong>Statements</strong> - a complete line of code, made of expressions and operators.</p></li>
+<li><p><strong>Control Flow</strong> - branching (if statements) and iteration (loops).</p></li>
+<li><p><strong>Functions</strong> - reusable chunks of code that can take inputs and give outputs.</p></li>
+</ol>
+<p></br></p>
+<div id="section-r-foundations" class="section level3">
+<h3>R Foundations</h3>
 <p>Base R is the fundamental language and what we’ll explore in this section.</p>
-<p>On top of base R are packages. Packages are bundles of code to expand the functionality of base R; we look at a couple of these later in the course. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own package too, <code>phsmethods</code> (a bundle of functions that are common for PHS staff).</p>
-<p>It’s on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.</p>
-<p><img src="images/r-foundations-structure.png" width="100%" style="display: block; margin: auto;" /></p>
-<div id="section-input" class="section level3">
-<h3>Input</h3>
+<div id="section-anatomy-of-a-program" class="section level4">
+<h4>Anatomy of a Program</h4>
 <p>Below is an example of R code, it includes various types of R syntax:</p>
 <ul>
 <li><code># Hello World example</code> - <strong>comments</strong> are just for us humans and ignored by R. They help to aid understanding of code, think more “why” than “what”. Comments are created using the <code>#</code> symbol at the start of a line.</li>
@@ -172,6 +184,23 @@ hello_world &lt;- &quot;Hello World&quot;
 
 print(hello_world)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<p></br></p>
+</div>
+<div id="section-style-guide" class="section level4">
+<h4>Style Guide</h4>
+<p>Maintaining a style guide ensures that code can be more easily shared and understood. The <a href="https://github.com/Public-Health-Scotland/R-Resources/blob/master/PHS%20R%20style%20guide.md">PHS R Style Guide</a> is the style guidance for everyone using R within PHS. It is designed to allow flexibility for working across different projects but is detailed enough to provide benefit.</p>
+<p>A couple of high-level important points to take forward:</p>
+<ul>
+<li><strong>Naming</strong> - variables and filenames should have meaningful names in <em><code>snake_case</code></em> format, preferring all lower case.</li>
+<li><strong>Structure</strong>:
+<ul>
+<li>Spaces after commas (just like in English prose).</li>
+<li>No spaces before or after parenthesis.</li>
+<li>Comments are used to explain code and create sections/structure.</li>
+<li>Prefer <code>"</code> over <code>'</code> for character strings.</li>
+</ul></li>
+</ul>
 </div>
 </div>
 <div id="section-basic-data-types" class="section level3">
@@ -190,9 +219,9 @@ is.numeric(123.5)
 print(typeof(2 + 2i))</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
-</div>
-<div id="section-type-conversion" class="section level3">
-<h3>Type Conversion</h3>
+<p></br></p>
+<div id="section-type-conversion" class="section level4">
+<h4>Type Conversion</h4>
 <p>It’s sometimes necessary to convert from one basic data type to another. For example, we may receive a data-set with Boolean values stored as <code>1</code> and <code>0</code> or lowercase <code>true</code> and <code>false</code>. The function <code>as.&lt;data_type&gt;()</code> performs this function for us with some considerations required:</p>
 <ul>
 <li><code>as.character()</code> conversions tend to succeed without fault.</li>
@@ -206,9 +235,10 @@ as.numeric(&quot;123.5&quot;)
 as.logical(&quot;False&quot;)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 </div>
-<div id="section-operators" class="section level3">
-<h3>Operators</h3>
+<div id="section-operators" class="section level4">
+<h4>Operators</h4>
 <p>These operators are common to most programming languages. The table shows the appropriate R syntax in the ‘operator’ column and are shown in order of operation/precedence. In terms of precedence, it is advisable to use brackets to avoid anything ambiguous.</p>
 <table>
 <colgroup>
@@ -266,9 +296,40 @@ as.logical(&quot;False&quot;)</code></pre>
 </tr>
 </tbody>
 </table>
+<p></br></p>
 </div>
-<div id="section-data-structures" class="section level3">
-<h3>Data Structures</h3>
+</div>
+<div id="section-knowledge-check" class="section level3">
+<h3>Knowledge Check</h3>
+<p><div class="panel-heading tutorial-quiz-title"><span data-i18n="text.quiz">Quiz</span></div></p>
+<div class="panel panel-default">
+<div data-label="foundations-basics-quiz-1" class="tutorial-question panel-body">
+<div id="foundations-basics-quiz-1-answer_container" class="shiny-html-output"></div>
+<div id="foundations-basics-quiz-1-message_container" class="shiny-html-output"></div>
+<div id="foundations-basics-quiz-1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default">
+<div data-label="foundations-basics-quiz-2" class="tutorial-question panel-body">
+<div id="foundations-basics-quiz-2-answer_container" class="shiny-html-output"></div>
+<div id="foundations-basics-quiz-2-message_container" class="shiny-html-output"></div>
+<div id="foundations-basics-quiz-2-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default">
+<div data-label="foundations-basics-quiz-3" class="tutorial-question panel-body">
+<div id="foundations-basics-quiz-3-answer_container" class="shiny-html-output"></div>
+<div id="foundations-basics-quiz-3-message_container" class="shiny-html-output"></div>
+<div id="foundations-basics-quiz-3-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+</div>
+</div>
+<div id="section-data-structures" class="section level2">
+<h2>Data Structures</h2>
 <p>This is a list of the main data structures (complex data types) available in R:</p>
 <ul>
 <li><strong>Vectors</strong> contain multiple objects of the same basic class</li>
@@ -291,6 +352,7 @@ c(&quot;a&quot;, &quot;c&quot;, &quot;f&quot;, &quot;b&quot;)[1]
 c(2, 5, 1, &quot;abc&quot;)[2]</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 </div>
 <div id="section-lists" class="section level4">
 <h4>Lists</h4>
@@ -305,6 +367,7 @@ c(2, 5, 1, &quot;abc&quot;)[2]</code></pre>
 list(list(2, 3), &quot;abc&quot;)[2]</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 <div id="section-naming-lists" class="section level5">
 <h5>Naming Lists</h5>
 <p>It’s possible to name list items, this can be done during creation or after with the <code>names()</code> function.</p>
@@ -320,6 +383,7 @@ names(x) &lt;- c(&quot;Char&quot;, &quot;Num&quot;)
 x$Char</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 </div>
 </div>
 <div id="section-matrices" class="section level4">
@@ -335,6 +399,7 @@ x
 x[2, 3]</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 </div>
 <div id="section-factors" class="section level4">
 <h4>Factors</h4>
@@ -350,6 +415,7 @@ factor_ex &lt;- factor(factor_ex, levels = c(&quot;low&quot;, &quot;medium&quot;
 levels(factor_ex)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
+<p></br></p>
 </div>
 <div id="section-data-frames" class="section level4">
 <h4>Data Frames</h4>
@@ -364,8 +430,7 @@ levels(factor_ex)</code></pre>
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
 </div>
-</div>
-<div id="section-knowledge-check" class="section level3">
+<div id="section-knowledge-check-1" class="section level3">
 <h3>Knowledge Check</h3>
 <p><div class="panel-heading tutorial-quiz-title"><span data-i18n="text.quiz">Quiz</span></div></p>
 <div class="panel panel-default">
@@ -404,6 +469,9 @@ levels(factor_ex)</code></pre>
 </div>
 <div id="section-packages" class="section level2">
 <h2>Packages</h2>
+<p>On top of base R are packages. Packages are bundles of code to expand the functionality of base R; we look at a couple of these later in the course. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own package too, <code>phsmethods</code> (a bundle of functions that are common for PHS staff).</p>
+<p>It’s on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.</p>
+<p><img src="images/r-foundations-structure.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>Packages expand and improve the functionality of R with functions. Packages may be necessary for complex, repetitive, or exceptionally large tasks.</p>
 <p>To use packages, they must first be installed on your system. This only needs to be done once, it’s like installing new software on your computer. Packages are installed by using <code>install.packages("&lt;package_name&gt;")</code>.</p>
 <p>To utilise the functions within a package, they have to be loaded for each new session of R. This is done with <code>library(&lt;package_name&gt;)</code>. <em>Another function that loads packages is <code>require(&lt;package_name&gt;)</code>, however, this will not halt the execution of a program where an error occurs and is typically only used within other functions with supporting code.</em></p>
@@ -691,7 +759,7 @@ borders_data %&gt;%
   select(-Postcode)</code></pre>
 </div>
 </div>
-<div id="section-knowledge-check-1" class="section level3">
+<div id="section-knowledge-check-2" class="section level3">
 <h3>Knowledge Check</h3>
 <p>Let’s put some of your new knowledge into action. Using the <code>borders_data</code> data-set, answer the questions below.</p>
 <ul>
@@ -894,7 +962,7 @@ borders_data %&gt;%
 <pre class="text"><code>left_join(baby5, baby6, by = c(&quot;FAMILYID&quot;, &quot;DOB&quot;))</code></pre>
 </div>
 </div>
-<div id="section-knowledge-check-2" class="section level3">
+<div id="section-knowledge-check-3" class="section level3">
 <h3>Knowledge Check</h3>
 <p>Another opportunity to exercise your new skills:</p>
 <ul>
@@ -1064,27 +1132,27 @@ learnr:::store_exercise_setup_chunk("__setup__", c("# Author: Russell McCreath",
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "intro-quiz-1", 
     question = structure("Which of the following can R help to produce?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_ef7698c", 
+    "character")), answers = list(structure(list(id = "lnr_ans_612932f", 
         option = "Tidy Data", value = "Tidy Data", label = structure("Tidy Data", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_aafe29d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9a11d53", 
         option = "Dashboards", value = "Dashboards", label = structure("Dashboards", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8d0a073", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_26cb747", 
         option = "Static/Interactive Reports", value = "Static/Interactive Reports", 
         label = structure("Static/Interactive Reports", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3a38459", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f3e13f3", 
         option = "Web Apps", value = "Web Apps", label = structure("Web Apps", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2b7d0e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f5966f6", 
         option = "Magic", value = "Magic", label = structure("Magic", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("It may seem like R is magic but unfortunately not", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2debd18", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_82cf9e3", 
         option = "Databases", value = "Databases", label = structure("Databases", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_48b4a01", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4269f17", 
         option = "Presentations", value = "Presentations", label = structure("Presentations", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1096,7 +1164,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "intro-quiz-1-answer", question = "intro-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich of the following can R help to produce?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1671130804.22182, options = list()), class = c("learnr_checkbox", 
+    seed = 596494207.722236, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
@@ -1214,6 +1282,96 @@ learnr:::store_exercise_cache("foundations-type-conversion", list(setup = NULL, 
         "as.logical(\"False\")"), out.width.px = 624, out.height.px = 384, 
         params.src = "foundations-type-conversion, exercise=TRUE", 
         fig.num = 0, exercise.df_print = "paged"), engine = "r"))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-basics-quiz-1", 
+    question = structure("What would <code>typeof(as.logical(0))<\u002fcode> return and what is its value?", html = TRUE, class = c("html", 
+    "character")), answers = list(structure(list(id = "lnr_ans_88dbce4", 
+        option = "Numeric - `0`", value = "Numeric - `0`", label = structure("Numeric - <code>0<\u002fcode>", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9502517", 
+        option = "Character - `\"0\"`", value = "Character - `\"0\"`", 
+        label = structure("Character - <code>&quot;0&quot;<\u002fcode>", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2f86a25", 
+        option = "Logical - `TRUE`", value = "Logical - `TRUE`", 
+        label = structure("Logical - <code>TRUE<\u002fcode>", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_708a911", 
+        option = "Logical - `FALSE`", value = "Logical - `FALSE`", 
+        label = structure("Logical - <code>FALSE<\u002fcode>", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+    "character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+    "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+    "character")), try_again = structure("Not quite, have another go!", html = TRUE, class = c("html", 
+    "character")), incorrect = structure("Not quite, have another go!", html = TRUE, class = c("html", 
+    "character")), message = NULL, post_message = NULL), ids = list(
+        answer = "foundations-basics-quiz-1-answer", question = "foundations-basics-quiz-1"), 
+    loading = structure("<strong>Loading:<\u002fstrong> \nWhat would <code>typeof(as.logical(0))<\u002fcode> return and what is its value?\n<br/><br/><br/>", html = TRUE, class = c("html", 
+    "character")), random_answer_order = TRUE, allow_retry = TRUE, 
+    seed = 2060646726.54044, options = list()), class = c("learnr_radio", 
+"tutorial_question")))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-basics-quiz-2", 
+    question = structure("If <code>x = 5<\u002fcode>, what does this return: <code>x &lt; 10 || x == 4<\u002fcode>?", html = TRUE, class = c("html", 
+    "character")), answers = list(structure(list(id = "lnr_ans_769ceaf", 
+        option = "TRUE", value = "TRUE", label = structure("TRUE", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_49fd3f4", 
+        option = "FALSE", value = "FALSE", label = structure("FALSE", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+    "character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+    "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+    "character")), try_again = structure("Not quite, have another go!", html = TRUE, class = c("html", 
+    "character")), incorrect = structure("Not quite, have another go!", html = TRUE, class = c("html", 
+    "character")), message = NULL, post_message = NULL), ids = list(
+        answer = "foundations-basics-quiz-2-answer", question = "foundations-basics-quiz-2"), 
+    loading = structure("<strong>Loading:<\u002fstrong> \nIf <code>x = 5<\u002fcode>, what does this return: <code>x &lt; 10 || x == 4<\u002fcode>?\n<br/><br/><br/>", html = TRUE, class = c("html", 
+    "character")), random_answer_order = TRUE, allow_retry = TRUE, 
+    seed = 1482915250.30946, options = list()), class = c("learnr_radio", 
+"tutorial_question")))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "foundations-basics-quiz-3", 
+    question = structure("What makes an <strong>invalid<\u002fstrong> name for a variable?", html = TRUE, class = c("html", 
+    "character")), answers = list(structure(list(id = "lnr_ans_57997b8", 
+        option = "Starting with an underscore (`_`)", value = "Starting with an underscore (`_`)", 
+        label = structure("Starting with an underscore (<code>_<\u002fcode>)", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_72dc22b", 
+        option = "Starting with a dot (`.`)", value = "Starting with a dot (`.`)", 
+        label = structure("Starting with a dot (<code>.<\u002fcode>)", html = TRUE, class = c("html", 
+        "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c8391c6", 
+        option = "Symbols other than an underscore (`_`) or dot (`.`)", 
+        value = "Symbols other than an underscore (`_`) or dot (`.`)", 
+        label = structure("Symbols other than an underscore (<code>_<\u002fcode>) or dot (<code>.<\u002fcode>)", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3620459", 
+        option = "Starting with a number", value = "Starting with a number", 
+        label = structure("Starting with a number", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f4550c8", 
+        option = "Reserved names, e.g. `TRUE`", value = "Reserved names, e.g. `TRUE`", 
+        label = structure("Reserved names, e.g. <code>TRUE<\u002fcode>", html = TRUE, class = c("html", 
+        "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
+    "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+    "character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+    "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+    "character")), try_again = structure("Not quite, have another go!", html = TRUE, class = c("html", 
+    "character")), incorrect = structure("Not quite, have another go!", html = TRUE, class = c("html", 
+    "character")), message = NULL, post_message = NULL), ids = list(
+        answer = "foundations-basics-quiz-3-answer", question = "foundations-basics-quiz-3"), 
+    loading = structure("<strong>Loading:<\u002fstrong> \nWhat makes an <strong>invalid<\u002fstrong> name for a variable?\n<br/><br/><br/>", html = TRUE, class = c("html", 
+    "character")), random_answer_order = TRUE, allow_retry = TRUE, 
+    seed = 1089536046.49265, options = list()), class = c("learnr_checkbox", 
+"tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -1444,22 +1602,22 @@ learnr:::store_exercise_cache("foundations-structures-dataframe", list(setup = N
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-1", 
     question = structure("What will <code>c(&#39;abc&#39;, 5, TRUE, 123.5)[3]<\u002fcode> return?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_31f4089", 
+    "character")), answers = list(structure(list(id = "lnr_ans_88e9a50", 
         option = "`TRUE`", value = "`TRUE`", label = structure("<code>TRUE<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("This is a vector so only holds one basic data type.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_389ba4b", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5d278cc", 
         option = "`5`", value = "`5`", label = structure("<code>5<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_385c879", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a0167e7", 
         option = "`123.5`", value = "`123.5`", label = structure("<code>123.5<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system and this is a vector so only holds one basic data type.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_53ade17", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e37baea", 
         option = "`'123.5'`", value = "`'123.5'`", label = structure("<code>&#39;123.5&#39;<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system.", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9ac840e", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8db2162", 
         option = "`'TRUE'`", value = "`'TRUE'`", label = structure("<code>&#39;TRUE&#39;<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1471,27 +1629,27 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-1-answer", question = "foundations-structures-quiz-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat will <code>c(&#39;abc&#39;, 5, TRUE, 123.5)[3]<\u002fcode> return?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1076312863.4988, options = list()), class = c("learnr_radio", 
+    seed = 900894882.580488, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "foundations-structures-quiz-2", 
     question = structure("How do you return the second element from this list (not a sub-list)? (Select all that apply) <code>example_list &lt;- list(&#39;Number&#39; = 123, &#39;List&#39; = list(1, 2, 3), TRUE, FALSE)<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_136fc7a", 
+    "character")), answers = list(structure(list(id = "lnr_ans_6a201a4", 
         option = "`example_list[2]`", value = "`example_list[2]`", 
         label = structure("<code>example_list[2]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("Remember it&#39;s the element to be returned, not a sub-list", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_3d8ac6a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ca1dea3", 
         option = "`example_list[[2]]`", value = "`example_list[[2]]`", 
         label = structure("<code>example_list[[2]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_597ea57", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_76b1e76", 
         option = "`example_list$List`", value = "`example_list$List`", 
         label = structure("<code>example_list$List<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6ea0a52", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_92ee4ca", 
         option = "`c(1, 2, 3)`", value = "`c(1, 2, 3)`", label = structure("<code>c(1, 2, 3)<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1503,23 +1661,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "foundations-structures-quiz-2-answer", question = "foundations-structures-quiz-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nHow do you return the second element from this list (not a sub-list)? (Select all that apply) <code>example_list &lt;- list(&#39;Number&#39; = 123, &#39;List&#39; = list(1, 2, 3), TRUE, FALSE)<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1209116453.93696, options = list()), class = c("learnr_checkbox", 
+    seed = 1986743320.07485, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-3", 
     question = structure("What result did Zac get? <code>patient_list &lt;- data.frame(name = c(&#39;Tom&#39;, &#39;Jen&#39;, &#39;Zac&#39;, &#39;Kat&#39;), \n result = c(97.6, 54.3, 21.0, 83.8))<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_c10d5d", 
+    "character")), answers = list(structure(list(id = "lnr_ans_c47106d", 
         option = "97.6", value = "97.6", label = structure("97.6", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_96d9418", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_f9b7847", 
         option = "54.3", value = "54.3", label = structure("54.3", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_369ea32", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d38eeb", 
         option = "21.0", value = "21.0", label = structure("21.0", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5adf7b3", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7b17c92", 
         option = "83.8", value = "83.8", label = structure("83.8", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
@@ -1531,27 +1689,27 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-3-answer", question = "foundations-structures-quiz-3"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat result did Zac get? <code>patient_list &lt;- data.frame(name = c(&#39;Tom&#39;, &#39;Jen&#39;, &#39;Zac&#39;, &#39;Kat&#39;), \n result = c(97.6, 54.3, 21.0, 83.8))<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = TRUE, 
-    seed = 1463302774.8186, options = list()), class = c("learnr_radio", 
+    seed = 499725733.767297, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "foundations-structures-quiz-4", 
     question = structure("How do you get the 2nd, 3rd, and 4th item from this list? <code>example_list &lt;- list(&#39;x&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;y&#39;, &#39;z&#39;)<\u002fcode>", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_25b5bb0", 
+    "character")), answers = list(structure(list(id = "lnr_ans_9de2255", 
         option = "`example_list[2:4]`", value = "`example_list[2:4]`", 
         label = structure("<code>example_list[2:4]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_476c946", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_de743d6", 
         option = "`example_list[1:3]`", value = "`example_list[1:3]`", 
         label = structure("<code>example_list[1:3]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = structure("R has a 1-based indexing system", html = TRUE, class = c("html", 
         "character"))), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a5113b8", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7a12008", 
         option = "`example_list[[2:4]]`", value = "`example_list[[2:4]]`", 
         label = structure("<code>example_list[[2:4]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5afda4d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_93a7766", 
         option = "`example_list[[1:3]]`", value = "`example_list[[1:3]]`", 
         label = structure("<code>example_list[[1:3]]<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
@@ -1564,7 +1722,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "foundations-structures-quiz-4-answer", question = "foundations-structures-quiz-4"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nHow do you get the 2nd, 3rd, and 4th item from this list? <code>example_list &lt;- list(&#39;x&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;y&#39;, &#39;z&#39;)<\u002fcode>\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1179911808.45056, options = list()), class = c("learnr_radio", 
+    seed = 1666055805.22418, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
