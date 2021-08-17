@@ -390,17 +390,42 @@ quiz(
 ```
 
 
-## Packages
+## Functions & Packages
 
-On top of base R are packages. Packages are bundles of code to expand the functionality of base R; we look at a couple of these later in the course. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own package too, `phsmethods` (a bundle of functions that are common for PHS staff).
+#### Anatomy of a Function
+
+It's a good point here to have a look at how a function is created. This is at a high level and just to help understand what is happening when you utilise functions. 
+
+Functions, at a basic level, allow us to bundle code for reuse, taking inputs, doing something and providing outputs. 
+
+```
+<name> <- function(<inputs>){
+  <code>
+  return(<outputs>)
+}
+```
+The above shows a basic template of a function, below is a basic function. Have a look and determine what you think happens. Run the code and see if the output matches your expectations. Feel free to play around with the function code.
+
+```{r foundations-function-anatomy, exercise=TRUE}
+mult_2 <- function(x){
+  x <- x * 2
+  return(x)
+}
+
+mult_2(4)
+```
+
+</br>
+
+### Packages
+
+On top of base R are packages, these are bundles of code to expand the functionality of base R. This allows people to write and share functions that share expertise. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own suite of packages too, including `phsmethods` (a bundle of functions that are common for PHS staff) and `phsopendata` (functions for interacting with the Scottish Health and Social Care Open Data platform).
 
 It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.
 
 ```{r foundations-rstructure, echo=FALSE, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/r-foundations-structure.png")
 ```
-
-Packages expand and improve the functionality of R with functions. Packages may be necessary for complex, repetitive, or exceptionally large tasks.
 
 To use packages, they must first be installed on your system. This only needs to be done once, it's like installing new software on your computer. Packages are installed by using `install.packages("<package_name>")`. 
 
