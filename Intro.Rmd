@@ -477,6 +477,8 @@ PHS have developed a package, `phsmethods`, with the aim to tackle some of the m
 
 ## RStudio
 
+RStudio is the software we use to write and run R code, also known as an Integrated Development Environment (IDE). In PHS we have the [RStudio Server](https://rstudio.nhsnss.scot.nhs.uk/) which takes the processing strain away from your local machine and prevents the need to pull data to process or run analyses. Work is ongoing in the background to improve the infrastructure, maintain the highest security but also allowing new and innovative platforms for sharing our products and services. 
+
 ![](https://www.youtube.com/watch?v=n3uue28FD0w)
 
 
