@@ -64,3 +64,9 @@ img {
   min-width: 350px;
   padding-bottom: 10px;
 }
+
+.supporting-image-left {
+  float: left;
+  width: 400px;
+  padding-top: 10px;
+}

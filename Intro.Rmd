@@ -86,17 +86,34 @@ quiz(
 
 ## Foundations
 
+We're going to start with a high-level overview of programming concepts which will help lay the foundations for building your R skills. We'll then build on these concepts with the specific syntax in R, hopefully having some fun along the way. This graphic shows the structure of the concepts and how they come together to form a program:
+
+<div class = "supporting-image-left">
+```{r foundations-buildingblocks, echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/r-foundations-buildingblocks.png")
+```
+</div>
+
+1. **Basic data types** - representing fundamental data, like numbers and text.
+
+2. **Complex data types** - taking basic data types and forming more complex, composite data types, e.g. tables.
+
+3. **Variables** - named storage to track "objects" across a program.
+
+4. **Statements** - a complete line of code, made of expressions and operators.
+
+5. **Control Flow** - branching (if statements) and iteration (loops).
+
+6. **Functions** - reusable chunks of code that can take inputs and give outputs.
+
+</br>
+
+
+### R Foundations
+
 Base R is the fundamental language and what we'll explore in this section. 
 
-On top of base R are packages. Packages are bundles of code to expand the functionality of base R; we look at a couple of these later in the course. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own package too, `phsmethods` (a bundle of functions that are common for PHS staff).
-
-It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.
-
-```{r foundations-rstructure, echo=FALSE, fig.align='center', out.width="100%"}
-knitr::include_graphics("images/r-foundations-structure.png")
-```
-
-### Input
+#### Anatomy of a Program
 
 Below is an example of R code, it includes various types of R syntax:
 
@@ -125,6 +142,21 @@ grade_result(
 )
 ```
 
+</br>
+
+#### Style Guide
+
+Maintaining a style guide ensures that code can be more easily shared and understood. The [PHS R Style Guide](https://github.com/Public-Health-Scotland/R-Resources/blob/master/PHS%20R%20style%20guide.md) is the style guidance for everyone using R within PHS. It is designed to allow flexibility for working across different projects but is detailed enough to provide benefit.
+
+A couple of high-level important points to take forward:
+
+* **Naming** - variables and filenames should have meaningful names in *`snake_case`* format, preferring all lower case.
+* **Structure**:
+    * Spaces after commas (just like in English prose).
+    * No spaces before or after parenthesis.
+    * Comments are used to explain code and create sections/structure.
+    * Prefer `"` over `'` for character strings.
+
 ### Basic Data Types
 
 R has some basic/primitive data types:
@@ -142,7 +174,9 @@ is.numeric(123.5)
 print(typeof(2 + 2i))
 ```
 
-### Type Conversion
+</br>
+
+#### Type Conversion
 
 It's sometimes necessary to convert from one basic data type to another. For example, we may receive a data-set with Boolean values stored as `1` and `0` or lowercase `true` and `false`. The function `as.<data_type>()` performs this function for us with some considerations required:
 
@@ -158,7 +192,9 @@ as.numeric("123.5")
 as.logical("False")
 ```
 
-### Operators
+</br>
+
+#### Operators
 
 These operators are common to most programming languages. The table shows the appropriate R syntax in the ‘operator’ column and are shown in order of operation/precedence. In terms of precedence, it is advisable to use brackets to avoid anything ambiguous.
 
@@ -173,7 +209,43 @@ knitr::kable(operators_table)
 
 ```
 
-### Data Structures
+</br>
+
+### Knowledge Check
+
+```{r foundations-basics-quiz}
+quiz(
+  question("What would `typeof(as.logical(0))` return and what is its value?",
+           answer("Numeric - `0`"),
+           answer('Character - `"0"`'),
+           answer("Logical - `TRUE`"),
+           answer("Logical - `FALSE`", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("If `x = 5`, what does this return: `x < 10 || x == 4`?",
+           answer("TRUE", correct = TRUE),
+           answer("FALSE"),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("What makes an **invalid** name for a variable?",
+           answer("Starting with an underscore (`_`)", correct = TRUE),
+           answer("Starting with a dot (`.`)"),
+           answer("Symbols other than an underscore (`_`) or dot (`.`)", correct = TRUE),
+           answer("Starting with a number", correct = TRUE),
+           answer("Reserved names, e.g. `TRUE`", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           )
+)
+```
+
+
+## Data Structures
 
 This is a list of the main data structures (complex data types) available in R:
 
@@ -198,6 +270,8 @@ c("a", "c", "f", "b")[1]
 c(2, 5, 1, "abc")[2]
 ```
 
+</br>
+
 #### Lists
 
 * Create: `list(...)`
@@ -210,6 +284,8 @@ Have a look and click 'Run Code' below to see the output.
 list("abc", 4, FALSE, 2.5)[1:2]
 list(list(2, 3), "abc")[2]
 ```
+
+</br>
 
 ##### Naming Lists
 
@@ -228,6 +304,8 @@ names(x) <- c("Char", "Num")
 x$Char
 ```
 
+</br>
+
 #### Matrices
 
 * Create: `matrix(<data>, nrow = <int>, ncol = <int>)`
@@ -240,6 +318,8 @@ x <- matrix(1:6, 2, 3)
 x
 x[2, 3]
 ```
+
+</br>
 
 #### Factors
 
@@ -255,6 +335,8 @@ factor_ex <- factor(factor_ex, levels = c("low", "medium", "high"))
 levels(factor_ex)
 ```
 
+</br>
+
 #### Data Frames
 
 * Create: `data.frame("<name>" = <element(s)>)`
@@ -266,6 +348,7 @@ Have a look and click 'Run Code' below to see the output.
 ```{r foundations-structures-dataframe, exercise=TRUE}
 data.frame(name = c("Harry", "Sarah"), score = c(62, 91))
 ```
+
 
 ### Knowledge Check
 
@@ -307,9 +390,42 @@ quiz(
 ```
 
 
-## Packages
+## Functions & Packages
 
-Packages expand and improve the functionality of R with functions. Packages may be necessary for complex, repetitive, or exceptionally large tasks.
+#### Anatomy of a Function
+
+It's a good point here to have a look at how a function is created. This is at a high level and just to help understand what is happening when you utilise functions. 
+
+Functions, at a basic level, allow us to bundle code for reuse, taking inputs, doing something and providing outputs. 
+
+```
+<name> <- function(<inputs>){
+  <code>
+  return(<outputs>)
+}
+```
+The above shows a basic template of a function, below is a basic function. Have a look and determine what you think happens. Run the code and see if the output matches your expectations. Feel free to play around with the function code.
+
+```{r foundations-function-anatomy, exercise=TRUE}
+mult_2 <- function(x){
+  x <- x * 2
+  return(x)
+}
+
+mult_2(4)
+```
+
+</br>
+
+### Packages
+
+On top of base R are packages, these are bundles of code to expand the functionality of base R. This allows people to write and share functions that share expertise. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own suite of packages too, including `phsmethods` (a bundle of functions that are common for PHS staff) and `phsopendata` (functions for interacting with the Scottish Health and Social Care Open Data platform).
+
+It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.
+
+```{r foundations-rstructure, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-foundations-structure.png")
+```
 
 To use packages, they must first be installed on your system. This only needs to be done once, it's like installing new software on your computer. Packages are installed by using `install.packages("<package_name>")`. 
 
@@ -361,7 +477,35 @@ PHS have developed a package, `phsmethods`, with the aim to tackle some of the m
 
 ## RStudio
 
+RStudio is the software we use to write and run R code, also known as an Integrated Development Environment (IDE). In PHS we have the [RStudio Server](https://rstudio.nhsnss.scot.nhs.uk/) which takes the processing strain away from your local machine and prevents the need to pull data to process or run analyses. Work is ongoing in the background to improve the infrastructure, maintain the highest security but also allowing new and innovative platforms for sharing our products and services. 
+
 ![](https://www.youtube.com/watch?v=n3uue28FD0w)
+
+</br>
+
+### R Projects
+
+Using RStudio also gives us the use of R Projects. Using R Projects keeps our projects separate, giving the project its own working directory, workspace, and history. 
+
+Opening an .Rproj file will:
+
+* Start a new R session
+* Load project specifics and related settings
+* The project directory is set as the current working directory
+
+<div class = "supporting-image-left">
+```{r rstudio-newproj, echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/r-rstudio-newproj.png")
+```
+</div>
+
+To create a new R project, open this dialogue box by going to 'File > New Project...' or click 'Create a project' in the global toolbar.
+
+* **New Directory** - creates a new directory/folder in the place you specify with the .Rproj file inside.
+* **Existing Directory** - takes an existing directory/folder and associates the project there.
+* **Version Control** - this takes a project from version control (such as one on GitHub) and creates the directory/folder in the place you specify.
+
+</br>
 
 
 ## Data Flow
@@ -1019,7 +1163,11 @@ grade_result(
 ```
 
 
-## Visualise
+## Visualise & Output
+
+</br>
+
+#### Data Visualisation
 
 <div class = "tidyverse-logo">
 ```{r packages-ggplot2, echo=FALSE, fig.align='center', out.width="60%"}
@@ -1027,92 +1175,11 @@ knitr::include_graphics("images/r-packages-ggplot2.png")
 ```
 </div>
 
-Visualisations are incredibly valuable and the process for creating them is simplified with `ggplot2`, a system from creating graphics to visualise data.
+Visualisations are incredibly valuable. We primarily use the `ggplot2` package but also `plotly` as you start including interactivity. Both of these packages are built the same underlying grammar of graphics, giving us a clear structure on how to construct meaningful visualisations of our data.
 
-It begins with a call to `ggplot()`, supplying the data and aesthetic mappings, using `aes()`, then just add `layers`, `scales`, `coords`, and `facets` with `+`.
+**PHS Online Course**: [Data Visualisation in R](https://scotland.shinyapps.io/phs-learnr-dataviz/). 
 
-### Line Graph
-
-```{r line-graph, exercise=TRUE}
-# Define the data
-data <- data.frame(
-  x = c(1, 3, 2, 4),
-  y = c(4, 8, 7, 11))
-
-# Plot the data
-line_plot <- ggplot(data, aes(x, y)) +
-  geom_line() +
-  geom_point()
-
-line_plot
-```
-
-### Bar Plot
-
-```{r bar-plot, exercise=TRUE}
-bar_plot <- ggplot(borders_age_data) +
-  geom_bar(aes(x = admissionday))
-
-bar_plot
-```
-
-### Scatter Plot
-
-```{r scatter-plot, exercise=TRUE}
-scatter_plot <- ggplot(borders_age_data, aes(x = ageonadmission,
-                                        y = lengthofstay1)) +
-  geom_point()
-
-scatter_plot
-```
-
-### Customisation
-
-```{r custom-plot, exercise=TRUE}
-custom_bar_plot <- ggplot(borders_age_data) +
-  geom_bar(aes(x = admissionday),
-           fill = "magenta4",
-           width = 0.5) +
-  xlab("Admission Day") +
-  ylab("Number of Admissions") +
-  ggtitle("Distribution of Admissions")
-
-custom_bar_plot
-```
-
-### Knowledge Checking
-
-Using the loaded `borders_data` data-set:
-
-1. Filter the data-set to show only records from `HospitalCode` "B109H", name this new data-set "borders_b109h"
-2. Create a histogram for patient's `LengthOfStay`, call this plot "b109h_los_hist"
-3. Add axis labels and a title to your histogram
-
-```{r plots-exercise, exercise=TRUE}
-
-```
-
-``` {r plots-exercise-solution}
-# Filter the data for HospitalCode B109H
-borders_b109h <- borders_data %>%
-  filter(HospitalCode == "B109H")
-
-# Create a histogram for patient's LengthOfStay
-b109H_los_hist <- ggplot(borders_b109h) +
-  geom_histogram(aes(LengthOfStay)) +
-  # Add labels
-  ggtitle("Length Of Stay Histogram") +
-  xlab("Length Of Stay") +
-  ylab("Count")
-b109H_los_hist
-```
-
-```{r plots-exercise-check}
-grade_code()
-```
-
-
-## Output
+</br>
 
 #### RMarkdown
 
@@ -1122,7 +1189,9 @@ knitr::include_graphics("images/r-packages-rmarkdown.png")
 ```
 </div>
 
-RMarkdown allows for the production of fully reproducible documents, with R (and other language) 'chunks' included. It supports many static and dynamic outputs, including PDF, MS Word, HTML, books, presentation, even this course is written using RMarkdown (and Shiny). RMarkdown is currently used across PHS in RAP publications, infographics, and more.
+The `rmarkdown` package allows for the production of fully reproducible documents, with R (and other language) 'chunks' included. It supports many static and dynamic outputs, including PDF, MS Word, HTML, books, presentation, even this course is written using RMarkdown (and Shiny). RMarkdown is currently used across PHS in RAP publications, infographics, and more. 
+
+**PHS Online Course**: [Introduction to RMarkdown](https://scotland.shinyapps.io/phs-learnr-rmarkdown/).
  
 </br>
  
@@ -1134,7 +1203,9 @@ knitr::include_graphics("images/r-packages-shiny.png")
 ```
 </div>
 
-Shiny is used for building interactive web apps through R. It provides an interactive approach to sharing data and analyses and can be hosted online or embedded in RMarkdown documents. Shiny is used for some PHS publications and in development for more.
+When it comes to building interactive web apps, you're going to need the `shiny` package (with a lot of other supporting packages). This provides an interactive approach to sharing data and analyses and can be hosted online or embedded in RMarkdown documents. Shiny is used for some PHS publications and in development for more.
+
+**PHS Course**: *in development*.
 
 </br>
 </br>
@@ -1144,10 +1215,16 @@ Shiny is used for building interactive web apps through R. It provides an intera
 
 Now it's time to embed your new knowledge and skills, expand with related technologies (e.g. git), and when you're ready *Take R Further* with more training opportunities.
 
+#### Debugging
+
+1. **Review warnings/errors** - these can appear cryptic but use Google and some will become familiar. Checking the functions could help too - `?<function>`
+2. **Narrow the problem** - step through the code, isolating the issue to a specific chunk, line, or function.
+3. **Google/StackOverflow** - this can be specific to the bug or more general to the
+problem you’re trying to solve. You should tag queries with "[r]".
+4. **Pair up** - sometimes a fresh pair of eyes makes the difference (you might have just missed a comma). For a more general audience post a message on the R User Group [Technical Queries Teams channel](https://teams.microsoft.com/l/channel/19:9620ef6cf8234d50a0f95caba65a3edf@thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a).
+
 #### Help
 
-* Vignettes (Help) / `?<function_name>`
-* Google / Stack Overflow (tag queries with "[r]")
 * [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
 * [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
 
