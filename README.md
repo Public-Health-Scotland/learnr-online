@@ -18,11 +18,8 @@ These applications are hosted online and provide functionality around quizzes an
 ### Files
   * `.gitignore` - tells git what files and folders *not* to track or upload to GitHub
   * `DataViz.Rmd` - RMarkdown file containing all necessary code to build app for data viz course
-  * `DataViz.html` - generated HTML from building app for data viz course
   * `Intro.Rmd` - RMarkdown file containing all necessary code to build app for intro course
-  * `Intro.html` - generated HTML from building app for intro course
   * `PHSMethods.Rmd` - RMarkdown file containing all necessary code to build app for phsmethods course
-  * `PHSMethods.html` - generated HTML from building app for phsmethods course
   * `PHS-LearnR.Proj` - R project
   * `README.md` - this page
   * `LICENSE` - MIT License 
