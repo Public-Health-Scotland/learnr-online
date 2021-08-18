@@ -88,7 +88,7 @@ quiz(
 
 We're going to start with a high-level overview of programming concepts which will help lay the foundations for building your R skills. We'll then build on these concepts with the specific syntax in R, hopefully having some fun along the way. This graphic shows the structure of the concepts and how they come together to form a program:
 
-<div class = "building-blocks">
+<div class = "supporting-image-left">
 ```{r foundations-buildingblocks, echo=FALSE, fig.align='center', out.width="75%"}
 knitr::include_graphics("images/r-foundations-buildingblocks.png")
 ```
@@ -480,6 +480,32 @@ PHS have developed a package, `phsmethods`, with the aim to tackle some of the m
 RStudio is the software we use to write and run R code, also known as an Integrated Development Environment (IDE). In PHS we have the [RStudio Server](https://rstudio.nhsnss.scot.nhs.uk/) which takes the processing strain away from your local machine and prevents the need to pull data to process or run analyses. Work is ongoing in the background to improve the infrastructure, maintain the highest security but also allowing new and innovative platforms for sharing our products and services. 
 
 ![](https://www.youtube.com/watch?v=n3uue28FD0w)
+
+</br>
+
+### R Projects
+
+Using RStudio also gives us the use of R Projects. Using R Projects keeps our projects separate, giving the project its own working directory, workspace, and history. 
+
+Opening an .Rproj file will:
+
+* Start a new R session
+* Load project specifics and related settings
+* The project directory is set as the current working directory
+
+<div class = "supporting-image-left">
+```{r rstudio-newproj, echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/r-rstudio-newproj.png")
+```
+</div>
+
+To create a new R project, open this dialogue box by going to 'File > New Project...' or click 'Create a project' in the global toolbar.
+
+* **New Directory** - creates a new directory/folder in the place you specify with the .Rproj file inside.
+* **Existing Directory** - takes an existing directory/folder and associates the project there.
+* **Version Control** - this takes a project from version control (such as one on GitHub) and creates the directory/folder in the place you specify.
+
+</br>
 
 
 ## Data Flow
