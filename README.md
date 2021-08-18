@@ -25,6 +25,7 @@ These applications are hosted online and provide functionality around quizzes an
   * `PHSMethods.html` - generated HTML from building app for phsmethods course
   * `PHS-LearnR.Proj` - R project
   * `README.md` - this page
+  * `LICENSE` - MIT License 
 
 
 ## Get in touch
