@@ -1175,7 +1175,7 @@ knitr::include_graphics("images/r-packages-ggplot2.png")
 ```
 </div>
 
-Visualisations are incredibly valuable. We primarily use the `ggplot2` package but also `plotly` as you start including interactivity. Both of these packages are built the same underlying grammar of graphics, giving us a clear structure on how to construct meaningful visualisations of our data.
+Visualisations are incredibly valuable. We primarily use the `ggplot2` package but also `plotly` as you start including interactivity. Both of these packages are built on the same underlying grammar of graphics, giving us a clear structure on how to construct meaningful visualisations of our data.
 
 **PHS Online Course**: [Data Visualisation in R](https://scotland.shinyapps.io/phs-learnr-dataviz/). 
 
