@@ -26,6 +26,7 @@ tutorial_options(
 knitr::include_graphics("images/phs-logo.png")
 ```
 
+
 ## Introduction
 
 Welcome to an Introduction to Open Data. This course is designed as a self-led introduction to working with open data for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code.
@@ -43,8 +44,12 @@ Welcome to an Introduction to Open Data. This course is designed as a self-led i
 
 ### What is Open Data?
 
-Open data is publicly released information which is made __freely available to everyone to use and reuse__ in any way they like. Open data offers all those who want to make use of its potential an opportunity to make better decisions, improve and innovate. The released information is structured, able to be linked with other data and in a machine readable format that enables programmatical use of the data. Open data should never be patient identifiable and it should not disclose any personal information about individuals.
+Open data is the name for publicly released datea which is made __freely available to everyone to use and reuse__ in any way they like. With open data, anyone is able to make use of its potential: improving, innovating, and making better decisions. Open data is:
 
+* Structured data, 
+* Able to be linked with other data 
+* Machine readable 
+* **Never** patient identifiable and free of personal information
 
 </br>
 
@@ -67,24 +72,20 @@ quiz(
 )
 ```
 
+</br>
 
 ### Scottish Health and Social Care Open Data
 
-The [Scottish Health and Social Care Open Data Portal](opendata.nhs.scot) provides a single location for all health and social care organisations in Scotland to release open data. Health and social care organisations can use it to release and share any open dataset that meets the minimum requirements for open data as set out in the [Scottish Government Open Data Strategy](https://www.gov.scot/publications/open-data-strategy/). This strategy seeks to create a Scotland where non-personal and non-commercially sensitive data from public services is recognised as a resource for wider societal use and as such is made open in an intelligent manner and available for re-use by others.
+The [Scottish Health and Social Care Open Data Portal](opendata.nhs.scot) provides a single location for all health and social care organisations in Scotland to release open data. The minimum requirements for open data on this platform are set out in the [Scottish Government Open Data Strategy](https://www.gov.scot/publications/open-data-strategy/). This strategy seeks to create a Scotland where non-personal and non-commercially sensitive data from public services is recognised as a resource for wider societal use and as such is made open in an intelligent manner and available for re-use by others.
 
-A single platform for the Scottish Health and Social Care data makes it much easier for users to explore the rich health and care data landscape that exists in Scotland. Users of open data are from a wide range of backgrounds - from individual citizens, health and care professionals, government and public sector, academic researchers and private businesses. 
+Providing a single platform for the Scottish Health and Social Care data makes it much easier for users to explore the rich health and care data landscape that exists in Scotland. Users of open data are from a wide range of backgrounds: from individual citizens, health and care professionals, government and public sector, academic researchers and private businesses. 
 
-The Scottish Health and Social Care open data portal is managed by the Open Data team who are based within Public Health Scotland. Data is released on this platform under the [UK Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
-
-The Scottish Health and Social Care Open Data Portal is located at [https://www.opendata.nhs.scot/](https://www.opendata.nhs.scot/).
+The Scottish Health and Social Care open data portal is managed by the Open Data team, based within Public Health Scotland. Data is released on this platform under the [UK Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
 
-### CKAN
+#### CKAN
 
-Scottish Health and Social Care open data is hosted on a CKAN data portal, which is an open-source data management system with a fully-documented API (Application Programming Interface) allowing programmatical access to all the data hosted on the site. We'll dive deeper into the CKAN API later in this course.
-
-Public Health Scotland publish 3-star open data on this platform - this means the data is in a structured, non-proprietary format (ie csv files) and can be utilised by a wide range of users ranging from the general public to more technical users like data scientists and app developers.
-
+The Scottish Health and Social Care open data is hosted on a CKAN data portal. This is an open-source data management system with a fully-documented API (Application Programming Interface) allowing software access to all the data hosted on the site. We'll dive deeper into the CKAN API later in this course.
 
 
 ## Open Data Standards
