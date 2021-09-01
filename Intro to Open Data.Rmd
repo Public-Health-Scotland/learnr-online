@@ -44,9 +44,9 @@ Welcome to an Introduction to Open Data. This course is designed as a self-led i
 
 ### What is Open Data?
 
-Open data is the name for publicly released datea which is made __freely available to everyone to use and reuse__ in any way they like. With open data, anyone is able to make use of its potential: improving, innovating, and making better decisions. Open data is:
+Open data is the name for publicly released data which is made __freely available to everyone to use and reuse__ in any way they like. With open data, anyone is able to make use of its potential: improving, innovating, and making better decisions. Open data is:
 
-* Structured data, 
+* Structured data
 * Able to be linked with other data 
 * Machine readable 
 * **Never** patient identifiable and free of personal information
@@ -89,6 +89,16 @@ The Scottish Health and Social Care open data is hosted on a CKAN data portal. T
 
 
 ## Open Data Standards
+
+The 5-star Open Data scheme (developed by Tim Berners-Lee) is a way to measure how well data is integrated and made available for use. The levels are outlined below:
+
+* &#9733; - make your stuff available on the web (whatever format)
+* &#9733;&#9733; - make it available as structured data (e.g. excel instead of image scan of a table)
+* &#9733;&#9733;&#9733; - non-proprietary format (e.g. csv instead of excel)
+* &#9733;&#9733;&#9733;&#9733; - use URIs to identify things, so that people can point at your stuff
+* &#9733;&#9733;&#9733;&#9733;&#9733; - link your data to other data to provide context
+
+Public Health Scotland publish 3-star open data. This means the data is in a structured, non-proprietary format (i.e. csv files) and can be utilised by a wide range of users ranging from the general public to more technical users like data scientists and app developers.
 
 ### Components of Open Data
 
