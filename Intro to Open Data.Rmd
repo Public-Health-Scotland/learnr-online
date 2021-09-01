@@ -53,12 +53,12 @@ Since we're getting started, here's a quiz to get familiar with the layout:
 ```{r intro-quiz}
 quiz(
   question("Which of the following is true of open data?",
-    answer("It`s free", correct = TRUE),
+    answer("It's free", correct = TRUE),
     answer("Anyone can access it", correct = TRUE),
     answer("Data can be re-used", correct = TRUE),
     answer("You need permission to use it", correct = FALSE),
-    answer("It`s disclosive", message = "Open data is non-personal and non-commercially sensitive, adhering to data protection principles. Disclosure control can be applied as necessary."),
-    answer("It`s in a structured format", correct = TRUE),
+    answer("It's disclosive", message = "Open data is non-personal and non-commercially sensitive, adhering to data protection principles. Disclosure control can be applied as necessary."),
+    answer("It's in a structured format", correct = TRUE),
     answer("It can be shared", correct = TRUE),
     incorrect = "Not quite, have another go!",
     allow_retry = TRUE,
@@ -81,7 +81,7 @@ The Scottish Health and Social Care Open Data Portal is located at [https://www.
 
 ### CKAN
 
-Scottish Health and Social Care open data is hosted on a CKAN data portal, which is an open-source data management system with a fully-documented API (Application Programming Interface) allowing programmatical access to all the data hosted on the site. We`ll dive deeper into the CKAN API later in this course.
+Scottish Health and Social Care open data is hosted on a CKAN data portal, which is an open-source data management system with a fully-documented API (Application Programming Interface) allowing programmatical access to all the data hosted on the site. We'll dive deeper into the CKAN API later in this course.
 
 Public Health Scotland publish 3-star open data on this platform - this means the data is in a structured, non-proprietary format (ie csv files) and can be utilised by a wide range of users ranging from the general public to more technical users like data scientists and app developers.
 
@@ -491,7 +491,7 @@ quiz(
     allow_retry = TRUE,
     random_answer_order = TRUE
   ),
-  question("What does and open data file`s structure look like?",
+  question("What does and open data file's structure look like?",
     answer("Excel spreadsheet", correct = FALSE),
     answer("CSV format", correct = TRUE),
     answer("No special characters", correct = TRUE),
@@ -585,7 +585,7 @@ Some advantages to interacting with our open data through the CKAN API are:
 
 ### How can I interact with it?
 
-The CKAN DataStore offers an API for reading, searching and filtering data without the need to download the entire file first. Making a Data API request essentially consists of you posting a JSON dictionary in an HTTP POST request to an API URL, with the API also returning its response in a JSON dictionary. This may seem intimidating at first glance if you`re not familiar with HTTP or JSON. Luckily, many programming softwares and lanuages allow you to make API requests packaged in a more familiar fashion:
+The CKAN DataStore offers an API for reading, searching and filtering data without the need to download the entire file first. Making a Data API request essentially consists of you posting a JSON dictionary in an HTTP POST request to an API URL, with the API also returning its response in a JSON dictionary. This may seem intimidating at first glance if you're not familiar with HTTP or JSON. Luckily, many programming softwares and lanuages allow you to make API requests packaged in a more familiar fashion:
 
 * within R or RStudio
 * Python
@@ -646,7 +646,7 @@ paste(dataset_list)
 
 Note from the previous 'package_list' query that the dataset names used to identify a dataset differs from the title displayed on the open data platform. This is due to the fact that the title can be edited and may will contain spaces, while the identifying name remains constant - you may notice this is reflected in the dataset url as well - therefore crucial for consistency. Just for good measure, datastes also have a unique identifier too.
 
-Let`s look at an example dataset to illustrate:
+Let's look at an example dataset to illustrate:
 
 __Title__: Care Home Census
 
@@ -733,7 +733,7 @@ dataset_tags
 
 ### Extract a list of resources from a dataset {#list_res}
 
-Now that you found the dataset you are interested in, and read the relevant metadata, you are ready to see what resources - data files - are available. Luckily, the metadata contains this information, so all we have to do is extract this from the list object returned by the package_show query we use to get the dataset`s metadata. 
+Now that you found the dataset you are interested in, and read the relevant metadata, you are ready to see what resources - data files - are available. Luckily, the metadata contains this information, so all we have to do is extract this from the list object returned by the package_show query we use to get the dataset's metadata. 
 
 ```{r res_list, exercise=TRUE}
 res_list <- metadata$resources %>% 
@@ -814,9 +814,9 @@ gp_pop
 
 ## Exercise
 
-Let`s put all of this new-found knowledge to work! 
+Let's put all of this new-found knowledge to work! 
 
-Can you extract information on live births in NHS Lothian over the past 5 years? You`ll want to start by finding the relevant resource from the Births in Scottish Hospitals dataset, then filtering the data to only extract what you need. You can also rely on reference files to find the NHS Lothian locations we are interested in.
+Can you extract information on live births in NHS Lothian over the past 5 years? You'll want to start by finding the relevant resource from the Births in Scottish Hospitals dataset, then filtering the data to only extract what you need. You can also rely on reference files to find the NHS Lothian locations we are interested in.
 
 First, search for the relevant dataset on the platform to find the dataset id. We will use this subsequently to see what resources are available in the dataset.
 
@@ -870,7 +870,7 @@ res_list <- metadata$resources %>%
 grade_code()
 ```
 
-Note what geography information is available in this resource - remember our task is to find births information in NHS Lothian, so we`ll need to find all the council area codes that are within NHS Lothian. 
+Note what geography information is available in this resource - remember our task is to find births information in NHS Lothian, so we'll need to find all the council area codes that are within NHS Lothian. 
 
 ```{r filter_res4, exercise=TRUE}
 
@@ -948,7 +948,7 @@ The API is very flexible when combined with SQL queries, so you can do a whole l
 
 More detail about the CKAN API can also be found in the [CKAN docs](https://docs.ckan.org/en/latest/api/index.html).
 
-If you require further assistance, don`t hesitate to get in touch with the [PHS Open Data Team](mailto:phs.opendata@phs.scot). 
+If you require further assistance, don't hesitate to get in touch with the [PHS Open Data Team](mailto:phs.opendata@phs.scot). 
 
 
 
