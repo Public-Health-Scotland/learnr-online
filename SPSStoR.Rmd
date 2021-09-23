@@ -34,3 +34,52 @@ baby6 <- read_csv("www/data/Baby6.csv")
 ```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
 knitr::include_graphics("images/phs-logo.png")
 ```
+
+
+## Introduction
+
+Welcome to SPSS to R. This course is designed as a self-led introduction to converting SPSS to R for anyone in Public Health Scotland. The aim of this course is to bridge the understanding of each technology, giving translations where possible but generally supporting the transition. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
+
+This course aims to follow the path set out by the [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course, the structure of which is below. Both courses can be used at the same time and neither replaces the other.
+
+```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-intro-pathway-2.png")
+```
+
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
+### What is R?
+
+* A programming language widely used for data analysis, statistics, and graphics
+* Open source and available on all major operating systems
+* Has the functionality to go from raw data to interactive reports, web apps, and more
+* A part of the PHS analytical strategy
+
+</br>
+
+Since we're getting started, here's a quiz to get familiar with the layout:
+
+```{r intro-quiz}
+quiz(
+  question("Which of the following can R help to produce?",
+    answer("Tidy Data", correct = TRUE),
+    answer("Dashboards", correct = TRUE),
+    answer("Static/Interactive Reports", correct = TRUE),
+    answer("Web Apps", correct = TRUE),
+    answer("Magic", message = "It may seem like R is magic but unfortunately not"),
+    answer("Databases", correct = TRUE),
+    answer("Presentations", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
