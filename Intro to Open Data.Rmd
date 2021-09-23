@@ -203,17 +203,17 @@ kableExtra::kbl(long_table) %>%
 
 Column headers should fulfil the following requirements:
 
-*	Column field names must be meaningful, distinct, clear and in plain English.
-*	Column field names must be 48 or less characters in length, shortening should not result in misinterpretation.
-* Avoid use of abbreviations or cryptic names unless these are widely recognised abbreviations, such as NHS (National Health Service). All abbreviations and acronyms have to be fully explained in the data dictionary.
-*	Use Camel case – the practice of writing compound words or phrases such that each word or abbreviation in the middle of the phrase begins with a capital letter, with no intervening spaces or punctuation.  
-*	Do not use spaces, underscores or hyphens in column names.
-*	Do not use special characters such as ‘%’ or ‘+’. You may write the full word ‘Percentage’ or use common abbreviations such as ‘Pc’. If the special character is part of a construct, such as ‘50+’ or ‘5%’ it should be considered as one phrase and therefore translate to ‘50plus’ and ‘5pc’.  
+*	Meaningful, distinct, clear names in plain English.
+*	48 characters or less in length (shortening should not result in misinterpretation).
+* Avoid abbreviations or cryptic names, unless widely recognised, such as NHS (National Health Service). All abbreviations and acronyms have to be fully explained in the data dictionary.
+*	Use camel case – the practice of writing compound words or phrases such that each word or abbreviation in the middle of the phrase begins with a capital letter, with no intervening spaces or punctuation, e.g. "camelCase".
+*	No spaces, underscores or hyphens.
+*	Do not use special characters such as `%` or `+`. You may write the full word ‘Percentage’ or use common abbreviations such as ‘Pc’. If the special character is part of a construct, such as ‘50+’ or ‘5%’ it should be considered as one phrase and therefore translate to ‘50plus’ and ‘5pc’.  
 
 
 ###	Variable types
 
-A variable/column can only contain one data type. CKAN recognises data types as numeric or string upon upload to the platform. A column should never consist of a mixture of numeric cells with text cells. This means special characters cannot be used in numeric data columns (no asterisks, no N/A-s). If a dataset contains missing and/or suppressed values these should be displayed as an empty cell and coded in a separate ‘Qualifier column’ - more on using statistical qualifiers later. 
+A variable/column can only contain one data type. CKAN recognises data types as numeric or string upon upload to the platform. A column should never consist of a mixture of numeric cells with text cells. This means special characters cannot be used in numeric data columns (no asterisks (`*`), no `NA`s). If a dataset contains missing and/or suppressed values these should be displayed as an empty cell and coded in a separate ‘Qualifier column’ - more on using statistical qualifiers later. 
 
 Numeric values should always be plain numbers such as 12 or 1400.35. Do not use commas in values to increase readability for humans. As commas are used to separate columns in a CSV file values with a comma are exported as text field.
 
@@ -238,11 +238,11 @@ The most commonly used codes in Scottish Health and Social Care open data are:
 
 The header for health boards and other geography levels needs to encompass:
 
-*	Type of health board indicated, eg health board of residence (HBR), health board of treatment (HBT) etc.
-* Configuration is specified in the data dictionary and mentions the configuration used:  health board 2014, health board 2019, health board at time of event (which can be a mixture of both 2019, 2018 and 2014 configurations).
+*	Type of health board indicated, e.g. health board of residence (HBR), health board of treatment (HBT) etc.
+* Configuration is specified in the data dictionary and mentions the configuration used:  "health board 2014", "health board 2019", "health board at time of event" (which can be a mixture of both 2019, 2018 and 2014 configurations).
 * The corresponding health board names can be found in the reference files.
 
-Various types of Geography should not be listed in a shared column, as this both makes the data more difficult to understand and increases the risk of double counting. Data should be presented in an as granular way as possible with the smallest possible geography being used, considering confidentiality and suppression of small numbers. 
+Various types of Geography should not be listed in a shared column, as this both makes the data more difficult to understand and increases the risk of double counting. Data should be presented as granular as possible with the smallest possible geography being used, considering confidentiality and suppression of small numbers. 
 
 ```{r, echo=FALSE}
 wrong_geo_table <- data.frame(
@@ -254,7 +254,7 @@ kableExtra::kbl(wrong_geo_table) %>%
   kable_paper(full_width = FALSE)
 ```
 
-Where it makes sense to present the data on multiple levels, this should be done in separate files. The exception to this rule is the Scotland total. However, if this is included, it has to be made clear with the use of the qualifier ‘d’.
+Where it makes sense to present the data on multiple levels, this should be done in separate files. The exception to this rule is the Scotland total. However, if this is included, it has to be made clear with the use of the qualifier `d`.
 
 ```{r, echo=FALSE}
 hb_geo_table <- data.frame(
@@ -325,10 +325,10 @@ Blank fields, when left unexplained, risk confusion – particularly when the co
 * If the blank field represents zero, then the field should be zero.
 * If the blank field represents ‘not collected’ or ‘unknown’, then this should be a blank field and explained in a separate qualifier column, adjacent to the data column this is referring to.
 
-Equally important is consistency.
+Equally important is consistency:
 
-* If data is numeric, it should not also be presented as text within the same column. Blank fields should therefore not contain space “ “.
-* Fields containing “N/A”, “-” or “unknown” should not be mixed within a numeric column as this will make sorting and analysis difficult. 
+* If data is numeric, it should not also be presented as text within the same column. Blank fields should therefore not contain space: " ".
+* Fields containing "NA", "-" or "unknown" should not be mixed within a numeric column as this will make sorting and analysis more difficult. 
 
 Our advice is to follow the guidance of the Office for National Statistics on symbols in tables. This suggests the use of an extra column next to the data column the qualifier refers to. The column should have the identical name of the column it is referring to with the suffix QF (i.e. `NumberOfPatients` – `NumberOfPatientsQF` or `NewHires` - `NewHiresQF`). 
 
@@ -358,7 +358,11 @@ A full list of qualifiers can be found on https://www.opendata.nhs.scot/dataset/
 
 ### Calculated fields
 
-These data fields should be expanded to include each data component, especially when the creation of visualisations will rely upon this data. For example, if two figures were added together to create a summary value, you should include three columns: one for the first added value, a second column for the second added value, and a third column for the sum of the two.
+These data fields should be expanded to include each data component, especially when the creation of visualisations will rely upon this data. For example, if two figures were added together to create a summary value, you should include three columns: 
+
+1. for the first added value, 
+2. for the second added value, 
+3. and a the sum of the two added values.
 
 ```{r, echo=FALSE}
 calculated_table <- data.frame(
@@ -470,7 +474,6 @@ File names should remain consistent over time. This makes regular updates quicke
 
 ### Knowledge Check
 
-
 ```{r standards-quiz}
 quiz(
   question("Which of the following would be acceptable to use as column names in an open data file?",
@@ -561,35 +564,33 @@ Bespoke platforms:
 
 API stands for Application Programming Interface. It is a software intermediary that allows two applications, or computers, to talk to each other. In contrast to a user interface, which connects a computer to a person, an application programming interface connects computers or pieces of software to each other. 
 
-What makes API-s particularly valuable and useful is they are highly standardized (typically following HTTP or REST protocols), well-documented, accessible and thus developer-friendly.
+What makes APIs particularly valuable and useful is they are highly standardised (typically following HTTP or REST protocols), well-documented, accessible and thus developer-friendly.
 
 
 ### Why use the API?
 
-While most Web API-s will be used primarily by developers, interacting with open data via API can be a valuable and efficient solution for a wider audience as well.
+While most Web APIs will be used primarily by developers, interacting with open data via an API can be a valuable and efficient solution for a wider audience as well.
 
 Some advantages to interacting with our open data through the CKAN API are:
 
 * __speed__ - downloading multiple data files via API will be quicker than doing so manually
-
 * __efficiency__ - the API allows extraction of only the relevant chunks of data you are interested in, without having to download a full file
-
-* __automation__ - data extraction and subsquent manipulation can be easily automated when done via API
+* __automation__ - data extraction and subsequent manipulation can be easily automated when done via API
 
 
 ### How can I interact with it?
 
-The CKAN DataStore offers an API for reading, searching and filtering data without the need to download the entire file first. Making a Data API request essentially consists of you posting a JSON dictionary in an HTTP POST request to an API URL, with the API also returning its response in a JSON dictionary. This may seem intimidating at first glance if you're not familiar with HTTP or JSON. Luckily, many programming softwares and lanuages allow you to make API requests packaged in a more familiar fashion:
+The CKAN DataStore offers an API for reading, searching and filtering data without the need to download the entire file first. Making a Data API request essentially consists of you posting a JSON dictionary in an HTTP POST request to an API URL, with the API also returning its response in a JSON dictionary. This may seem intimidating at first glance if you're not familiar with HTTP or JSON. Luckily, a lot of software development tools and languages allow you to make API requests packaged in a more familiar fashion:
 
 * within R or RStudio
 * Python
 * Javascript
 * SQL
-* [Postman](https://www.postman.com/) or similar (an application specifically for building API calls)
+* [Postman](https://www.postman.com/) or similar software made specifically for building API calls.
 
 If you use R or python, check out the example scripts in our [github repository](https://github.com/Public-Health-Scotland/Open-Data) for extracting open data via the Data API. 
 
-The [CKAN API documentation](https://docs.ckan.org/en/latest/api/index.html) also contains further examples in python and Javascript, as well as SQL queries.
+The [CKAN API documentation](https://docs.ckan.org/en/latest/api/index.html) also contains further examples in Python and Javascript, as well as SQL queries.
 
 In this course, we will show you how to interact with the open data via API through R.
 
@@ -634,7 +635,7 @@ paste(dataset_list)
 
 ### Dataset name, title and id
 
-Note from the previous 'package_list' query that the dataset names used to identify a dataset differs from the title displayed on the open data platform. This is due to the fact that the title can be edited and may will contain spaces, while the identifying name remains constant - you may notice this is reflected in the dataset url as well - therefore crucial for consistency. Just for good measure, datastes also have a unique identifier too.
+Note from the previous 'package_list' query that the dataset names used to identify a dataset differs from the title displayed on the open data platform. This is due to the fact that the title can be edited and may contain spaces, while the identifying name remains constant - you may notice this is reflected in the dataset URL as well, therefore, crucial for consistency. Just for good measure, datasets also have a unique identifier too.
 
 Let's look at an example dataset to illustrate:
 
@@ -687,7 +688,7 @@ tag_query_datasets <- package_search(fq = 'tags:alcohol', as = "table")
 
 ### Extract metadata {#metadata}
 
-Once you have identified the dataset you are interested in, you can use the dataset identifier or the dataset name to pull all the metadata information available. Note, here again you will need to use the `name` rather than the `display_name` variable for this - to avoid mixing these up, we recommend relying on the dataset id instead. The `package_show` function from the `ckanr` package provides an easy way to extract this information as a list object, which you can then transform into a friendlier table format to view the metadata. 
+Once you have identified the dataset you are interested in, you can use the dataset identifier or the dataset name to pull all the metadata information available. Note, here again you will need to use the `name` rather than the `display_name` variable for this - to avoid mixing these up, we recommend relying on the dataset ID instead. The `package_show` function from the `ckanr` package provides an easy way to extract this information as a list object, which you can then transform into a friendlier table format to view the metadata. 
 
 ```{r metadata, exercise=TRUE}
 metadata <- package_show(id = "covid-19-vaccination-in-scotland", url = "https://www.opendata.nhs.scot/", as = "table")
@@ -726,7 +727,7 @@ dataset_tags
 
 ### Extract a list of resources from a dataset {#list_res}
 
-Now that you found the dataset you are interested in, and read the relevant metadata, you are ready to see what resources - data files - are available. Luckily, the metadata contains this information, so all we have to do is extract this from the list object returned by the package_show query we use to get the dataset's metadata. 
+Now that you found the dataset you are interested in, and read the relevant metadata, you are ready to see what resources - data files - are available. Luckily, the metadata contains this information, so all we have to do is extract this from the list object returned by the `package_show` query we use to get the dataset's metadata. 
 
 ```{r res_list, exercise=TRUE}
 res_list <- metadata$resources %>% 
@@ -739,7 +740,7 @@ res_list
 
 ### Download a resource (data file) {#get_res}
 
-Once you have explored the available datasets and are familiar with the metadata - it is time to get to the most exciting part: the data itself. This is also where things become more flexible, as there are several ways to extract data from a resource depending on what you want:
+Once you have explored the available datasets and are familiar with the metadata, it is time to get to the most exciting part: the data itself. This is also where things become more flexible, as there are several ways to extract data from a resource depending on what you want:
 
 1. Download the data file, with the option to retrieve a specific number of rows
 
@@ -790,9 +791,9 @@ filtered_data
 
 ### Download all resources from a dataset {#get_dataset}
 
-If you are interested in several resources from a dataset, it can be more efficient to download all resources in one go rather than having to extract each resource individually. This can be done by first extracting the [list of resources](#list_res) from the dataset metadata, then looping through these resource id-s to [download the data](#get_res). 
+If you are interested in several resources from a dataset, it can be more efficient to download all resources in one go rather than having to extract each resource individually. This can be done by first extracting the [list of resources](#list_res) from the dataset metadata, then looping through these resource IDs to [download the data](#get_res). 
 
-In some cases, you may also want to merge the resources into a single dataframe - for example, linking up GP Practice Population files from all quarters published, or all geography codes and labels reference files into a single lookup.
+In some cases, you may also want to merge the resources into a single data-frame - for example, linking up GP Practice Population files from all quarters published, or all geography codes and labels reference files into a single lookup.
 
 The [`get_dataset`](https://github.com/Public-Health-Scotland/phsopendata/blob/master/R/get_dataset.R) function in the [`phsopendata`](hhttps://github.com/Public-Health-Scotland/phsopendata) package can be used to do this, using the dataset name to identify the dataset to retrieve. Note, the dataset name will differ from the display name that appears as the dataset title - you can either extract the dataset name from the [metadata via API](#metadata), or navigate to the dataset in your browser and select the dataset name from the URL:
 opendata.nhs.scot/dataset/ __geography-codes-and-labels__
@@ -813,7 +814,7 @@ Let's put all of this new-found knowledge to work!
 
 Can you extract information on live births in NHS Lothian over the past 5 years? You'll want to start by finding the relevant resource from the Births in Scottish Hospitals dataset, then filtering the data to only extract what you need. You can also rely on reference files to find the NHS Lothian locations we are interested in.
 
-First, search for the relevant dataset on the platform to find the dataset id. We will use this subsequently to see what resources are available in the dataset.
+First, search for the relevant dataset on the platform to find the dataset ID. We will use this subsequently to see what resources are available in the dataset.
 
 ```{r filter_res1, exercise=TRUE}
 
