@@ -1,0 +1,36 @@
+---
+title: "SPSS to R"
+output: 
+  learnr::tutorial:
+    css: "css/style.css"
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+# Author: Russell McCreath
+# Original Date: Oct 2020
+# Version of R: 3.6.1
+
+library(learnr)
+library(gradethis)
+library(stringr)
+library(readr)
+library(haven)
+library(dplyr)
+knitr::opts_chunk$set(echo = FALSE)
+
+tutorial_options(
+  exercise.checker = gradethis::grade_learnr
+)
+
+borders_data <- readRDS("www/data/borders.rds")
+borders_age_data <- read_csv("www/data/BORDERS (inc Age).csv")
+baby5 <- read_csv("www/data/Baby5.csv")
+baby6 <- read_csv("www/data/Baby6.csv")
+```
+
+```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
+knitr::include_graphics("images/phs-logo.png")
+```
