@@ -42,6 +42,7 @@ Welcome to an Introduction to Open Data. This course is designed as a self-led i
   </div>
 </br>
 
+
 ### What is Open Data?
 
 Open data is the name for publicly released data which is made __freely available to everyone to use and reuse__ in any way they like. With open data, anyone is able to make use of its potential: improving, innovating, and making better decisions. Open data is:
@@ -74,6 +75,7 @@ quiz(
 
 </br>
 
+
 ### Scottish Health and Social Care Open Data
 
 The [Scottish Health and Social Care Open Data Portal](opendata.nhs.scot) provides a single location for all health and social care organisations in Scotland to release open data. The minimum requirements for open data on this platform are set out in the [Scottish Government Open Data Strategy](https://www.gov.scot/publications/open-data-strategy/). This strategy seeks to create a Scotland where non-personal and non-commercially sensitive data from public services is recognised as a resource for wider societal use and as such is made open in an intelligent manner and available for re-use by others.
@@ -100,23 +102,21 @@ The 5-star Open Data scheme (developed by Tim Berners-Lee) is a way to measure h
 
 Public Health Scotland publish 3-star open data. This means the data is in a structured, non-proprietary format (i.e. csv files) and can be utilised by a wide range of users ranging from the general public to more technical users like data scientists and app developers.
 
+
 ### Components of Open Data
 
 Publishing open data doesn't simply translate to dumping your data as is out in the world expecting everyone to understand it and use it in an appropriate way. Including the actual data files themselves, various other components create what we call an 'open dataset':
 
-* __Data file__ - The data must be a machine-readable CSV file, and formatted according to uniform technical standards.
-
-* __Metadata__ - Metadata describes characteristics and attributes of the data (eg who, what, where, why, how). It contextualises the data and explains what it represents. Providing accurate and comprehensive metadata alongside open data files is crucial to giving users a comprehensive understanding of the dataset enabling them to make the best use of your data file. It also makes finding content and data faster and easier. Metadata facilitates data discovery and linkage across relevant and different data sources. 
-
-* __Data dictionary__ - The Data Dictionary defines and explains the columns that make up each dataset. A data dictionary template is automatically generated on the platform after uploading a dataset. A consistent, standardised vocabulary helps the end-user to fully understand the information contained within the dataset.
-
-* __Supplementary documents__ - This could include a report specific to the data, explanatory documentation, a description of research benefits, survey findings, or information on data collection tools.
-
-Before making a dataset available, the Open Data team at Public Health Scotland also requires a completed approval form, signed by all required parties. It is important for the data provider to demonstrate that their data has been approved for public release and to confirm compliance with data protection and confidentiality.
-
 ```{r components, echo=FALSE, fig.align='center', out.width="90%"}
 knitr::include_graphics("images/components.JPG")
 ```
+
+* __Data file__ - The data must be a machine-readable CSV file, and formatted according to uniform technical standards.
+* __Metadata__ - Metadata describes characteristics and attributes of the data (eg who, what, where, why, how). It contextualises the data and explains what it represents. Providing accurate and comprehensive metadata alongside open data files is crucial to giving users a comprehensive understanding of the dataset enabling them to make the best use of your data file. It also makes finding content and data faster and easier. Metadata facilitates data discovery and linkage across relevant and different data sources. 
+* __Data dictionary__ - The Data Dictionary defines and explains the columns that make up each dataset. A data dictionary template is automatically generated on the platform after uploading a dataset. A consistent, standardised vocabulary helps the end-user to fully understand the information contained within the dataset.
+* __Supplementary documents__ - This could include a report specific to the data, explanatory documentation, a description of research benefits, survey findings, or information on data collection tools.
+
+Before making a dataset available, the Open Data team at Public Health Scotland also requires a completed approval form, signed by all required parties. It is important for the data provider to demonstrate that their data has been approved for public release and to confirm compliance with data protection and confidentiality.
 
 
 ```{r components-quiz}
@@ -150,21 +150,17 @@ quiz(
 
 Requirements:
 
-* CSV - Files should be produced in CSV format.
-
-* No formatting - Files should not be specially formatted before creating a CSV as this can lead to errors in the file structure. Style elements cannot be stored in CSV files. Avoid drop down lists and filters.
-
-* No merged cells - You must not include merged cells in your file. They cannot be reproduced in a CSV. Each column needs to have a unique header, contained in the top row, defining the data. 
-
-* No multiple items in cells - A cell may contain only one item of information; multiple lines within a cell will cause the import process to fail. Cells that contain collections of data are impossible to evaluate and could cause problems for end-users of your data.
-
-* No multi-row headers - Data should only contain one header row. Multi-row headers are not acceptable.
-
-* No blank rows/columns - Care must be taken to ensure that any blank rows/columns have been removed prior to creating your CSV files. Empty rows and empty columns among the data will not be accepted. Empty rows adversely impact sorting and analysis, and empty columns adversely impact initial import and refresh.  An easy way to check any blank rows or cells is opening your csv file in a text editor such as Notepad, and looking for a column of commas or a row of commas at the end of the document, indicating the presence of blank rows/columns.
+* __CSV__ - Files should be produced in CSV format.
+* __No formatting__ - Files should not be specially formatted before creating a CSV as this can lead to errors in the file structure. Style elements cannot be stored in CSV files. Avoid drop down lists and filters.
+* __No merged cells__ - You must not include merged cells in your file. They cannot be reproduced in a CSV. Each column needs to have a unique header, contained in the top row, defining the data. 
+* __No multiple items in cells__ - A cell may contain only one item of information; multiple lines within a cell will cause the import process to fail. Cells that contain collections of data are impossible to evaluate and could cause problems for end-users of your data.
+* __No multi-row headers__ - Data should only contain one header row. Multi-row headers are not acceptable.
+* __No blank rows/columns__ - Care must be taken to ensure that any blank rows/columns have been removed prior to creating your CSV files. Empty rows and empty columns among the data will not be accepted. Empty rows adversely impact sorting and analysis, and empty columns adversely impact initial import and refresh.  An easy way to check any blank rows or cells is opening your csv file in a text editor such as Notepad, and looking for a column of commas or a row of commas at the end of the document, indicating the presence of blank rows/columns.
 
 Individual files should be kept compact by avoiding duplication which will reduce the time needed to download the data. One way of doing this is to exclude information that is already provided on the platform in the reference files such as geographies, hospitals and specialities. 
 
 Datasets containing multiple independent categories should be split by those categories, for example ‘by age’, ‘by deprivation’, ‘by council area’. This helps to avoid accidental double-counting and allows better understanding of the data.
+
 
 ### Orientation
 
@@ -208,22 +204,19 @@ kableExtra::kbl(long_table) %>%
 Column headers should fulfil the following requirements:
 
 *	Column field names must be meaningful, distinct, clear and in plain English.
-
 *	Column field names must be 48 or less characters in length, shortening should not result in misinterpretation.
-
 * Avoid use of abbreviations or cryptic names unless these are widely recognised abbreviations, such as NHS (National Health Service). All abbreviations and acronyms have to be fully explained in the data dictionary.
-
 *	Use Camel case – the practice of writing compound words or phrases such that each word or abbreviation in the middle of the phrase begins with a capital letter, with no intervening spaces or punctuation.  
-
 *	Do not use spaces, underscores or hyphens in column names.
-
 *	Do not use special characters such as ‘%’ or ‘+’. You may write the full word ‘Percentage’ or use common abbreviations such as ‘Pc’. If the special character is part of a construct, such as ‘50+’ or ‘5%’ it should be considered as one phrase and therefore translate to ‘50plus’ and ‘5pc’.  
+
 
 ###	Variable types
 
 A variable/column can only contain one data type. CKAN recognises data types as numeric or string upon upload to the platform. A column should never consist of a mixture of numeric cells with text cells. This means special characters cannot be used in numeric data columns (no asterisks, no N/A-s). If a dataset contains missing and/or suppressed values these should be displayed as an empty cell and coded in a separate ‘Qualifier column’ - more on using statistical qualifiers later. 
 
 Numeric values should always be plain numbers such as 12 or 1400.35. Do not use commas in values to increase readability for humans. As commas are used to separate columns in a CSV file values with a comma are exported as text field.
+
 
 ###	Coding conventions
 
@@ -234,15 +227,10 @@ Any codes used in open data need to be available for look-up in a reference file
 The most commonly used codes in Scottish Health and Social Care open data are:
 
 * __geography codes__ - Standard codes consist of a nine digit alpha-numeric code, and are referred to as GSS codes where the GSS refers to Government Statistical Service. Some additional, non-standard codes are also used by the NHS for reporting on other categories (eg. special health boards, residential categories). These are separate from the GSS codes and are found in the [Non-standard Geography Codes and Labels](https://www.opendata.nhs.scot/dataset/non-standard-geography-codes-and-labels) reference dataset.
-
 * __practice details__ - Various reference files for Dental Practices and General Practices, including address and contact information, practice list sizes and practice population information
-
 * __population__ - Population estimates and projections for all geographies in Scotland, and standardised populations.
-
 * __deprivation__ - Scottish Index of Multiple Deprivation (population weighted)
-
 * __location codes__ - Location codes used alongside geography areas, such as: Hospital locations, A&E sites, Dispenser Locations
-
 * __specialty codes__ - Codes used for health specialties in NHS Scotland
 
 
@@ -250,11 +238,9 @@ The most commonly used codes in Scottish Health and Social Care open data are:
 
 The header for health boards and other geography levels needs to encompass:
 
-•	Type of health board indicated, eg health board of residence (HBR), health board of treatment (HBT) etc.
-
-•	Configuration is specified in the data dictionary and mentions the configuration used:  health board 2014, health board 2019, health board at time of event (which can be a mixture of both 2019, 2018 and 2014 configurations).
-
-•	The corresponding health board names can be found in the reference files.
+*	Type of health board indicated, eg health board of residence (HBR), health board of treatment (HBT) etc.
+* Configuration is specified in the data dictionary and mentions the configuration used:  health board 2014, health board 2019, health board at time of event (which can be a mixture of both 2019, 2018 and 2014 configurations).
+* The corresponding health board names can be found in the reference files.
 
 Various types of Geography should not be listed in a shared column, as this both makes the data more difficult to understand and increases the risk of double counting. Data should be presented in an as granular way as possible with the smallest possible geography being used, considering confidentiality and suppression of small numbers. 
 
@@ -267,7 +253,6 @@ wrong_geo_table <- data.frame(
 kableExtra::kbl(wrong_geo_table) %>%
   kable_paper(full_width = FALSE)
 ```
-
 
 Where it makes sense to present the data on multiple levels, this should be done in separate files. The exception to this rule is the Scotland total. However, if this is included, it has to be made clear with the use of the qualifier ‘d’.
 
@@ -306,6 +291,7 @@ kableExtra::kbl(nested_geo_table) %>%
   kable_paper(full_width = FALSE)
 ```
 
+
 ### Dates
 
 The way the dates are formatted may depend on the structure of your data. Please keep in mind that open data should be as granular as possible. 
@@ -334,19 +320,17 @@ kableExtra::kbl(date_table) %>%
 
 ### Statistical Qualifiers
 
-Blank fields, when left unexplained, risk confusion – particularly when the column is numeric.
+Blank fields, when left unexplained, risk confusion – particularly when the column is numeric:
 
-•	If the blank field represents zero, then the field should be zero.
-
-•	If the blank field represents ‘not collected’ or ‘unknown’, then this should be a blank field and explained in a separate qualifier column, adjacent to the data column this is referring to.
+* If the blank field represents zero, then the field should be zero.
+* If the blank field represents ‘not collected’ or ‘unknown’, then this should be a blank field and explained in a separate qualifier column, adjacent to the data column this is referring to.
 
 Equally important is consistency.
 
-•	If data is numeric, it should not also be presented as text within the same column. Blank fields should therefore not contain space “ “.
+* If data is numeric, it should not also be presented as text within the same column. Blank fields should therefore not contain space “ “.
+* Fields containing “N/A”, “-” or “unknown” should not be mixed within a numeric column as this will make sorting and analysis difficult. 
 
-•	Fields containing “N/A”, “-” or “unknown” should not be mixed within a numeric column as this will make sorting and analysis difficult. 
-
-Our advice is to follow the guidance of the Office for National Statistics on symbols in tables. This suggests the use of an extra column next to the data column the qualifier refers to. The column should have the identical name of the column it is referring to with the suffix QF (ie NumberOfPatients – NumberOfPatientsQF or NewHires - NewHiresQF). 
+Our advice is to follow the guidance of the Office for National Statistics on symbols in tables. This suggests the use of an extra column next to the data column the qualifier refers to. The column should have the identical name of the column it is referring to with the suffix QF (i.e. `NumberOfPatients` – `NumberOfPatientsQF` or `NewHires` - `NewHiresQF`). 
 
 ```{r, echo=FALSE}
 qualifier_table <- data.frame(
@@ -372,7 +356,6 @@ A full list of qualifiers can be found on https://www.opendata.nhs.scot/dataset/
 |d – derived |	A figure is derived for custom groupings and for totals; this includes totals for Geographies (ie Scotland when data is otherwise presented at council area level) and specialities (ie all cancers, all alcohol conditions) to prevent double counting. |
 
 
-
 ### Calculated fields
 
 These data fields should be expanded to include each data component, especially when the creation of visualisations will rely upon this data. For example, if two figures were added together to create a summary value, you should include three columns: one for the first added value, a second column for the second added value, and a third column for the sum of the two.
@@ -393,11 +376,11 @@ kableExtra::kbl(calculated_table) %>%
 ```
 
 
-
 ### Disclosure Control
 
 The Open Data team expect you to follow all necessary disclosure control protocols that are available within your organisation, this includes the suppression of small numbers. If you require help with disclosure control please get in touch with the [Statistical Governance Team](mailto::phs.statsgov@phs.scot) .
 It is necessary that disclosure controls are applied to your data before this leaves your department and is sent to us.
+
 
 ### Data dictionary 
 
@@ -405,13 +388,11 @@ The data dictionary is an essential part of any open data dataset. It helps the 
 
 The following fields are created in the data dictionary:
 
-•	Column - The column headers (variables) you have used in your dataset are automatically populated in the data dictionary.
+* __Column__ - The column headers (variables) you have used in your dataset are automatically populated in the data dictionary.
+* __Type__ - The variable type of the column (numeric or text). This is populated automatically on upload.
+* __Description__ - A definition for each of the variables used in the data set. Where applicable, the description needs to contain all details on potentially used abbreviations and scales/rankings. 
+* __Lookup__ - If a column contains codes, this field needs to be populated with the URL of the reference/look-up file. If the column does not contain codes this field can remain empty.
 
-•	Type - The variable type of the column (numeric or text). This is populated automatically on upload.
-
-•	Description - A definition for each of the variables used in the data set. Where applicable, the description needs to contain all details on potentially used abbreviations and scales/rankings. 
-
-•	Lookup- If a column contains codes, this field needs to be populated with the URL of the reference/look-up file. If the column does not contain codes this field can remain empty.
 
 ### Metadata
 
@@ -480,12 +461,12 @@ kableExtra::kbl(metadata_table) %>%
 ```
 
 
-
 ### File naming convention
 
 When you create open data files and save them as CSV, you should choose a name that describes your dataset. A good rule of thumb in naming is to imagine that if you have downloaded a file and looked at the name a week later, would you still remember what it stands for? Avoid using cryptic names with not widely known acronyms. 
 
 File names should remain consistent over time. This makes regular updates quicker and easier to maintain the dataset on the platform. 
+
 
 ### Knowledge Check
 
@@ -573,8 +554,8 @@ Bespoke platforms:
 * [Edinburgh City](https://data.edinburghcouncilmaps.info/)
 * [Scottish Government - 5-star open data](https://statistics.gov.scot/home)
 
-## Introducing API-s
 
+## Introducing APIs
 
 ### What are APIs?
 
@@ -582,17 +563,19 @@ API stands for Application Programming Interface. It is a software intermediary 
 
 What makes API-s particularly valuable and useful is they are highly standardized (typically following HTTP or REST protocols), well-documented, accessible and thus developer-friendly.
 
+
 ### Why use the API?
 
 While most Web API-s will be used primarily by developers, interacting with open data via API can be a valuable and efficient solution for a wider audience as well.
 
 Some advantages to interacting with our open data through the CKAN API are:
 
-* speed - downloading multiple data files via API will be quicker than doing so manually
+* __speed__ - downloading multiple data files via API will be quicker than doing so manually
 
-* efficiency - the API allows extraction of only the relevant chunks of data you are interested in, without having to download a full file
+* __efficiency__ - the API allows extraction of only the relevant chunks of data you are interested in, without having to download a full file
 
-* automation - data extraction and subsquent manipulation can be easily automated when done via API
+* __automation__ - data extraction and subsquent manipulation can be easily automated when done via API
+
 
 ### How can I interact with it?
 
@@ -602,14 +585,14 @@ The CKAN DataStore offers an API for reading, searching and filtering data witho
 * Python
 * Javascript
 * SQL
-* [Postman](https://www.postman.com/) (an application specifically for building API calls)
-
+* [Postman](https://www.postman.com/) or similar (an application specifically for building API calls)
 
 If you use R or python, check out the example scripts in our [github repository](https://github.com/Public-Health-Scotland/Open-Data) for extracting open data via the Data API. 
 
 The [CKAN API documentation](https://docs.ckan.org/en/latest/api/index.html) also contains further examples in python and Javascript, as well as SQL queries.
 
 In this course, we will show you how to interact with the open data via API through R.
+
 
 ### What can I do with it?
 
@@ -618,17 +601,11 @@ CKAN’s Action API is a powerful, RPC-style API that exposes all of CKAN’s co
 You can:
 
 *	[Explore what datasets are available](#list_dataset)
-
 *	[Search datasets](#search_dataset). You can search keywords, groups, or tags
-
 *	[Extract metadata](#metadata)
-
 *	[Extract a list of resources from a dataset](#list_res)
-
 *	[Download a resource (data file)](#get_res)
-
 *	[Download a filtered extract from a data file](#filter_data)
-
 *	[Download all resources (data files) from a dataset](#get_dataset)
 
 
@@ -644,6 +621,7 @@ ckanr_setup(url = "https://www.opendata.nhs.scot/")
 
 Now that `ckanr` knows what website we want to get our data from, we can start exploring!
 
+
 ### List Datasets {#list_dataset}
 
 You might want to know what datasets are available on the open data portal. To do this, we can make an API call querying the list of all datasets on the platform, using the `package_list` function from the `ckanr` package. Note that this function defaults to 31 datasets, so we need to set the limit ourselves in order to capture the full list. In this example, we are only returning 5 datasets. 
@@ -653,7 +631,8 @@ dataset_list <- package_list(url = "https://www.opendata.nhs.scot/", as = "table
 paste(dataset_list)
 ```
 
-###Dataset name, title and id
+
+### Dataset name, title and id
 
 Note from the previous 'package_list' query that the dataset names used to identify a dataset differs from the title displayed on the open data platform. This is due to the fact that the title can be edited and may will contain spaces, while the identifying name remains constant - you may notice this is reflected in the dataset url as well - therefore crucial for consistency. Just for good measure, datastes also have a unique identifier too.
 
@@ -668,6 +647,7 @@ __dataset name__: care-home-census
 __dataset id__: 75cca0a9-780d-40e0-9e1f-5f4796950794
 
 In a later section of this course we will show you how to extract metadata information for a dataset that includes the title as well as the dataset name. 
+
 
 ### Search Datasets {#search_dataset}
 
@@ -703,6 +683,7 @@ Searching by tags works much the same, simply using tags in the `package_search`
 ```{r search_tag, exercise=TRUE}
 tag_query_datasets <- package_search(fq = 'tags:alcohol', as = "table")
 ```
+
 
 ### Extract metadata {#metadata}
 
@@ -742,6 +723,7 @@ dataset_groups
 dataset_tags
 ```
 
+
 ### Extract a list of resources from a dataset {#list_res}
 
 Now that you found the dataset you are interested in, and read the relevant metadata, you are ready to see what resources - data files - are available. Luckily, the metadata contains this information, so all we have to do is extract this from the list object returned by the package_show query we use to get the dataset's metadata. 
@@ -753,6 +735,7 @@ res_list <- metadata$resources %>%
 
 res_list
 ```
+
 
 ### Download a resource (data file) {#get_res}
 
@@ -822,6 +805,7 @@ gp_pop <- get_dataset("gp-practice-populations", max_resources = 2, rows = 10)
 gp_pop
 
 ```
+
 
 ## Exercise
 
@@ -950,7 +934,6 @@ filtered_data <- dplyr::tbl(src = ckan$con, from = res_id) %>%
 ``` {r filter_res5-check}
 grade_code()
 ```
-
 
 
 ## API Resources
