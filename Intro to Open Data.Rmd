@@ -937,13 +937,24 @@ grade_code()
 ```
 
 
-## API Resources
+## Help & Feedback
+
+#### API Resources
 
 The API is very flexible when combined with SQL queries, so you can do a whole lot more than the examples listed above. For more resources, you can visit the [PHS Open Data github repository](https://github.com/Public-Health-Scotland/Open-Data), which contains example scripts in R and python.
 
 More detail about the CKAN API can also be found in the [CKAN docs](https://docs.ckan.org/en/latest/api/index.html).
 
+</br>
+
+#### Help
+
 If you require further assistance, don't hesitate to get in touch with the [PHS Open Data Team](mailto:phs.opendata@phs.scot). 
 
+</br>
+
+#### Feedback
+
+<iframe width="100%" height= "2300" src= "https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5JmibxHi_yzZ9Pvduh8IqoF_5UOFZRSTlVWE9aTVFNMUlEOTNZNFdOSTVFTiQlQCN0PWcu&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
 
 
