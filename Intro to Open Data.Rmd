@@ -486,7 +486,7 @@ quiz(
     allow_retry = TRUE,
     random_answer_order = TRUE
   ),
-  question("What does and open data file's structure look like?",
+  question("What does an open data file's structure look like?",
     answer("Excel spreadsheet", correct = FALSE),
     answer("CSV format", correct = TRUE),
     answer("No special characters", correct = TRUE),
