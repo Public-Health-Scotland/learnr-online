@@ -629,7 +629,7 @@ You might want to know what datasets are available on the open data portal. To d
 
 ```{r dataset_list, exercise=TRUE, exercise.eval=TRUE}
 dataset_list <- package_list(url = "https://www.opendata.nhs.scot/", as = "table", limit = 5)
-paste(dataset_list)
+dataset_list
 ```
 
 
@@ -671,7 +671,7 @@ group_query_datasets <- package_search(fq = 'groups:covid-19', as = "table")
 
 Note that this will return a list object, which contains our datasets in the results item. We can extract just the results to view all the metadata information for each dataset in this group, or we can just view the titles to be able to determine which will be of further interest:
 
-```{r search_group2, exercise=TRUE}
+```{r search_group2, exercise=TRUE, exercise.setup='search_group'}
 group_query_datasets[["results"]] %>%
   as_tibble() %>%
   head(1)
