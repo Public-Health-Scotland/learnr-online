@@ -38,9 +38,9 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-Welcome to SPSS to R. This course is designed as a self-led introduction to converting SPSS to R for anyone in Public Health Scotland. The aim of this course is to bridge the understanding of each technology, giving translations where possible but generally supporting the transition. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
+Welcome to SPSS to R. This course is designed as a self-led introduction to R from SPSS and is for anyone in Public Health Scotland with experience of SPSS. The aim of this course is to bridge the understanding of each technology, giving translations where possible but generally supporting the transition. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
 
-This course aims to follow the path set out by the [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course, the structure of which is below. Both courses can be used at the same time and neither replaces the other.
+This course aims to follow the path set out by the [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course, the structure of which is below. Both courses should be used in conjunction and neither replaces the other.
 
 ```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/r-intro-pathway-2.png")
@@ -56,7 +56,12 @@ knitr::include_graphics("images/r-intro-pathway-2.png")
 </div>
 </br>
 
-### What is R?
+
+#### What is SPSS?
+
+* Software
+
+#### What is R?
 
 * A programming language widely used for data analysis, statistics, and graphics
 * Open source and available on all major operating systems
