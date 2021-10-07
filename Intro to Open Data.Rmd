@@ -599,15 +599,15 @@ In this course, we will show you how to interact with the open data via API thro
 
 CKAN’s Action API is a powerful, RPC-style API that exposes all of CKAN’s core features to API clients. All of the Scottish Health and Social Care Open Data platform’s core functionality (everything you can do with the web interface and more) can be used by external code that calls the CKAN API. 
 
-You can:
+All explored in the next chapter, you can:
 
-*	[Explore what datasets are available](#list_dataset)
-*	[Search datasets](#search_dataset). You can search keywords, groups, or tags
-*	[Extract metadata](#metadata)
-*	[Extract a list of resources from a dataset](#list_res)
-*	[Download a resource (data file)](#get_res)
-*	[Download a filtered extract from a data file](#filter_data)
-*	[Download all resources (data files) from a dataset](#get_dataset)
+*	Explore what datasets are available
+*	Search datasets. You can search keywords, groups, or tags
+*	Extract metadata
+*	Extract a list of resources from a dataset
+*	Download a resource (data file)
+*	Download a filtered extract from a data file
+*	Download all resources (data files) from a dataset
 
 
 ## Using the CKAN API
@@ -623,7 +623,7 @@ ckanr_setup(url = "https://www.opendata.nhs.scot/")
 Now that `ckanr` knows what website we want to get our data from, we can start exploring!
 
 
-### List Datasets {#list_dataset}
+### List Datasets
 
 You might want to know what datasets are available on the open data portal. To do this, we can make an API call querying the list of all datasets on the platform, using the `package_list` function from the `ckanr` package. Note that this function defaults to 31 datasets, so we need to set the limit ourselves in order to capture the full list. In this example, we are only returning 5 datasets. 
 
@@ -650,7 +650,7 @@ __dataset id__: 75cca0a9-780d-40e0-9e1f-5f4796950794
 In a later section of this course we will show you how to extract metadata information for a dataset that includes the title as well as the dataset name. 
 
 
-### Search Datasets {#search_dataset}
+### Search Datasets
 
 Rather than having to check through a long list of datasets, you may be only interested data relating to a specific topic or theme. You can search for the datasets of interest based on keywords in the dataset, tags associated with it, or the custom groups on the open data portal they belong to. 
 
@@ -686,7 +686,7 @@ tag_query_datasets <- package_search(fq = 'tags:alcohol', as = "table")
 ```
 
 
-### Extract metadata {#metadata}
+### Extract metadata
 
 Once you have identified the dataset you are interested in, you can use the dataset identifier or the dataset name to pull all the metadata information available. Note, here again you will need to use the `name` rather than the `display_name` variable for this - to avoid mixing these up, we recommend relying on the dataset ID instead. The `package_show` function from the `ckanr` package provides an easy way to extract this information as a list object, which you can then transform into a friendlier table format to view the metadata. 
 
@@ -709,7 +709,7 @@ metadata_extras <- metadata$extras %>%
 
 You can also extract the groups and tags this dataset is associated with and view these in a table:
 
-```{r metadata_groups_tags, exercise=TRUE}
+```{r metadata_groups_tags, exercise=TRUE, exercise.setup='metadata'}
 dataset_groups <- as_tibble(metadata[["groups"]]) %>%
     select(name, id) %>%
     rename(group = "name",
@@ -725,11 +725,11 @@ dataset_tags
 ```
 
 
-### Extract a list of resources from a dataset {#list_res}
+### Extract a list of resources from a dataset
 
 Now that you found the dataset you are interested in, and read the relevant metadata, you are ready to see what resources - data files - are available. Luckily, the metadata contains this information, so all we have to do is extract this from the list object returned by the `package_show` query we use to get the dataset's metadata. 
 
-```{r res_list, exercise=TRUE}
+```{r res_list, exercise=TRUE, exercise.setup='metadata'}
 res_list <- metadata$resources %>% 
   as_tibble() %>%
   select(name, id, size, mimetype, last_modified, url, description)
@@ -738,7 +738,7 @@ res_list
 ```
 
 
-### Download a resource (data file) {#get_res}
+### Download a resource (data file)
 
 Once you have explored the available datasets and are familiar with the metadata, it is time to get to the most exciting part: the data itself. This is also where things become more flexible, as there are several ways to extract data from a resource depending on what you want:
 
@@ -789,7 +789,7 @@ filtered_data
 ```
 
 
-### Download all resources from a dataset {#get_dataset}
+### Download all resources from a dataset
 
 If you are interested in several resources from a dataset, it can be more efficient to download all resources in one go rather than having to extract each resource individually. This can be done by first extracting the [list of resources](#list_res) from the dataset metadata, then looping through these resource IDs to [download the data](#get_res). 
 
