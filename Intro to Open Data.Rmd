@@ -206,7 +206,7 @@ Column headers should fulfil the following requirements:
 *	Meaningful, distinct, clear names in plain English.
 *	48 characters or less in length (shortening should not result in misinterpretation).
 * Avoid abbreviations or cryptic names, unless widely recognised, such as NHS (National Health Service). All abbreviations and acronyms have to be fully explained in the data dictionary.
-*	Use camel case – the practice of writing compound words or phrases such that each word or abbreviation in the middle of the phrase begins with a capital letter, with no intervening spaces or punctuation, e.g. "camelCase".
+*	Camel case – we use a version of camel case where the compound words or phrases such that each word or abbreviation begins with a capital letter, with no intervening spaces or punctuation, e.g. "CamelCase".
 *	No spaces, underscores or hyphens.
 *	Do not use special characters such as `%` or `+`. You may write the full word ‘Percentage’ or use common abbreviations such as ‘Pc’. If the special character is part of a construct, such as ‘50+’ or ‘5%’ it should be considered as one phrase and therefore translate to ‘50plus’ and ‘5pc’.  
 
