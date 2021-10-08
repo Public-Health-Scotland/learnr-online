@@ -103,3 +103,24 @@ quiz(
 ```
 
 
+
+## Help & Feedback
+
+#### References
+
+* SPSS Syntax to R paper (James McMahon, Chris Deans, Gavin Clark) - https://www.isdscotland.org/About-ISD/Methodologies/_docs/SPSS-syntax-to-R_v1-1.pdf
+
+
+#### Help
+
+If you continue to have support requirements for transitioning to using R instead of SPSS, it could be data access issues or technical skill, reach out to the [Data Science mailbox](mailto:phs.datascience@nhs.net?subject=SPSS to R - Help). 
+
+For specific help with a technical issue, follow this hierarchy:
+
+* Vignettes (Help) / `?<function_name>`
+* Google / Stack Overflow (tag queries with "[r]", "[tidyverse]", etc.)
+* [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
+* [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
+
+#### Feedback
+
