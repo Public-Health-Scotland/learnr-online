@@ -19,6 +19,7 @@ library(stringr)
 library(readr)
 library(haven)
 library(dplyr)
+library(kableExtra)
 knitr::opts_chunk$set(echo = FALSE)
 
 tutorial_options(
@@ -57,16 +58,28 @@ knitr::include_graphics("images/r-intro-pathway-2.png")
 </br>
 
 
-#### What is SPSS?
+#### Comparison of Technologies
 
-* Software
+```{r r-vs-spss, echo=FALSE}
+r_vs_spss <- data.frame(
+  "R" = c("A programming language widely used for data analysis, statistics, and graphics.",
+          "Open source and available on all major operating systems",
+          "Has the functionality to go from raw data to interactive reports, web apps, and more.",
+          "A part of the PHS analytical strategy."),
+  "SPSS" = c("Software used for statistical analysis mainly in the social sciences, providing users with an interface for building tasks as well as a *command syntax language*.",
+             "Non-extensible, proprietary software.",
+             "Predetermined statistical analysis tools and visualisations.",
+             "Decreasing use across industry and PHS licenses will expire early 2023.")
+)
 
-#### What is R?
+kableExtra::kbl(r_vs_spss) %>% 
+  kable_paper(full_width = FALSE)
 
-* A programming language widely used for data analysis, statistics, and graphics
-* Open source and available on all major operating systems
-* Has the functionality to go from raw data to interactive reports, web apps, and more
-* A part of the PHS analytical strategy
+```
+
+</br>
+
+While the use of SPSS is decreasing across industries and academia, the use of other tools such as R (and Python) are increasing, a large part due to their open source nature. Being open source allows communities to build around them for support, gives users more control in how they use and extend them, and maintains transferability (preventing work being locked into a single tool). PHS has and continues to invest in building the infrastructure to support R into the future, ensuring the whole workflow is as seamless as possible. 
 
 </br>
 
@@ -88,3 +101,5 @@ quiz(
   )
 )
 ```
+
+
