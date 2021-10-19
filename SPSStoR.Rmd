@@ -62,7 +62,7 @@ knitr::include_graphics("images/r-intro-pathway-2.png")
 
 ```{r r-vs-spss, echo=FALSE}
 r_vs_spss <- data.frame(
-  "R" = c("A programming language widely used for data analysis, statistics, and graphics.",
+  "R" = c("A *programming language* widely used for data analysis, statistics, and graphics.",
           "Open source and available on all major operating systems",
           "Has the functionality to go from raw data to interactive reports, web apps, and more.",
           "A part of the PHS analytical strategy."),
@@ -73,7 +73,8 @@ r_vs_spss <- data.frame(
 )
 
 kableExtra::kbl(r_vs_spss) %>% 
-  kable_paper(full_width = FALSE)
+  kable_paper(full_width = FALSE) %>%
+  column_spec(1:2, width = "50%")
 
 ```
 
@@ -87,15 +88,13 @@ Since we're getting started, here's a quiz to get familiar with the layout:
 
 ```{r intro-quiz}
 quiz(
-  question("Which of the following can R help to produce?",
-    answer("Tidy Data", correct = TRUE),
-    answer("Dashboards", correct = TRUE),
-    answer("Static/Interactive Reports", correct = TRUE),
-    answer("Web Apps", correct = TRUE),
-    answer("Magic", message = "It may seem like R is magic but unfortunately not"),
-    answer("Databases", correct = TRUE),
+  question("Which of the following relate only to R (and not SPSS)?",
+    answer("Programming language", correct = TRUE),
+    answer("Proprietary software", message = "Thankfully, R is open-source and extendable through packages. SPSS is proprietary software."),
+    answer("Open-source", correct = TRUE),
+    answer("Interactive reports & web apps", correct = TRUE),
     answer("Presentations", correct = TRUE),
-    incorrect = "Not quite, have another go!",
+    incorrect = "Not quite, make sure to only select the statements that apply to R!",
     allow_retry = TRUE,
     random_answer_order = TRUE
   )
