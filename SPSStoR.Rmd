@@ -103,6 +103,147 @@ quiz(
 
 
 
+## Foundations
+
+The [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course lays out the foundations of programming. However, with experience in SPSS (if you used the syntax), the logic of this will be familiar, it's just giving the concepts specific names and applies it in a slightly different way. One of the main differences between SPSS and R that's worth noting is with SPSS you're typically dealing with one whole dataset, in R you can be dealing with a single value through to multiple datasets and even an application all at the same time. The difference is important as some of the foundational skills built in [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) deal with single values rather than whole datasets, it's hoped that a direct translation here can be useful.
+
+The graphic of the structure of programming gives a simplified view of how those concepts come together and is similar in SPSS. Everything is translatable to a feature in SPSS except functions.
+
+<div class = "supporting-image-left">
+```{r foundations-buildingblocks, echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/r-foundations-buildingblocks.png")
+```
+</div>
+
+
+1. **Basic data types**
+
+2. **Complex data types**
+
+3. **Variables**
+
+4. **Statements**
+
+5. **Control Flow**
+
+6. **Functions**
+
+</br>
+</br>
+
+### Anatomy of a Program/Script
+
+While it's not strictly accurate to call an SPSS syntax file a program, we can align them for this purpose. Taking these 2 examples, we can split down what each component is:
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* A simple SPSS comment
+compute x = 0.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r echo=TRUE}
+# A simple R comment
+x <- 0
+```
+  </div>
+</div>
+
+```{r}
+# The below table has been built using Markdown rather than Kable - this was is because Kable seemed to be translating symbols within code elements to HTML codes, particularly useless for the R assignment operator example. 
+```
+
+| Concept | SPSS | R |
+| ------- | ---- | - |
+| **Comment** - just for us humans and ignored by the computer, they help add understanding and structure to our code. | `* A simple SPSS comment` | `# A simple R comment` |
+| **Variables** - names (containers) we give to 'objects' | `x` | `x` |
+| **Assignment Operator** - giving variables their content. | `=` | `<-` |
+| **Basic data type** - in this case, numeric, it's one of the basic data types available. | `0` | `0` |
+
+* In SPSS, the `compute` keyword is similar to a function, it tells the computer to do a specific set of things based on the parameters you provide. There are many functions available in R but when assigning a new variable, a function isn't required. 
+* Each line in SPSS needs to be finished with a `.`, this tells the computer you have finished the statement and to execute that as one. In R, this isn't necessary and the computer determines what makes a complete statement. This does mean that you should be careful with how you structure your code, making it easy to read and review with proper spacing and breaks (see the [PHS R Style Guide](https://github.com/Public-Health-Scotland/R-Resources/blob/master/PHS%20R%20style%20guide.md)).
+
+
+### Basic Data Types
+
+| Type | SPSS | R |
+| ---- | ---- | - |
+| Character / String | `"Hello"` | `"Hello"` |
+| Numeric | `321` or `123.5` | `321` or `123.5` |
+| Logical | N/A | `TRUE` or `FALSE` |
+| Complex | N/A | `2i` |
+
+SPSS has 2 data types, string and numeric. The numeric data type then has formats available, this allows visual formatting to be added such as currency, but is also used for restricting decimal places. In R, the number is handled for us until we get to things like dates and times (for this we'd likely use the [lubridate](https://lubridate.tidyverse.org/) package for some helpful functions).
+
+</br>
+
+#### Type Conversion
+
+To convert from one basic data type to another in SPSS, we follow this syntax `alter type <variable> (<data_type_format>).`, in R we can apply this to a single item that represents one instance of this data type using a function. The function we use depends on the resulting data type we'd like but it looks like this: `as.<data_type>(<variable>)`. If we want to apply this across a whole column in a dataset, we'd use `mutate()`, examples of both are shown below.
+
+| Conversion | SPSS | R |
+| ---------- | ---- | - |
+| to string | `alter type Year (a4).` | `as.character(Year)` -> `data %<>% mutate(Year = as.character(Year))` |
+| to numeric | `alter type Var1 (f2.0).` | `as.numeric(Var1)` -> `data %<>% mutate(Var1 = as.numeric(Var1))` |
+| to logical | N/A | `as.logical(Var2)` -> `data %<>% mutate(Var2 = as.logical(Var2))`
+
+*This is our first time coming across pipes (`%>%` or `%<>%`) in this course. They are really useful at allowing us to write "chained" processes, passing the result of the previous to the next. Have a look at this blog for more detail: [The Four Pipes of magrittr, R-bloggers](https://www.r-bloggers.com/2021/09/the-four-pipes-of-magrittr/).*
+
+</br>
+
+#### Operators
+
+| Description | SPSS | R |
+| ----------- | -------- | -------- |
+| Exponentiation (right to left) | `**` | `^` |
+| Modulus | `MOD` (function) | `%` |
+| Multiplication, Division | `*` `/` |  `*` `/` |
+| Addition, Subtraction | `+` `-` | `+` `-` |
+| Comparison Operators (Less Than, More Than, Less Than or Equal To, More Than or Equal To, Equal To, Not Equal To) | `<` (`LT`) `>` (`GT`) `<=` (`LE`) `>=` (`GE`) `=` (`EQ`) `<>` (`NE` `¬=` `~=`) | `<` `>` `<=` `>=` `==` `!=` |
+| Logical NOT | `NOT` | `!` |
+| Logical AND | `AND` | `&` `&&` | 
+| Logical OR | `OR` | `|` `||` |
+
+
+### Knowledge Check
+
+```{r foundations-basics-quiz}
+quiz(
+  question("Convert `compute Var1 = 0.` from SPSS to R",
+           answer("`compute(Var1, 0)`", message = "R doesn't need a function to assign a variable."),
+           answer("`0 <- Var1`", message = "Be careful which way round you write the statement."),
+           answer("`Var1 <- 0`", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("Convert `alter type Var1 (a1).` from SPSS to R",
+           answer("`as.character(Var1)`", correct = TRUE),
+           answer("`as.numeric(Var1)`"),
+           answer("`mutate(Var1, numeric)`"),
+           answer("`mutate(Var1, character)`"),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("Which of these are proper comparison operator conversions from SPSS to R?",
+           answer("`<>` to `||`", message = "`<>` is a 'not equal' from SPSS to `||`, 'Logical OR', in R."),
+           answer("`NOT` to `¬`", message = "The `¬` operator doesn't exist in R."),
+           answer("`AND` to `&`", correct = TRUE),
+           answer("`**` to `^`", correct = TRUE),
+           answer("`MOD` to `%`", correct = TRUE),
+           answer("`*` to `*`", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           )
+)
+```
+
+
 ## Help & Feedback
 
 #### References
