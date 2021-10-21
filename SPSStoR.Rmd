@@ -432,14 +432,15 @@ summary(borders_data$sex)
 ### Frequencies & Crosstabs
 
 | Type | SPSS | R |
-| -- | ---- | ------ |
+| -- | -- | ------ |
 | Frequency | `FREQUENCIES VARIABLES = <variables>.` | `table(<df_name>$<variable>)` |
 | Crosstab | `CROSSTABS TABLES = <variable1> BY <variable 2>.` | `table(<df_name>$<variable1>, <df_name>$<variable2>)` with `addmargins()` for col/row totals |
 
 Convert the below SPSS code to R:
 
 ```{r eval=FALSE, echo=TRUE}
-CROSSTABS TABLES = HospitalCode BY Sex.
+CROSSTABS 
+  /TABLES = HospitalCode BY Sex.
 ```
 
 ```{r crosstabs, exercise=TRUE}
@@ -458,6 +459,232 @@ addmargins(table(borders_data$HospitalCode, borders_data$Sex))
 grade_code()
 ```
 
+
+## Wrangle - Part 1
+
+### Filter
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+SELECT IF <logical_expression>.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+filter(<data>, <logical_expression>)
+
+<data> %>% filter(<logical_expression>)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R, try using the pipe too.
+
+```{r eval=FALSE, echo=TRUE}
+SELECT IF HospitalCode = "B120H" AND LengthOfStay > 10.
+```
+
+```{r filter, exercise=TRUE}
+...
+```
+
+```{r filter-hint-1}
+... %>%
+  ...(... == ... & ... > ...)
+```
+
+```{r filter-solution}
+borders_data %>%
+  filter(HospitalCode == "B120H" & LengthOfStay > 10)
+```
+
+```{r filter-check}
+grade_code()
+```
+
+
+### Mutate
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+COMPUTE <new_variable> = <value>.
+IF <logical_expression> <new_variable> = <updated_value>.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+mutate(<data>, <new_variable> = <expression>)
+
+<data> %>% mutate(
+  <new_variable> = <expression>
+)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R.
+
+```{r eval=FALSE, echo=TRUE}
+COMPUTE los_div2 = LengthOfStay / 2.
+```
+
+```{r mutate, exercise=TRUE}
+...
+```
+
+```{r mutate-hint-1}
+... %>%
+  ...(... = ... / ...)
+```
+
+```{r mutate-solution}
+borders_data %>%
+  mutate(los_div2 = LengthOfStay / 2)
+```
+
+```{r mutate-check}
+grade_code()
+```
+
+
+### Arrange
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* Ascending Order
+SORT CASES BY <variables>
+  
+* Descending Order
+SORT CASES BY <variables> (d)
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+# Ascending Order
+arrange(<data>, <variables>)
+
+data %>% arrange(<variables>)
+
+# Descending Order
+arrange(<data>, desc(<variables>))
+
+data %>% arrange(desc(<variables>))
+```
+  </div>
+</div>
+
+Convert the following SPSS into R.
+
+```{r eval=FALSE, echo=TRUE}
+SORT CASES BY HospitalCode (a) Specialty (d).
+```
+
+```{r arrange, exercise=TRUE}
+...
+```
+
+```{r arrange-hint-1}
+... %>%
+  ...(..., ...(...))
+```
+
+```{r arrange-solution}
+borders_data %>%
+  arrange(HospitalCode, desc(Specialty))
+```
+
+```{r arrange-check}
+grade_code()
+```
+
+
+### Select
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* Remove variables
+DELETE VARIABLES <variables>
+
+* Remove variables as part of a GET or SAVE
+... /DROP <variables>
+  
+* Keeping variables as part of a GET or SAVE
+... /KEEP <variables>
+
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+# Prepend `-` to a variable to remove
+select(<data>, <variables>)
+
+<data> %>% select(<variables>)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R.
+
+```{r eval=FALSE, echo=TRUE}
+DELETE VAIRABLES Main_op
+```
+
+```{r select, exercise=TRUE}
+...
+```
+
+```{r select-hint-1}
+... %>% 
+  ...(...)
+```
+
+```{r select-solution}
+borders_data %>%
+  select(-Main_op)
+```
+
+```{r select-check}
+grade_code()
+```
+
+
+### Knowledge Check
+
+Taking this chunk of SPSS code, convert it to R.
+
+```{r eval=FALSE, echo=TRUE}
+SELECT IF (LengthOfStay >= 2 AND LengthOfStay <= 10) AND (SPECIALTY = "E12" OR SPECIALTY = "C8").
+DELETE VARIABLES URI Postcode.
+SORT CASES BY LengthOfStay.
+```
+
+```{r wrangle-1, exercise=TRUE}
+...
+```
+
+```{r wrangle-1-solution}
+borders_data %>%
+  filter(LengthOfStay >= 2 & LengthOfStay <= 10) %>%
+  filter(Specialty == "E12" | Specialty == "C8") %>%
+  select(-URI, -Postcode) %>%
+  arrange(LengthOfStay)
+```
+
+```{r wrangle-1-check}
+grade_code()
+```
 
 ## Help & Feedback
 
