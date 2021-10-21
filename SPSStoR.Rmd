@@ -140,7 +140,7 @@ While it's not strictly accurate to call an SPSS syntax file a program, we can a
 <h4 class="colour-purple">SPSS</h4>
 ```{r eval=FALSE, echo=TRUE}
 * A simple SPSS comment
-compute x = 0.
+COMPUTE x = 0.
 ```
   </div>
   <div class="spss-r-column">
@@ -163,7 +163,7 @@ x <- 0
 | **Assignment Operator** - giving variables their content. | `=` | `<-` |
 | **Basic data type** - in this case, numeric, it's one of the basic data types available. | `0` | `0` |
 
-* In SPSS, the `compute` keyword is similar to a function, it tells the computer to do a specific set of things based on the parameters you provide. There are many functions available in R but when assigning a new variable, a function isn't required. 
+* In SPSS, the `COMPUTE` keyword is similar to a function, it tells the computer to do a specific set of things based on the parameters you provide. There are many functions available in R but when assigning a new variable, a function isn't required. 
 * Each line in SPSS needs to be finished with a `.`, this tells the computer you have finished the statement and to execute that as one. In R, this isn't necessary and the computer determines what makes a complete statement. This does mean that you should be careful with how you structure your code, making it easy to read and review with proper spacing and breaks (see the [PHS R Style Guide](https://github.com/Public-Health-Scotland/R-Resources/blob/master/PHS%20R%20style%20guide.md)).
 
 
@@ -182,12 +182,12 @@ SPSS has 2 data types, string and numeric. The numeric data type then has format
 
 #### Type Conversion
 
-To convert from one basic data type to another in SPSS, we follow this syntax `alter type <variable> (<data_type_format>).`, in R we can apply this to a single item that represents one instance of this data type using a function. The function we use depends on the resulting data type we'd like but it looks like this: `as.<data_type>(<variable>)`. If we want to apply this across a whole column in a dataset, we'd use `mutate()`, examples of both are shown below.
+To convert from one basic data type to another in SPSS, we follow this syntax `ALTER TYPE <variable> (<data_type_format>).`, in R we can apply this to a single item that represents one instance of this data type using a function. The function we use depends on the resulting data type we'd like but it looks like this: `as.<data_type>(<variable>)`. If we want to apply this across a whole column in a dataset, we'd use `mutate()`, examples of both are shown below.
 
 | Conversion | SPSS | R |
 | ---------- | ---- | - |
-| to string | `alter type Year (a4).` | `as.character(Year)` -> `data %<>% mutate(Year = as.character(Year))` |
-| to numeric | `alter type Var1 (f2.0).` | `as.numeric(Var1)` -> `data %<>% mutate(Var1 = as.numeric(Var1))` |
+| to string | `ALTER TYPE Year (a4).` | `as.character(Year)` -> `data %<>% mutate(Year = as.character(Year))` |
+| to numeric | `ALTER TYPE Var1 (f2.0).` | `as.numeric(Var1)` -> `data %<>% mutate(Var1 = as.numeric(Var1))` |
 | to logical | N/A | `as.logical(Var2)` -> `data %<>% mutate(Var2 = as.logical(Var2))`
 
 *This is our first time coming across pipes (`%>%` or `%<>%`) in this course. They are really useful at allowing us to write "chained" processes, passing the result of the previous to the next. Have a look at this blog for more detail: [The Four Pipes of magrittr, R-bloggers](https://www.r-bloggers.com/2021/09/the-four-pipes-of-magrittr/).*
@@ -212,7 +212,7 @@ To convert from one basic data type to another in SPSS, we follow this syntax `a
 
 ```{r foundations-basics-quiz}
 quiz(
-  question("Convert `compute Var1 = 0.` from SPSS to R",
+  question("Convert `COMPUTE Var1 = 0.` from SPSS to R",
            answer("`compute(Var1, 0)`", message = "R doesn't need a function to assign a variable."),
            answer("`0 <- Var1`", message = "Be careful which way round you write the statement."),
            answer("`Var1 <- 0`", correct = TRUE),
@@ -220,7 +220,7 @@ quiz(
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
-  question("Convert `alter type Var1 (a1).` from SPSS to R",
+  question("Convert `ALTER TYPE Var1 (a1).` from SPSS to R",
            answer("`as.character(Var1)`", correct = TRUE),
            answer("`as.numeric(Var1)`"),
            answer("`mutate(Var1, numeric)`"),
