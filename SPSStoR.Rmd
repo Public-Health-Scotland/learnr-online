@@ -375,6 +375,90 @@ dbDisconnect(smra_connection)
 </div>
 
 
+## Explore
+
+### Mean
+
+There are similarities in SPSS and R and this is one of them. In both cases, mean is a function, so in SPSS you would write `COMPUTE average = MEAN(<variables>).` compared to `average = mean(<variables>)` in R. Remember that in R, you don't have to assign the result of a function to a variable, this will automatically print it to your console.
+
+Let's get a bit more interactive now, keeping it easy to start with. *Remember that there can be many ways to reach the same solution in R but marked exercises sometimes require exact code/syntax matching. Have a look at the solution and compare it to yours... if the result is the same you still got it right!*
+
+The borders training dataset has been loaded as `borders_data`, convert the below SPSS code to R:
+
+```{r eval=FALSE, echo=TRUE}
+COMPUTE av = MEAN(LengthOfStay).
+```
+
+```{r mean, exercise=TRUE}
+...
+```
+
+```{r mean-hint-1}
+... <- ...(...$...)
+```
+
+```{r mean-solution}
+av <- mean(borders_data$LengthOfStay)
+```
+
+```{r mean-check}
+grade_code()
+```
+
+
+### Summary Statistics
+
+When exploring the data, a list of the summary statistics is a common starting point. In SPSS, this is often done through menus and building frequency tables. These tables allows many summary statistics to be included, from mean to median, standard deviation, and quartiles. Most of these are included in one R function, `summary()`, and can be run on a single variable or a whole dataset. Other summary statistics that aren't included as default are just another function away, e.g. `sd()` for standard deviation. 
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+FREQUENCIES 
+  VARIABLES = sex
+  /FORMAT = NOTABLE
+  /STATISTICS = MINIMUM QUARTILES MEDIAN MEAN MAXIMUM
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+summary(borders_data$sex)
+```
+  </div>
+</div>
+
+
+### Frequencies & Crosstabs
+
+| Type | SPSS | R |
+| -- | ---- | ------ |
+| Frequency | `FREQUENCIES VARIABLES = <variables>.` | `table(<df_name>$<variable>)` |
+| Crosstab | `CROSSTABS TABLES = <variable1> BY <variable 2>.` | `table(<df_name>$<variable1>, <df_name>$<variable2>)` with `addmargins()` for col/row totals |
+
+Convert the below SPSS code to R:
+
+```{r eval=FALSE, echo=TRUE}
+CROSSTABS TABLES = HospitalCode BY Sex.
+```
+
+```{r crosstabs, exercise=TRUE}
+...
+```
+
+```{r crosstabs-hint-1}
+...(...(...$..., ...$...))
+```
+
+```{r crosstabs-solution}
+addmargins(table(borders_data$HospitalCode, borders_data$Sex))
+```
+
+```{r crosstabs-check}
+grade_code()
+```
+
+
 ## Help & Feedback
 
 #### References
