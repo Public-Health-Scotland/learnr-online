@@ -460,7 +460,7 @@ grade_code()
 ```
 
 
-## Wrangle - Part 1
+## Wrangle
 
 ### Filter
 
@@ -660,6 +660,50 @@ grade_code()
 ```
 
 
+### Rename
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+RENAME VARIABLES <existing_name> = <new_name>.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+rename(<data>, <new_name> = <existing_name>)
+
+<data> %>% 
+  rename(<new_name> = <existing_name>)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R.
+
+```{r eval=FALSE, echo=TRUE}
+RENAME VARIABLES Dateofbirth = date_of_birth.
+```
+
+```{r rename, exercise=TRUE}
+...
+```
+
+```{r rename-hint-1}
+... %>% 
+  ...(... = ...)
+```
+
+```{r rename-solution}
+borders_data %>%
+  rename(date_of_birth = Dateofbirth)
+```
+
+```{r rename-check}
+grade_code()
+```
+
 ### Knowledge Check
 
 Taking this chunk of SPSS code, convert it to R.
@@ -685,6 +729,7 @@ borders_data %>%
 ```{r wrangle-1-check}
 grade_code()
 ```
+
 
 ## Help & Feedback
 
