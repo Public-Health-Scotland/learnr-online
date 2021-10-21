@@ -57,7 +57,6 @@ knitr::include_graphics("images/r-intro-pathway-2.png")
 </div>
 </br>
 
-
 #### Comparison of Technologies
 
 ```{r r-vs-spss, echo=FALSE}
@@ -102,7 +101,6 @@ quiz(
 ```
 
 
-
 ## Foundations
 
 The [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course lays out the foundations of programming. However, with experience in SPSS (if you used the syntax), the logic of this will be familiar, it's just giving the concepts specific names and applies it in a slightly different way. One of the main differences between SPSS and R that's worth noting is with SPSS you're typically dealing with one whole dataset, in R you can be dealing with a single value through to multiple datasets and even an application all at the same time. The difference is important as some of the foundational skills built in [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) deal with single values rather than whole datasets, it's hoped that a direct translation here can be useful.
@@ -130,6 +128,7 @@ knitr::include_graphics("images/r-foundations-buildingblocks.png")
 
 </br>
 </br>
+
 
 ### Anatomy of a Program/Script
 
@@ -250,6 +249,7 @@ As previously mentioned, you're likely working with a single dataset in SPSS, co
 
 *As in the [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course, it's not possible to have any code exercises that reach 'directories' for reading and writing code on this app.*
 
+
 ### CSV
 
 <div class="spss-r-row">
@@ -300,6 +300,7 @@ write_csv(borders_csv, "data/Borders.csv")
 ```
   </div>
 </div>
+
 
 ### SPSS Files
 
@@ -704,6 +705,7 @@ borders_data %>%
 grade_code()
 ```
 
+
 ### Knowledge Check
 
 Taking this chunk of SPSS code, convert it to R.
@@ -824,7 +826,6 @@ grade_code()
 
 * SPSS Syntax to R paper (James McMahon, Chris Deans, Gavin Clark) - https://www.isdscotland.org/About-ISD/Methodologies/_docs/SPSS-syntax-to-R_v1-1.pdf
 
-
 #### Help
 
 If you continue to have support requirements for transitioning to using R instead of SPSS, it could be data access issues or technical skill, reach out to the [Data Science mailbox](mailto:phs.datascience@nhs.net?subject=SPSS to R - Help). 
@@ -837,4 +838,6 @@ For specific help with a technical issue, follow this hierarchy:
 * [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
 
 #### Feedback
+
+<iframe width="100%" height= "2300" src= "https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5JmibxHi_yzZ9Pvduh8IqoF_5URFZSOFNWTlFMSDFGWFdEOU9IU0RNT0NXWSQlQCN0PWcu&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
 
