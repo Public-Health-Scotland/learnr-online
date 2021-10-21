@@ -199,7 +199,7 @@ To convert from one basic data type to another in SPSS, we follow this syntax `a
 | Description | SPSS | R |
 | ----------- | -------- | -------- |
 | Exponentiation (right to left) | `**` | `^` |
-| Modulus | `MOD` (function) | `%` |
+| Modulus | `MOD` | `%` |
 | Multiplication, Division | `*` `/` |  `*` `/` |
 | Addition, Subtraction | `+` `-` | `+` `-` |
 | Comparison Operators (Less Than, More Than, Less Than or Equal To, More Than or Equal To, Equal To, Not Equal To) | `<` (`LT`) `>` (`GT`) `<=` (`LE`) `>=` (`GE`) `=` (`EQ`) `<>` (`NE` `¬=` `~=`) | `<` `>` `<=` `>=` `==` `!=` |
@@ -242,6 +242,137 @@ quiz(
            )
 )
 ```
+
+
+## Data Flow
+
+As previously mentioned, you're likely working with a single dataset in SPSS, compared to multiple datasets along with other components in R. This means you could be reading multiple files, wrangling, and outputting different things all within one 'script' in R. To be the most efficient, we'll be using functions from packages in R, these will clearly be included in any code block that uses them.
+
+*As in the [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course, it's not possible to have any code exercises that reach 'directories' for reading and writing code on this app.*
+
+### CSV
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* Read a CSV file
+GET DATA /TYPE=TXT
+  /FILE = "data/Borders.csv" 
+  /DELCASE = LINE 
+  /DELIMITERS = "," 
+  /ARRANGEMENT = DELIMITED
+  /FIRSTCASE = 2
+  /VARIABLES =
+  Name A28
+  Age F3.0
+  DOB edate11.
+CACHE.
+EXECUTE.
+
+* Write a CSV file
+SAVE TRANSLATE
+  /OUTFILE = "data/Borders.csv"
+  /TYPE = CSV
+  /REPLACE
+  /FIELDNAMES.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+library(readr)
+
+# Read a CSV file
+# Implicit naming and data types
+borders_csv <- read_csv("data/Borders.csv") 
+
+# Explicit naming and data types
+borders_csv <- read_csv(
+  "data/Borders.csv",
+  col_names = c("Name", "Age", "DOB"),
+  col_types = "ciD",
+  skip = 1
+  ) 
+
+# Write a CSV file
+write_csv(borders_csv, "data/Borders.csv") 
+```
+  </div>
+</div>
+
+### SPSS Files
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* Read an SPSS file
+GET FILE = "data/Borders.sav"
+
+* Write an SPSS file
+SAVE OUTFILE = "data/Borders.sav"
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+library(haven)
+
+# Read an SPSS file
+borders_spss <- read_sav("data/Borders.sav")
+
+# Write an SPSS file
+write_sav(borders_csv, "data/Borders.sav") 
+```
+  </div>
+</div>
+
+
+### Databases (SMRA)
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+INSERT FILE = pass.sps.
+GET DATA
+  /TYPE = ODBC
+  /CONNECT = !connect
+  /SQL = "SELECT LOCATION,
+ADMISSION_DATE, DISCHARGE_DATE,
+HBTREAT_CURRENTDATE, LINK_NO,
+AGE_IN_YEARS, ADMISSION_TYPE,
+CIS_MARKER, ADMISSION, DISCHARGE, URI "
+    "FROM ANALYSIS.SMR01_PI "
+    "WHERE ADMISSION_DATE >= '2006-4-1'".
+CACHE.
+EXECUTE.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+smra_connection <- dbConnect(drv = odbc(), 
+dsn = "SMRA",
+uid = .rs.askForPassword("SMRA Username:"),
+pwd = .rs.askForPassword("SMRA Password:"))
+
+smra_query <- "SELECT LOCATION, ADMISSION_DATE,
+  DISCHARGE_DATE, HBTREAT_CURRENTDATE,
+  LINK_NO, AGE_IN_YEARS,
+  ADMISSION_TYPE, CIS_MARKER,
+  ADMISSION, DISCHARGE, URI
+  FROM ANALYSIS.SMR01_PI
+  WHERE ADMISSION_DATE >= '01-APR-2006"
+
+smr01_data <- dbGetQuery(smra_connection, smra_query) %>%
+  as_tibble()
+
+dbDisconnect(smra_connection)
+```
+  </div>
+</div>
 
 
 ## Help & Feedback
