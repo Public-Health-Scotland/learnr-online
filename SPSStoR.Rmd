@@ -731,6 +731,93 @@ grade_code()
 ```
 
 
+## Joining
+
+### Adding Observations (Rows)
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+ADD FILES
+  /FILE = "<data/file1.ext>",
+  /FILE = "<data/file2.ext>".
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+data_1 <- read_csv("<data/file1.ext>")
+data_2 <- read_csv("<data/file2.ext>")
+
+data_combined <- bind_rows(data_1, data_2)
+```
+  </div>
+</div>
+
+
+### Adding Variables (Columns)
+
+This is considered a join, so it'd be good to review the types of joins:
+
+
+```{r join-tables-overview, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-joining-overview.png")
+```
+
+* `left_join` - taking all records from the "left", `data_1`, and adding matched records from the "right", `data_2`, introducing `na` where the "right", `data_2` had no matching records
+* `right_join` - taking all records from the "right", `data_2`, and adding matched records from the "left", `data_1`, introducing `na` where the "left", `data_1` had no matching records
+* `inner_join` - producing only records where there were matches on both given data sets
+* `full_join` - retaining all records from both data sets and introducing `na` on either one where there was no matching records
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+GET FILE = "<data/file1.ext>".
+SORT CASES BY <common_variable>.
+MATCH FILES
+  /FILE = "<data/file2.ext>",
+  /BY <common_variable>
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+<type>_join(<data_1>, <data_2>, by = <common_variable(s)>)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R. 
+
+Assume the datasets are already loaded for you (named `baby5` and `baby6`).
+
+```{r eval=FALSE, echo=TRUE}
+GET FILE = "data/baby5.sav".
+SORT CASES BY FAMILYID DOB.
+MATCH FILES
+  /FILE = "data/baby6.sav",
+  /BY FAMILYID DOB.
+```
+
+```{r joins, exercise=TRUE}
+...
+```
+
+```{r joins-hint-1}
+...(..., ..., ... = ...(..., ...))
+```
+
+```{r joins-solution}
+left_join(baby5, baby6, by = c("FAMILYID", "DOB"))
+```
+
+```{r joins-check}
+grade_code()
+```
+
+
 ## Help & Feedback
 
 #### References
