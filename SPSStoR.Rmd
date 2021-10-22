@@ -39,7 +39,7 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-Welcome to SPSS to R. This course is designed as a self-led introduction to R from SPSS and is for anyone in Public Health Scotland with experience of SPSS. The aim of this course is to bridge the understanding of each technology, giving translations where possible but generally supporting the transition. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
+Welcome to SPSS to R. This course is designed as a self-led introduction to R from SPSS and is for anyone in Public Health Scotland with experience of using SPSS. The aim of this course is to bridge the understanding of each technology, giving translations where possible and generally supporting the transition. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
 
 This course aims to follow the path set out by the [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course, the structure of which is below. Both courses should be used in conjunction and neither replaces the other.
 
@@ -103,9 +103,9 @@ quiz(
 
 ## Foundations
 
-The [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course lays out the foundations of programming. However, with experience in SPSS (if you used the syntax), the logic of this will be familiar, it's just giving the concepts specific names and applies it in a slightly different way. One of the main differences between SPSS and R that's worth noting is with SPSS you're typically dealing with one whole dataset, in R you can be dealing with a single value through to multiple datasets and even an application all at the same time. The difference is important as some of the foundational skills built in [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) deal with single values rather than whole datasets, it's hoped that a direct translation here can be useful.
+The [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course lays out the foundations of programming. However, with experience in SPSS (if you used the syntax), the logic of this will be familiar, it's just giving the concepts specific names and applies it in a slightly different way. One of the main differences between SPSS and R that's worth noting is with SPSS you're typically dealing with one whole dataset, in R you can be dealing with a single value through to multiple datasets and even an application all at the same time. The difference is important as some of the foundational skills built in [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) deal with single values rather than whole datasets, as such a direct translation here can be useful.
 
-The graphic of the structure of programming gives a simplified view of how those concepts come together and is similar in SPSS. Everything is translatable to a feature in SPSS except functions.
+The graphic of the structure of programming gives a simplified view of how those concepts come together and is similar in SPSS. Everything, except functions, is translatable to a feature in SPSS.
 
 <div class = "supporting-image-left">
 ```{r foundations-buildingblocks, echo=FALSE, fig.align='center', out.width="75%"}
@@ -132,7 +132,7 @@ knitr::include_graphics("images/r-foundations-buildingblocks.png")
 
 ### Anatomy of a Program/Script
 
-While it's not strictly accurate to call an SPSS syntax file a program, we can align them for this purpose. Taking these 2 examples, we can split down what each component is:
+While it's not strictly accurate to call an SPSS syntax file a program, we can align them for the purpose of this course. Taking these 2 examples, we can break down each component:
 
 <div class="spss-r-row">
   <div class="spss-r-column">
@@ -175,7 +175,7 @@ x <- 0
 | Logical | N/A | `TRUE` or `FALSE` |
 | Complex | N/A | `2i` |
 
-SPSS has 2 data types, string and numeric. The numeric data type then has formats available, this allows visual formatting to be added such as currency, but is also used for restricting decimal places. In R, the number is handled for us until we get to things like dates and times (for this we'd likely use the [lubridate](https://lubridate.tidyverse.org/) package for some helpful functions).
+SPSS has 2 data types, string and numeric. The numeric data type then also has formats available, this allows visual formatting to be added such as currency, but is also used for restricting decimal places. In R, the number is handled for us until we get to things like dates and times (for this we'd likely use the [lubridate](https://lubridate.tidyverse.org/) package for some helpful functions).
 
 </br>
 
@@ -380,7 +380,7 @@ dbDisconnect(smra_connection)
 
 ### Mean
 
-There are similarities in SPSS and R and this is one of them. In both cases, mean is a function, so in SPSS you would write `COMPUTE average = MEAN(<variables>).` compared to `average = mean(<variables>)` in R. Remember that in R, you don't have to assign the result of a function to a variable, this will automatically print it to your console.
+This is one of the similarities between SPSS and R. In both cases, mean is a function, so in SPSS you would write `COMPUTE average = MEAN(<variables>).` compared to `average = mean(<variables>)` in R. Remember that in R, you don't have to assign the result of a function to a variable, this will automatically print it to your console.
 
 Let's get a bit more interactive now, keeping it easy to start with. *Remember that there can be many ways to reach the same solution in R but marked exercises sometimes require exact code/syntax matching. Have a look at the solution and compare it to yours... if the result is the same you still got it right!*
 
