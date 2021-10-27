@@ -1,0 +1,885 @@
+---
+title: "SPSS to R"
+output: 
+  learnr::tutorial:
+    css: "css/style.css"
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+# Author: Russell McCreath
+# Original Date: Oct 2020
+# Version of R: 3.6.1
+
+library(learnr)
+library(gradethis)
+library(stringr)
+library(readr)
+library(haven)
+library(dplyr)
+library(magrittr)
+library(kableExtra)
+knitr::opts_chunk$set(echo = FALSE)
+
+tutorial_options(
+  exercise.checker = gradethis::grade_learnr
+)
+
+borders_data <- readRDS("www/data/borders.rds")
+borders_age_data <- read_csv("www/data/BORDERS (inc Age).csv")
+baby5 <- read_csv("www/data/Baby5.csv")
+baby6 <- read_csv("www/data/Baby6.csv")
+```
+
+```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
+knitr::include_graphics("images/phs-logo.png")
+```
+
+
+## Introduction
+
+Welcome to SPSS to R. This course is designed as a self-led introduction to R from SPSS and is for anyone in Public Health Scotland with experience of using SPSS. The aim of this course is to bridge the understanding of each technology, giving translations where possible and generally supporting the transition. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
+
+This course aims to follow the path set out by the [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course, the structure of which is below. Both courses should be used in conjunction and neither replaces the other.
+
+```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-intro-pathway-2.png")
+```
+
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
+#### Comparison of Technologies
+
+```{r r-vs-spss, echo=FALSE}
+r_vs_spss <- data.frame(
+  "R" = c("A *programming language* widely used for data analysis, statistics, and graphics.",
+          "Open source and available on all major operating systems",
+          "Has the functionality to go from raw data to interactive reports, web apps, and more.",
+          "A part of the PHS analytical strategy."),
+  "SPSS" = c("Software used for statistical analysis mainly in the social sciences, providing users with an interface for building tasks as well as a *command syntax language*.",
+             "Non-extensible, proprietary software.",
+             "Predetermined statistical analysis tools and visualisations.",
+             "Decreasing use across industry and PHS licenses will expire early 2023.")
+)
+
+kableExtra::kbl(r_vs_spss) %>% 
+  kable_paper(full_width = FALSE) %>%
+  column_spec(1:2, width = "50%")
+
+```
+
+</br>
+
+While the use of SPSS is decreasing across industries and academia, the use of other tools such as R (and Python) are increasing, a large part due to their open source nature. Being open source allows communities to build around them for support, gives users more control in how they use and extend them, and maintains transferability (preventing work being locked into a single tool). PHS has and continues to invest in building the infrastructure to support R into the future, ensuring the whole workflow is as seamless as possible. 
+
+</br>
+
+Since we're getting started, here's a quiz to get familiar with the layout:
+
+```{r intro-quiz}
+quiz(
+  question("Which of the following relate only to R (and not SPSS)?",
+    answer("Programming language", correct = TRUE),
+    answer("Proprietary software", message = "Thankfully, R is open-source and extendable through packages. SPSS is proprietary software."),
+    answer("Open-source", correct = TRUE),
+    answer("Interactive reports & web apps", correct = TRUE),
+    answer("Presentations", correct = TRUE),
+    incorrect = "Not quite, make sure to only select the statements that apply to R!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+
+## Foundations
+
+The [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course lays out the foundations of programming. However, with experience in SPSS (if you used the syntax), the logic of this will be familiar, it's just giving the concepts specific names and applies it in a slightly different way. One of the main differences between SPSS and R that's worth noting is with SPSS you're typically dealing with one whole dataset, in R you can be dealing with a single value through to multiple datasets and even an application all at the same time. The difference is important as some of the foundational skills built in [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) deal with single values rather than whole datasets, as such a direct translation here can be useful.
+
+The graphic of the structure of programming gives a simplified view of how those concepts come together and is similar in SPSS. Everything, except functions, is translatable to a feature in SPSS.
+
+<div class = "supporting-image-left">
+```{r foundations-buildingblocks, echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/r-foundations-buildingblocks.png")
+```
+</div>
+
+
+1. **Basic data types**
+
+2. **Complex data types**
+
+3. **Variables**
+
+4. **Statements**
+
+5. **Control Flow**
+
+6. **Functions**
+
+</br>
+</br>
+
+
+### Anatomy of a Program/Script
+
+While it's not strictly accurate to call an SPSS syntax file a program, we can align them for the purpose of this course. In the below SPSS example, we are adding a variable (column) to the dataset. However, in R, we can have multiple objects in our working environment, so this line of code actually sets up a variable, `x`, completely separate from any dataset. We can add it to a dataset using the `mutate()` function which we'll find out more about later.
+
+Taking these 2 examples, we can break down each component:
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* A simple SPSS comment
+COMPUTE x = 0.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r echo=TRUE}
+# A simple R comment
+x <- 0
+```
+  </div>
+</div>
+
+```{r}
+# The below table has been built using Markdown rather than Kable - this was is because Kable seemed to be translating symbols within code elements to HTML codes, particularly useless for the R assignment operator example. 
+```
+
+| Concept | SPSS | R |
+| ------- | ---- | - |
+| **Comment** - just for us humans and ignored by the computer, they help add understanding and structure to our code. | `* A simple SPSS comment` | `# A simple R comment` |
+| **Variables** - names (containers) we give to 'objects' | `x` | `x` |
+| **Assignment Operator** - giving variables their content. | `=` | `<-` |
+| **Basic data type** - in this case, numeric, it's one of the basic data types available. | `0` | `0` |
+
+* In SPSS, the `COMPUTE` keyword is similar to a function/method, it tells the computer to do a specific set of things based on the parameters you provide. There are many functions available in R but when assigning a new variable, a function isn't required. You may also be familiar with macros in SPSS where you can define something along the lines of a function for yourself in SPSS, this isn't covered for R in this course but will be in more advanced courses in the future.
+* Each line in SPSS needs to be finished with a `.`, this tells the computer you have finished the statement and to execute that as one. In R, this isn't necessary and the computer determines what makes a complete statement. This does mean that you should be careful with how you structure your code, making it easy to read and review with proper spacing and breaks (see the [PHS R Style Guide](https://github.com/Public-Health-Scotland/R-Resources/blob/master/PHS%20R%20style%20guide.md)).
+
+
+### Basic Data Types
+
+| Type | SPSS | R |
+| ---- | ---- | - |
+| Character / String | `"Hello"` | `"Hello"` |
+| Numeric | `321` or `123.5` | `321` or `123.5` |
+| Logical | N/A | `TRUE` or `FALSE` |
+| Complex | N/A | `2i` |
+
+SPSS has 2 data types, string and numeric. The numeric data type then also has formats available, this allows visual formatting to be added such as currency, but is also used for restricting decimal places. In R, the number is handled for us until we get to things like dates and times (for this we'd likely use the [lubridate](https://lubridate.tidyverse.org/) package for some helpful functions).
+
+</br>
+
+#### Type Conversion
+
+To convert from one basic data type to another in SPSS, we follow this syntax `ALTER TYPE <variable> (<data_type_format>).`, in R we can apply this to a single item that represents one instance of this data type using a function. The function we use depends on the resulting data type we'd like but it looks like this: `as.<data_type>(<variable>)`. If we want to apply this across a whole column in a dataset, we'd use `mutate()`, examples of both are shown below.
+
+| Conversion | SPSS | R |
+| ---------- | ---- | - |
+| to string | `ALTER TYPE Year (a4).` | `as.character(Year)` -> `data %<>% mutate(Year = as.character(Year))` |
+| to numeric | `ALTER TYPE Var1 (f2.0).` | `as.numeric(Var1)` -> `data %<>% mutate(Var1 = as.numeric(Var1))` |
+| to logical | N/A | `as.logical(Var2)` -> `data %<>% mutate(Var2 = as.logical(Var2))`
+
+*This is our first time coming across pipes (`%>%` or `%<>%`) in this course. They are really useful at allowing us to write "chained" processes, passing the result of the previous to the next. Have a look at this blog for more detail: [The Four Pipes of magrittr, R-bloggers](https://www.r-bloggers.com/2021/09/the-four-pipes-of-magrittr/).*
+
+</br>
+
+#### Operators
+
+| Description | SPSS | R |
+| ----------- | -------- | -------- |
+| Exponentiation (right to left) | `**` | `^` |
+| Modulus | `MOD` | `%%` |
+| Multiplication, Division | `*` `/` |  `*` `/` |
+| Addition, Subtraction | `+` `-` | `+` `-` |
+| Comparison Operators (Less Than, More Than, Less Than or Equal To, More Than or Equal To, Equal To, Not Equal To) | `<` (`LT`) `>` (`GT`) `<=` (`LE`) `>=` (`GE`) `=` (`EQ`) `<>` (`NE` `¬=` `~=`) | `<` `>` `<=` `>=` `==` `!=` |
+| Logical NOT | `NOT` | `!` |
+| Logical AND | `AND` | `&` `&&` | 
+| Logical OR | `OR` | `|` `||` |
+
+
+### Knowledge Check
+
+```{r foundations-basics-quiz}
+quiz(
+  question("Convert `COMPUTE Var1 = 0.` from SPSS to R",
+           answer("`compute(Var1, 0)`", message = "R doesn't need a function to assign a variable."),
+           answer("`0 <- Var1`", message = "Be careful which way round you write the statement."),
+           answer("`Var1 <- 0`", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("Convert `ALTER TYPE Var1 (a1).` from SPSS to R",
+           answer("`as.character(Var1)`", correct = TRUE),
+           answer("`as.numeric(Var1)`"),
+           answer("`mutate(Var1, numeric)`"),
+           answer("`mutate(Var1, character)`"),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("Which of these are proper comparison operator conversions from SPSS to R?",
+           answer("`<>` to `||`", message = "`<>` is a 'not equal' from SPSS to `||`, 'Logical OR', in R."),
+           answer("`NOT` to `¬`", message = "The `¬` operator doesn't exist in R."),
+           answer("`AND` to `&`", correct = TRUE),
+           answer("`**` to `^`", correct = TRUE),
+           answer("`MOD` to `%%`", correct = TRUE),
+           answer("`*` to `*`", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           )
+)
+```
+
+
+## Data Flow
+
+As previously mentioned, you're likely working with a single dataset in SPSS, compared to multiple datasets along with other components in R. This means you could be reading multiple files, wrangling, and outputting different things all within one 'script' in R. To be the most efficient, we'll be using functions from packages in R, these will clearly be included in any code block that uses them.
+
+*As in the [Introduction to R](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r) course, it's not possible to have any code exercises that reach 'directories' for reading and writing code on this app.*
+
+
+### CSV
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* Read a CSV file
+GET DATA /TYPE=TXT
+  /FILE = "data/Borders.csv" 
+  /DELCASE = LINE 
+  /DELIMITERS = "," 
+  /ARRANGEMENT = DELIMITED
+  /FIRSTCASE = 2
+  /VARIABLES =
+  Name A28
+  Age F3.0
+  DOB edate11.
+CACHE.
+EXECUTE.
+
+* Write a CSV file
+SAVE TRANSLATE
+  /OUTFILE = "data/Borders.csv"
+  /TYPE = CSV
+  /REPLACE
+  /FIELDNAMES.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+library(readr)
+
+# Read a CSV file
+# Implicit naming and data types
+borders_csv <- read_csv("data/Borders.csv") 
+
+# Explicit naming and data types
+borders_csv <- read_csv(
+  "data/Borders.csv",
+  col_names = c("Name", "Age", "DOB"),
+  col_types = "ciD",
+  skip = 1
+  ) 
+
+# Write a CSV file
+write_csv(borders_csv, "data/Borders.csv") 
+```
+  </div>
+</div>
+
+
+### SPSS Files
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* Read an SPSS file
+GET FILE = "data/Borders.sav"
+
+* Write an SPSS file
+SAVE OUTFILE = "data/Borders.sav"
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+library(haven)
+
+# Read an SPSS file
+borders_spss <- read_sav("data/Borders.sav")
+
+# Write an SPSS file
+write_sav(borders_csv, "data/Borders.sav") 
+```
+  </div>
+</div>
+
+
+### Databases (SMRA)
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+INSERT FILE = pass.sps.
+GET DATA
+  /TYPE = ODBC
+  /CONNECT = !connect
+  /SQL = "SELECT LOCATION,
+ADMISSION_DATE, DISCHARGE_DATE,
+HBTREAT_CURRENTDATE, LINK_NO,
+AGE_IN_YEARS, ADMISSION_TYPE,
+CIS_MARKER, ADMISSION, DISCHARGE, URI "
+    "FROM ANALYSIS.SMR01_PI "
+    "WHERE ADMISSION_DATE >= '2006-4-1'".
+CACHE.
+EXECUTE.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+smra_connection <- dbConnect(drv = odbc(), 
+dsn = "SMRA",
+uid = .rs.askForPassword("SMRA Username:"),
+pwd = .rs.askForPassword("SMRA Password:"))
+
+smra_query <- "SELECT LOCATION, ADMISSION_DATE,
+  DISCHARGE_DATE, HBTREAT_CURRENTDATE,
+  LINK_NO, AGE_IN_YEARS,
+  ADMISSION_TYPE, CIS_MARKER,
+  ADMISSION, DISCHARGE, URI
+  FROM ANALYSIS.SMR01_PI
+  WHERE ADMISSION_DATE >= '01-APR-2006"
+
+smr01_data <- dbGetQuery(smra_connection, smra_query) %>%
+  as_tibble()
+
+dbDisconnect(smra_connection)
+```
+  </div>
+</div>
+
+
+## Explore
+
+### Mean
+
+This is one of the similarities between SPSS and R. In both cases, mean is a function, so in SPSS you would write `COMPUTE average = MEAN(<variables>).` compared to `average = mean(<variables>)` in R. (*Remember that in R, you don't have to assign the result of a function to a variable, this will automatically print it to your console.*) 
+
+The difference between these is the R code has created a standalone variable called `average`, not part of the dataset, so not entirely equal to the SPSS syntax. To make them the same, we'd need to *mutate* our dataset, using the `mutate()` function. This is done by wrapping the above R code in a mutate function with the corresponding dataset, like this:
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+COMPUTE average = MEAN(<variables>).
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+# Computing the mean by itself
+average = mean(<variables>)
+
+# Adding a new variable (column) to a dataset
+<data> <- mutate(<data>, average = mean(<variables>))
+
+# Same as above, with pipes
+<data> %<>% mutate(average = mean(<variables>))
+```
+  </div>
+</div>
+
+Let's get a bit more interactive now, keeping it easy to start with. *Remember that there can be many ways to reach the same solution in R but marked exercises sometimes require exact code/syntax matching. Have a look at the hints/solution and compare it to yours... if the result is the same, you still got it right!*
+
+The borders training dataset has been loaded as `borders_data`, convert the below SPSS code to R (let's **not** use pipes in this question):
+
+```{r eval=FALSE, echo=TRUE}
+COMPUTE av = MEAN(LengthOfStay).
+```
+
+```{r mean, exercise=TRUE}
+...
+```
+
+```{r mean-hint-1}
+... <- ...(...$...)
+```
+
+```{r mean-solution}
+borders_data <- mutate(borders_data, av = mean(LengthOfStay))
+```
+
+```{r mean-check}
+grade_code()
+```
+
+
+### Summary Statistics
+
+When exploring the data, a list of the summary statistics is a common starting point. In SPSS, this is often done through menus and building frequency tables. These tables allows many summary statistics to be included, from mean to median, standard deviation, and quartiles. Most of these are included in one R function, `summary()`, and can be run on a single variable or a whole dataset. Other summary statistics that aren't included as default are just another function away, e.g. `sd()` for standard deviation.
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+FREQUENCIES 
+  VARIABLES = sex
+  /FORMAT = NOTABLE
+  /STATISTICS = MINIMUM QUARTILES MEDIAN MEAN MAXIMUM
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+summary(borders_data$sex)
+```
+  </div>
+</div>
+
+
+### Frequencies & Crosstabs
+
+| Type | SPSS | R |
+| -- | -- | ------ |
+| Frequency | `FREQUENCIES VARIABLES = <variables>.` | `table(<df_name>$<variable>)` or `count(<df_name>, <variable>)` |
+| Crosstab | `CROSSTABS TABLES = <variable1> BY <variable 2>.` | `table(<df_name>$<variable1>, <df_name>$<variable2>)` with `addmargins()` for col/row totals |
+
+Convert the below SPSS code to R:
+
+```{r eval=FALSE, echo=TRUE}
+CROSSTABS 
+  /TABLES = HospitalCode BY Sex.
+```
+
+```{r crosstabs, exercise=TRUE}
+...
+```
+
+```{r crosstabs-hint-1}
+...(...(...$..., ...$...))
+```
+
+```{r crosstabs-solution}
+addmargins(table(borders_data$HospitalCode, borders_data$Sex))
+```
+
+```{r crosstabs-check}
+grade_code()
+```
+
+
+## Wrangle
+
+### Filter
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+SELECT IF <logical_expression>.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+filter(<data>, <logical_expression>)
+
+<data> %>% filter(<logical_expression>)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R, try using the pipe too.
+
+```{r eval=FALSE, echo=TRUE}
+SELECT IF HospitalCode = "B120H" AND LengthOfStay > 10.
+```
+
+```{r filter, exercise=TRUE}
+...
+```
+
+```{r filter-hint-1}
+... %>%
+  ...(... == ... & ... > ...)
+```
+
+```{r filter-solution}
+borders_data %>%
+  filter(HospitalCode == "B120H" & LengthOfStay > 10)
+```
+
+```{r filter-check}
+grade_code()
+```
+
+
+### Mutate
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+COMPUTE <new_variable> = <value>.
+IF <logical_expression> <new_variable> = <updated_value>.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+mutate(<data>, <new_variable> = <expression>)
+
+<data> %>% mutate(
+  <new_variable> = <expression>
+)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R.
+
+```{r eval=FALSE, echo=TRUE}
+COMPUTE los_div2 = LengthOfStay / 2.
+```
+
+```{r mutate, exercise=TRUE}
+...
+```
+
+```{r mutate-hint-1}
+... %>%
+  ...(... = ... / ...)
+```
+
+```{r mutate-solution}
+borders_data %>%
+  mutate(los_div2 = LengthOfStay / 2)
+```
+
+```{r mutate-check}
+grade_code()
+```
+
+
+### Arrange
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* Ascending Order
+SORT CASES BY <variables>
+  
+* Descending Order
+SORT CASES BY <variables> (d)
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+# Ascending Order
+arrange(<data>, <variables>)
+
+data %>% arrange(<variables>)
+
+# Descending Order
+arrange(<data>, desc(<variables>))
+
+data %>% arrange(desc(<variables>))
+```
+  </div>
+</div>
+
+Convert the following SPSS into R.
+
+```{r eval=FALSE, echo=TRUE}
+SORT CASES BY HospitalCode (a) Specialty (d).
+```
+
+```{r arrange, exercise=TRUE}
+...
+```
+
+```{r arrange-hint-1}
+... %>%
+  ...(..., ...(...))
+```
+
+```{r arrange-solution}
+borders_data %>%
+  arrange(HospitalCode, desc(Specialty))
+```
+
+```{r arrange-check}
+grade_code()
+```
+
+
+### Select
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+* Remove variables
+DELETE VARIABLES <variables>
+
+* Remove variables as part of a GET or SAVE
+... /DROP <variables>
+  
+* Keeping variables as part of a GET or SAVE
+... /KEEP <variables>
+
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+# Prepend `-` to a variable to remove
+select(<data>, <variables>)
+
+<data> %>% select(<variables>)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R.
+
+```{r eval=FALSE, echo=TRUE}
+DELETE VAIRABLES Main_op
+```
+
+```{r select, exercise=TRUE}
+...
+```
+
+```{r select-hint-1}
+... %>% 
+  ...(...)
+```
+
+```{r select-solution}
+borders_data %>%
+  select(-Main_op)
+```
+
+```{r select-check}
+grade_code()
+```
+
+
+### Rename
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+RENAME VARIABLES <existing_name> = <new_name>.
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+rename(<data>, <new_name> = <existing_name>)
+
+<data> %>% 
+  rename(<new_name> = <existing_name>)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R.
+
+```{r eval=FALSE, echo=TRUE}
+RENAME VARIABLES Dateofbirth = date_of_birth.
+```
+
+```{r rename, exercise=TRUE}
+...
+```
+
+```{r rename-hint-1}
+... %>% 
+  ...(... = ...)
+```
+
+```{r rename-solution}
+borders_data %>%
+  rename(date_of_birth = Dateofbirth)
+```
+
+```{r rename-check}
+grade_code()
+```
+
+
+### Knowledge Check
+
+Taking this chunk of SPSS code, convert it to R.
+
+```{r eval=FALSE, echo=TRUE}
+SELECT IF (LengthOfStay >= 2 AND LengthOfStay <= 10) AND (SPECIALTY = "E12" OR SPECIALTY = "C8").
+DELETE VARIABLES URI Postcode.
+SORT CASES BY LengthOfStay.
+```
+
+```{r wrangle-1, exercise=TRUE}
+...
+```
+
+```{r wrangle-1-solution}
+borders_data %>%
+  filter(LengthOfStay >= 2 & LengthOfStay <= 10) %>%
+  filter(Specialty == "E12" | Specialty == "C8") %>%
+  select(-URI, -Postcode) %>%
+  arrange(LengthOfStay)
+```
+
+```{r wrangle-1-check}
+grade_result(
+  fail_if(~ identical(as.character(.result$Postcode[1]), "TD5 7XX"), "Did you select the right columns?"),
+  fail_if(~ identical(as.character(.result$URI[1]), "2"), "Did you select the right columns?"),
+  fail_if(~ identical(as.character(.result$LinkNo[986]), "16114"), "Did you filter from 2 up to and including 10?"),
+  fail_if(~ identical(as.character(.result$LinkNo[0]), "10028"), "Did you filter from including 2 up to 10?"),
+  pass_if(~ identical(as.character(.result$LinkNo[1]), "1006") & identical(as.character(.result$Specialty[1]), "E12") & identical(as.character(.result$LengthOfStay[1]), "2") & identical(as.character(.result$LinkNo[985]), "12967")),
+  fail_if(~ TRUE)
+)
+```
+
+
+## Joining
+
+### Adding Observations (Rows)
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+ADD FILES
+  /FILE = "<data/file1.ext>",
+  /FILE = "<data/file2.ext>".
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+data_1 <- read_csv("<data/file1.ext>")
+data_2 <- read_csv("<data/file2.ext>")
+
+data_combined <- bind_rows(data_1, data_2)
+```
+  </div>
+</div>
+
+
+### Adding Variables (Columns)
+
+This is considered a join, so it'd be good to review the types of joins:
+
+
+```{r join-tables-overview, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/r-joining-overview.png")
+```
+
+* `left_join` - taking all records from the "left", `data_1`, and adding matched records from the "right", `data_2`, introducing `na` where the "right", `data_2` had no matching records
+* `right_join` - taking all records from the "right", `data_2`, and adding matched records from the "left", `data_1`, introducing `na` where the "left", `data_1` had no matching records
+* `inner_join` - producing only records where there were matches on both given data sets
+* `full_join` - retaining all records from both data sets and introducing `na` on either one where there was no matching records
+
+</br> 
+
+When comparing SPSS and R, there are a few specific points to note that are different:
+
+* R doesn't need to be sorted by the joining variable.
+* Where SPSS fails on a non-unique table, R will just duplicate the rows required.
+
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+GET FILE = "<data/file1.ext>".
+SORT CASES BY <common_variable>.
+MATCH FILES
+  /FILE = "<data/file2.ext>",
+  /BY <common_variable>
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+<type>_join(<data_1>, <data_2>, by = <common_variable(s)>)
+```
+  </div>
+</div>
+
+Convert the following SPSS into R. 
+
+Assume the datasets are already loaded for you (named `baby5` and `baby6`).
+
+```{r eval=FALSE, echo=TRUE}
+GET FILE = "data/baby5.sav".
+SORT CASES BY FAMILYID DOB.
+MATCH FILES
+  /FILE = *
+  /FILE = "data/baby6.sav",
+  /BY FAMILYID DOB.
+```
+
+```{r joins, exercise=TRUE}
+...
+```
+
+```{r joins-hint-1}
+...(..., ..., ... = ...(..., ...))
+```
+
+```{r joins-solution}
+left_join(baby5, baby6, by = c("FAMILYID", "DOB"))
+```
+
+```{r joins-check}
+grade_code()
+```
+
+
+## Help & Feedback
+
+#### References
+
+* SPSS Syntax to R paper (James McMahon, Chris Deans, Gavin Clark) - https://www.isdscotland.org/About-ISD/Methodologies/_docs/SPSS-syntax-to-R_v1-1.pdf
+
+#### Help
+
+If you continue to have support requirements for transitioning to using R instead of SPSS, it could be data access issues or technical skill, reach out to the [Data Science mailbox](mailto:phs.datascience@nhs.net?subject=SPSS to R - Help). 
+
+For specific help with a technical issue, follow this hierarchy:
+
+* Vignettes (Help) / `?<function_name>`
+* Google / Stack Overflow (tag queries with "[r]", "[tidyverse]", etc.)
+* [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
+* [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
+
+#### Feedback
+
+<iframe width="100%" height= "2300" src= "https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5JmibxHi_yzZ9Pvduh8IqoF_5URFZSOFNWTlFMSDFGWFdEOU9IU0RNT0NXWSQlQCN0PWcu&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+
