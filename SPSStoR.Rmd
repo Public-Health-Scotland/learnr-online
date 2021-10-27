@@ -19,6 +19,7 @@ library(stringr)
 library(readr)
 library(haven)
 library(dplyr)
+library(magrittr)
 library(kableExtra)
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -132,7 +133,9 @@ knitr::include_graphics("images/r-foundations-buildingblocks.png")
 
 ### Anatomy of a Program/Script
 
-While it's not strictly accurate to call an SPSS syntax file a program, we can align them for the purpose of this course. Taking these 2 examples, we can break down each component:
+While it's not strictly accurate to call an SPSS syntax file a program, we can align them for the purpose of this course. In the below SPSS example, we are adding a variable (column) to the dataset. However, in R, we can have multiple objects in our working environment, so this line of code actually sets up a variable, `x`, completely separate from any dataset. We can add it to a dataset using the `mutate()` function which we'll find out more about later.
+
+Taking these 2 examples, we can break down each component:
 
 <div class="spss-r-row">
   <div class="spss-r-column">
@@ -162,7 +165,7 @@ x <- 0
 | **Assignment Operator** - giving variables their content. | `=` | `<-` |
 | **Basic data type** - in this case, numeric, it's one of the basic data types available. | `0` | `0` |
 
-* In SPSS, the `COMPUTE` keyword is similar to a function, it tells the computer to do a specific set of things based on the parameters you provide. There are many functions available in R but when assigning a new variable, a function isn't required. 
+* In SPSS, the `COMPUTE` keyword is similar to a function/method, it tells the computer to do a specific set of things based on the parameters you provide. There are many functions available in R but when assigning a new variable, a function isn't required. You may also be familiar with macros in SPSS where you can define something along the lines of a function for yourself in SPSS, this isn't covered for R in this course but will be in more advanced courses in the future.
 * Each line in SPSS needs to be finished with a `.`, this tells the computer you have finished the statement and to execute that as one. In R, this isn't necessary and the computer determines what makes a complete statement. This does mean that you should be careful with how you structure your code, making it easy to read and review with proper spacing and breaks (see the [PHS R Style Guide](https://github.com/Public-Health-Scotland/R-Resources/blob/master/PHS%20R%20style%20guide.md)).
 
 
@@ -198,7 +201,7 @@ To convert from one basic data type to another in SPSS, we follow this syntax `A
 | Description | SPSS | R |
 | ----------- | -------- | -------- |
 | Exponentiation (right to left) | `**` | `^` |
-| Modulus | `MOD` | `%` |
+| Modulus | `MOD` | `%%` |
 | Multiplication, Division | `*` `/` |  `*` `/` |
 | Addition, Subtraction | `+` `-` | `+` `-` |
 | Comparison Operators (Less Than, More Than, Less Than or Equal To, More Than or Equal To, Equal To, Not Equal To) | `<` (`LT`) `>` (`GT`) `<=` (`LE`) `>=` (`GE`) `=` (`EQ`) `<>` (`NE` `¬=` `~=`) | `<` `>` `<=` `>=` `==` `!=` |
@@ -233,7 +236,7 @@ quiz(
            answer("`NOT` to `¬`", message = "The `¬` operator doesn't exist in R."),
            answer("`AND` to `&`", correct = TRUE),
            answer("`**` to `^`", correct = TRUE),
-           answer("`MOD` to `%`", correct = TRUE),
+           answer("`MOD` to `%%`", correct = TRUE),
            answer("`*` to `*`", correct = TRUE),
            incorrect = "Not quite, have another go!",
            allow_retry = TRUE,
@@ -380,11 +383,35 @@ dbDisconnect(smra_connection)
 
 ### Mean
 
-This is one of the similarities between SPSS and R. In both cases, mean is a function, so in SPSS you would write `COMPUTE average = MEAN(<variables>).` compared to `average = mean(<variables>)` in R. Remember that in R, you don't have to assign the result of a function to a variable, this will automatically print it to your console.
+This is one of the similarities between SPSS and R. In both cases, mean is a function, so in SPSS you would write `COMPUTE average = MEAN(<variables>).` compared to `average = mean(<variables>)` in R. (*Remember that in R, you don't have to assign the result of a function to a variable, this will automatically print it to your console.*) 
 
-Let's get a bit more interactive now, keeping it easy to start with. *Remember that there can be many ways to reach the same solution in R but marked exercises sometimes require exact code/syntax matching. Have a look at the solution and compare it to yours... if the result is the same you still got it right!*
+The difference between these is the R code has created a standalone variable called `average`, not part of the dataset, so not entirely equal to the SPSS syntax. To make them the same, we'd need to *mutate* our dataset, using the `mutate()` function. This is done by wrapping the above R code in a mutate function with the corresponding dataset, like this:
 
-The borders training dataset has been loaded as `borders_data`, convert the below SPSS code to R:
+<div class="spss-r-row">
+  <div class="spss-r-column">
+<h4 class="colour-purple">SPSS</h4>
+```{r eval=FALSE, echo=TRUE}
+COMPUTE average = MEAN(<variables>).
+```
+  </div>
+  <div class="spss-r-column">
+<h4 class="colour-purple">R</h4>
+```{r eval=FALSE, echo=TRUE}
+# Computing the mean by itself
+average = mean(<variables>)
+
+# Adding a new variable (column) to a dataset
+<data> <- mutate(<data>, average = mean(<variables>))
+
+# Same as above, with pipes
+<data> %<>% mutate(average = mean(<variables>))
+```
+  </div>
+</div>
+
+Let's get a bit more interactive now, keeping it easy to start with. *Remember that there can be many ways to reach the same solution in R but marked exercises sometimes require exact code/syntax matching. Have a look at the hints/solution and compare it to yours... if the result is the same, you still got it right!*
+
+The borders training dataset has been loaded as `borders_data`, convert the below SPSS code to R (let's **not** use pipes in this question):
 
 ```{r eval=FALSE, echo=TRUE}
 COMPUTE av = MEAN(LengthOfStay).
@@ -399,7 +426,7 @@ COMPUTE av = MEAN(LengthOfStay).
 ```
 
 ```{r mean-solution}
-av <- mean(borders_data$LengthOfStay)
+borders_data <- mutate(borders_data, av = mean(LengthOfStay))
 ```
 
 ```{r mean-check}
@@ -409,7 +436,7 @@ grade_code()
 
 ### Summary Statistics
 
-When exploring the data, a list of the summary statistics is a common starting point. In SPSS, this is often done through menus and building frequency tables. These tables allows many summary statistics to be included, from mean to median, standard deviation, and quartiles. Most of these are included in one R function, `summary()`, and can be run on a single variable or a whole dataset. Other summary statistics that aren't included as default are just another function away, e.g. `sd()` for standard deviation. 
+When exploring the data, a list of the summary statistics is a common starting point. In SPSS, this is often done through menus and building frequency tables. These tables allows many summary statistics to be included, from mean to median, standard deviation, and quartiles. Most of these are included in one R function, `summary()`, and can be run on a single variable or a whole dataset. Other summary statistics that aren't included as default are just another function away, e.g. `sd()` for standard deviation.
 
 <div class="spss-r-row">
   <div class="spss-r-column">
@@ -434,7 +461,7 @@ summary(borders_data$sex)
 
 | Type | SPSS | R |
 | -- | -- | ------ |
-| Frequency | `FREQUENCIES VARIABLES = <variables>.` | `table(<df_name>$<variable>)` |
+| Frequency | `FREQUENCIES VARIABLES = <variables>.` | `table(<df_name>$<variable>)` or `count(<df_name>, <variable>)` |
 | Crosstab | `CROSSTABS TABLES = <variable1> BY <variable 2>.` | `table(<df_name>$<variable1>, <df_name>$<variable2>)` with `addmargins()` for col/row totals |
 
 Convert the below SPSS code to R:
@@ -729,7 +756,14 @@ borders_data %>%
 ```
 
 ```{r wrangle-1-check}
-grade_code()
+grade_result(
+  fail_if(~ identical(as.character(.result$Postcode[1]), "TD5 7XX"), "Did you select the right columns?"),
+  fail_if(~ identical(as.character(.result$URI[1]), "2"), "Did you select the right columns?"),
+  fail_if(~ identical(as.character(.result$LinkNo[986]), "16114"), "Did you filter from 2 up to and including 10?"),
+  fail_if(~ identical(as.character(.result$LinkNo[0]), "10028"), "Did you filter from including 2 up to 10?"),
+  pass_if(~ identical(as.character(.result$LinkNo[1]), "1006") & identical(as.character(.result$Specialty[1]), "E12") & identical(as.character(.result$LengthOfStay[1]), "2") & identical(as.character(.result$LinkNo[985]), "12967")),
+  fail_if(~ TRUE)
+)
 ```
 
 
@@ -772,6 +806,13 @@ knitr::include_graphics("images/r-joining-overview.png")
 * `inner_join` - producing only records where there were matches on both given data sets
 * `full_join` - retaining all records from both data sets and introducing `na` on either one where there was no matching records
 
+</br> 
+
+When comparing SPSS and R, there are a few specific points to note that are different:
+
+* R doesn't need to be sorted by the joining variable.
+* Where SPSS fails on a non-unique table, R will just duplicate the rows required.
+
 <div class="spss-r-row">
   <div class="spss-r-column">
 <h4 class="colour-purple">SPSS</h4>
@@ -799,6 +840,7 @@ Assume the datasets are already loaded for you (named `baby5` and `baby6`).
 GET FILE = "data/baby5.sav".
 SORT CASES BY FAMILYID DOB.
 MATCH FILES
+  /FILE = *
   /FILE = "data/baby6.sav",
   /BY FAMILYID DOB.
 ```
