@@ -848,6 +848,8 @@ res_list <- metadata$resources %>%
   as_tibble() %>%
   select(name, id, size, mimetype, last_modified, url, description)
 
+res_list
+
 ```
 
 ``` {r filter_res2-check}
@@ -861,11 +863,7 @@ Armed with the resource ID, it is a good idea to pull a single (or a few) rows o
 ```
 
 ``` {r filter_res3-solution}
-metadata <- package_show(id = "df10dbd4-81b3-4bfa-83ac-b14a5ec62296", as = "table")
-
-res_list <- metadata$resources %>% 
-  as_tibble() %>%
-  select(name, id, size, mimetype, last_modified, url, description)
+get_resource(res_id = "d534ae02-7890-4fbc-8cc7-f223d53fb11b", rows=5)
 
 ```
 
@@ -899,6 +897,8 @@ res_list_geo <- metadata_geo$resources %>%
   as_tibble() %>%
   select(name, id, size, mimetype, last_modified, url, description)
 
+res_list_geo
+
 ca_codes <- get_resource(res_id = "967937c4-8d67-4f39-974f-fd58c4acfda5") %>%
   filter(HBName == "NHS Lothian")
 
@@ -919,6 +919,9 @@ Now we have everything we need to build our API query. Remember, we want to extr
 ``` {r filter_res5-hint-1}
 #set the resource id for Births by Hospitals
 res_id <- "d534ae02-7890-4fbc-8cc7-f223d53fb11b"
+
+#set up connection to ckan
+ckan <- src_ckan("https://www.opendata.nhs.scot")
 ```
 
 ``` {r filter_res5-hint-2}
@@ -929,13 +932,15 @@ filtered_data <- dplyr::tbl(src = ckan$con, from = res_id) %>%
 ```
 
 ``` {r filter_res5-solution}
-
+ckan <- src_ckan("https://www.opendata.nhs.scot")
 res_id <- "d534ae02-7890-4fbc-8cc7-f223d53fb11b"
 
 filtered_data <- dplyr::tbl(src = ckan$con, from = res_id) %>% 
   as_tibble() %>%
   filter(CA %in% c("S12000010", "S12000019", "S12000036", "S12000040") & FinancialYear %in% c("2020/21", "2019/20", "2018/19", "2017/18", "2016/17") & Outcome == "Live") %>%
   select(FinancialYear, CA, Hospital, Outcome, SMR02Births)
+
+filtered_data
 
 ```
 
