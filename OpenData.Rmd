@@ -16,6 +16,7 @@ library(kableExtra)
 library(ckanr)
 library(remotes)
 library(phsopendata)
+ckanr_setup(url = "https://www.opendata.nhs.scot/")
 knitr::opts_chunk$set(echo = FALSE)
 tutorial_options(
   exercise.checker = gradethis::grade_learnr
@@ -667,6 +668,8 @@ Now we can use these tag and group names to search datasets associated with them
 
 ```{r search_group, exercise=TRUE}
 group_query_datasets <- package_search(fq = 'groups:covid-19', as = "table")
+
+group_query_datasets
 ```
 
 Note that this will return a list object, which contains our datasets in the results item. We can extract just the results to view all the metadata information for each dataset in this group, or we can just view the titles to be able to determine which will be of further interest:
@@ -683,6 +686,8 @@ Searching by tags works much the same, simply using tags in the `package_search`
 
 ```{r search_tag, exercise=TRUE}
 tag_query_datasets <- package_search(fq = 'tags:alcohol', as = "table")
+
+tag_query_datasets
 ```
 
 
@@ -765,6 +770,8 @@ res_id <- "427f9a25-db22-4014-a3bc-893b68243055"
 
 dump_data <- readr::read_csv(glue::glue("{ckan_url}/datastore/dump/{res_id}?bom=true"))%>%
   dplyr::select(-"_id")
+
+dump_data
 ```
 
 3. Download a subset of the data {#filter_data}
