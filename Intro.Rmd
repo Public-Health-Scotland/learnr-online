@@ -770,7 +770,7 @@ grade_result(
 Orders rows in ascending order:
 
 * `arrange(<data>, <variables>)`
-* `arrange(desc(<data>), <variables>)` to sort in descending order
+* `arrange(<data>, desc(<variables>))` to sort in descending order
 * With pipe: `<data> %>% arrange(<variables>)`
 
 Sort `borders_data` by `HospitalCode`. Use the hint button if you need some help.
