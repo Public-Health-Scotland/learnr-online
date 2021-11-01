@@ -167,6 +167,7 @@ x <- 0
 
 * In SPSS, the `COMPUTE` keyword is similar to a function/method, it tells the computer to do a specific set of things based on the parameters you provide. There are many functions available in R but when assigning a new variable, a function isn't required. You may also be familiar with macros in SPSS where you can define something along the lines of a function for yourself in SPSS, this isn't covered for R in this course but will be in more advanced courses in the future.
 * Each line in SPSS needs to be finished with a `.`, this tells the computer you have finished the statement and to execute that as one. In R, this isn't necessary and the computer determines what makes a complete statement. This does mean that you should be careful with how you structure your code, making it easy to read and review with proper spacing and breaks (see the [PHS R Style Guide](https://github.com/Public-Health-Scotland/R-Resources/blob/master/PHS%20R%20style%20guide.md)).
+* Everything in R is case sensitive. This means functions, variables that you create, and even within data. If you have "Male" in the data, this is not the same as "male". 
 
 
 ### Basic Data Types
@@ -206,8 +207,8 @@ To convert from one basic data type to another in SPSS, we follow this syntax `A
 | Addition, Subtraction | `+` `-` | `+` `-` |
 | Comparison Operators (Less Than, More Than, Less Than or Equal To, More Than or Equal To, Equal To, Not Equal To) | `<` (`LT`) `>` (`GT`) `<=` (`LE`) `>=` (`GE`) `=` (`EQ`) `<>` (`NE` `¬=` `~=`) | `<` `>` `<=` `>=` `==` `!=` |
 | Logical NOT | `NOT` | `!` |
-| Logical AND | `AND` | `&` `&&` | 
-| Logical OR | `OR` | `|` `||` |
+| Logical AND | `AND` | `&&` or `&` for element-wise comparison | 
+| Logical OR | `OR` | `||` or `|` for element-wise comparison |
 
 
 ### Knowledge Check
@@ -284,6 +285,7 @@ SAVE TRANSLATE
   <div class="spss-r-column">
 <h4 class="colour-purple">R</h4>
 ```{r eval=FALSE, echo=TRUE}
+# Loading libraries
 library(readr)
 
 # Read a CSV file
@@ -321,6 +323,7 @@ SAVE OUTFILE = "data/Borders.sav"
   <div class="spss-r-column">
 <h4 class="colour-purple">R</h4>
 ```{r eval=FALSE, echo=TRUE}
+# Loading libraries
 library(haven)
 
 # Read an SPSS file
@@ -357,11 +360,17 @@ EXECUTE.
   <div class="spss-r-column">
 <h4 class="colour-purple">R</h4>
 ```{r eval=FALSE, echo=TRUE}
+# Loading libraries
+library(odbc)
+library(tibble)
+
+# Database connection
 smra_connection <- dbConnect(drv = odbc(), 
 dsn = "SMRA",
 uid = .rs.askForPassword("SMRA Username:"),
 pwd = .rs.askForPassword("SMRA Password:"))
 
+# Database query
 smra_query <- "SELECT LOCATION, ADMISSION_DATE,
   DISCHARGE_DATE, HBTREAT_CURRENTDATE,
   LINK_NO, AGE_IN_YEARS,
@@ -383,7 +392,7 @@ dbDisconnect(smra_connection)
 
 ### Mean
 
-This is one of the similarities between SPSS and R. In both cases, mean is a function, so in SPSS you would write `COMPUTE average = MEAN(<variables>).` compared to `average = mean(<variables>)` in R. (*Remember that in R, you don't have to assign the result of a function to a variable, this will automatically print it to your console.*) 
+This is one of the similarities between SPSS and R. In both cases, mean is a function, so in SPSS you would write `COMPUTE average = MEAN(<variables>).` compared to `average <- mean(<dataset>$<variables>)` in R. (*Remember that in R, you don't have to assign the result of a function to a variable, this will automatically print it to your console.*) 
 
 The difference between these is the R code has created a standalone variable called `average`, not part of the dataset, so not entirely equal to the SPSS syntax. To make them the same, we'd need to *mutate* our dataset, using the `mutate()` function. This is done by wrapping the above R code in a mutate function with the corresponding dataset, like this:
 
@@ -504,6 +513,7 @@ SELECT IF <logical_expression>.
 ```{r eval=FALSE, echo=TRUE}
 filter(<data>, <logical_expression>)
 
+# or by using pipes (same output)
 <data> %>% filter(<logical_expression>)
 ```
   </div>
@@ -540,8 +550,7 @@ grade_code()
   <div class="spss-r-column">
 <h4 class="colour-purple">SPSS</h4>
 ```{r eval=FALSE, echo=TRUE}
-COMPUTE <new_variable> = <value>.
-IF <logical_expression> <new_variable> = <updated_value>.
+COMPUTE <new_variable> = <logical_expression>.
 ```
   </div>
   <div class="spss-r-column">
@@ -549,6 +558,7 @@ IF <logical_expression> <new_variable> = <updated_value>.
 ```{r eval=FALSE, echo=TRUE}
 mutate(<data>, <new_variable> = <expression>)
 
+# or by using pipes (same output)
 <data> %>% mutate(
   <new_variable> = <expression>
 )
@@ -599,12 +609,12 @@ SORT CASES BY <variables> (d)
 ```{r eval=FALSE, echo=TRUE}
 # Ascending Order
 arrange(<data>, <variables>)
-
+# or by using pipes (same output)
 data %>% arrange(<variables>)
 
 # Descending Order
 arrange(<data>, desc(<variables>))
-
+# or by using pipes (same output)
 data %>% arrange(desc(<variables>))
 ```
   </div>
@@ -658,6 +668,7 @@ DELETE VARIABLES <variables>
 # Prepend `-` to a variable to remove
 select(<data>, <variables>)
 
+# or by using pipes (same output)
 <data> %>% select(<variables>)
 ```
   </div>
@@ -702,6 +713,7 @@ RENAME VARIABLES <existing_name> = <new_name>.
 ```{r eval=FALSE, echo=TRUE}
 rename(<data>, <new_name> = <existing_name>)
 
+# or by using pipes (same output)
 <data> %>% 
   rename(<new_name> = <existing_name>)
 ```
@@ -738,7 +750,7 @@ grade_code()
 Taking this chunk of SPSS code, convert it to R.
 
 ```{r eval=FALSE, echo=TRUE}
-SELECT IF (LengthOfStay >= 2 AND LengthOfStay <= 10) AND (SPECIALTY = "E12" OR SPECIALTY = "C8").
+SELECT IF (LengthOfStay >= 2 AND LengthOfStay <= 10) AND (Specialty = "E12" OR Specialty = "C8").
 DELETE VARIABLES URI Postcode.
 SORT CASES BY LengthOfStay.
 ```
@@ -832,9 +844,14 @@ MATCH FILES
   </div>
 </div>
 
-Convert the following SPSS into R. 
+For the exercise, the datasets are already loaded for you (named `baby5` and `baby6`). Below is an output of what they look like using a function `glimpse()` from `dplyr` (a "tidy" version of `str()`).
 
-Assume the datasets are already loaded for you (named `baby5` and `baby6`).
+```{r echo=TRUE, eval=TRUE}
+glimpse(baby5)
+glimpse(baby6)
+```
+
+Convert the following SPSS into R. 
 
 ```{r eval=FALSE, echo=TRUE}
 GET FILE = "data/baby5.sav".
