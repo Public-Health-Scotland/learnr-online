@@ -770,6 +770,12 @@ In [Packages] we spoke about Tidyverse, a suite of packages for data exploration
 
 `filter()` `mutate()` `arrange()` `select()` `group_by()` `summarise()` `count()` `rename()` `recode()`
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_tidydata.jpg")
+```
+</div>
+
 ### Pipe Operator
 
 Before going on to the functions that make up `dplyr`, we need to talk about the pipe `%>%` (shortcut: `ctrl` + `shift` + `M`). This is used to link functions together, passing the result of the previous into the next. Using the pipe makes R code more readable and prevents extensive parenthesis building up with multiple function calls. An example is below, you can see the results are the same. Don't worry too much about the functions, we get into that next (`dplyr` has been loaded).
