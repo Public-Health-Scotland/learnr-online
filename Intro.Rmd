@@ -432,7 +432,7 @@ mult_2(4)
 
 ### Packages
 
-On top of base R are packages, these are bundles of code to expand the functionality of base R. This allows people to write and share functions that share expertise. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own suite of packages too, including `phsmethods` (a bundle of functions that are common for PHS staff) and `phsopendata` (functions for interacting with the Scottish Health and Social Care Open Data platform).
+On top of base R are packages, these are bundles of code to expand the functionality of base R. This allows people to write and share functions that share expertise. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own suite of packages too, `phsverse`, including `phsmethods` (a bundle of functions that are common for PHS staff) and `phsopendata` (functions for interacting with the Scottish Health and Social Care Open Data platform).
 
 It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.
 
@@ -456,7 +456,7 @@ knitr::include_graphics("images/r-packages-tidyverse.png")
 ```
 </div>
 
-Tidyverse is a suite of packages and have a common theme throughout. We’ll look at a couple of the Tidyverse packages later in [Wrangle]. It is not recommended to load Tidyverse in its entirety though, but rather each package that you’ll specifically use (e.g. `dplyr`). Tidyverse has grown dramatically so loading the whole suite will unnecessarily utilise a lot of resource.
+Tidyverse is a suite of packages and have a common theme throughout (and an opinionated style guide which we have adopted in PHS). We’ll look at a couple of the Tidyverse packages later in [Wrangle]. It is not recommended to load Tidyverse in its entirety though, but rather each package that you’ll specifically use (e.g. `dplyr`). Tidyverse has grown dramatically so loading the whole suite will unnecessarily utilise a lot of resource.
 
 </br>
 
@@ -483,9 +483,14 @@ You can see that `dplyr` has the same function names as in a package called `sta
 
 </br>
 
-#### PHSMethods
+#### PHSverse
 
-PHS have developed a package, `phsmethods`, with the aim to tackle some of the most common tasks, e.g. dealing with CHI numbers and working with postcodes.
+PHS have developed a suite of packages, [`phsverse`](https://github.com/Public-Health-Scotland/phsverse), with the aim to tackle some of the most common tasks, e.g. dealing with CHI numbers and following our brand guidelines in visualisations. The included packages in [`phsverse`](https://github.com/Public-Health-Scotland/phsverse) are outlined below.
+
+* `phsmethods` - functions for common analytical tasks
+* `phsopendata` - functions to extract and interact with data from the Scottish Health and Social Care Open Data platform
+* `phsstyles` - functions for standard graphic styling
+* `phstemplates` - standard R templates and projects
 
 
 ## RStudio
