@@ -799,6 +799,12 @@ Picks cases based on their values:
 * `filter(<data>, <logical_expression>)`
 * With pipe: `<data> %>% filter(<logical_expression>)`
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_dplyr_filter.jpg")
+```
+</div>
+
 Filter the `borders_data` data-set to where `HospitalCode` is "B120H" and `LengthOfStay` is more than 10. Use the hint button if you need some help.
 
 ```{r filter-example, exercise=TRUE}
