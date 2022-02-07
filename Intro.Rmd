@@ -19,6 +19,7 @@ library(stringr)
 library(readr)
 library(haven)
 library(dplyr)
+library(purrr)
 library(ggplot2)
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -491,6 +492,75 @@ PHS have developed a suite of packages, [`phsverse`](https://github.com/Public-H
 * `phsopendata` - functions to extract and interact with data from the Scottish Health and Social Care Open Data platform
 * `phsstyles` - functions for standard graphic styling
 * `phstemplates` - standard R templates and projects
+
+
+## Control Flow & Iteration
+
+In programming, control flow is where decisions are made and iteration is where things are repeated. This is the foundation of making a program work for us and are likely to be used within the functions we just looked at. 
+
+### Control Flow - if
+
+* Package: `dplyr`
+* `if_else(<condition>, <true>, <false>)`
+
+```{r cfi-if, exercise=TRUE}
+x <- 5
+if_else(x > 5, "`x` is more than 5", "`x` is less than or equal to 5")
+```
+
+
+### Control Flow - case
+
+* Package: `dplyr`
+* `case_when(<condition> ~ <result>)`
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_dplyr_case_when.png")
+```
+</div>
+
+```{r cfi-case, exercise=TRUE}
+x <- c(1, 2, 3, 4, 5)
+case_when(x < 3 ~ "LT3",
+          x %% 2 == 0 ~ "Even")
+```
+
+
+### Iteration - for
+
+* `for(<value> in <sequence>) {<statement>}`
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_for_loop.png")
+```
+</div>
+
+```{r cfi-for, exercise=TRUE}
+x <- c(1, 2, 3, 4, 5)
+even_count <- 0
+for(i in x) {
+  if(i %% 2 == 0)
+    even_count <- even_count + 1
+}
+print(even_count)
+```
+
+
+### Iteration - purrr loop
+
+* Package: `purrr`
+* `map(<object>, <function>)`
+
+```{r cfi-purrr, exercise=TRUE}
+add_10 <- function(x) {
+  x <- x + 10
+}
+
+x <- c(1, 2, 3, 4, 5)
+map(x, add_10)
+```
 
 
 ## RStudio
