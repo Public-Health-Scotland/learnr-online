@@ -571,7 +571,15 @@ RStudio is the software we use to write and run R code, also known as an Integra
 
 </br>
 
-### R Projects
+#### Guidance
+
+* **Close Sessions** - leaving sessions open or running multiple sessions uses resource. As the server is a shared resource, this can the whole organisation. When finished, close it down using the red power button at the top right.
+* **Store Data Properly** - projects and files shouldn’t be stored in your ‘home’ drive and unused data should be removed from your environment.
+* **Retrieve Data Efficiently** - limit the data extracted using well written SQL.
+
+</br>
+
+#### R Projects
 
 Using RStudio also gives us the use of R Projects. Using R Projects keeps our projects separate, giving the project its own working directory, workspace, and history. 
 
