@@ -1,7 +1,5 @@
 ---
 title: "Intro to Openxlsx"
-author: "Ciara Gribben"
-date: "07/02/2022"
 output: 
   learnr::tutorial:
     css: "css/style.css"
@@ -11,25 +9,320 @@ runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Author: Ciara Gribben
+# Date: Feb 2022
+# R Version: 3.6.1
+
+# Learnr Package Documentation: https://rstudio.github.io/learnr/
+
+# Packages
+library(learnr)
+library(dplyr)
+library(janitor)
+library(stringr)
+library(openxlsx)
+
+knitr::opts_chunk$set(echo = FALSE)
+
+# Formatting text table
+annotation <- c("#", "##", "###", "\\*italics\\*", "\\*\\*bold\\*\\*", "\\* bulleted list")
+formatting <- c("Header 1", "Header 2", "Header 3", "Format text to italics", "Format text to bold", "Create bulleted list")
+
+formattext <- data.frame(Annotation = annotation, Formatting = formatting, stringsAsFactors = FALSE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r phs-logo, fig.align='right', out.width="40%"}
+knitr::include_graphics("images/phs-logo.png")
 ```
 
-## Including Plots
+## Introduction
 
-You can also embed plots, for example:
+Welcome to an introduction to the openxlsx R package. This course is designed as a self-directed introduction to openxlsx for anyone in Public Health Scotland. 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+<div class="info_box">
+<h4>Course Info</h4>
+<ul>
+
+<li>
+
+This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.
+
+</li>
+
+<li>
+
+Some sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.
+
+</li>
+
+<li>
+
+The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.
+
+</li>
+
+</ul>
+
+There are some exercises designed to accompany this course which can be downloaded from [Github](https://github.com/Public-Health-Scotland/). These can either be completed bit by bit as you work through the course or as a whole exercise at the end.  
+  </div>
+</br>
+
+
+### What is openxlsx?
+
+Openxslx is an R package that allows us to read, write and edit xlsx files from within the RStudio interface allowing us to automate the creation and formatting of the excel files that usually accompany our publications. This is key because, usually, the process to create these excel publication files is very manual and involves several copy/paste steps. This can result in errors with data being pasted in the wrong place or in the wrong format which can have serious consequences. For example, in 2003 the Candian power company TransAlta lost $24 million due to a copy paste error causing misaligned rows in a spreadsheet containing bids for contracts. 
+
+
+### Why use Excel?
+You might wonder why we should still provide data in an excel format, aren't dashboards and infographics the way forward? 
+
+While dashboards and infographics are a great way of showing results and delivering messages they don't suit everyone. Many of our customers can't access dashboards due to IT setup in their organisations and others may just want the data in a spreadsheet to take away and do their own analysis. 
+
+### Knowledge Check
+```{r intro-quiz}
+quiz(
+  question("Which of the following can openxlsx do?",
+    answer("Read data in from excel", correct = TRUE),
+    answer("Write data out to excel", correct = TRUE),
+    answer("Format excel files using the RStudio interface", correct = TRUE),
+    answer("Write publications"),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Data Setup
+For the purposes of this course we'll use the iris dataset - this is a dataset that is in-built to R and means the code will be reproducible in your RStudio. However, please note that the datatset is not really important and you can replace it with a dataset of your choice if you prefer. 
+
+Let's look at the iris data:
+```{r iris-head, exercise=TRUE}
+iris <- iris
+head (iris)
+```
+
+First we need to do some data wrangling and produce tables for the excel output:
+```{r iris-wrangling, exercise=TRUE}
+# Clean variable names and data
+data <- iris %>%
+  clean_names() %>%
+  mutate(species = str_to_title(species))
+
+# Create a table with the minimum and maximum petal length for each iris species
+data_table <- data %>%
+  group_by(species) %>%
+  summarise(max_pet_length = max(petal_length),
+            max_pet_width = max(petal_width)) %>% 
+  rename(Species = species, 
+         `Max Petal Length` = max_pet_length,
+         `Max Petal Width` = max_pet_width)
+
+# Create a table with a count of each iris species
+data_table2 <- data %>%
+  group_by(species) %>%
+  summarise(number = n())
+```
+
+We will also produce a simple chart to insert into excel:
+```{r iris-chart, exercise=TRUE}
+graph1 <- data %>%
+  ggplot(aes(sepal_length, sepal_width, color = species))+
+  geom_point()+
+  theme_classic()+
+  labs(x="Sepal Length", y="Sepal Width",
+       title = "Sepal Length by Sepal Width Across Different Species",
+       color = "Species")
+```
+
+
+## Create the excel output
+We will now create the excel output and output the tables and chart into it. Refer to the exercises to follow along with this section. 
+
+The following code creates a blank excel template that you build on. Note that you can't view it as you go along, only once it is saved out, so you have to keep track of what you are adding. 
+
+````
+wb <- createWorkbook()
+````
+
+Before we can add any data to the workbook we have to create a worksheet for the data to go in. Note that the order you add the sheets to the workbook is the order they appear in, this is not set in code
+
+````
+addWorksheet(
+  # Name of the workbook we want to add the sheet to
+  wb = wb,
+  
+  # Define the name of the worksheet 
+  sheetName = "Table1",
+  
+  # Show gridlines? Default is TRUE
+  gridLines = FALSE,
+  
+  # Colour of the tab - either use from colours() list or use hex code (optional)
+  tabColour = "red", # Uses in built colour
+  
+  # Add headers - as a character vector for positions left, centre and right
+  # You can use some in built things
+  # (such as page numbers, date, time, filename etc)
+  header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"))
+````
+
+````
+writeData(wb, 1, data_table, startCol = 2, startRow = 4)
+````
+
+Let's save the workbook out at this point and have a look!
+
+````
+saveWorkbook(
+  # Workbook to save
+  wb = wb,
+  
+  # The file path to save out to
+  # - only short version here as working directory is set by the project
+  file = "ATI Workbook.xlsx",
+  
+  # Whether you want to overwrite the file already there
+  overwrite = TRUE)
+````
+
+```{r save_1_screenshot, fig.align='right', out.width="100%"}
+knitr::include_graphics("images/openxlsx-first-save.PNG")
+```
+
+So we do have data there but it doesn't look very good! So we can apply some formatting to make it look better.
+
+## Creating Styles
+We can set particular styles to apply to certain areas of the workbook. 
+
+### Header Style
+Let's set a style for the table headers, borders, the contents of any tables and any non-header text:
+
+````
+header_style <- createStyle(fontSize = 14,
+                            fontName = "Arial",
+                            halign = "Center", # Horizontal Align
+                            valign = "Center", # Vertical align
+                            wrapText = TRUE,
+                            # Can add multiple decorations in a vector
+                            textDecoration = c("bold", "underline"))
+
+table_style <- createStyle(fontSize = 11,
+                           fontName = "Arial",
+                           valign = "Bottom",
+                           halign = "Right",
+                           border = "TopBottomLeftRight",
+                           numFmt = "COMMA")
+                           
+body_style <- createStyle(fontSize = 11,
+                          fontName = "Arial",
+                          valign = "Bottom",
+                          halign = "Left",
+                          border = "TopBottomLeftRight",
+                          numFmt = "TEXT")
+                          
+border_style_dash = createStyle(border = "TopBottomLeftRight",
+                                borderStyle = c("dashed"))
+                                
+border_style_thick = createStyle(border = "TopBottomLeftRight",
+                                 borderStyle = c("thick"))
+````
+
+You can also define colours using hex codes:
+
+````
+blue <- "#add8e6"
+gray <- "#ededed"
+````
+
+We can use these colours within styles:
+
+````
+blue_style = createStyle(
+  fgFill = blue
+)
+
+gray_style = createStyle(
+  fgFill = gray
+)
+````
+
+Let's apply these styles to our workbook, note that we can add styles on top of styles:
+
+`````
+wb <- createWorkbook()
+
+addWorksheet(
+  # Name of the workbook we want to add the sheet to
+  wb = wb,
+  
+  # Define the name of the worksheet 
+  sheetName = "Table1",
+  
+  # Show gridlines? Default is TRUE
+  gridLines = FALSE,
+  
+  # Colour of the tab - either use from colours() list or use hex code (optional)
+  tabColour = "red", # Uses in built colour
+  
+  # Add headers - as a character vector for positions left, centre and right
+  # You can use some in built things
+  # (such as page numbers, date, time, filename etc)
+  header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"))
+  
+writeData(
+
+# Name of workbook to add the data to
+wb, 
+
+# Sheet to insert data into
+1, 
+
+# Name of object we want to write
+data_table, 
+
+# Which column/row should we start writing the data to
+startCol = 2, startRow = 4)
+
+# Apply style to table body
+addStyle(
+
+# Name of workbook object we're working on
+wb, 
+
+# Sheet to apply style to, can either use sheet number or sheet name
+sheet = 1, 
+
+# Style to apply
+style = body_style, 
+
+# Rows and Columns to apply style to
+rows = 7, 
+cols = 4)
+
+# Apply border style
+addStyle(
+wb,
+ 1, 
+ border_style_thick, 
+ rows = 4:7, cols = 2:4, gridExpand = TRUE,
+         stack = TRUE)
+         
+addStyle(wb, 1, blue_style, rows = 4:7, cols = 2:4, gridExpand = TRUE,
+         stack = TRUE)
+
+
+saveWorkbook(
+  # Workbook to save
+  wb = wb,
+  
+  # The file path to save out to
+  # - only short version here as working directory is set by the project
+  file = "ATI Workbook.xlsx",
+  
+  # Whether you want to overwrite the file already there
+  overwrite = TRUE)  
+`````
+
+
+
