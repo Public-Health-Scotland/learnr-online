@@ -563,6 +563,38 @@ map(x, add_10)
 ```
 
 
+### Knowledge Check
+
+Have a look at the code below, then answer the quiz questions.
+
+```{r, eval=FALSE, echo=TRUE}
+if (number < 10) {
+  if (number < 5) {
+    result <- "extra small"
+  } else {
+    result <- "small"
+  }
+} else if (number < 100) {
+  result <- "medium"
+} else {
+  result <- "large"
+}
+```
+
+```{r if-else-quiz}
+quiz(
+  question("Which 2 statements are true?",
+           answer('If `number` = `6`, `result` = "small".', correct = TRUE),
+           answer('If `number` = `100`, `result` = "medium".'),
+           answer('If `number` = `4`, `result` = "extra small".', correct = TRUE),
+           answer('If `number` = `2500`, R will generate an error.'),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE
+  )
+)
+```
+
+
 ## RStudio
 
 RStudio is the software we use to write and run R code, also known as an Integrated Development Environment (IDE). In PHS we have the [RStudio Server](https://rstudio.nhsnss.scot.nhs.uk/) which takes the processing strain away from your local machine and prevents the need to pull data to process or run analyses. Work is ongoing in the background to improve the infrastructure, maintain the highest security but also allowing new and innovative platforms for sharing our products and services. 
