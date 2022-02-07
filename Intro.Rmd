@@ -848,6 +848,12 @@ Adds new variables that are functions of existing variables:
 * `mutate(<data>, <new-col> = <expression>)`
 * With pipe: `<data> %>% mutate(<new-col> = <expression>)`
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_dplyr_mutate.png")
+```
+</div>
+
 Create a new column in `borders_data` that is equal to `LengthOfStay` divided by 2. Name this column `los_div2`. Use the hint button if you need some help.
 
 ```{r mutate-example, exercise=TRUE}
