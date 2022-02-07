@@ -62,6 +62,12 @@ knitr::include_graphics("images/r-intro-pathway-2.png")
 * Has the functionality to go from raw data to interactive reports, web apps, and more
 * A part of the PHS analytical strategy
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_welcome_twitter.png")
+```
+</div>
+
 </br>
 
 Since we're getting started, here's a quiz to get familiar with the layout:
@@ -88,7 +94,7 @@ quiz(
 
 We're going to start with a high-level overview of programming concepts which will help lay the foundations for building your R skills. We'll then build on these concepts with the specific syntax in R, hopefully having some fun along the way. This graphic shows the structure of the concepts and how they come together to form a program:
 
-<div class = "supporting-image-left">
+<div class="supporting-image-left">
 ```{r foundations-buildingblocks, echo=FALSE, fig.align='center', out.width="75%"}
 knitr::include_graphics("images/r-foundations-buildingblocks.png")
 ```
@@ -151,6 +157,13 @@ Maintaining a style guide ensures that code can be more easily shared and unders
 A couple of high-level important points to take forward:
 
 * **Naming** - variables and filenames should have meaningful names in *`snake_case`* format, preferring all lower case.
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/illustrations/r_coding_cases.png")
+```
+</div>
+
 * **Structure**:
     * Spaces after commas (just like in English prose).
     * No spaces before or after parenthesis.
