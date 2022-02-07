@@ -1357,7 +1357,15 @@ knitr::include_graphics("images/illustrations/r_debugging.jpg")
 problem you’re trying to solve. You should tag queries with "[r]".
 4. **Pair up** - sometimes a fresh pair of eyes makes the difference (you might have just missed a comma). For a more general audience post a message on the R User Group [Technical Queries Teams channel](https://teams.microsoft.com/l/channel/19:9620ef6cf8234d50a0f95caba65a3edf@thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a).
 
+</br>
+
 #### Help
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_rollercoaster.png")
+```
+</div>
 
 * [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
 * [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
