@@ -1345,6 +1345,12 @@ Now it's time to embed your new knowledge and skills, expand with related techno
 
 #### Debugging
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_debugging.jpg")
+```
+</div>
+
 1. **Review warnings/errors** - these can appear cryptic but use Google and some will become familiar. Checking the functions could help too - `?<function>`
 2. **Narrow the problem** - step through the code, isolating the issue to a specific chunk, line, or function.
 3. **Google/StackOverflow** - this can be specific to the bug or more general to the
