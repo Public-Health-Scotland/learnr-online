@@ -1006,6 +1006,12 @@ Groups variables to perform other operations:
 * `group_by(<data>, <col_name>)`
 * With pipe: `<data> %>% group_by(<col_name>)`
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_group_by.png")
+```
+</div>
+
 We're not performing another operation but to see that it works, this is the output of `group_by()` on `borders_data` by `HospitalCode`. Notice the `"Groups: HospitalCode[48]"` output. This shows 48 groups, this means `HospitalCode` has 48 unique values. 
 
 ```{r group-by-example, eval=FALSE, include=TRUE, echo=TRUE}
