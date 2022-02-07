@@ -616,7 +616,15 @@ knitr::include_graphics("images/r-workflow.png")
 
 ### Working Directory
 
-The working directory is the current directory/file associated with your project. Working directories allow for more efficient file paths that are *relative* to your working directory. This is associated with the use of [R Projects](https://r4ds.had.co.nz/workflow-projects.html). Base R has it's own functions for navigating your working directory:
+The working directory is the current directory/file associated with your project. Working directories allow for more efficient file paths that are *relative* to your working directory. This is associated with the use of [R Projects](https://r4ds.had.co.nz/workflow-projects.html). 
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_cracked_setwd.png")
+```
+</div>
+
+Base R has it's own functions for navigating your working directory:
 
 * Current working directory: `getwd()`
 * Set new working directory: `setwd("<filepath>")`
