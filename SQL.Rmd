@@ -1,0 +1,58 @@
+---
+title: "SQL in R"
+output: 
+  learnr::tutorial:
+    css: "css/style.css"
+    progressive: false
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+# Author: Russell McCreath
+# Original Date: Feb 2022
+# Version of R: 3.6.1
+
+# See here for learnr package documentation: https://rstudio.github.io/learnr/
+
+# Include packages here that are required throughout the training
+library(learnr)         # Required to build the Shiny app
+library(gradethis)      # Required for specific code checking and specific feedback
+
+knitr::opts_chunk$set(echo = FALSE)
+
+tutorial_options(
+  exercise.checker = gradethis::grade_learnr
+)
+```
+
+```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
+knitr::include_graphics("images/phs-logo.png")
+```
+
+## Introduction
+
+Welcome to **SQL in R**. This is a self-led course on accessing and utilising databases within Public Health Scotland, particularly SQL databases, in R. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write both R and SQL code. 
+
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
+### What is SQL?
+
+SQL (you can read about the [pronounciation *conflict* here](https://database.guide/is-it-pronounced-s-q-l-or-sequel/)) is the **S**tructured **Q**uery **L**anguage used to interact with relational databases. This is, by far, the most popular database structure and for our purposes makes storing and interacting with data so much more efficient. 
+
+A relational database is just like a collection of tables, rows and columns, like an Excel spreadsheet. Each table represents a single entity, columns (or fields) represent attributes, and rows (or records) represent information about a single entity.
+
+
+## Help & Feedback
+
+#### Feedback
+
+[Insert iframe for Google/Microsoft Forms]
+
