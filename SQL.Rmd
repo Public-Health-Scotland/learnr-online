@@ -17,14 +17,30 @@ runtime: shiny_prerendered
 
 # Include packages here that are required throughout the training
 library(learnr)         # Required to build the Shiny app
-library(gradethis)      # Required for specific code checking and specific feedback
+library(gradethis)      # For code checking and user-specific feedback
+library(readr)          # For reading/writing data
+library(RSQLite)        # For interfacing with SQLite databases
 
 knitr::opts_chunk$set(echo = FALSE)
 
 tutorial_options(
   exercise.checker = gradethis::grade_learnr
 )
+
+### Database Setup
+# Load data
+borders_data <- readRDS("www/data/borders.rds")
+
+# Create a connection to the database
+conn <- dbConnect(RSQLite::SQLite(), ":memory:")
+
+# Write data into a table within the database
+dbWriteTable(conn, "borders_data", borders_data, overwrite = TRUE)
+
+# List tables available in the database
+dbListTables(conn)
 ```
+
 
 ```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
 knitr::include_graphics("images/phs-logo.png")
@@ -48,6 +64,12 @@ Welcome to **SQL in R**. This is a self-led course on accessing and utilising da
 SQL (you can read about the [pronounciation *conflict* here](https://database.guide/is-it-pronounced-s-q-l-or-sequel/)) is the **S**tructured **Q**uery **L**anguage used to interact with relational databases. This is, by far, the most popular database structure and for our purposes makes storing and interacting with data so much more efficient. 
 
 A relational database is just like a collection of tables, rows and columns, like an Excel spreadsheet. Each table represents a single entity, columns (or fields) represent attributes, and rows (or records) represent information about a single entity.
+
+
+```{r intro-test, exercise=TRUE}
+# Retrieve data from database
+dbGetQuery(conn, "SELECT * FROM borders_data LIMIT 10")
+```
 
 
 ## Help & Feedback
