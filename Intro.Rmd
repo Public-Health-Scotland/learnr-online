@@ -19,6 +19,7 @@ library(stringr)
 library(readr)
 library(haven)
 library(dplyr)
+library(purrr)
 library(ggplot2)
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -62,6 +63,12 @@ knitr::include_graphics("images/r-intro-pathway-2.png")
 * Has the functionality to go from raw data to interactive reports, web apps, and more
 * A part of the PHS analytical strategy
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_welcome_twitter.png")
+```
+</div>
+
 </br>
 
 Since we're getting started, here's a quiz to get familiar with the layout:
@@ -88,7 +95,7 @@ quiz(
 
 We're going to start with a high-level overview of programming concepts which will help lay the foundations for building your R skills. We'll then build on these concepts with the specific syntax in R, hopefully having some fun along the way. This graphic shows the structure of the concepts and how they come together to form a program:
 
-<div class = "supporting-image-left">
+<div class="supporting-image-left">
 ```{r foundations-buildingblocks, echo=FALSE, fig.align='center', out.width="75%"}
 knitr::include_graphics("images/r-foundations-buildingblocks.png")
 ```
@@ -151,6 +158,13 @@ Maintaining a style guide ensures that code can be more easily shared and unders
 A couple of high-level important points to take forward:
 
 * **Naming** - variables and filenames should have meaningful names in *`snake_case`* format, preferring all lower case.
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/illustrations/r_coding_cases.png")
+```
+</div>
+
 * **Structure**:
     * Spaces after commas (just like in English prose).
     * No spaces before or after parenthesis.
@@ -419,7 +433,7 @@ mult_2(4)
 
 ### Packages
 
-On top of base R are packages, these are bundles of code to expand the functionality of base R. This allows people to write and share functions that share expertise. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own suite of packages too, including `phsmethods` (a bundle of functions that are common for PHS staff) and `phsopendata` (functions for interacting with the Scottish Health and Social Care Open Data platform).
+On top of base R are packages, these are bundles of code to expand the functionality of base R. This allows people to write and share functions that share expertise. There are over 4000 packages available on CRAN (Comprehensive R Archive Network) and more available outside of this network. PHS have their own suite of packages too, `phsverse`, including `phsmethods` (a bundle of functions that are common for PHS staff) and `phsopendata` (functions for interacting with the Scottish Health and Social Care Open Data platform).
 
 It's on top of both base R and packages that user codes sits. Not all user code make use of packages but it can make writing code easier and improve efficiency.
 
@@ -443,7 +457,7 @@ knitr::include_graphics("images/r-packages-tidyverse.png")
 ```
 </div>
 
-Tidyverse is a suite of packages and have a common theme throughout. We’ll look at a couple of the Tidyverse packages later in [Wrangle]. It is not recommended to load Tidyverse in its entirety though, but rather each package that you’ll specifically use (e.g. `dplyr`). Tidyverse has grown dramatically so loading the whole suite will unnecessarily utilise a lot of resource.
+Tidyverse is a suite of packages and have a common theme throughout (and an opinionated style guide which we have adopted in PHS). We’ll look at a couple of the Tidyverse packages later in [Wrangle]. It is not recommended to load Tidyverse in its entirety though, but rather each package that you’ll specifically use (e.g. `dplyr`). Tidyverse has grown dramatically so loading the whole suite will unnecessarily utilise a lot of resource.
 
 </br>
 
@@ -470,9 +484,115 @@ You can see that `dplyr` has the same function names as in a package called `sta
 
 </br>
 
-#### PHSMethods
+#### PHSverse
 
-PHS have developed a package, `phsmethods`, with the aim to tackle some of the most common tasks, e.g. dealing with CHI numbers and working with postcodes.
+PHS have developed a suite of packages, [`phsverse`](https://github.com/Public-Health-Scotland/phsverse), with the aim to tackle some of the most common tasks, e.g. dealing with CHI numbers and following our brand guidelines in visualisations. The included packages in [`phsverse`](https://github.com/Public-Health-Scotland/phsverse) are outlined below.
+
+* `phsmethods` - functions for common analytical tasks
+* `phsopendata` - functions to extract and interact with data from the Scottish Health and Social Care Open Data platform
+* `phsstyles` - functions for standard graphic styling
+* `phstemplates` - standard R templates and projects
+
+
+## Control Flow & Iteration
+
+In programming, control flow is where decisions are made and iteration is where things are repeated. This is the foundation of making a program work for us and are likely to be used within the functions we just looked at. 
+
+### Control Flow - if
+
+* Package: `dplyr`
+* `if_else(<condition>, <true>, <false>)`
+
+```{r cfi-if, exercise=TRUE}
+x <- 5
+if_else(x > 5, "`x` is more than 5", "`x` is less than or equal to 5")
+```
+
+
+### Control Flow - case
+
+* Package: `dplyr`
+* `case_when(<condition> ~ <result>)`
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_dplyr_case_when.png")
+```
+</div>
+
+```{r cfi-case, exercise=TRUE}
+x <- c(1, 2, 3, 4, 5)
+case_when(x < 3 ~ "LT3",
+          x %% 2 == 0 ~ "Even")
+```
+
+
+### Iteration - for
+
+* `for(<value> in <sequence>) {<statement>}`
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_for_loop.png")
+```
+</div>
+
+```{r cfi-for, exercise=TRUE}
+x <- c(1, 2, 3, 4, 5)
+even_count <- 0
+for(i in x) {
+  if(i %% 2 == 0)
+    even_count <- even_count + 1
+}
+print(even_count)
+```
+
+
+### Iteration - purrr loop
+
+* Package: `purrr`
+* `map(<object>, <function>)`
+
+```{r cfi-purrr, exercise=TRUE}
+add_10 <- function(x) {
+  x <- x + 10
+}
+
+x <- c(1, 2, 3, 4, 5)
+map(x, add_10)
+```
+
+
+### Knowledge Check
+
+Have a look at the code below, then answer the quiz questions.
+
+```{r, eval=FALSE, echo=TRUE}
+if (number < 10) {
+  if (number < 5) {
+    result <- "extra small"
+  } else {
+    result <- "small"
+  }
+} else if (number < 100) {
+  result <- "medium"
+} else {
+  result <- "large"
+}
+```
+
+```{r if-else-quiz}
+quiz(
+  question("Which 2 statements are true?",
+           answer('If `number` = `6`, `result` = "small".', correct = TRUE),
+           answer('If `number` = `100`, `result` = "medium".'),
+           answer('If `number` = `4`, `result` = "extra small".', correct = TRUE),
+           answer('If `number` = `2500`, R will generate an error.'),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE
+  )
+)
+```
 
 
 ## RStudio
@@ -483,7 +603,15 @@ RStudio is the software we use to write and run R code, also known as an Integra
 
 </br>
 
-### R Projects
+#### Guidance
+
+* **Close Sessions** - leaving sessions open or running multiple sessions uses resource. As the server is a shared resource, this can the whole organisation. When finished, close it down using the red power button at the top right.
+* **Store Data Properly** - projects and files shouldn’t be stored in your ‘home’ drive and unused data should be removed from your environment.
+* **Retrieve Data Efficiently** - limit the data extracted using well written SQL.
+
+</br>
+
+#### R Projects
 
 Using RStudio also gives us the use of R Projects. Using R Projects keeps our projects separate, giving the project its own working directory, workspace, and history. 
 
@@ -520,7 +648,15 @@ knitr::include_graphics("images/r-workflow.png")
 
 ### Working Directory
 
-The working directory is the current directory/file associated with your project. Working directories allow for more efficient file paths that are *relative* to your working directory. This is associated with the use of [R Projects](https://r4ds.had.co.nz/workflow-projects.html). Base R has it's own functions for navigating your working directory:
+The working directory is the current directory/file associated with your project. Working directories allow for more efficient file paths that are *relative* to your working directory. This is associated with the use of [R Projects](https://r4ds.had.co.nz/workflow-projects.html). 
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_cracked_setwd.png")
+```
+</div>
+
+Base R has it's own functions for navigating your working directory:
 
 * Current working directory: `getwd()`
 * Set new working directory: `setwd("<filepath>")`
@@ -666,6 +802,12 @@ In [Packages] we spoke about Tidyverse, a suite of packages for data exploration
 
 `filter()` `mutate()` `arrange()` `select()` `group_by()` `summarise()` `count()` `rename()` `recode()`
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_tidydata.jpg")
+```
+</div>
+
 ### Pipe Operator
 
 Before going on to the functions that make up `dplyr`, we need to talk about the pipe `%>%` (shortcut: `ctrl` + `shift` + `M`). This is used to link functions together, passing the result of the previous into the next. Using the pipe makes R code more readable and prevents extensive parenthesis building up with multiple function calls. An example is below, you can see the results are the same. Don't worry too much about the functions, we get into that next (`dplyr` has been loaded).
@@ -688,6 +830,12 @@ Picks cases based on their values:
 
 * `filter(<data>, <logical_expression>)`
 * With pipe: `<data> %>% filter(<logical_expression>)`
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_dplyr_filter.jpg")
+```
+</div>
 
 Filter the `borders_data` data-set to where `HospitalCode` is "B120H" and `LengthOfStay` is more than 10. Use the hint button if you need some help.
 
@@ -731,6 +879,12 @@ Adds new variables that are functions of existing variables:
 
 * `mutate(<data>, <new-col> = <expression>)`
 * With pipe: `<data> %>% mutate(<new-col> = <expression>)`
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_dplyr_mutate.png")
+```
+</div>
 
 Create a new column in `borders_data` that is equal to `LengthOfStay` divided by 2. Name this column `los_div2`. Use the hint button if you need some help.
 
@@ -883,6 +1037,12 @@ Groups variables to perform other operations:
 
 * `group_by(<data>, <col_name>)`
 * With pipe: `<data> %>% group_by(<col_name>)`
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_group_by.png")
+```
+</div>
 
 We're not performing another operation but to see that it works, this is the output of `group_by()` on `borders_data` by `HospitalCode`. Notice the `"Groups: HospitalCode[48]"` output. This shows 48 groups, this means `HospitalCode` has 48 unique values. 
 
@@ -1217,13 +1377,27 @@ Now it's time to embed your new knowledge and skills, expand with related techno
 
 #### Debugging
 
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_debugging.jpg")
+```
+</div>
+
 1. **Review warnings/errors** - these can appear cryptic but use Google and some will become familiar. Checking the functions could help too - `?<function>`
 2. **Narrow the problem** - step through the code, isolating the issue to a specific chunk, line, or function.
 3. **Google/StackOverflow** - this can be specific to the bug or more general to the
 problem you’re trying to solve. You should tag queries with "[r]".
 4. **Pair up** - sometimes a fresh pair of eyes makes the difference (you might have just missed a comma). For a more general audience post a message on the R User Group [Technical Queries Teams channel](https://teams.microsoft.com/l/channel/19:9620ef6cf8234d50a0f95caba65a3edf@thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a).
 
+</br>
+
 #### Help
+
+<div>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/r_rollercoaster.png")
+```
+</div>
 
 * [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
 * [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
