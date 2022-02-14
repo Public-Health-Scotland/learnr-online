@@ -22,6 +22,7 @@ library(janitor)
 library(stringr)
 library(openxlsx)
 
+
 knitr::opts_chunk$set(echo = FALSE)
 
 # Formatting text table
