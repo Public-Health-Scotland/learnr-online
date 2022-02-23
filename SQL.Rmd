@@ -20,6 +20,7 @@ library(learnr)         # Required to build the Shiny app
 library(gradethis)      # For code checking and user-specific feedback
 library(readr)          # For reading/writing data
 library(RSQLite)        # For interfacing with SQLite databases
+library(kableExtra)
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -63,12 +64,40 @@ Welcome to **SQL in R**. This is a self-led course on accessing and utilising da
 
 SQL (you can read about the [pronounciation *conflict* here](https://database.guide/is-it-pronounced-s-q-l-or-sequel/)) is the **S**tructured **Q**uery **L**anguage used to interact with relational databases. This is, by far, the most popular database structure and for our purposes makes storing and interacting with data so much more efficient. 
 
-A relational database is just like a collection of tables, rows and columns, like an Excel spreadsheet. Each table represents a single entity, columns (or fields) represent attributes, and rows (or records) represent information about a single entity.
+A relational database is just like a collection of tables, rows and columns, like an Excel spreadsheet. Each table represents a single entity, columns (or fields) represent attributes, and rows (or records) represent information about a single entity. Have a look at the below table as an example:
 
+```{r, echo=FALSE}
+graphics_grammar_table <- data.frame(
+  "ID" = c("1", "2", "3"),
+  "Name" = c("Harry", "Luna", "Ronald"),
+  "Specialty" = c("A11", "A11", "A11"),
+  "DateofAdmission" = c("12012022", "14012022", "14012022")
+)
 
-```{r intro-test, exercise=TRUE}
-# Retrieve data from database
-dbGetQuery(conn, "SELECT * FROM borders_data LIMIT 10")
+kableExtra::kbl(graphics_grammar_table) %>%
+  kable_paper(full_width = FALSE)
+
+```
+
+```{r intro-quiz}
+quiz(
+  question("How many records are in the above table?",
+           answer("0"),
+           answer("1"),
+           answer("2"),
+           answer("3", correct = TRUE),
+           answer("4"),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = FALSE
+  ),
+  question("What was the DateofAdmission for Luna?",
+           answer("12012022"),
+           answer("14012022", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE)
+)
 ```
 
 
