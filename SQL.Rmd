@@ -70,8 +70,8 @@ A relational database is just like a collection of tables, rows and columns, lik
 graphics_grammar_table <- data.frame(
   "ID" = c("1", "2", "3"),
   "Name" = c("Harry", "Luna", "Ronald"),
-  "Specialty" = c("A11", "A11", "A11"),
-  "DateofAdmission" = c("12012022", "14012022", "14012022")
+  "Specialty" = c("A1", "A11", "A2"),
+  "LoS" = c("5", "7", "9")
 )
 
 kableExtra::kbl(graphics_grammar_table) %>%
@@ -91,9 +91,12 @@ quiz(
            allow_retry = TRUE,
            random_answer_order = FALSE
   ),
-  question("What was the DateofAdmission for Luna?",
-           answer("12012022"),
-           answer("14012022", correct = TRUE),
+  question("What was the LoS (Length of Stay) for Luna?",
+           answer("5"),
+           answer("A11"),
+           answer("9"),
+           answer("7", correct = TRUE),
+           answer("2"),
            incorrect = "Not quite, have another go!",
            allow_retry = TRUE,
            random_answer_order = TRUE)
