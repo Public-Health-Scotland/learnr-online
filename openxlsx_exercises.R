@@ -1,9 +1,10 @@
+### 1 -  Setup ----
 # Packages
-library(learnr)
 library(dplyr)
 library(janitor)
 library(stringr)
 library(openxlsx)
+library(ggplot2)
 
 # Read in data
 iris <- iris
@@ -28,6 +29,7 @@ data_table2 <- data %>%
 group_by(species) %>%
 summarise(number = n())
 
+# Create a simple chart to include in the excel document
 graph1 <- data %>%
 ggplot(aes(sepal_length, sepal_width, color = species))+
 geom_point()+
@@ -36,6 +38,10 @@ labs(x="Sepal Length", y="Sepal Width",
 title = "Sepal Length by Sepal Width Across Different Species",
 color = "Species")
 
+graph1
+
+
+### 2 - Create initial excel output ----
 # Create workbook
 wb <- createWorkbook()
 
@@ -68,12 +74,14 @@ wb = wb,
 
 # The file path to save out to
 # - only short version here as working directory is set by the project
-file = "ATI Workbook.xlsx",
+file = "openxlsx_training.xlsx",
 
 # Whether you want to overwrite the file already there
 overwrite = TRUE)
 
-## Creating Styles
+
+### 3 - Creating Styles ----
+# Styles for the table headers, borders, the contents of any tables and any non-header text
 header_style <- createStyle(fontSize = 14,
 fontName = "Arial",
 halign = "Center", # Horizontal Align
@@ -101,6 +109,8 @@ borderStyle = c("dashed"))
 
 border_style_thick = createStyle(border = "TopBottomLeftRight",
 borderStyle = c("thick"))
+
+# You can also define colours using hex codes and use these colours within styles:
 
 blue <- "#add8e6"
 gray <- "#ededed"
@@ -140,7 +150,7 @@ writeData(
   wb, 
   
   # Sheet to insert data into
-  1, 
+  "Table1", 
   
   # Name of object we want to write
   data_table, 
@@ -155,7 +165,7 @@ addStyle(
   wb, 
   
   # Sheet to apply style to, can either use sheet number or sheet name
-  sheet = 1, 
+  sheet = "Table1", 
   
   # Style to apply
   style = body_style, 
@@ -167,22 +177,71 @@ addStyle(
 # Apply border style
 addStyle(
   wb,
-  1, 
+  "Table1", 
   border_style_thick, 
   rows = 4:7, cols = 2:4, gridExpand = TRUE,
   stack = TRUE)
 
-addStyle(wb, 1, blue_style, rows = 4:7, cols = 2:4, gridExpand = TRUE,
+addStyle(wb, "Table1", blue_style, rows = 4:7, cols = 2:4, gridExpand = TRUE,
          stack = TRUE)
 
 
 saveWorkbook(
+  
   # Workbook to save
   wb = wb,
   
   # The file path to save out to
   # - only short version here as working directory is set by the project
-  file = "ATI Workbook.xlsx",
+  file = "openxlsx_training.xlsx",
   
   # Whether you want to overwrite the file already there
   overwrite = TRUE)  
+
+#### 4 - Worksheet Formatting ----
+wb <- createWorkbook()
+
+addWorksheet(
+  wb = wb,
+  sheetName = "Data_Tables",
+  gridLines = FALSE,
+  tabColour = "red", # Uses in built colour
+  header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"))
+
+# Add a table title and better column names:
+title_table <- "Max Petal Length and Width in Each Species Within Iris Dataset"
+writeData(wb, "Data_Tables", title_table, startCol = 2, startRow = 2)
+
+names(data_table) <- c("Species", "Max Petal Length", "Max Petal Width")
+writeData(wb, "Data_Tables", data_table, startCol = 2, startRow = 4)
+
+
+### 5 - Excel Functionality -----
+## Pivot Table
+names(data_table2) = c("Species", "Number")
+
+# This function creates an actual table in excel
+writeDataTable(wb, sheet = "Data_Tables", startCol = 6, x = data_table2,
+               startRow = 4,
+               # You can check the names by hovering over table styles in excel
+               tableStyle = "TableStyleLight15",
+               # Names the table - not necessary in most situations though
+               tableName = "Data_Table_2")
+
+# Add a title for this table
+title_table2 <- "Number of each Iris Species in Dataframe"
+writeData(wb, "Data_Tables", title_table2, startCol = 6, startRow = 2)
+
+## Formulae
+# Adding "Total"
+writeData(wb, "Data_Tables",
+          # You can just add a string here, rather than saving to objects
+          # Better to save to an object if the string is long,
+          # for neatness and readability
+          x = "Total",
+          startCol = 6, startRow = 8)
+
+# Use this function to write excel formulae
+writeFormula(wb, "Data_Tables", x = "=SUM(G5:G7)",
+             startCol = 7, startRow = 8)
+

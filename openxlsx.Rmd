@@ -71,7 +71,13 @@ There are some exercises designed to accompany this course which can be download
 
 ### What is openxlsx?
 
-Openxslx is an R package that allows us to read, write and edit xlsx files from within the RStudio interface allowing us to automate the creation and formatting of the excel files that usually accompany our publications. This is key because, usually, the process to create these excel publication files is very manual and involves several copy/paste steps. This can result in errors with data being pasted in the wrong place or in the wrong format which can have serious consequences. For example, in 2003 the Candian power company TransAlta lost $24 million due to a copy paste error causing misaligned rows in a spreadsheet containing bids for contracts. 
+Openxslx is an R package that allows us to read, write and edit xlsx files from within the RStudio interface. This will let us automate the creation and formatting of the excel files that usually accompany our publications. 
+
+Usually, the process to create these excel publication files is very manual and involves several copy/paste steps. This can result in errors with data being pasted in the wrong place or wrong format which can have serious consequences. For example, in 2003 the Candian power company TransAlta lost $24 million due to a copy paste error causing misaligned rows in a spreadsheet containing bids for contracts. So automating the production of these excel files is key. 
+
+```{r openxlsx-horst, echo=FALSE, fig.align='centre', out.width="100%"}
+knitr::include_graphics("images/openxlsx/openxlsx_horst.jfif")
+```
 
 
 ### Why use Excel?
@@ -86,7 +92,7 @@ quiz(
     answer("Read data in from excel", correct = TRUE),
     answer("Write data out to excel", correct = TRUE),
     answer("Format excel files using the RStudio interface", correct = TRUE),
-    answer("Write publications"),
+    answer("Write publications for us"),
     incorrect = "Not quite, have another go!",
     allow_retry = TRUE,
     random_answer_order = TRUE
@@ -95,15 +101,18 @@ quiz(
 ```
 
 ## Data Setup
-For the purposes of this course we'll use the iris dataset - this is a dataset that is in-built to R and means the code will be reproducible in your RStudio. However, please note that the datatset is not really important and you can replace it with a dataset of your choice if you prefer. 
+For the purposes of this course we'll use the iris dataset - this is a dataset that is in-built to R and means the code will be reproducible in your RStudio. However, please note that the datatset is not really important, we're just using it as an example.  
 
 Let's look at the iris data:
 ```{r iris-head, exercise=TRUE}
+# Read in iris data
 iris <- iris
+
+# Look at the first 5 rows of the iris data
 head (iris)
 ```
 
-First we need to do some data wrangling and produce tables for the excel output:
+First we need to do some data wrangling and produce tables to be included in the excel output:
 ```{r iris-wrangling, exercise=TRUE}
 # Clean variable names and data
 data <- iris %>%
@@ -125,7 +134,7 @@ data_table2 <- data %>%
   summarise(number = n())
 ```
 
-We will also produce a simple chart to insert into excel:
+We will also produce a simple chart to insert into the excel document:
 ```{r iris-chart, exercise=TRUE}
 graph1 <- data %>%
   ggplot(aes(sepal_length, sepal_width, color = species))+
@@ -134,11 +143,13 @@ graph1 <- data %>%
   labs(x="Sepal Length", y="Sepal Width",
        title = "Sepal Length by Sepal Width Across Different Species",
        color = "Species")
+
+graph1
 ```
 
 
 ## Create the excel output
-We will now create the excel output and output the tables and chart into it. Refer to the exercises to follow along with this section. 
+We will now create the excel output and output the tables and chart into it. Refer to the accompanying exercises to follow along with this section. 
 
 The following code creates a blank excel template that you build on. Note that you can't view it as you go along, only once it is saved out, so you have to keep track of what you are adding. 
 
@@ -146,7 +157,7 @@ The following code creates a blank excel template that you build on. Note that y
 wb <- createWorkbook()
 ````
 
-Before we can add any data to the workbook we have to create a worksheet for the data to go in. Note that the order you add the sheets to the workbook is the order they appear in, this is not set in code
+Before we can add any data to the workbook we have to create a worksheet for the data to go in. Note that the order you add the sheets to the workbook is the order they appear in, this is not set in code.
 
 ````
 addWorksheet(
@@ -156,7 +167,7 @@ addWorksheet(
   # Define the name of the worksheet 
   sheetName = "Table1",
   
-  # Show gridlines? Default is TRUE
+  # Do we want to show gridlines? The default is TRUE so we have to specify if we don't want them
   gridLines = FALSE,
   
   # Colour of the tab - either use from colours() list or use hex code (optional)
@@ -181,17 +192,17 @@ saveWorkbook(
   
   # The file path to save out to
   # - only short version here as working directory is set by the project
-  file = "ATI Workbook.xlsx",
+  file = "openxlsx_training.xlsx",
   
-  # Whether you want to overwrite the file already there
+  # If a file with the same name exists, do you want to overwrite it?
   overwrite = TRUE)
 ````
 
 ```{r save_1_screenshot, fig.align='right', out.width="100%"}
-knitr::include_graphics("images/openxlsx-first-save.PNG")
+knitr::include_graphics("images/openxlsx/openxlsx-first-save.PNG")
 ```
 
-So we do have data there but it doesn't look very good! So we can apply some formatting to make it look better.
+So we do have data there but it doesn't look very good! Let's apply some formatting to make it look better.
 
 ## Creating Styles
 We can set particular styles to apply to certain areas of the workbook. 
@@ -229,16 +240,12 @@ border_style_thick = createStyle(border = "TopBottomLeftRight",
                                  borderStyle = c("thick"))
 ````
 
-You can also define colours using hex codes:
+You can also define colours using hex codes and use these colours within styles:
 
 ````
 blue <- "#add8e6"
 gray <- "#ededed"
-````
 
-We can use these colours within styles:
-
-````
 blue_style = createStyle(
   fgFill = blue
 )
@@ -248,7 +255,7 @@ gray_style = createStyle(
 )
 ````
 
-Let's apply these styles to our workbook, note that we can add styles on top of styles:
+Let's apply these styles to our workbook:
 
 `````
 wb <- createWorkbook()
@@ -260,10 +267,10 @@ addWorksheet(
   # Define the name of the worksheet 
   sheetName = "Table1",
   
-  # Show gridlines? Default is TRUE
+  # Show gridlines? 
   gridLines = FALSE,
   
-  # Colour of the tab - either use from colours() list or use hex code (optional)
+  # Colour of the tab 
   tabColour = "red", # Uses in built colour
   
   # Add headers - as a character vector for positions left, centre and right
@@ -277,7 +284,7 @@ writeData(
 wb, 
 
 # Sheet to insert data into
-1, 
+"Table1", 
 
 # Name of object we want to write
 data_table, 
@@ -292,7 +299,7 @@ addStyle(
 wb, 
 
 # Sheet to apply style to, can either use sheet number or sheet name
-sheet = 1, 
+sheet = "Table1", 
 
 # Style to apply
 style = body_style, 
@@ -304,26 +311,138 @@ cols = 4)
 # Apply border style
 addStyle(
 wb,
- 1, 
- border_style_thick, 
- rows = 4:7, cols = 2:4, gridExpand = TRUE,
-         stack = TRUE)
-         
-addStyle(wb, 1, blue_style, rows = 4:7, cols = 2:4, gridExpand = TRUE,
-         stack = TRUE)
+"Table1", 
+border_style_thick, 
+rows = 4:7, 
+cols = 2:4, 
+gridExpand = TRUE,
+stack = TRUE)
 
+# Apply colour to the table         
+addStyle(
+wb,
+"Table1", 
+blue_style, 
+rows = 4:7, 
+cols = 2:4, 
+gridExpand = TRUE,
+stack = TRUE)
 
 saveWorkbook(
-  # Workbook to save
   wb = wb,
-  
-  # The file path to save out to
-  # - only short version here as working directory is set by the project
-  file = "ATI Workbook.xlsx",
-  
-  # Whether you want to overwrite the file already there
+  file = "openxlsx_training.xlsx",
   overwrite = TRUE)  
 `````
 
+```{r save_2_screenshot, fig.align='right', out.width="100%"}
+knitr::include_graphics("images/openxlsx/openxlsx-with-styles.png")
+```
 
+This looks much better! But we can do more and add some formatting.
 
+## Formatting Worksheets.
+We can merge cells:
+
+`````
+mergeCells(
+# Specify workbook to apply to
+wb, 
+
+# Define worksheet for formatting to apply to
+sheetName = "Table1",
+
+# Define columns and rows to merge
+cols = 2:5, rows = 7:11)
+
+`````
+
+Set row heights and column widths:
+
+`````
+setColWidths(
+# Specify workbook to apply to
+wb, 
+
+# Define worksheet for formatting to apply to
+sheet = "Table1", 
+
+# Columns to apply to
+cols = 2:5, 
+
+# Width - check within excel by right clicking on column and clicking "Column Width"
+widths = 20) 
+`````
+
+Add a table title and better column names:
+
+`````
+title_table <- "Max Petal Length and Width in Each Species Within Iris Dataset"
+writeData(wb, "Table1", title_table, startCol = 2, startRow = 2)
+
+names(data_table) <- c("Species", "Max Petal Length", "Max Petal Width")
+writeData(wb, "Table1", data_table, startCol = 2, startRow = 4)
+`````
+
+## Excel Functionality
+### Adding Pivot Tables
+We can write our datasets to excel as pivot tables instead of static tables (like we did in the previous section): 
+
+`````
+# Rename the columns of the dataset
+names(data_table2) <- c("Species", "Number")
+
+# Add a title for this table
+title_table2 <- "Number of each Iris Species in Dataframe"
+
+# This function creates a pivot table in excel
+writeDataTable(wb, sheet = "Data_Tables", startCol = 6, x = data_table2,
+startRow = 4,
+# You can check the names by hovering over table styles in excel
+tableStyle = "TableStyleLight15",
+# Names the table - not necessary in most situations though
+tableName = "Data_Table_2")
+
+writeData(wb, "Data_Tables", title_table2, startCol = 6, startRow = 2)
+`````
+
+This gives us the output below:
+
+```{r save_3_screenshot, fig.align='right', out.width="100%"}
+knitr::include_graphics("images/openxlsx/openxlsx-with-table.png")
+```
+
+### Adding Formulae
+Let's add an excel function to calculate the total. We could just add a total row to the dataframe but adding a formula to the excel output allows the output to dynamically update with inputs.
+
+`````
+# Add another table to the workbook
+names(data_table2) = c("Species", "Number")
+
+# This function creates an actual table in excel
+writeDataTable(wb, sheet = "Data_Tables", startCol = 6, x = data_table2,
+               startRow = 4,
+               # You can check the names by hovering over table styles in excel
+               tableStyle = "TableStyleLight15",
+               # Names the table - not necessary in most situations though
+               tableName = "Data_Table_2")
+
+# Adding "Total"
+writeData(
+wb, 
+"Data_Tables",
+x = "Total",
+startCol = 6, 
+startRow = 8)
+
+# Use this function to write excel formulae
+writeFormula(
+wb, 
+"Data_Tables", 
+x = "=SUM(G5:G7)",
+startCol = 7, 
+startRow = 8)
+`````
+
+```{r save_4_screenshot, fig.align='right', out.width="100%"}
+knitr::include_graphics("images/openxlsx/openxlsx-with-formula.png")
+```
