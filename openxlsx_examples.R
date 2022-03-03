@@ -245,3 +245,30 @@ writeData(wb, "Data_Tables",
 writeFormula(wb, "Data_Tables", x = "=SUM(G5:G7)",
              startCol = 7, startRow = 8)
 
+
+### 6 - Adding Plots -----
+addWorksheet(
+  wb = wb,
+  sheetName = "Charts",
+  gridLines = FALSE,
+  tabColour = "blue", # Uses in built colour
+  header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"))
+
+print(graph1)
+
+insertPlot(wb = wb, 
+           sheet = 2,
+           width = 6, 
+           height = 4, 
+           startRow = 3, 
+           startCol = 2, 
+           dpi = 300) 
+
+saveWorkbook(
+  # Workbook object build in the beginning
+  wb = wb,
+  # The file path
+  # - only short version here as working directory is set by the project
+  file = "openxlsx_training.xlsx",
+  # Whether you want to overwrite the file already there
+  overwrite = TRUE)

@@ -64,7 +64,7 @@ The course will also show progress through sections, a green tick will appear on
 
 </ul>
 
-There are some exercises designed to accompany this course which can be downloaded from [Github](https://github.com/Public-Health-Scotland/). These can either be completed bit by bit as you work through the course or as a whole exercise at the end.  
+There are some examples designed to accompany this course, these can either be completed bit by bit as you work through the course or as a whole at the end.  There is also an exercise for you to try when you finish the course to apply what you've learned. Both can be downloaded from [Github](https://github.com/Public-Health-Scotland/).
   </div>
 </br>
 
@@ -149,7 +149,7 @@ graph1
 
 
 ## Create the excel output
-We will now create the excel output and output the tables and chart into it. Refer to the accompanying exercises to follow along with this section. 
+We will now create the excel output and output the tables and chart into it.
 
 The following code creates a blank excel template that you build on. Note that you can't view it as you go along, only once it is saved out, so you have to keep track of what you are adding. 
 
@@ -157,7 +157,7 @@ The following code creates a blank excel template that you build on. Note that y
 wb <- createWorkbook()
 ````
 
-Before we can add any data to the workbook we have to create a worksheet for the data to go in. Note that the order you add the sheets to the workbook is the order they appear in, this is not set in code.
+Before we can add any data to the workbook we have to create worksheets for the data to go in. Note that the order you add the sheets to the workbook is the order they appear in, this is not set in code. 
 
 ````
 addWorksheet(
@@ -385,7 +385,7 @@ writeData(wb, "Table1", data_table, startCol = 2, startRow = 4)
 
 ## Excel Functionality
 ### Adding Pivot Tables
-We can write our datasets to excel as pivot tables instead of static tables (like we did in the previous section): 
+We can write our datasets to excel as pivot tables instead of static tables (like we did in the previous section). We'll use the second datset we created in this section:
 
 `````
 # Rename the columns of the dataset
@@ -395,7 +395,7 @@ names(data_table2) <- c("Species", "Number")
 title_table2 <- "Number of each Iris Species in Dataframe"
 
 # This function creates a pivot table in excel
-writeDataTable(wb, sheet = "Data_Tables", startCol = 6, x = data_table2,
+writeDataTable(wb, sheet = "Data_Tables", startCol = 7, x = data_table2,
 startRow = 4,
 # You can check the names by hovering over table styles in excel
 tableStyle = "TableStyleLight15",
@@ -415,34 +415,55 @@ knitr::include_graphics("images/openxlsx/openxlsx-with-table.png")
 Let's add an excel function to calculate the total. We could just add a total row to the dataframe but adding a formula to the excel output allows the output to dynamically update with inputs.
 
 `````
-# Add another table to the workbook
-names(data_table2) = c("Species", "Number")
-
-# This function creates an actual table in excel
-writeDataTable(wb, sheet = "Data_Tables", startCol = 6, x = data_table2,
-               startRow = 4,
-               # You can check the names by hovering over table styles in excel
-               tableStyle = "TableStyleLight15",
-               # Names the table - not necessary in most situations though
-               tableName = "Data_Table_2")
-
 # Adding "Total"
 writeData(
 wb, 
 "Data_Tables",
 x = "Total",
-startCol = 6, 
+startCol = 7, 
 startRow = 8)
 
 # Use this function to write excel formulae
 writeFormula(
 wb, 
 "Data_Tables", 
-x = "=SUM(G5:G7)",
-startCol = 7, 
+x = "=SUM(H5:H7)",
+startCol = 8, 
 startRow = 8)
 `````
 
 ```{r save_4_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-with-formula.png")
 ```
+
+
+## Adding plots
+Openxlsx automatically adds the most recently used plot to the workbook. The easiest way to make sure you use the correct chart is to print the chart you want and then add it. 
+
+`````
+# Print chart
+print(graph1)
+
+insertPlot(wb = wb, 
+
+          # Sheet number/name
+           sheet = 3,
+           
+           # Width/height of the graph - you might need to play around to get the right ratio
+           width = 6, 
+           height = 4, 
+           
+           # Define where the top and left side of the chart should sit
+           startRow = 3, 
+           startCol = 2, 
+           
+           # Resolution of the chart
+           dpi = 300) 
+`````
+
+```{r save_4_screenshot, fig.align='right', out.width="100%"}
+knitr::include_graphics("images/openxlsx/openxlsx-with-chart.png")
+```
+
+
+## Adding Information Page
