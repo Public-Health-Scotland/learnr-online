@@ -71,7 +71,9 @@ graphics_grammar_table <- data.frame(
   "ID" = c("1", "2", "3"),
   "Name" = c("Harry", "Luna", "Ronald"),
   "Specialty" = c("A1", "A11", "A2"),
-  "LoS" = c("5", "7", "9")
+  "LoS" = c("5", "7", "9"),
+  "HB_Res" = c("S08000031", "S08000024", "S08000031"),
+  "HB_Treat" = c("S08000031", "S08000031", "S08000031")
 )
 
 kableExtra::kbl(graphics_grammar_table) %>%
@@ -93,7 +95,6 @@ quiz(
   ),
   question("What was the LoS (Length of Stay) for Luna?",
            answer("5"),
-           answer("A11"),
            answer("9"),
            answer("7", correct = TRUE),
            answer("2"),
@@ -102,6 +103,16 @@ quiz(
            random_answer_order = TRUE)
 )
 ```
+
+</br>
+
+PHS have many databases for different purposes, with varying technical infrastructures (Oracle, PostgreSQL, MySQL) they all utilise a common language, SQL (albeit with some differences as things get more advanced). This course will minimise the need to interact with any live PHS database but still reference and make sure the knowledge gained is transferable. We'll stay practical in this course though, building knowledge and skill by:
+
+1. Learning the basics of how to use SQL
+2. Implementing SQL within R
+3. Top it off with a Tidyverse package, [`dbplyr`](https://dbplyr.tidyverse.org/), used to interact with databases with the Tidyverse style of coding.
+
+RStudio has functionality to make connecting to and interacting with databases slightly easier but the real power comes from including the SQL code in-line with your R code. This means there's no interruption to your workflow, you can include it within your automation pipelines, and add supporting data manipulation code in R. However, R relies on processing power and memory and larger data extracts can have an exponential impact on performance. We'll therefore go over writing efficient queries and other best practice to make our lives that bit easier. 
 
 
 ## Help & Feedback
