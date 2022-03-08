@@ -551,12 +551,22 @@ saveWorkbook(
   overwrite = TRUE)
 ````
 
+## What now?
+If you haven't been doing so during the course, have a go at running the code in the [examples script](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-examples.R). Once you're happy with that you can have a go at creating your own excel output! There's an [exercise](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-exercises.R) you can download from GitHub which has some basic tasks to get you started. 
+
+Once you've done that, why not see where you can apply this in your own team (or beyond...). Good luck!
+
+```{r openxlsx-remoteR, fig.align='right', out.width="100%"}
+knitr::include_graphics("images/openxlsx/openxlsx-horst-remoteR.png")
+```
+
+
 ## Review & Feedback
 
 #### References
-
-* [Openxlsx Vignette] - (https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf)
 * Openxlsx ATI Training by Ruben Vine (Senior Information Analyst)
+* [Openxlsx Vignette](https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf)
+* [Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/)
 
 
 #### Help
