@@ -9,7 +9,7 @@ These applications are hosted online and provide functionality around quizzes an
 * [Data Visualisation in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/DataViz.Rmd) - building on an the Intro to R course, learn data visualisation with `ggplot2` and an introduction to `plotly`. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-dataviz/ 
 * [Introduction to Open Data](https://github.com/Public-Health-Scotland/learnr-online/blob/master/OpenData.Rmd) - learning what open data is and how it's used in PHS, then getting interactive accessing open data using R. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-opendata/ 
 * [SPSS to R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/SPSStoR.Rmd) - a translation course to work alongside the Introduction to R course with a focus on translating code from SPSS to R. 
-* [Introduction to OpenXLSX](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx.Rmd) - a course providing an introduction to the `openxlsx`, used to read, write, and edit Excel files from R.
+* [Introduction to OpenXLSX](https://github.com/Public-Health-Scotland/learnr-online/blob/master/OpenXLSX.Rmd) - a course providing an introduction to the `openxlsx`, used to read, write, and edit Excel files from R.
 
 ### Directories
   As this is a shiny prerendered project, only certain filenames are accessible from within the app. These are outlined below:
@@ -27,7 +27,7 @@ Other directories:
   * `OpenData.Rmd` - RMarkdown file containing all necessary code to build app for the open data course
   * `PHSMethods.Rmd` - RMarkdown file containing all necessary code to build app for the phsmethods course
   * `SPSStoR.Rmd` - RMarkdown file containing all necessary code to build app for the SPSS to R course
-  * `Openxlsx.Rmd` - RMarkdown file containing all necessary code to build app for the openxlsx course
+  * `OpenXLSX.Rmd` - RMarkdown file containing all necessary code to build app for the openxlsx course
   * `.gitignore` - tells git what files and folders *not* to track or upload to GitHub
   * `LICENSE` - MIT License 
   * `PHS-LearnR.Proj` - R project
