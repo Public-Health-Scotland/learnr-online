@@ -21,6 +21,7 @@ library(gradethis)      # For code checking and user-specific feedback
 library(readr)          # For reading/writing data
 library(RSQLite)        # For interfacing with SQLite databases
 library(kableExtra)
+library(shiny)
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -31,12 +32,16 @@ tutorial_options(
 ### Database Setup
 # Load Borders data
 borders_data <- readRDS("www/data/borders.rds")
+# Load pantheon data
+pantheon <- read_csv("www/data/gb_us_pantheon.csv")
 
 # Create a connection to the database
 conn <- dbConnect(RSQLite::SQLite(), ":memory:")
 
 # Write Borders data into a table within the database
 dbWriteTable(conn, "borders_data", borders_data, overwrite = TRUE)
+# Write pantheon data into a table within the database
+dbWriteTable(conn, "pantheon", pantheon, overwrite = TRUE)
 
 # List tables available in the database
 dbListTables(conn)
@@ -113,6 +118,29 @@ PHS have many databases for different purposes, with varying technical infrastru
 3. Top it off with a Tidyverse package, [`dbplyr`](https://dbplyr.tidyverse.org/), used to interact with databases with the Tidyverse style of coding.
 
 RStudio has functionality to make connecting to and interacting with databases slightly easier but the real power comes from including the SQL code in-line with your R code. This means there's no interruption to your workflow, you can include it within your automation pipelines, and add supporting data manipulation code in R. However, R relies on processing power and memory and larger data extracts can have an exponential impact on performance. We'll therefore go over writing efficient queries and other best practice to make our lives that bit easier. 
+
+
+## Basics
+
+The basics in this course start with understanding SQL, the language of interacting with databases. We can then plug this SQL into R to keep our code and workflows streamlined. However, as we're learning SQL, the syntax is quite different from R but with a straightforward structure, you're going to be able to do a lot with a little.
+
+SQL can be used for creating and modifying databases but our focus will be querying databases. We work with and rely on data throughout our daily workload, and querying a database is how we can get this data from a database table (or combination of tables).
+
+Let's start the journey by running some SQL code:
+
+```{sql basics-1, connection="conn", exercise=TRUE}
+SELECT * FROM pantheon;
+```
+
+</br>
+
+```{r basics-1-quiz}
+question("What is the listed occupation on the first record, that of Abraham Lincoln?",
+         answer("President"),
+         answer("Tennis Player"),
+         answer("Politician", correct = TRUE),
+         random_answer_order = TRUE)
+```
 
 
 ## Help & Feedback
