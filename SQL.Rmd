@@ -3,7 +3,7 @@ title: "SQL in R"
 output: 
   learnr::tutorial:
     css: "css/style.css"
-    progressive: false
+    progressive: true
     allow_skip: true
 runtime: shiny_prerendered
 ---
@@ -150,11 +150,11 @@ question("What is the listed occupation on the first record, that of Abraham Lin
 -- This is a SQL comment
 -- Selecting specific columns from the table
 SELECT some_column, another_column, ...
-FROM table;
+FROM my_table;
 
 -- Selecting all columns from the table
 SELECT *
-FROM table;
+FROM my_table;
 ```
 
 SQL keywords are not case-sensitive but it's here that we can introduce some of our best practice:
@@ -175,6 +175,17 @@ LIMIT 10;
 SELECT name, birthcity, occupation
 FROM pantheon
 LIMIT 30;
+```
+
+</br> 
+
+#### DISTINCT
+
+There may be a situation in which you need the unique values from a column, this is where the `DISTINCT` keyword comes in. As an example, we can get a list of all industries from the `pantheon` table:
+
+```{sql distinct-1, connection="conn", exercise=TRUE}
+SELECT DISTINCT industry
+FROM pantheon;
 ```
 
 
