@@ -142,6 +142,10 @@ question("What is the listed occupation on the first record, that of Abraham Lin
          random_answer_order = TRUE)
 ```
 
+```{r basics-welcome, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/sql/tables-welcome.png")
+```
+
 ### SELECT
 
 `SELECT` and `FROM` are keywords in SQL, and make the foundation of a query. The `SELECT` statement refers to the attributes (columns) and the `FROM` is the table in the database where that data exists. This forms that most basic query. You can select some (or all) of the columns which will return a two-dimensional copy of the table with the columns requested and all the rows. To select all the columns, we use the wildcard character, asterisk (`*`):
@@ -187,6 +191,8 @@ There may be a situation in which you need the unique values from a column, this
 SELECT DISTINCT industry
 FROM pantheon;
 ```
+
+</br> 
 
 
 ## Help & Feedback
