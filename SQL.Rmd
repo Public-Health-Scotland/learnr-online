@@ -142,6 +142,41 @@ question("What is the listed occupation on the first record, that of Abraham Lin
          random_answer_order = TRUE)
 ```
 
+### SELECT
+
+`SELECT` and `FROM` are keywords in SQL, and make the foundation of a query. The `SELECT` statement refers to the attributes (columns) and the `FROM` is the table in the database where that data exists. This forms that most basic query. You can select some (or all) of the columns which will return a two-dimensional copy of the table with the columns requested and all the rows. To select all the columns, we use the wildcard character, asterisk (`*`):
+
+```sql
+-- This is a SQL comment
+-- Selecting specific columns from the table
+SELECT some_column, another_column, ...
+FROM table;
+
+-- Selecting all columns from the table
+SELECT *
+FROM table;
+```
+
+SQL keywords are not case-sensitive but it's here that we can introduce some of our best practice:
+
+* Make SQL keyboards UPPER-CASE, this will distinguish them from other parts of your query.
+* End queries with a semicolon, sometimes this is necessary to run the query, other times its not.
+* We can already create efficiencies in our code at this stage. Limit the columns queried to what you require in your immediate workflow. If you want to explore/check the data across all columns, you can add a `LIMIT` to your query which will only pull the specified number of rows.
+
+Feel free to play around with this on the `pantheon` table and then finish by creating a table of names (`name`), birth cities (`birthcity`), and occupations (`occupation`). Then, limit the number of results to 30:
+
+```{sql, select-1, connection="conn", exercise=TRUE}
+SELECT *
+FROM pantheon
+LIMIT 10;
+```
+
+```{sql, select-1-solution}
+SELECT name, birthcity, occupation
+FROM pantheon
+LIMIT 30;
+```
+
 
 ## Help & Feedback
 
