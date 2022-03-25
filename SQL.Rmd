@@ -29,13 +29,13 @@ tutorial_options(
 )
 
 ### Database Setup
-# Load data
+# Load Borders data
 borders_data <- readRDS("www/data/borders.rds")
 
 # Create a connection to the database
 conn <- dbConnect(RSQLite::SQLite(), ":memory:")
 
-# Write data into a table within the database
+# Write Borders data into a table within the database
 dbWriteTable(conn, "borders_data", borders_data, overwrite = TRUE)
 
 # List tables available in the database
@@ -64,7 +64,7 @@ Welcome to **SQL in R**. This is a self-led course on accessing and utilising da
 
 SQL (you can read about the [pronounciation *conflict* here](https://database.guide/is-it-pronounced-s-q-l-or-sequel/)) is the **S**tructured **Q**uery **L**anguage used to interact with relational databases. This is, by far, the most popular database structure and for our purposes makes storing and interacting with data so much more efficient. 
 
-A relational database is just like a collection of tables, rows and columns, like an Excel spreadsheet. Each table represents a single entity, columns (or fields) represent attributes, and rows (or records) represent information about a single entity. Have a look at the below table as an example:
+A relational database is just like a collection of tables, rows and columns, like an Excel spreadsheet. Each table represents a single entity, columns (or fields) represent attributes, and rows (or records) represent information about a single entity. Have a look at the below table as an example, other tables in this database might include further information about the individual patients or Health Board areas (such as deprivation data):
 
 ```{r, echo=FALSE}
 graphics_grammar_table <- data.frame(
