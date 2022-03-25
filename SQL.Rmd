@@ -194,6 +194,32 @@ FROM pantheon;
 
 </br> 
 
+#### COUNT
+
+Occasionally, it's not even the data that we need, it's the number of records that match the query in the specified table. This is where the `COUNT()` function comes in, and as we learn more about forming SQL queries, each of these components can be used in different ways to return our desired result.
+
+```sql
+-- Count total number of rows in a toble
+SELECT COUNT(*) FROM my_table;
+
+-- Count non-missing values of specific attribute
+SELECT COUNT(column) FROM my_table;
+
+-- Count the number of distinct values in a column
+SELECT COUNT(DISTINCT column) FROM my_table;
+```
+
+Now, to get practical, let's get the number of unique cities (`birthcity`) from the `pantheon` table:
+
+```{sql count-1, connection="conn", exercise=TRUE}
+
+```
+
+```{sql count-1-solution}
+SELECT COUNT(DISTINCT birthcity)
+FROM pantheon;
+```
+
 
 ## Help & Feedback
 
