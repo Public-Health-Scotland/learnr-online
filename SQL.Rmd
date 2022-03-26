@@ -199,7 +199,7 @@ FROM pantheon;
 Occasionally, it's not even the data that we need, it's the number of records that match the query in the specified table. This is where the `COUNT()` function comes in, and as we learn more about forming SQL queries, each of these components can be used in different ways to return our desired result.
 
 ```sql
--- Count total number of rows in a toble
+-- Count total number of rows in a table
 SELECT COUNT(*) FROM my_table;
 
 -- Count non-missing values of specific attribute
@@ -219,6 +219,89 @@ Now, to get practical, let's get the number of unique cities (`birthcity`) from 
 SELECT COUNT(DISTINCT birthcity)
 FROM pantheon;
 ```
+
+
+### WHERE
+
+<div class="supporting-image-right">
+```{r where-image, echo=FALSE, fig.align='center', out.width="90%"}
+knitr::include_graphics("images/sql/where.jpg")
+```
+</div>
+
+We often deal with datasets with millions of rows but it's not very often we need every row. It's much more efficient to only extract the data that we need. We can do this by adding constraints with the `WHERE` clause as part of your query. The clause is then applied to each record to determine if that record is included in the results, all at the database system side. This means that no processing is required locally and that only the required data is transferred. 
+
+
+```sql
+-- Selecting specific columns from the table with constraints
+SELECT some_column, another_column, ...
+FROM my_table
+WHERE condition
+  AND/OR another_condition
+  ...;
+```
+
+</br>
+
+We now need to focus on creating the conditions, these will have a familiar logic. Below are some useful operators to start us off:
+
+| Numeric Operator  | Condition                               | Example       |
+| :---------------: | --------------------------------------- | ------------- |
+| `=`  `<>` | Equal to and not equal to | `col <> 100` |
+| `<`  `<=`  `>`  `>=` | Comparison operators |   `col >= 18` |
+| `BETWEEN ... AND ...` | Within inclusive range of 2 values | `col BETWEEN 0 AND 5.5` |
+| `NOT BETWEEN ... AND ...` | Not within inclusive range of 2 values | `col NOT BETWEEN 0 AND 5.5` |
+| `IN (...)` | Exists within list (short for multiple OR conditions) | `col IN (2, 4, 6)` |
+| `NOT IN (...)` | Doesn't exist within list | `col NOT IN (1, 3, 5)` |
+
+
+| String Operator  | Condition                               | Example       |
+| :---------------: | --------------------------------------- | ------------- |
+| `=`  `<>` | Equal to and not equal to | `col <> 'Glasgow'` |
+| `LIKE` | Case insensitive exact string comparison |   `col LIKE 'Glasgow'` |
+| `NOT LIKE` | Case insensitive exact string inequality comparison |   `col NOT LIKE 'Glasgow'` |
+| `%` | Used anywhere in a string to match a sequence of zero or more characters (only with LIKE or NOT LIKE) | `col LIKE '%AT%'` (matches "AT", "ATTIC", "CAT" or "BATS") |
+| `_` | Used anywhere in a string to match a single character (only with LIKE or NOT LIKE) | `col LIKE 'AN_'` (matches "AND", but not "AN") |
+| `IN (...)` | Exists within list (short for multiple OR conditions) | `col IN ('EDI', 'GLA')` |
+| `NOT IN (...)` | Doesn't exist within list | `col NOT IN ('G', 'E', 'A')` |
+
+*For most purposes, this implementation of text search is efficient and works well. However, if the workflow becomes more specified, there are dedicated libraries designed around full text search.*
+
+To test what we've been learning, build a query with the following constraints on the `pantheon` table:
+
+* `birthcity` contains "burgh" in the name
+* `domain` is the Arts
+* `birthyear` is in the 1920s
+
+```{sql where-1, connection="conn", exercise=TRUE}
+
+```
+
+```{sql where-1-solution}
+SELECT name
+FROM pantheon
+WHERE birthcity LIKE '%burgh%'
+    AND domain = 'Arts'
+    AND birthyear BETWEEN 1920 AND 1929
+```
+
+```{r where-1-quiz}
+question("Who is the result of the above query?",
+         answer("Gene Kelly"),
+         answer("F. Murray Abraham"),
+         answer("Stuart Sutcliffe"),
+         answer("Andy Warhol", correct = TRUE),
+         random_answer_order = TRUE)
+```
+
+## Connect
+
+
+## Inspect
+
+
+## Query 
+
 
 
 ## Help & Feedback
