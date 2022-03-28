@@ -467,6 +467,81 @@ HAVING count(occupation) > 50
 ORDER BY Number DESC;
 ```
 
+### Summary
+
+Now is a good point to reflect on our journey with SQL so far. We've looked at a complete SQL query:
+
+```sql
+SELECT DISTINCT some_column, AGR_FUNC(column_or_expression) AS agr_description, ...
+FROM my_table
+WHERE condition(s)
+GROUP BY some_column
+HAVING condition(s)
+ORDER BY some_column ASC/DESC
+LIMIT x OFFSET y;
+```
+
+However, you may have noticed that has only included a single table, we'll next take a look at how to query multiple related tables and join the data together. Before that, lets run through some questions and check the knowledge we've been building.
+
+```{r queries-quiz}
+quiz(
+  question("In `SELECT * FROM patients;` what does patients represent?",
+    answer("SQL query"),
+    answer("SQL statement"),
+    answer("Database"),
+    answer("Table", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("What does the following SQL statement return? `SELECT * FROM patients WHERE name LIKE 'a%'`",
+    answer("It records in the patients table where the value in the name column doesn't have an 'a'."),
+    answer("It records in the patients table where the value in the name column has an 'a'."),
+    answer("It records in the patients table where the value in the name column ends with 'a'."),
+    answer("It records in the patients table where the value in the name column starts with 'a'.", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("Which choice is NOT a statement you would use to filter data?",
+    answer("`WHERE`"),
+    answer("`LIMIT`"),
+    answer("`LIKE`"),
+    answer("`GROUP_BY`", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("How can you filter duplicate data while retrieving records from a table?",
+    answer("`WHERE`"),
+    answer("`LIMIT`"),
+    answer("`AS`"),
+    answer("`DISTINCT`", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("How do you select every row in a given table named 'hospitals'?",
+    answer("`SELECT all FROM hospitals;`"),
+    answer("`FROM hospitals SELECT all;`"),
+    answer("`FROM hospitals SELECT *;`"),
+    answer("`SELECT * FROM hospitals;`", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+## Connect
+
+
+## Inspect
+
+
+## Query 
+
+
 
 ## Help & Feedback
 
