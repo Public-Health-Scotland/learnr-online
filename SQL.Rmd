@@ -126,7 +126,7 @@ The basics in this course start with understanding SQL, the language of interact
 
 SQL can be used for creating and modifying databases but our focus will be querying databases. We work with and rely on data throughout our daily workload, and querying a database is how we can get this data from a database table (or combination of tables).
 
-Let's start the journey by running some SQL code:
+In the next couple of sections, we're going to be using the `pantheon` table, which is a list of well-known people from the United Kingdom and United States. There's some other variables but why don't you have a look yourself after running this SQL code to retrieve all the data from that table:
 
 ```{sql basics-1, connection="conn", exercise=TRUE}
 SELECT * FROM pantheon;
@@ -532,6 +532,7 @@ quiz(
   )
 )
 ```
+
 
 ## Connect
 
