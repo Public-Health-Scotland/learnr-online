@@ -312,6 +312,18 @@ question("Who is the result of the above query?",
          random_answer_order = TRUE)
 ```
 
+### ORDER BY
+
+The final, and short, section on basics is about ordering. This isn't always necessary as part of a larger piece of work but can save time if you're looking to prettify a data dump without having to do anything else locally. This is achieved by using `ORDER_BY` which defaults to ascending order but you can append a `DESC` keyword after any of the specified columns to achieve a descending order.
+
+```sql
+SELECT some_column, another_column, ...
+FROM my_table
+WHERE condition(s)
+ORDER BY some_column, another_column DESC;
+-- some_column defaults to ASC (ascending) order
+```
+
 ## Connect
 
 
