@@ -192,6 +192,8 @@ SELECT DISTINCT industry
 FROM pantheon;
 ```
 
+*`DISTINCT` is attached to the column that you're looking for unique values from. This will completely remove any rows that are duplicated based on that simple identification. Later on, we'll find out about grouping (`GROUP_BY`).*
+
 </br> 
 
 #### COUNT
@@ -275,6 +277,22 @@ To test what we've been learning, build a query with the following constraints o
 
 ```{sql where-1, connection="conn", exercise=TRUE}
 
+```
+
+```{sql where-1-hint-1}
+SELECT name
+FROM pantheon
+WHERE birthcity ___
+    AND domain ___
+    AND birthyear ___
+```
+
+```{sql where-1-hint-2}
+SELECT name
+FROM pantheon
+WHERE birthcity LIKE ___
+    AND domain = ___
+    AND birthyear BETWEEN ___
 ```
 
 ```{sql where-1-solution}
