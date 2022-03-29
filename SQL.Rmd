@@ -534,14 +534,94 @@ quiz(
 ```
 
 
+## Joins
+
+Data is often split across multiple tables in a database as a result of a process known as [normalisation](https://docs.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description). This is useful as it minimises duplication of data and simplifies the addition of new data. In some cases our internal databases have views created where tables are already joined but knowing how joins work and how to handle them will be useful.
+
+Now, these tables that share information need to have a *primary key* that uniquely identifies the entity across the database. Commonly, this is a increasing integer referred to as an ID, but can be anything that is unique, e.g. a CHI number. 
+
+### INNER JOIN
+
+The first type of join we're going to look at is the inner join. This process involves matching rows from the first table with the second to create a combination, where there is a match existing in both on the given key (defined by the `ON` constraint). The other arguments we learned about in the previous sections can then be applied as required.
+
+```{r join-inner, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/sql/join-inner.png")
+```
+
+```sql
+SELECT some_column_table1, another_column_table2, ...
+FROM my_table
+INNER JOIN another_table
+  ON my_table.id = another_table.id;
+```
+
+*You may see queries where an `INNER JOIN` is simply written as `JOIN`. This is the default behaviour, however, it's better practice to be explicit.*
+
+#### USING
+
+The IDs from each table don't have to have the same name, this is where the explicit naming of the columns using the `ON` keyword works well. However, it's likely that the columns will have the same name as they are referring to the same thing. When this happens we can use the `USING` keyword and just include the common column name within brackets, like this:
+
+```sql
+SELECT some_column_table1, another_column_table2, ...
+FROM my_table
+INNER JOIN another_table
+  USING (id);
+```
+
+### OUTER JOINS
+
+Restricting the data to what's available in both tables might not always be suitable. If the tables are asymmetrical then you might need to use an outer join: left join, right join, or full join. 
+
+#### LEFT JOIN
+
+When joining table A to table B, a `LEFT JOIN` includes all rows from A regardless of if a matching row is found in B. 
+
+```{r join-left, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/sql/join-left.png")
+```
+
+```sql
+SELECT some_column_table1, another_column_table2, ...
+FROM my_table
+LEFT JOIN another_table
+  ON my_table.id = another_table.id;
+```
+
+</br>
+
+#### RIGHT JOIN
+
+The `RIGHT JOIN` is the same as `LEFT JOIN` but reversed. This means that all rows are kept from table B regardless of if a matching row is found in A.
+
+```{r join-right, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/sql/join-right.png")
+```
+
+```sql
+SELECT some_column_table1, another_column_table2, ...
+FROM my_table
+RIGHT JOIN another_table
+  ON my_table.id = another_table.id;
+```
+
+</br>
+
+#### FULL JOIN
+
+A `FULL JOIN` means that all rows from both tables are kept regardless of any match from either side. 
+
+```{r join-full, echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/sql/join-full.png")
+```
+
+```sql
+SELECT some_column_table1, another_column_table2, ...
+FROM my_table
+FULL JOIN another_table
+  ON my_table.id = another_table.id;
+```
+
 ## Connect
-
-
-## Inspect
-
-
-## Query 
-
 
 
 ## Help & Feedback
