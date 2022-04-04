@@ -22,6 +22,7 @@ library(readr)          # For reading/writing data
 library(RSQLite)        # For interfacing with SQLite databases
 library(kableExtra)
 library(shiny)
+library(dplyr)
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -34,6 +35,10 @@ tutorial_options(
 borders_data <- readRDS("www/data/borders.rds")
 # Load pantheon data
 pantheon <- read_csv("www/data/gb_us_pantheon.csv")
+# Load baby names data
+baby <- read_csv("www/data/Baby5.csv")
+baby_family <- read_csv("www/data/Baby6.csv") %>%
+  select(FAMILYID, SURNAME)
 
 # Create a connection to the database
 conn <- dbConnect(RSQLite::SQLite(), ":memory:")
@@ -42,6 +47,9 @@ conn <- dbConnect(RSQLite::SQLite(), ":memory:")
 dbWriteTable(conn, "borders_data", borders_data, overwrite = TRUE)
 # Write pantheon data into a table within the database
 dbWriteTable(conn, "pantheon", pantheon, overwrite = TRUE)
+# Write baby data into a table within the database
+dbWriteTable(conn, "baby", baby, overwrite = TRUE)
+dbWriteTable(conn, "baby_family", baby_family, overwrite = TRUE)
 
 # List tables available in the database
 dbListTables(conn)
@@ -570,9 +578,25 @@ INNER JOIN another_table
   USING (id);
 ```
 
-### OUTER JOINS
+This is most common type of join so let's get practical with it. You may have come across this example in the ['Introduction to R' course](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r). It's straightforward but allows you to visually check the outcome.
 
-Restricting the data to what's available in both tables might not always be suitable. If the tables are asymmetrical then you might need to use an outer join: left join, right join, or full join. 
+We have 2 tables in our database, one refers to newborn babies (`baby`), the other is information relating to the baby's family (`baby_family`). Explore the tables and then join based on (`FAMILYID`), it's the same key for each table.
+
+```{sql inner-join, connection="conn", exercise=TRUE}
+
+```
+
+```{sql inner-join-solution}
+SELECT *
+FROM baby
+  INNER JOIN baby_family
+  USING (FAMILYID);
+```
+
+
+### OUTER & CROSS JOINS
+
+Restricting the data to what's available in both tables might not always be suitable. If the tables are asymmetrical then you might need to use an outer join: left join, right join, or full join. We'll also look at cross joins at the end of this section.
 
 #### LEFT JOIN
 
@@ -623,7 +647,7 @@ FULL JOIN another_table
   ON my_table.id = another_table.id;
 ```
 
-### CROSS JOIN
+#### CROSS JOIN
 
 A `CROSS JOIN` creates all possible combinations of the 2 given tables, also known as the Cartesian product.
 
