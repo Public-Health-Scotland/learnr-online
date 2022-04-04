@@ -637,6 +637,40 @@ FROM my_table
 CROSS JOIN another_table;
 ```
 
+### Knowledge Check
+
+```{r joins-quiz}
+quiz(
+  question("Left and right joins are also known as ___?",
+    answer("Inner join"),
+    answer("Natural join"),
+    answer("Cartesian join"),
+    answer("Outer join", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("What is wrong with this code? `\n` `SELECT c.name AS country, l.name AS language \nFROM countries AS c \n \t INNER JOIN languages AS l;`",
+    answer("The number of rows in `languages` and `countries` is different."),
+    answer("There is more than one language per country."),
+    answer("A `JOIN` query can't be ended with a semi-colon."),
+    answer("`INNER JOIN` requires the specification of the key field(s) in each table.", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("What is the most common type of join?",
+    answer("`JOINED TABLE`"),
+    answer("`JOINED`"),
+    answer("`INSIDE JOIN`"),
+    answer("`INNER JOIN`", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
 ## Connect
 
 
