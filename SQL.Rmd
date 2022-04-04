@@ -39,6 +39,8 @@ pantheon <- read_csv("www/data/gb_us_pantheon.csv")
 baby <- read_csv("www/data/Baby5.csv")
 baby_family <- read_csv("www/data/Baby6.csv") %>%
   select(FAMILYID, SURNAME)
+# Load hospital lookup data
+hospital_lookup <- read_csv("www/data/hospital_lookup.csv")
 
 # Create a connection to the database
 conn <- dbConnect(RSQLite::SQLite(), ":memory:")
@@ -50,6 +52,8 @@ dbWriteTable(conn, "pantheon", pantheon, overwrite = TRUE)
 # Write baby data into a table within the database
 dbWriteTable(conn, "baby", baby, overwrite = TRUE)
 dbWriteTable(conn, "baby_family", baby_family, overwrite = TRUE)
+# Write hospital lookup data into a table within the database
+dbWriteTable(conn, "hospital_lookup", hospital_lookup, overwrite = TRUE)
 
 # List tables available in the database
 dbListTables(conn)
@@ -594,7 +598,7 @@ FROM baby
 ```
 
 
-### OUTER & CROSS JOINS
+### OUTER (& CROSS) JOINS
 
 Restricting the data to what's available in both tables might not always be suitable. If the tables are asymmetrical then you might need to use an outer join: left join, right join, or full join. We'll also look at cross joins at the end of this section.
 
@@ -647,6 +651,8 @@ FULL JOIN another_table
   ON my_table.id = another_table.id;
 ```
 
+</br>
+
 #### CROSS JOIN
 
 A `CROSS JOIN` creates all possible combinations of the 2 given tables, also known as the Cartesian product.
@@ -662,6 +668,19 @@ CROSS JOIN another_table;
 ```
 
 ### Knowledge Check
+
+You may be familiar with the Borders dataset from previous courses, this is what we're going to use here but with SQL. The table is called `borders_data` which has a `HospitalCode` to show which hospital the record refers to. We also have another table, `hospital_lookup`, which includes information about all the hospitals. We want to create a table with the `LocationName` (Hospital name), `Specialty`, and `LengthOfStay`. Feel free to use alias' to make your code more readable too. Explore the tables and select a join type that will allow you to create this table.
+
+```{sql join-kc, connection="conn", exercise=TRUE}
+
+```
+
+```{sql join-kc-solution}
+SELECT hosp.LocationName, borders.Specialty, borders.LengthOfStay
+FROM borders_data AS borders
+  LEFT JOIN hospital_lookup AS hosp
+  ON borders.HospitalCode = hosp.Location;
+```
 
 ```{r joins-quiz}
 quiz(
