@@ -623,6 +623,13 @@ FULL JOIN another_table
   ON my_table.id = another_table.id;
 ```
 
+### CROSS JOIN
+
+A `CROSS JOIN` creates all possible combination of the 2 given tables, also known as the Cartesian product. 
+```{r join-cross, echo=FALSE, fig.align='center', out.width="60%"}
+knitr::include_graphics("images/sql/join-cross.png")
+```
+
 ## Connect
 
 
