@@ -721,6 +721,88 @@ quiz(
 )
 ```
 
+
+## Subqueries
+
+<div class="supporting-image-right">
+```{r subquery-image, echo=FALSE, fig.align='center', out.width="60%"}
+knitr::include_graphics("images/sql/lightbulb.jpg")
+```
+</div>
+
+Subqueries (also called nested queries, inner queries, and inner selects), are getting to the more advanced end of our journey with SQL. They can be used in a few places, including inside themselves, and are used to return a restricted set of data to the calling query. Here's a few rules to shape our understanding:
+
+* Subqueries must be enclosed within brackets (parentheses)
+* A subquery can only have one column in the `SELECT` clause
+* Subqueries cannot use `ORDER BY`
+* `BETWEEN` can be used within a subquery but will not work to compare between subqueries.
+
+The syntax is pretty much going to be the same as you'd expect, it's a query within another query. However, make sure to consider readability and performance, and confirm that using a subquery is the most appropriate.  
+
+#### Inside SELECT
+
+* Return a single aggregate value
+* Create calculated columns with a single numeric value
+
+```sql
+-- You'll want to give the subquery an alias in this case, can you think why?
+SELECT some_column, another_column, ...
+  (SELECT some_column, another_column, ...
+   FROM my_table
+   WHERE condition) AS subquery_name
+FROM my_table;
+```
+
+#### Inside FROM
+
+* Help restructure and transform your data
+* Provide additional processing before analysis (e.g. filtering or reshaping data)
+* Calculate aggregates of summary information
+* Create more than one query in one `FROM` statement
+* Subqueries can be joined to each other or to other tables if that have a column in common
+
+```sql
+SELECT some_column, another_column, ...
+FROM my_table
+  (SELECT some_column, another_column, ...
+   FROM my_table
+   WHERE condition) AS subquery_name
+WHERE condition(s);
+```
+
+#### Inside WHERE
+
+* Filters results, based on data that would otherwise have to be created separately
+* Can create a list for filtering
+* Returns only a single column
+
+```sql
+SELECT some_column, another_column, ...
+FROM my_table
+WHERE condition(s)
+  (SELECT some_column, another_column, ...
+   FROM my_table
+   WHERE condition);
+```
+
+This is most common type of subquery so let's get practical for this one.
+
+Find the records where the length of stay (`LengthOfStay`) is more than the average for `HospitalCode` "B120H". 
+
+```{sql sub-where, connection="conn", exercise=TRUE}
+
+```
+
+```{sql sub-where-solution}
+SELECT *
+FROM borders_data
+WHERE LengthOfStay > 
+    (SELECT AVG(LengthOfStay)
+    FROM borders_data
+    WHERE HospitalCode = "B120H")
+    AND HospitalCode = "B120H";
+```
+
 ## Connect
 
 
