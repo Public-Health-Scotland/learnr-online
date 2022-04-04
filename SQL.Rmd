@@ -540,7 +540,7 @@ quiz(
 
 Data is often split across multiple tables in a database as a result of a process known as [normalisation](https://docs.microsoft.com/en-us/office/troubleshoot/access/database-normalization-description). This is useful as it minimises duplication of data and simplifies the addition of new data. In some cases our internal databases have views created where tables are already joined but knowing how joins work and how to handle them will be useful.
 
-Now, these tables that share information need to have a *primary key* that uniquely identifies the entity across the database. Commonly, this is a increasing integer referred to as an ID, but can be anything that is unique, e.g. a CHI number. 
+Now, these tables that share information need to have a *primary key* that uniquely identifies the entity across the database. Commonly, this is a increasing integer referred to as an ID, but can be anything that is unique, e.g. a CHI number in some cases. 
 
 ### INNER JOIN
 
@@ -625,9 +625,16 @@ FULL JOIN another_table
 
 ### CROSS JOIN
 
-A `CROSS JOIN` creates all possible combination of the 2 given tables, also known as the Cartesian product. 
+A `CROSS JOIN` creates all possible combinations of the 2 given tables, also known as the Cartesian product.
+
 ```{r join-cross, echo=FALSE, fig.align='center', out.width="60%"}
 knitr::include_graphics("images/sql/join-cross.png")
+```
+
+```sql
+SELECT some_column_table1, another_column_table2, ...
+FROM my_table
+CROSS JOIN another_table;
 ```
 
 ## Connect
