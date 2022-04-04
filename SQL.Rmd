@@ -194,6 +194,8 @@ FROM pantheon;
 
 *`DISTINCT` is attached to the column that you're looking for unique values from. This will completely remove any rows that are duplicated based on that simple identification. Later on, we'll find out about grouping (`GROUP_BY`).*
 
+Now, `DISTINCT` needs to be used with care. To use it, the database system has to use a lot of processing and memory as literally every row is compared. It can also be misused based on how the rest of the query is created, `DISTINCT` will not resolve problems in your code. Only use `DISTINCT` where there are genuine duplicates in the data.
+
 </br> 
 
 #### COUNT
