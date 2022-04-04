@@ -66,7 +66,7 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-Welcome to **SQL in R**. This is a self-led course on accessing and utilising databases within Public Health Scotland, particularly SQL databases, in R. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write both R and SQL code. 
+Welcome to **SQL in R**. This is a self-led course on accessing and utilising databases within Public Health Scotland, specifically SQL databases, in R. The first part is a complete introductory course on SQL, then the knowledge of integrating that within R is next. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write both R and SQL code. 
 
 <div class="info_box">
   <h4>Course Info</h4>
@@ -125,9 +125,16 @@ quiz(
 
 PHS have many databases for different purposes, with varying technical infrastructures (Oracle, PostgreSQL, MySQL) they all utilise a common language, SQL (albeit with some differences as things get more advanced). This course will minimise the need to interact with any live PHS database but still reference and make sure the knowledge gained is transferable. We'll stay practical in this course though, building knowledge and skill by:
 
-1. Learning the basics of how to use SQL
-2. Implementing SQL within R
-3. Top it off with a Tidyverse package, [`dbplyr`](https://dbplyr.tidyverse.org/), used to interact with databases with the Tidyverse style of coding.
+1. **Learning SQL**
+    * [Query Basics](#query-basics)
+    * [Aggregate Queries](#aggregate-queries)
+    * [Joins](#joins)
+    * [Subqueries](#subqueries)
+2. **Implementing SQL within R** 
+    * [Connect](#connect)
+    * [Query](#query)
+3. Top it off with a **Tidyverse package, [`dbplyr`](https://dbplyr.tidyverse.org/),** used to interact with databases with the Tidyverse style of coding 
+    * [Tidyverse](#tidyverse)
 
 RStudio has functionality to make connecting to and interacting with databases slightly easier but the real power comes from including the SQL code in-line with your R code. This means there's no interruption to your workflow, you can include it within your automation pipelines, and add supporting data manipulation code in R. However, R relies on processing power and memory and larger data extracts can have an exponential impact on performance. We'll therefore go over writing efficient queries and other best practice to make our lives that bit easier. 
 
