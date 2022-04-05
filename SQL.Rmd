@@ -589,9 +589,9 @@ INNER JOIN another_table
   USING (id);
 ```
 
-This is most common type of join so let's get practical with it. You may have come across this example in the ['Introduction to R' course](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r). It's straightforward but allows you to visually check the outcome.
+This is most common type of join so let's get practical with it. 
 
-We have 2 tables in our database, one refers to newborn babies (`baby`), the other is information relating to the baby's family (`baby_family`). Explore the tables and then join based on (`FAMILYID`), it's the same key for each table.
+You may have come across this example in the ['Introduction to R' course](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-r). It's small but this allows you to visually check the outcome. We have 2 tables in our database, one refers to newborn babies (`baby`), the other is information relating to the baby's family (`baby_family`). Explore the tables and then join based on (`FAMILYID`), it's the same key for each table.
 
 ```{sql inner-join, connection="conn", exercise=TRUE}
 
@@ -802,8 +802,6 @@ WHERE LengthOfStay >
     WHERE HospitalCode = "B120H")
     AND HospitalCode = "B120H";
 ```
-
-## Connect
 
 
 ## Help & Feedback
