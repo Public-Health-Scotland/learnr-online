@@ -965,7 +965,7 @@ WHERE specialty = "A77";
 
 ### ALTER TABLE
 
-Even with the best planning, changes to projects happen and that could mean that your table's structure is no longer fit for purpose. That's where `ALTER TABLE` comes along, giving you the power to change the table and schemas to add, remove, or modify columns and table constraints. Some database systems allow for more than others though so it's always best to consult the docs: [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-table-transact-sql?redirectedfrom=MSDN&view=sql-server-ver15),  [MySQL](https://dev.mysql.com/doc/refman/5.6/en/alter-table.html), [Postgres](https://www.postgresql.org/docs/9.4/sql-altertable.html), [SQLite](https://www.sqlite.org/lang_altertable.html).
+Even with the best planning, changes to projects happen and that could mean that your table's structure is no longer fit for purpose. That's where `ALTER TABLE` comes along, giving you the power to change the table and schemas to add, remove, or modify columns and table constraints. Some database systems allow for more than others though so it's always best to consult the docs: [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/ALTER-TABLE.html), [MySQL](https://dev.mysql.com/doc/refman/5.6/en/alter-table.html), [Postgres](https://www.postgresql.org/docs/9.4/sql-altertable.html), [SQLite](https://www.sqlite.org/lang_altertable.html), [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-table-transact-sql?redirectedfrom=MSDN&view=sql-server-ver15).
 
 #### ADD
 
@@ -1027,6 +1027,7 @@ Let's delete `smra_test`
 ```{sql drop-table-solution}
 DROP TABLE IF EXISTS smra_test;
 ```
+
 
 
 ## Help & Feedback
