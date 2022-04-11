@@ -812,7 +812,221 @@ WHERE LengthOfStay >
 
 ## Table Management
 
+This course has taken a pretty wide view at interacting with existing tables in databases. Using these as building blocks, the power to build all sorts of queries in SQL is in your hands. However, what about changing the tables in some way, either creating new ones, editing, or deleting? Well, this all falls under an acronym (and we love an acronym) to describe operations, [**CRUD**](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete). 
 
+Databases that we use most likely have access restrictions to prevent issues with our live data. However, other use cases exist where we create a view for ourselves or we may even have the need to utilise a database for a bespoke project. This section explores the creation, updating, and deleting of tables within a database. Just to reiterate, there's a lot of supporting theory around database design and optimal database solutions, this course doesn't cover this in any detail but resources will be made available if this is something you're interested in.
+
+*Most of the exercises in this section don't have output, you can still build a query to view the table after to check the results though. However, you can only run one query at a time.*
+
+### CREATE TABLE
+
+We know that a table in a database has a particular structure with constraints in place, this is an explicit step in the creation of the table. The structure is defined by its [table schema](https://www.sqlite.org/schematab.html). As part of this, each table has:
+
+* A name (ideally in the singular with no spaces)
+* Date type
+* Constraints (*optional*)
+* Default values (*optional*)
+
+*If a table already exists with the same name, SQL will throw an error. You can suppress the error and stop the creation of the table using the `IF NOT EXISTS` clause.*
+
+```sql
+CREATE TABLE (IF NOT EXISTS) new_table (
+  new_column <DataType> <TableConstraint> DEFAULT <default_value>...
+);
+```
+
+#### Data Types
+
+Different databases support different data types, just like programming languages. There are common types, like numeric, string, dates, etc. Here's some of the types you might use:
+
+| Data Type         | Description                             | 
+| :---------------: | --------------------------------------- | 
+| `INTEGER` `BOOLEAN` | A whole integer value, e.g. age. Sometimes a boolean value is also represented as an integer value of `0` or `1`. |
+| `FLOAT` `DOUBLE` `REAL` | Floating point to represent fractional values. |
+| `CHARACTER(num_chars)` `VARCHAR(num_chars)` `TEXT` | Strings and text with the difference related to efficiency of the database. The types with `num_chars` specify the maximum number of characters. |
+| `DATE` `DATETIME` | Storing date and time stamps. |
+
+
+#### Table Constraints
+
+Staying at a high level, here are some of the constraints that can be placed on columns:
+
+| Constraint        | Description                             | 
+| :---------------: | --------------------------------------- | 
+| `PRIMARY KEY` | The values in this column are unique and can identify a single row in the table. |
+| `AUTOINCREMENT` | For integer values, the value of this will be automatically filled with a automatically incrementing value with each row insertion (not supported in all databases). |
+| `UNIQUE` | Similar to a primary key in that the values have to be unique but are not used as a key for that table. |
+| `NOT NULL` | The value cannot be `NULL`. |
+| `CHECK (expression)` | A more complex expression to test values, e.g. positive values, greater than values, starting with certain prefix, etc. |
+| `FOREIGN KEY` | Consistency check that each value in this column corresponds to another value in another table. |
+
+To test this out, let's create a new table called `smra_test`. This will return `NULL` as the query doesn't ask for anything to be returned. Until you add some data, there won't be anything to display either, we'll get to that next. Until then, let's look at our columns:
+
+* `id` - this is just going to be an automatically increasing integer but will be used to uniquely identify the row.
+* `first_name` - while it shouldn't be null, it also shouldn't be longer than 50 characters.
+* `specialty` - this alphanumeric code will not be longer than 4 characters.
+* `los` - (length of stay) is a positive integer.
+
+```{sql create-table, connection="conn", exercise=TRUE}
+
+```
+
+```{sql create-table-solution}
+CREATE TABLE IF NOT EXISTS smra_test (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  first_name CHARACTER(50) NOT NULL,
+  specialty CHARACTER(4),
+  los INTEGER
+);
+```
+
+</br>
+
+### INSERT INTO
+
+When inserting data into a database, we use the `INSERT` statement followed by the name of the table to write to, the columns of data we are filling, and one or more rows of data to insert. If you are relying on default values and not listing every column you need to state the column names explicitly. It's also possible to utilise expressions for the values to insert. 
+
+```sql
+INSERT INTO my_table
+-- optional explicit column listing
+(some_column, another_column, ...)
+VALUES (some_value, another_value...)...;
+```
+
+In our created table, `smra_test`, let's add a couple of rows:
+
+* `first_name`: Harry, `specialty`: A1, `los`: 5
+* `first_name`: Luna, `specialty`: A11, `los`: 7
+* `first_name`: Ron, `specialty`: A2, `los`: 9
+
+```{sql insert-into, connection="conn", exercise=TRUE}
+
+```
+
+```{sql insert-into-solution}
+INSERT INTO smra_test
+(first_name, specialty, LoS)
+VALUES ("Harry", "A1", 5),
+       ("Luna", "A11", 7),
+       ("Ron", "A2", 9);
+```
+
+</br> 
+
+### UPDATE
+
+Depending on your project, it may be a common task to update the data within a table. This is similar to the `INSERT` statement in that you have to be precise with the naming of your table, columns, and also which rows to use the `UPDATE` statement on. Any of the data you are trying to change will still have to match the table constraints from the schema. However, updating data is done with a `WHERE` clause and this is very important or you could end up updating the data across all rows. To avoid this, you could test the query with `SELECT` and ensure you see the right rows before writing the rest of the `UPDATE` statement.
+
+```sql
+UPDATE my_table
+SET column = some_value,
+    another_column = another_value, ...
+WHERE condition(s);
+```
+
+We need to update a couple of things on one of our rows:
+
+* `first_name`: Ron, `specialty`: A2, `los`: 9  **should be**  `first_name`: Ronald, `specialty`: A77, `los`: 9
+
+```{sql update-table, connection="conn", exercise=TRUE}
+
+```
+
+```{sql update-table-solution}
+UPDATE smra_test
+SET first_name = "Ronald", 
+    specialty = "A1"
+WHERE id = 3;
+```
+
+</br>
+
+### DELETE FROM
+
+If you need to delete data from your table, then it's the `DELETE` statement. Similar to the `UPDATE` statement, you specify the table and use a `WHERE` clause to describe the relevant rows to delete. If you leave the `WHERE` clause, all rows will be removed... useful if you mean that. To avoid mistakes, you can test the query like above with a `SELECT` query.
+
+```sql
+DELETE FROM my_table
+WHERE condition(s);
+```
+
+Looks like we have some erroneous data, every record where `specialty` is A77 should be deleted.
+
+```{sql delete-from, connection="conn", exercise=TRUE}
+
+```
+
+```{sql delete-from-solution}
+DELETE FROM smra_test
+WHERE specialty = "A77";
+```
+
+</br>
+
+### ALTER TABLE
+
+Even with the best planning, changes to projects happen and that could mean that your table's structure is no longer fit for purpose. That's where `ALTER TABLE` comes along, giving you the power to change the table and schemas to add, remove, or modify columns and table constraints. Some database systems allow for more than others though so it's always best to consult the docs: [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-table-transact-sql?redirectedfrom=MSDN&view=sql-server-ver15),  [MySQL](https://dev.mysql.com/doc/refman/5.6/en/alter-table.html), [Postgres](https://www.postgresql.org/docs/9.4/sql-altertable.html), [SQLite](https://www.sqlite.org/lang_altertable.html).
+
+#### ADD
+
+The syntax remains similar to when the table is originally set up, all the same information is required. In some databases, like MySQL, you can even specify where to insert the column using `FIRST` or `AFTER` clauses.
+
+```sql
+ALTER TABLE my_table
+ADD new_column <DataType> <TableConstraint> 
+  DEFAULT <default_value>...;
+```
+
+#### DROP
+
+Removing columns is known as dropping and it's just a case of specifying the relevant column. However, this feature hasn't always been supported in some implementations. If this is the case, a workaround would be to create a new table and migrate the data across. 
+
+```sql
+ALTER TABLE my_table
+DROP some_column;
+```
+
+#### RENAME
+
+There's a couple of things you might want to rename and they're both done at the same level.
+
+##### Column
+
+Although all these commands are particularly risky if you have existing code set up to interact with the database tables, this is particularly true for columns which can be laced throughout queries. If, however, the change would result in a semantic ambiguity, the statement will likely fail and throw an error. Changing a column name is done with `RENAME`.
+
+```sql
+ALTER TABLE my_table
+RENAME some_column TO new_column_name;
+```
+
+##### Table
+
+You can also rename an entire table with the `RENAME TO` clause. 
+
+```sql
+ALTER TABLE my_table
+RENAME TO new_table_name;
+```
+
+</br>
+
+### DROP TABLE
+
+The most destructive of all commands, the `DROP TABLE` statement removes the entire table including all data and metadata. Compared to a `DELETE` statement, `DROP TABLE` will even remove the table schema from the database. However, any other tables that exist and have some dependency (like a foreign key) will need to be updated to remove these before the database will allow the command to work. 
+
+```sql
+DROP TABLE (IF EXISTS) my_table;
+```
+
+Let's delete `smra_test`
+
+```{sql drop-table, connection="conn", exercise=TRUE}
+
+```
+
+```{sql drop-table-solution}
+DROP TABLE IF EXISTS smra_test;
+```
 
 
 ## Help & Feedback
