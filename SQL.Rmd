@@ -1168,6 +1168,14 @@ data
 
 ## Help & Feedback
 
+#### Resources
+
+* [PHS - SQL in R Cheatsheet](https://github.com/Public-Health-Scotland/R-Resources/blob/master/SQL%20in%20R%20-%20cheatsheet.R)
+* [PHS - Using SMRA with R](https://github.com/Public-Health-Scotland/R-Resources/blob/master/using%20SMRA%20with%20R.md)
+* [RStudio - Databases using R](https://db.rstudio.com/)
+* [W3 Schools - SQL](https://www.w3schools.com/sql/)
+
+
 #### Feedback
 
 [Insert iframe for Google/Microsoft Forms]
