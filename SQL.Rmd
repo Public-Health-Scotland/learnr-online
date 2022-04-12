@@ -20,6 +20,7 @@ library(learnr)         # Required to build the Shiny app
 library(gradethis)      # For code checking and user-specific feedback
 library(readr)          # For reading/writing data
 library(RSQLite)        # For interfacing with SQLite databases
+library(odbc)           # For interacting with databases
 library(kableExtra)
 library(shiny)
 library(dplyr)
@@ -1028,6 +1029,90 @@ Let's delete `smra_test`
 DROP TABLE IF EXISTS smra_test;
 ```
 
+
+## SQL in R
+
+The course, up until now, has been purely focussed on SQL. Hopefully this is helpful as the next step is bringing all of that knowledge into R. In this section we're going to explore connecting and querying databases from within R. That means that all the code can be in one place, you can write functions to directly interface with databases, and make efficiencies by utilising databases for your data rather than exporting and moving around data dumps in other formats. 
+
+### Connect
+
+The specification for connecting to and interacting with databases is outlined in the [`DBI`]() package. However, different databases require different R packages that provide more specific implementations, this includes:
+
+* [`RMySQL`](https://github.com/r-dbi/RMySQL) - for connecting to MySQL and MariaDB
+* [`RPostgreSQL`](https://github.com/tomoakin/RPostgreSQL) - for connecting to PostgreSQL and Redshift
+* [`RSQLite`](https://github.com/r-dbi/RSQLite) - for connecting to SQLite
+* [`odbc`](https://github.com/r-dbi/odbc) (Open Database Connectivity) - for connecting to Microsoft SQL Server and many other commercial databases
+* [`RODBC`](https://github.com/cran/RODBC) - less efficient than odbc but in some cases required as a fall-back.
+
+We'll continue with the `odbc` package and utilise SMRA as an example. When you're set-up with SMRA access, IT will also set up a DSN (Data Source Name), and under this alias all the details for interfacing with the database are stored. This layer of abstraction is the first security defence and also saves us some time.
+
+```r
+library(odbc)
+
+connection <- dbConnect(
+  odbc(),
+  dsn = "SMRA",
+  uid = .rs.askForPassword("SMRA Username: "),
+  pwd = .rs.askForPassword("SMRA Password: ")
+)
+```
+
+*Utilising the `.rs.askForPassword` functions provide a popup asking for details which are masked on entry and then passed back. This means that we don't have plain text passwords in our code. We could also use `keyring`, `config`, or environment variables to achieve this.*
+
+This chunk of code is all that's required for connecting to SMRA (with your authentication). Connecting to other databases will require other information, such as `port` or `host`, unless a DSN is set up for those too. The `connection` object (which could you name whatever makes sense in your code) is then passed to other functions to interact with the database. 
+
+</br>
+
+### Explore
+
+RStudio provides a user interface for interacting with the database, seeing the tables and column names without having to write any code. However, you can also explore these elements and more with code. The `DBI` package provides some functions for this and more are provided with the interface packages that depend on `DBI`.
+
+| Function          | Description                             | 
+| :---------------: | --------------------------------------- | 
+| `dbListObjects(connection)` | The top-level objects/schemas available within the database. |
+| `dbListTables(connection)` | The tables available across the whole database. |
+| `dbListFields(connection, "<table>")` | The columns/fields from a table. |
+
+</br>
+
+### Query
+
+When interacting with databases in R, this method still relies on SQL but wrapped within R functions. These functions come purely from the `DBI` package and there are 2 ways to query the database:
+
+* Interactively, sending and retrieving data with one command
+
+```r
+dbGetQuery(connection, "<SQL Query>")
+```
+
+* Composing the query, sending to the database, and retrieving the data as separate steps
+
+```r
+query <- dbSendQuery(connection, "<SQL Query>")
+dbFetch(query)
+dbClearResult(query)
+```
+
+</br>
+
+Let's give the R functions a go to pull in some data from the `borders_data` table. The packages have been loaded, the connection has been set up as `conn`, all that's left is the query the database. Retrieve all the columns of data where length of stay `LengthOfStay` was longer than 9.
+
+```{r odbc-explore, exercise=TRUE}
+
+```
+
+```{r odbc-explore-solution}
+dbGetQuery(conn, "SELECT * FROM borders_data WHERE LengthOfStay > 9")
+```
+
+</br>
+
+### Table Management
+
+These functions, again, come from the `DBI` package and are used to perform actions on tables as a whole.
+
+* `dbWriteTable(connection)` will write an R data frame to a SQL table.
+* `dbExecute(connection, "<SQL statement>")` will execute table management statements such as `INSERT INTO` or `CREATE TABLE`. 
 
 
 ## Help & Feedback
