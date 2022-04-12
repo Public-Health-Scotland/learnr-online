@@ -24,6 +24,7 @@ library(odbc)           # For interacting with databases
 library(kableExtra)
 library(shiny)
 library(dplyr)
+library(dbplyr)
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -1113,6 +1114,56 @@ These functions, again, come from the `DBI` package and are used to perform acti
 
 * `dbWriteTable(connection)` will write an R data frame to a SQL table.
 * `dbExecute(connection, "<SQL statement>")` will execute table management statements such as `INSERT INTO` or `CREATE TABLE`. 
+
+
+## Tidyverse
+
+Up until now, we've been using SQL. Even when we moved into R, we were just wrapping SQL syntax in our R functions. However, there is a package, `dbplyr`, which attempts to generate the SQL queries while using familiar Tidyverse syntax, the `dplyr` verbs. This package doesn't do everything though and the main focus is around `SELECT` statements.
+
+When we use SQL, the commands are executed in the database. This takes the stress off R and is generally far more efficient. The `dbplyr` package takes that slightly further and tries to be as lazy as possible.
+
+1. **Create the query** - at this stage, nothing is sent to the database. 
+
+```r
+query <- data %>%
+  group_by(variable) %>%
+  arrange(variable) %>%
+  filter(condition(s))
+```
+
+2. **Call query** - still doing the minimum, only a few rows will be pulled.
+
+```r
+query
+```
+
+3. **Collect the data** - after iterating over the query and checking you're getting what you need. This is because `dbplyr` is trying to prevent any unnecessary expensive operations.
+
+```r
+data <- query %>% collect()
+```
+
+You can check the syntax that is created using `show_query()`. This is unlikely to be the tidy and structured SQL that you would write but it still does what it's supposed to. There's also a couple of functions that cannot be summarised as the full query would need to be run, this includes `nrow()` and `tail()`. Finally, it's also possible to ask how the database will execute the query with `explain()`. 
+
+</br>
+
+### Knowledge Check
+
+We're just going to run the same query we did in the last exercise but use `dbplyr`. Retrieve all the columns of data where length of stay `LengthOfStay` was longer than 9 from the `borders_data` table. The connection has already been setup and any packages loaded.
+
+```{r dbplyr, exercise=TRUE}
+
+```
+
+```{r dbplyr-solution}
+query <- borders_data %>%
+    filter(LengthOfStay > 9)
+    
+data <- query %>%
+    collect()
+    
+data
+```
 
 
 ## Help & Feedback
