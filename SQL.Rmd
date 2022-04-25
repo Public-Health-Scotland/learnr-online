@@ -130,7 +130,7 @@ quiz(
 
 </br>
 
-PHS have many databases for different purposes, with varying technical infrastructures (Oracle, PostgreSQL, MySQL) they all utilise a common language, SQL (albeit with some differences as things get more advanced). This course will minimise the need to interact with any live PHS database but still reference and make sure the knowledge gained is transferable. We'll stay practical in this course though, building knowledge and skill by:
+PHS have many databases for different purposes, with varying technical infrastructures (Oracle, PostgreSQL, MySQL). All of these utilise a common language, SQL although there are differences as things get more advanced. This course will minimise the need to interact with any live PHS database but will still reference familiar databases and make sure the knowledge gained is transferable. We’ll stay practical in this course though, building knowledge and skill by:
 
 1. **Learning SQL**
     * [Query Basics](#query-basics)
@@ -143,7 +143,7 @@ PHS have many databases for different purposes, with varying technical infrastru
 3. Top it off with a **Tidyverse package, [`dbplyr`](https://dbplyr.tidyverse.org/),** used to interact with databases with the Tidyverse style of coding 
     * [Tidyverse](#tidyverse)
 
-RStudio has functionality to make connecting to and interacting with databases slightly easier but the real power comes from including the SQL code in-line with your R code. This means there's no interruption to your workflow, you can include it within your automation pipelines, and add supporting data manipulation code in R. However, R relies on processing power and memory and larger data extracts can have an exponential impact on performance. We'll therefore go over writing efficient queries and other best practice to make our lives that bit easier. 
+RStudio has functionality to make connecting to and interacting with databases slightly easier but the real power comes from including the SQL code in-line with your R code. This means there’s no interruption to your workflow as you can include it within your automation pipelines, and add supporting data manipulation code in R. However, R relies on processing power and memory and larger data extracts can have an exponential impact on performance. We’ll therefore go over writing efficient queries and other best practice to make our lives that bit easier.
 
 
 ## Query Basics
@@ -577,7 +577,7 @@ Now, these tables that share information need to have a *primary key* that uniqu
 
 ### INNER JOIN
 
-The first type of join we're going to look at is the inner join. This process involves matching rows from the first table with the second to create a combination, where there is a match existing in both on the given key (defined by the `ON` constraint). The other arguments we learned about in the previous sections can then be applied as required.
+The first type of join we’re going to look at is the inner join. This process uses a variable common to both tables to match rows and will only keep rows which have a record in both tables - we specify the common variable using the ON constraint. The other arguments we learned about in the previous sections can then be applied as required.
 
 ```{r join-inner, echo=FALSE, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/sql/join-inner.png")
@@ -660,7 +660,7 @@ RIGHT JOIN another_table
 
 #### FULL JOIN
 
-A `FULL JOIN` means that all rows from both tables are kept regardless of any match from either side. 
+A `FULL JOIN` means that all rows from both tables are kept regardless of any match from either side so we don't lose any information. 
 
 ```{r join-full, echo=FALSE, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/sql/join-full.png")
