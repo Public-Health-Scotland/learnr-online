@@ -237,6 +237,9 @@ SELECT COUNT(*) FROM my_table;
 -- Count non-missing values of specific attribute
 SELECT COUNT(column) FROM my_table;
 
+-- Count missing values of a specific attribute (more on WHERE next)
+SELECT COUNT(column) FROM my_table WHERE column IS NULL;
+
 -- Count the number of distinct values in a column
 SELECT COUNT(DISTINCT column) FROM my_table;
 ```
