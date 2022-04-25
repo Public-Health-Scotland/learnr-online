@@ -934,14 +934,14 @@ We need to update a couple of things on one of our rows:
 
 * `first_name`: Ron, `specialty`: A2, `los`: 9  **should be**  `first_name`: Ronald, `specialty`: A77, `los`: 9
 
-```{sql update-table, connection="conn", exercise=TRUE}
+```{sql update-table, connection="conn", exercise=TRUE, exercise.setup='insert-into-solution'}
 
 ```
 
 ```{sql update-table-solution}
 UPDATE smra_test
 SET first_name = "Ronald", 
-    specialty = "A1"
+    specialty = "A77"
 WHERE id = 3;
 ```
 
@@ -958,7 +958,7 @@ WHERE condition(s);
 
 Looks like we have some erroneous data, every record where `specialty` is A77 should be deleted.
 
-```{sql delete-from, connection="conn", exercise=TRUE}
+```{sql delete-from, connection="conn", exercise=TRUE, exercise.setup='update-table-solution'}
 
 ```
 
@@ -1026,7 +1026,7 @@ DROP TABLE (IF EXISTS) my_table;
 
 Let's delete `smra_test`
 
-```{sql drop-table, connection="conn", exercise=TRUE}
+```{sql drop-table, connection="conn", exercise=TRUE, exercise.setup='delete-from-solution'}
 
 ```
 
