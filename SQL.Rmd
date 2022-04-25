@@ -267,6 +267,8 @@ knitr::include_graphics("images/sql/where.jpg")
 
 We often deal with datasets with millions of rows but it's not very often we need every row. It's much more efficient to only extract the data that we need. We can do this by adding constraints with the `WHERE` clause as part of your query. The clause is then applied to each record to determine if that record is included in the results, all at the database system side. This means that no processing is required locally and that only the required data is transferred. 
 
+As an example, you might be looking for a particular hospital so you only want records that refer to that hospital. Similarly, you could be looking at groups of specialties, or a range of admission dates.
+
 ```sql
 -- Selecting specific columns from the table with constraints
 SELECT some_column, another_column, ...
@@ -349,7 +351,7 @@ question("Who is the result of the above query?",
 
 ### ORDER BY
 
-The final, and short, section on basics is about ordering. This isn't always necessary as part of a larger piece of work but can save time if you're looking to prettify a data dump without having to do anything else locally. This is achieved by using `ORDER_BY` which defaults to ascending order but you can append a `DESC` keyword after any of the specified columns to achieve a descending order.
+The final, and short, section on basics is about ordering. This isn't always necessary as part of a larger piece of work but can save time if you're looking to prettify a data dump without having to do anything else locally. This is achieved by using `ORDER_BY` which defaults to ascending order but you can append a `DESC` keyword after any of the specified columns to achieve a descending order. You might want to do this by Health Board or date to make the data easier to view as a whole.
 
 ```sql
 SELECT some_column, another_column, ...
@@ -629,7 +631,7 @@ Restricting the data to what's available in both tables might not always be suit
 
 #### LEFT JOIN
 
-When joining table A to table B, a `LEFT JOIN` includes all rows from A regardless of if a matching row is found in B. 
+When joining table A to table B, a `LEFT JOIN` includes all rows from A regardless of if a matching row is found in B. As an example, you might want to do this when using a postcode to lookup an SIMD. If it's a "lookup" table, this is likely the type of join you're looking for.
 
 ```{r join-left, echo=FALSE, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/sql/join-left.png")
