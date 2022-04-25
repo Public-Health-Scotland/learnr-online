@@ -730,15 +730,6 @@ quiz(
     incorrect = "Not quite, have another go!",
     allow_retry = TRUE,
     random_answer_order = TRUE
-  ),
-  question("What is the most common type of join?",
-    answer("`JOINED TABLE`"),
-    answer("`JOINED`"),
-    answer("`INSIDE JOIN`"),
-    answer("`INNER JOIN`", correct = TRUE),
-    incorrect = "Not quite, have another go!",
-    allow_retry = TRUE,
-    random_answer_order = TRUE
   )
 )
 ```
