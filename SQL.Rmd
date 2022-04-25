@@ -760,7 +760,7 @@ The syntax is pretty much going to be the same as you'd expect, it's a query wit
 ```sql
 -- You'll want to give the subquery an alias in this case, can you think why?
 SELECT some_column, another_column, ...
-  (SELECT some_column, another_column, ...
+  (SELECT some_column
    FROM my_table
    WHERE condition) AS subquery_name
 FROM my_table;
@@ -777,7 +777,7 @@ FROM my_table;
 ```sql
 SELECT some_column, another_column, ...
 FROM my_table
-  (SELECT some_column, another_column, ...
+  (SELECT some_column
    FROM my_table
    WHERE condition) AS subquery_name
 WHERE condition(s);
@@ -793,14 +793,14 @@ WHERE condition(s);
 SELECT some_column, another_column, ...
 FROM my_table
 WHERE condition(s)
-  (SELECT some_column, another_column, ...
+  (SELECT some_column
    FROM my_table
    WHERE condition);
 ```
 
 This is most common type of subquery so let's get practical for this one.
 
-Find the records where the length of stay (`LengthOfStay`) is more than the average for `HospitalCode` "B120H". 
+Find the records where the length of stay (`LengthOfStay`) is more than the average for `HospitalCode` "B120H" in `borders_data`. 
 
 ```{sql sub-where, connection="conn", exercise=TRUE}
 
