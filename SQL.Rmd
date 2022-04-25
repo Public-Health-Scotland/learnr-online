@@ -834,7 +834,7 @@ We know that a table in a database has a particular structure with constraints i
 * Constraints (*optional*)
 * Default values (*optional*)
 
-*If a table already exists with the same name, SQL will throw an error. You can suppress the error and stop the creation of the table using the `IF NOT EXISTS` clause.*
+*If a table already exists with the same name, SQL will throw an error. You can suppress the error and stop the creation of the table using the `IF NOT EXISTS` clause but this isn't necessary so shown in brackets below.*
 
 ```sql
 CREATE TABLE (IF NOT EXISTS) new_table (
@@ -1049,7 +1049,7 @@ The specification for connecting to and interacting with databases is outlined i
 * [`odbc`](https://github.com/r-dbi/odbc) (Open Database Connectivity) - for connecting to Microsoft SQL Server and many other commercial databases
 * [`RODBC`](https://github.com/cran/RODBC) - less efficient than odbc but in some cases required as a fall-back.
 
-We'll continue with the `odbc` package and utilise SMRA as an example. When you're set-up with SMRA access, IT will also set up a DSN (Data Source Name), and under this alias all the details for interfacing with the database are stored. This layer of abstraction is the first security defence and also saves us some time.
+We'll continue with the `odbc` package and utilise SMRA as an example. When you're set-up with SMRA access, IT will also set up a DSN (Data Source Name), and under this alias all the details for interfacing with the database are stored. This layer of abstraction is the first security defence and also saves us some time. To request access, you'll need authorisation and then submit a ticket on [Service Now](https://nhsnss.service-now.com/phs/).
 
 ```r
 library(odbc)
@@ -1062,7 +1062,7 @@ connection <- dbConnect(
 )
 ```
 
-*Utilising the `.rs.askForPassword` functions provide a popup asking for details which are masked on entry and then passed back. This means that we don't have plain text passwords in our code. We could also use `keyring`, `config`, or environment variables to achieve this.*
+*Utilising the `.rs.askForPassword` functions provide a popup asking for details which are masked on entry and then passed back. This means that we don't have plain text passwords in our code, which we never do! We could also use `keyring`, `config`, or [environment variables](https://community.rstudio.com/t/how-to-set-a-variable-in-renviron/5029) to achieve this.*
 
 This chunk of code is all that's required for connecting to SMRA (with your authentication). Connecting to other databases will require other information, such as `port` or `host`, unless a DSN is set up for those too. The `connection` object (which could you name whatever makes sense in your code) is then passed to other functions to interact with the database. 
 
