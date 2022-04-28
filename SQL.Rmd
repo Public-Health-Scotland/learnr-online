@@ -905,7 +905,16 @@ In our created table, `smra_test`, let's add a couple of rows:
 * `first_name`: Luna, `specialty`: A11, `los`: 7
 * `first_name`: Ron, `specialty`: A2, `los`: 9
 
-```{sql insert-into, connection="conn", exercise=TRUE}
+```{sql prepare-insert-into, connection="conn"}
+CREATE TABLE IF NOT EXISTS smra_test (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  first_name CHARACTER(50) NOT NULL,
+  specialty CHARACTER(4),
+  los INTEGER
+);
+```
+
+```{sql insert-into, connection="conn", exercise=TRUE, exercise.setup="prepare-insert-into"}
 
 ```
 
@@ -915,6 +924,12 @@ INSERT INTO smra_test
 VALUES ("Harry", "A1", 5),
        ("Luna", "A11", 7),
        ("Ron", "A2", 9);
+```
+
+Now that we should have some data in our database, let's take a look at what the right SQL will have done:
+
+```{sql insert-output, connection="conn", exercise=TRUE, exercise.setup="prepare-update-table"}
+SELECT * FROM smra_test;
 ```
 
 </br> 
@@ -934,7 +949,15 @@ We need to update a couple of things on one of our rows:
 
 * `first_name`: Ron, `specialty`: A2, `los`: 9  **should be**  `first_name`: Ronald, `specialty`: A77, `los`: 9
 
-```{sql update-table, connection="conn", exercise=TRUE, exercise.setup='insert-into-solution'}
+```{sql prepare-update-table, connection="conn", exercise.setup="prepare-insert-into"}
+INSERT INTO smra_test
+(first_name, specialty, LoS)
+VALUES ("Harry", "A1", 5),
+       ("Luna", "A11", 7),
+       ("Ron", "A2", 9);
+```
+
+```{sql update-table, connection="conn", exercise=TRUE, exercise.setup="prepare-update-table"}
 
 ```
 
@@ -943,6 +966,12 @@ UPDATE smra_test
 SET first_name = "Ronald", 
     specialty = "A77"
 WHERE id = 3;
+```
+
+Let's see how our data should look like now:
+
+```{sql update-output, connection="conn", exercise=TRUE, exercise.setup="prepare-delete-from"}
+SELECT * FROM smra_test;
 ```
 
 </br>
@@ -958,13 +987,26 @@ WHERE condition(s);
 
 Looks like we have some erroneous data, every record where `specialty` is A77 should be deleted.
 
-```{sql delete-from, connection="conn", exercise=TRUE, exercise.setup='update-table-solution'}
+```{sql prepare-delete-from, connection="conn", exercise.setup="prepare-update-table"}
+UPDATE smra_test
+SET first_name = "Ronald", 
+    specialty = "A77"
+WHERE id = 3;
+```
+
+```{sql delete-from, connection="conn", exercise=TRUE, exercise.setup='prepare-delete-from'}
 
 ```
 
 ```{sql delete-from-solution}
 DELETE FROM smra_test
 WHERE specialty = "A77";
+```
+
+Let's check what that will have done to our data:
+
+```{sql delete-output, connection="conn", exercise=TRUE, exercise.setup='prepare-drop-table'}
+
 ```
 
 </br>
@@ -1026,7 +1068,12 @@ DROP TABLE (IF EXISTS) my_table;
 
 Let's delete `smra_test`
 
-```{sql drop-table, connection="conn", exercise=TRUE, exercise.setup='delete-from-solution'}
+```{sql prepare-drop-table, connection="conn", exercise.setup="prepare-delete-from"}
+DELETE FROM smra_test
+WHERE specialty = "A77";
+```
+
+```{sql drop-table, connection="conn", exercise=TRUE, exercise.setup='prepare-drop-table'}
 
 ```
 
