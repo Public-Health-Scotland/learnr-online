@@ -25,11 +25,6 @@ library(ggplot2)
 
 knitr::opts_chunk$set(echo = FALSE)
 
-# Formatting text table
-# annotation <- c("#", "##", "###", "\\*italics\\*", "\\*\\*bold\\*\\*", "\\* bulleted list")
-# formatting <- c("Header 1", "Header 2", "Header 3", "Format text to italics", "Format text to bold", "Create bulleted list")
-
-# formattext <- data.frame(Annotation = annotation, Formatting = formatting, stringsAsFactors = FALSE)
 ```
 
 ```{r phs-logo, fig.align='right', out.width="40%"}
@@ -64,7 +59,7 @@ The course will also show progress through sections, a green tick will appear on
 
 </ul>
 
-There are some examples designed to accompany this course, these can either be completed bit by bit as you work through the course or as a whole at the end.  There is also an exercise for you to try when you finish the course to apply what you've learned. Both can be downloaded from [Github](https://github.com/Public-Health-Scotland/).
+There are some examples designed to accompany this course, these can either be completed bit by bit as you work through the course or as a whole at the end.  There is also an exercise for you to try when you finish the course to apply what you've learned. Both can be downloaded from [Github](https://github.com/Public-Health-Scotland/learnr-online/openxlsx_materials).
   </div>
 </br>
 
@@ -74,6 +69,13 @@ There are some examples designed to accompany this course, these can either be c
 Openxslx is an R package that allows us to read, write and edit xlsx files from within the RStudio interface. This will let us automate the creation and formatting of the excel files that usually accompany our publications. 
 
 The process to create these excel publication files is usually very manual and involves several copy/paste steps. This can result in errors with data being pasted in the wrong place or wrong format which can have serious consequences. For example, in 2003 the Candian power company TransAlta lost $24 million due to a copy paste error causing misaligned rows in a spreadsheet containing bids for contracts. For more examples of excel errors see this [blog post on LinkedIn](https://www.linkedin.com/pulse/7-biggest-excel-mistakes-all-time-andrew-hoag).
+
+This course focuses on the openxlsx package but there are other packages available in R that interact with Excel e.g. [readxl](https://readxl.tidyverse.org/) and [writexl](https://docs.ropensci.org/writexl/). To install the package use the following code:
+
+```{r install_package}
+#install.packages("openxlsx")
+library(openxlsx)
+```
 
 
 ### Why use Excel?
@@ -91,19 +93,49 @@ We will start by creating a blank workbook and then slowly build it up by adding
 
 Let's start by creating a blank excel template that you build on. Note that you can't view it as you go along, only once it is saved out, so you have to keep track of what you are adding. 
 
-````
-wb <- createWorkbook()
-````
+The createWorkbook function creates a blank workbook that you can add data and formatting to. There are optional arguments to add the workbook properties title, subject and category. 
+
+```{r echo=TRUE, eval=FALSE}
+wb <- createWorkbook(title = NULL, Subject = NULL, category = NULL)
+```
+
 
 ### Adding worksheets
 Before we can add any data to the workbook we have to create worksheets for the data to go in. Note that the order you add the sheets to the workbook is the order they appear in, this is not set in code. We will add 3 worksheets:
 
-* A notes page
-* A data page
-* A charts page
+1. A notes page
+2. A data page
+3. A charts page
 
-Notes page:
-````
+To do this we use the addWorksheet command which has a number of arguments:
+
+```{r echo=TRUE, eval=FALSE}
+addWorksheet(
+
+wb = Name of the workbook we want to add the sheet to e.g. wb1,
+
+sheetName = Name the worksheet e.g. "Notes",
+
+gridLines = Do we want to show gridlines? TRUE or FALSE,
+
+tabColour	= Colour of the worksheet tab, 
+
+zoom	= Worksheet zoom percentage, between 10 and 400, 
+
+header = Option to add header, Vector of length 3 (left, centre, right). There are some built in options e.g. page numbers, date, time, filename, 
+
+footer = Option to add footer, Vector of length 3 (left, centre, right). There are some built in options e.g. page numbers, date, time, filename, 
+
+visible	= Should sheet be visible? If FALSE, sheet is hidden, 
+
+orientation	 = "portrait" or "landscape"
+
+)
+
+```
+
+#### 1 - Notes page:
+```{r echo=TRUE, eval=FALSE}
 # Add Notes Page
 addWorksheet(
 # Name of the workbook we want to add the sheet to
@@ -119,10 +151,10 @@ gridLines = FALSE,
 # You can use some in built things
 # (such as page numbers, date, time, filename etc)
 header = c("&[Date]", NA, NA))
-````
+```
 
-Data Page:
-````
+#### 2 - Data Page:
+```{r echo=TRUE, eval=FALSE}
 # Add Data Page
 addWorksheet(
 # Name of the workbook we want to add the sheet to
@@ -141,10 +173,10 @@ tabColour = "red", # Uses in built colour
 # You can use some in built things
 # (such as page numbers, date, time, filename etc)
 header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"))
-````
+```
 
-Charts Page:
-````
+#### 3 - Charts Page:
+```{r echo=TRUE, eval=FALSE}
 # Add Charts Page
 addWorksheet(
 # Name of the workbook we want to add the sheet to
@@ -163,7 +195,7 @@ tabColour = "blue", # Uses in built colour
 # You can use some in built things
 # (such as page numbers, date, time, filename etc)
 header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"))
-````
+```
 
 This gives a blank workbook with named tabs (see image below) but no data! In the next section we'll add some tables to the workbook.
 
@@ -208,7 +240,7 @@ count_data
 
 We have two options for writing data out from R to excel, as a static table or as a pivot table. Let's look at the static table option first. We're going to write out the dataset we created with the minimum and maximum petal length for each iris species to the Data tab of the workbook we created:
 
-````
+```{r echo=TRUE, eval=FALSE}
 writeData(
 # Name of the workbook we want to add the sheet to
   wb = wb,
@@ -222,7 +254,7 @@ writeData(
   # Row and column we want the top left cell of the data to be in
   startCol = 2, 
   startRow = 4)
-````
+```
 
 ```{r save_2_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-table1.png")
@@ -230,7 +262,7 @@ knitr::include_graphics("images/openxlsx/openxlsx-table1.png")
 
 We can aso write data to a pivot table. We'll use the dataset containing the count of iris species for this:
 
-````
+```{r echo=TRUE, eval=FALSE}
 writeDataTable(
   # Name of the workbook we want to add the sheet to
   wb,
@@ -244,7 +276,7 @@ writeDataTable(
   # Row and column we want to have the top left cell of the data in
   startCol = 2,
   startRow = 12)
-`````
+```
 
 ```{r save_3_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-pivot-table.png")
@@ -268,7 +300,7 @@ graph1
 
 Openxlsx automatically adds the most recently used plot to the workbook. The easiest way to make sure you use the correct chart is to print the chart you want and then add it. 
 
-`````
+```{r echo=TRUE, eval=FALSE}
 # Print chart
 print(graph1)
 
@@ -287,7 +319,7 @@ insertPlot(wb = wb,
            
            # Resolution of the chart
            dpi = 300) 
-`````
+```
 
 ```{r save_4_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-with-chart.png")
@@ -296,7 +328,7 @@ knitr::include_graphics("images/openxlsx/openxlsx-with-chart.png")
 ## Adding Formulae
 Let's add an excel function to calculate the total of the second table. We could just add a total row to the dataframe but adding a formula to the excel output allows the output to dynamically update with inputs.
 
-`````
+```{r echo=TRUE, eval=FALSE}
 # Create a `Total` row at the bottom of the existing tab=le
 writeData(
   wb,
@@ -312,7 +344,7 @@ writeFormula(
   x = "=SUM(C13:C15)",
   startCol = 3,
   startRow = 16)
-`````
+```
 
 ```{r save_5_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-with-formula.png")
@@ -323,7 +355,7 @@ We now have all the data we want in our workbook but it doesn't look particularl
 ## Styles 
 Let's begin by setting a style for the table headers, borders, the contents/totals of any tables and any non-header text:
 
-````
+```{r echo=TRUE, eval=FALSE}
 header_style <- createStyle(fontSize = 11,
                             fontName = "Arial",
                             halign = "Left", # Horizontal Align
@@ -358,11 +390,11 @@ border_style_dash = createStyle(border = "TopBottomLeftRight",
                                 
 border_style_thick = createStyle(border = "TopBottomLeftRight",
                                  borderStyle = c("thick"))
-````
+```
 
 You can also define colours using hex codes and use these colours within styles:
 
-````
+```{r echo=TRUE, eval=FALSE}
 blue <- "#add8e6"
 gray <- "#ededed"
 
@@ -373,11 +405,11 @@ blue_style = createStyle(
 gray_style = createStyle(
   fgFill = gray
 )
-````
+```
 
 Let's apply these styles to our workbook, we'll add styles to the tables:
 
-`````
+```{r echo=TRUE, eval=FALSE}
 # Add total_style to the total row of table 2
 addStyle(
 
@@ -422,7 +454,7 @@ rows = 4:7,
 cols = 2:4, 
 gridExpand = TRUE,
 stack = TRUE)
-`````
+```
 
 ```{r save_6_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-with-table-styles.png")
@@ -433,7 +465,7 @@ This looks much better! But we can do more and add some formatting.
 ## Formatting 
 Let's add some information to the notes page. Let's add a title, a hyperliked email address and a description of what's contained in the workbook. First we define them:
 
-````
+```{r echo=TRUE, eval=FALSE}
 # Title
 contact <-  "Contact Details:"
 
@@ -444,11 +476,11 @@ class(email) <- "hyperlink"
 
 # Description
 notes_text <- paste0("An overview of Fischer's iris data including 2 summary tables and a chart.")
-````
+```
 
 Then we add them to the Notes page of the workbook:
 
-````
+```{r echo=TRUE, eval=FALSE}
 # Adding "Contact details:"
 writeData(wb, sheet = 1, x = contact, startCol = 2, startRow = 9)
 
@@ -457,7 +489,7 @@ writeData(wb, sheet = 1, x = email, startCol = 3, startRow = 9)
 
 # Adding the notes text
 writeData(wb,"Notes", notes_text, startCol = 2, startRow = 7)
-````
+```
 
 ```{r save_7_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-notes-pg1.png")
@@ -465,7 +497,7 @@ knitr::include_graphics("images/openxlsx/openxlsx-notes-pg1.png")
 
 This looks ok but we could tidy it up a bit. Let's merge the cells containing the description and change the column width so 'Contact Details' isn't cut off:
 
-`````
+```{r echo=TRUE, eval=FALSE}
 # Merge cells for description
 mergeCells(
 # Specify workbook to apply to
@@ -491,7 +523,7 @@ setColWidths(
   
   # Width - check within excel by right clicking on column and clicking "Column Width"
   widths = 15) 
-`````
+```
 
 ```{r save_8_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-notes-pg2.png")
@@ -500,7 +532,7 @@ knitr::include_graphics("images/openxlsx/openxlsx-notes-pg2.png")
 ### Table/Chart Titles and Column Names
 We can also tidy up the table 2 by adding better column names and add titles to both tables and the chart. Let's also apply the header style we defined earlier to the titles:
 
-````
+```{r echo=TRUE, eval=FALSE}
 # Table 1 
 ## Title
 title_table1 <- "Max Petal Length and Width in Each Species Within Iris Dataset"
@@ -519,19 +551,19 @@ addStyle(wb, "Data", header_style, rows = 10, cols = 2)
 
 names(count_data) <- c("Species", "Number")
 writeDataTable(wb, "Data", count_data, startCol = 2, startRow = 18)
-`````
+```
 
 ```{r save_9_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-data-titles.png")
 ```
 
-````
+```{r echo=TRUE, eval=FALSE}
 # chart 
 ## Title
 chart_title <- "Chart 1: Sepal Length by Sepal Width Across Different Species","
 writeData(wb, "Charts", Chart_title, startCol = 2, startRow = 2)
 addStyle(wb, "Charts", header_style, rows = 2, cols = 2)
-`````
+```
 
 ```{r save_10_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-with-chart-title.png")
@@ -539,7 +571,7 @@ knitr::include_graphics("images/openxlsx/openxlsx-with-chart-title.png")
 
 Finally, let's save out our workbook:
 
-````
+```{r echo=TRUE, eval=FALSE}
 saveWorkbook(
   # Workbook to save
   wb = wb,
@@ -549,7 +581,7 @@ saveWorkbook(
   
   # If a file with the same name exists, do you want to overwrite it? Default is FALSE
   overwrite = TRUE)
-````
+```
 
 ## What now?
 If you haven't been doing so during the course, have a go at running the code in the [examples script](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-examples.R). Once you're happy with that you can have a go at creating your own excel output! There's an [exercise](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-exercises.R) you can download from GitHub which has some basic tasks to get you started. 

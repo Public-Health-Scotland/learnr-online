@@ -3,6 +3,10 @@
 # Exercises
 ###############################################################################
 
+
+### Exercise 1 ----
+
+
 # Create your excel workbook using the Openxlsx package containing
 # (at least) the following:
 # * 3 worksheets
