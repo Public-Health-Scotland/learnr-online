@@ -261,6 +261,18 @@ addStyle(
   rows = 2,
   cols = 10)
 
+saveWorkbook(
+  # Workbook to save
+  wb = wb,
+  
+  # The file path to save out to
+  # - only short version here as working directory is set by the project
+  file = "openxlsx_training.xlsx",
+  
+  # If a file with the same name exists, do you want to overwrite it?
+  overwrite = TRUE)
+
+
 # Create your excel workbook using the Openxlsx package containing
 # (at least) the following:
 # * 3 worksheets
