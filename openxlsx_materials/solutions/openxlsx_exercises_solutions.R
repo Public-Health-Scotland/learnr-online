@@ -56,8 +56,8 @@ mergeCells(
 ### Exercise 1c ----
 # Run the code below to read in the episode data and then add it to the episode sheet.
 # Give each table an appropriate title
-hb_by_qtr_eps <- readRDS("hb_by_qtr_eps.Rds")
-hb_by_yr_eps <- readRDS("hb_by_yr_eps.Rds")
+hb_by_qtr_eps <- readRDS("data/hb_by_qtr_eps.Rds")
+hb_by_yr_eps <- readRDS("data/hb_by_yr_eps.Rds")
 
 writeData(
   wb,
