@@ -502,7 +502,7 @@ FROM pantheon
 WHERE birthyear > 1920
 GROUP BY occupation
 HAVING count(occupation) > 50
-ORDER BY Number DESC;
+ORDER BY number DESC;
 ```
 
 </br>
@@ -830,11 +830,11 @@ Databases that we use most likely have access restrictions to prevent issues wit
 We know that a table in a database has a particular structure with constraints in place, this is an explicit step in the creation of the table. The structure is defined by its [table schema](https://www.sqlite.org/schematab.html). As part of this, each table has:
 
 * A name (ideally in the singular with no spaces)
-* Date type
+* Data type
 * Constraints (*optional*)
 * Default values (*optional*)
 
-*If a table already exists with the same name, SQL will throw an error. You can suppress the error and stop the creation of the table using the `IF NOT EXISTS` clause but this isn't necessary so shown in brackets below.*
+*If a table already exists with the same name, SQL will throw an error. You can suppress the error and stop the creation of the table using the `IF NOT EXISTS` clause but this isn't necessary so shown in brackets below. Additionally, the fields which are user-determined, e.g. `DataType` are wrapped in angle brackets (`<>`), these shouldn't be used in the actual query.*
 
 ```sql
 CREATE TABLE (IF NOT EXISTS) new_table (
