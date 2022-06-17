@@ -1,0 +1,981 @@
+---
+title: "Defining Functions"
+output: 
+  learnr::tutorial:
+    css: "css/style.css"
+    progressive: false
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+# Author: Scott McLaren-Gow
+# Original Date: 17/6/22
+# Version of R: 3.6.1
+
+# See here for learnr package documentation: https://rstudio.github.io/learnr/
+
+# Include packages here that are required throughout the training
+library(learnr)         # Required to build the Shiny app
+library(gradethis)      # Required for specific code checking and specific feedback
+
+knitr::opts_chunk$set(echo = FALSE)
+
+tutorial_options(
+  exercise.checker = gradethis::grade_learnr
+)
+```
+
+```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
+knitr::include_graphics("images/phs-logo.png")
+```
+
+## Introduction
+
+[Insert some introductory text about the training here.]
+
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li> [Add some details about how the app works here. Include the following items if they are relevant.]</li>
+    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
+### What is [topic]?
+
+[Detailed description of topic with overview of course.]
+
+## The Basics
+
+### What is a function?
+
+We use functions all the time. To find the mean horsepower for the cars in the mtcars dataset, for example, we could use the mean() function:
+```{r example-predefined, exercise=TRUE, exercise.eval=FALSE}
+horsepower_values = mtcars$hp
+
+mean_horsepower = mean(horsepower_values)
+
+mean_horsepower
+```
+
+We're used to treating functions as a 'black box'. We provide the function with an input (horsepower_values), the function works some kind of magic that we know nothing about, and it gives us back an output (mean_horsepower).
+
+But the inside of a function isn't really a black box, it's just more code like the code we write ourselves; a function is just code that is grouped together to perform a specific task.
+
+### Defining our own functions
+
+To use a function of our own, we must first define it. This has a standard format:
+
+```{r example-format, echo=TRUE, eval=FALSE}
+
+my_function_name = function(arg1, arg2, arg3) {
+  
+  <Your Code Goes Here>
+  
+  return(my_output)
+  
+}
+  
+```
+
+* my_function_name: what the function is called, the name you need to use when you want to run the function
+* function: a keyword that tells R you are defining a function
+* (arg1, arg2, arg3): specifies what inputs the function needs - these are objects that the function will use. You don't need to list any objects that are created inside the function. There can be any number of inputs, and they can be called anything you like
+* { and }: set the start and end of the function body - the function body contains all the code inside the function. { and } are used in other contexts also, for example if statements, and have the same general meaning: a block of code to be treated as a single unit
+* \<Your Code Goes Here>: write your code like normal
+* return(my_output): the object you want to get back when you run the function
+
+An example of using this function:
+
+```{r example-format-use, echo=TRUE, eval=FALSE}
+
+val = my_function_name(A, B, C)
+  
+```
+
+Note that the names of the input and output objects don't need to match what you called them in the function definition. Inside the function, A will become arg1, B will become arg2 etc.
+
+Let's look at an example of a working function. Say we want to get some summary values for a column of data:
+```{r example-summary, echo=TRUE, eval=FALSE}
+
+get_summary_data = function(df, col_name) {
+  
+  summary_data =
+    df %>%
+    # col_name is a character vector containing the column name
+    # This doesn't work with dplyr (it expects e.g. col rather than "col")
+    # But .data[[]] will get the data in a column using a character vector
+    summarise(min = min(.data[[col_name]]),
+              mean = mean(.data[[col_name]]),
+              max = max(.data[[col_name]]))
+  
+  return(summary_data)
+  
+}
+
+```
+
+(There may be better ways of doing this, without defining our own function, but it serves as a nice example.)
+
+We can now use our function:
+
+```{r example-summary-use, echo=TRUE, eval=FALSE}
+
+summary_mpg = get_summary_data(mtcars, "mpg")
+summary_hp = get_summary_data(mtcars, "hp")
+summary_wt = get_summary_data(mtcars, "wt")
+
+# Show one as an example
+print(summary_mpg)
+```
+
+
+
+
+
+#### Good place for a task writing a simple function and using it
+
+
+
+
+
+
+
+## Why define functions?
+
+### Readability
+
+As a script gets longer, it gets more and more difficult to figure out what the code actually does. 
+
+Imagine you are new to a script that is 1000 lines long. How quickly could you get an overview of what is happening? How quickly could you go in and change one small part of the code?
+
+Imagine this situation:
+
+```{r example-long-script, echo=TRUE, eval=FALSE}
+
+some_object = 
+  input_data %>%
+  some_processing_1() %>%
+  some_processing_2() %>%
+  some_processing_3() %>%
+  etc()
+
+
+# ...800 lines of code...
+
+
+object_of_interest = 
+  some_object %>%
+  left_join(some_other_object) %>%
+  some_different_processing()
+
+
+```
+
+To get an overview of what the script is doing, we need to at least skim those 800 lines. To understand what is happening to some_object, we may need to dig into those 800 lines of code in detail.
+
+Compare with this, where the 800 lines of code is broken up into functions:
+
+```{r example-long-with-functions, echo=TRUE, eval=FALSE}
+
+some_object = prep_input(input_data)
+
+unrelated_object_1 = do_some_stuff_1(other_input_data)
+
+unrelated_object_2 = do_some_stuff_2(other_input_data)
+
+some_object = more_processing(some_object, unrelated_object_1)
+
+some_other_object = do_some_stuff_3(unrelated_object_1, unrelated_object_2)
+
+object_of_interest = 
+  some_object %>%
+  left_join(some_other_object) %>%
+  some_different_processing()
+
+
+```
+
+We can see the overall structure of the code without digging into the detail. We know what data each function is taking as an input and what it is returning. So we can see where some_object is being processed, and focus on the code in those functions if we want to make changes.
+
+
+
+
+
+#### Possible quiz: where to look to see where some_object is being processed
+
+
+
+
+
+### Reduce duplication of code
+
+This is a real life example of a function, used to get different splits on Did Not Attend data:
+
+```{r example-split-define, echo=TRUE, eval=FALSE}
+get_split = function(data, groups) {
+  
+  groups_with_status = c(groups, "derived_appt_status")
+  
+  # Start by getting the number of appointments of each status in each group
+  dna_pc = 
+    data %>%
+    group_by(across(groups_with_status)) %>%
+    summarise(num_appts = n(), .groups="drop") %>%
+    appt_counts %>%
+    pivot_wider(names_from=derived_appt_status, values_from=num_appts) %>%
+    mutate(dna_pc = round(DNA / (Attended + DNA) * 100, digits=2)) 
+  
+  return(dna_pc)
+  
+}
+
+```
+
+Exactly what this function does isn't important. What's important is that it can be used over and over again without repeating the code:
+
+```{r example-split-call, echo=TRUE, eval=FALSE}
+split_simd = get_split(appt_past_joined, "simd2020v2_sc_decile")
+
+split_ur = get_split(appt_past_joined, "ur6_2016_name")
+
+split_age = get_split(appt_past_joined, "pub_age_group")
+
+split_hbres = get_split(appt_past_joined, "hb2019name")
+
+split_hbres_age = get_split(appt_past_joined, c("hb2019name", "pub_age_group"))
+```
+
+If we hadn't defined a function?
+
+```{r example-split-functionless, echo=TRUE, eval=FALSE}
+
+split_simd =
+  appt_past_joined %>%
+  group_by(simd2020v2_sc_decile, derived_appt_status) %>%
+  summarise(num_appts = n(), .groups = "drop") %>%
+  pivot_wider(names_from = derived_appt_status, values_from = num_appts) %>%
+  mutate(dna_pc = round(DNA / (Attended + DNA) * 100, digits = 2))
+
+split_ur =
+  appt_past_joined %>%
+  group_by(ur6_2016_name, derived_appt_status) %>%
+  summarise(num_appts = n(), .groups = "drop") %>%
+  pivot_wider(names_from = derived_appt_status, values_from = num_appts) %>%
+  mutate(dna_pc = round(DNA / (Attended + DNA) * 100, digits = 2))
+
+split_age =
+  appt_past_joined %>%
+  group_by(pub_age_group, derived_appt_status) %>%
+  summarise(num_appts = n(), .groups = "drop") %>%
+  pivot_wider(names_from = derived_appt_status, values_from = num_appts) %>%
+  mutate(dna_pc = round(DNA / (Attended + DNA) * 100, digits = 2))
+
+split_hbres =
+  appt_past_joined %>%
+  group_by(hb2019name, derived_appt_status) %>%
+  summarise(num_appts = n(), .groups = "drop") %>%
+  pivot_wider(names_from = derived_appt_status, values_from = num_appts) %>%
+  mutate(dna_pc = round(DNA / (Attended + DNA) * 100, digits = 2))
+
+split_hbres_age =
+  appt_past_joined %>%
+  group_by(hb2019name, pub_age_group, derived_appt_status) %>%
+  summarise(num_appts = n(), .groups = "drop") %>%
+  pivot_wider(names_from = derived_appt_status, values_from = num_appts) %>%
+  mutate(dna_pc = round(DNA / (Attended + DNA) * 100, digits = 2))
+  
+```
+
+The main advantage to the function approach is that all of the code is kept in one place. Imagine spotting a mistake in the DNA calculation here, or deciding to make an improvement to the code. Instead of making changes in five separate places, you only need to modify the function definition. That's faster than changing it in 5 different places, you don't need to check all of those 5 places to see if there are minor differences in any of them, and there's no risk of forgetting to change it in any of the places.
+
+### Easier code reuse
+
+It's much easier to take a function and use it in another script than it is to copy and paste parts of the code. A function makes it easy to see where the code you want starts and ends, and see what inputs the code needs and the output it returns.
+
+
+
+
+
+#### Possibly annoying task - make user transfer code between examples twice, once where a function was used, once where one wasn't
+
+
+
+
+
+
+### When are functions not so useful?
+
+The more of these are true, the less likely it is worth the time to define functions:
+
+* Script is short
+* Script is being written for one-off use
+* Code will not be useful in any other scripts
+* Code isn't being duplicated in different parts of the script
+
+
+
+
+
+
+#### Good place for a quiz
+
+
+
+
+
+
+
+## Exiting a function
+
+Functions always return a value. They can do so explicitly or implicitly, and they can do so visibly or invisibly.
+
+### Explicit vs implicit return value
+
+To explicitly return a value, use the return() function:
+
+```{r example-explicit, exercise=TRUE, exercise.eval=TRUE}
+
+exitfunc_1 = function(A) {
+  
+  B = 2 * A
+  
+  return(B)
+  
+}
+
+out = exitfunc_1(5)
+print(out)
+```
+
+If you don't use the return() function, you're returning a value implicitly:
+
+```{r example-implicit, exercise=TRUE, exercise.eval=TRUE}
+
+exitfunc_2 = function(A) {
+  
+  B = 2 * A
+
+}
+
+out = exitfunc_1(5)
+print(out)
+```
+
+We still get 10 back. That's because R will automatically return the value from the last line of code if you don't specify the return value yourself. It's better to use return() though - it makes the code clearer.
+
+### Visible vs invisible
+
+Let's go back to the earlier example, but this time don't print the output value ourselves:
+```{r example-visible, exercise=TRUE, exercise.eval=TRUE}
+
+exitfunc_1 = function(A) {
+  
+  B = 2 * A
+  
+  return(B)
+  
+}
+
+exitfunc_1(5)
+```
+
+The output of the function is visible, even though we've not used print(). 
+
+```{r example-invisible, exercise=TRUE, exercise.eval=TRUE}
+
+exitfunc_3 = function(A) {
+  
+  B = 2 * A
+  
+  invisible(B)
+  
+}
+
+exitfunc_3(5)
+
+```
+
+We've used invisible() instead of return(), so the output doesn't print itself.
+
+### Returning multiple objects
+
+A function returns one object only. R doesn't make it elegant, but you can get multiple objects back like this:
+
+```{r example-multiple-return, echo=TRUE, eval=FALSE}
+
+exitfunc_4 = function(A, B, C) {
+  
+  X = 2 * A
+  Y = 3 * B
+  Z = 4 * C
+  
+  # Return a list of the objects we want
+  return(list(X, Y, Z))
+  
+}
+
+out = exitfunc_4(1, 2, 3)
+
+# Get individual objects from the list
+x = out[[1]]
+y = out[[2]]
+z = out[[3]]
+
+```
+
+We've still only returned one object - a list. That list just happens to contain the other objects we want.
+
+## Function arguments
+
+We've seen the basic way to define the function's arguments:
+
+```{r example-basic-arg, exercise=TRUE, exercise.eval=TRUE}
+
+argfunc_1 = function(arg1, arg2, arg3) {
+  
+  print(paste0(arg1, arg2, arg3))
+  
+}
+
+argfunc_1(1, 2, 3)
+  
+```
+
+We actually don't need to have any arguments at all, if our function doesn't need them:
+
+```{r example-no-arg, exercise=TRUE, exercise.eval=TRUE}
+
+argfunc_2 = function() {
+  
+  print(paste0(1, 2, 3))
+  
+}
+
+argfunc_2()
+  
+```
+
+We can also supply a default value for each argument:
+
+```{r example-default-arg-name, exercise=TRUE, exercise.eval=TRUE}
+
+argfunc_3 = function(arg1=1, arg2=2, arg3=3) {
+  
+  print(paste0(arg1, arg2, arg3))
+  
+}
+
+argfunc_3(arg3 = 5)
+  
+```
+
+Note that if you want to skip arguments when you are calling the function - like with arg1 and arg2 above - you need to specify the argument's name. Look what happens when we don't:
+
+```{r example-default-arg-position, exercise=TRUE, exercise.eval=TRUE}
+
+argfunc_3 = function(arg1=1, arg2=2, arg3=3) {
+  
+  print(paste0(arg1, arg2, arg3))
+  
+}
+
+argfunc_3(5)
+```
+
+We've not specified the argument's name, so we are specifying the arguments by position. The first argument is therefore arg1.
+
+## Debugging
+
+Debugging your code gets a little more complex when working with functions. Normally, if there's a problem you can just run a line of code in your script and see what it does, or you can source the script, let it stop where the error occurs, and look at the environment.
+
+There are two aspects of functions that make things more difficult:
+
+* when you run your function from your script, all of the lines inside the function are run as one block. You don't get to run each line individually
+* functions store the objects they create and modify in their own environment - you can't see these from the global environment
+
+You can avoid a lot of issues by developing your code interactively before putting it in a function, and by keeping your functions small. And you can always take your code back out of a function for testing, if you like.
+
+### Debugging mode
+
+But it is possible to debug functions by using debugging mode:
+![](images/functions/debugging_annotated.png)
+
+To enter debugging mode, you need to create a breakpoint. Your code will run until a breakpoint is reached, then it will pause to let you see what is going on. Note that in the image, the breakpoint is not reached until the function is actually called - line 2 has run, the function has been defined between lines 4 and 12, line 14 has run, and then you reach the breakpoint while line 16 is running. If you called the function multiple times, you would reach the breakpoint multiple times. You can also have multiple breakpoints.
+
+To create a breakpoint:
+
+1) click to the left of a line number in R Studio. The line must contain code, and some types of code won't let you create one (like the first line of a function definition).
+1) Source your script. If you use Run, the breakpoint will not activate
+
+Once you are in debugging mode:
+
+* Current line: this line of code has not been run yet - it is the next line of code to run
+* Run current line: the current line will be run, then R will pause again
+* Step into current line: say the current line was something like myvar = myfunc(myarg). If you pressed the button to run the current line, the entirety of myfunc would be run in one go. But if you step into the current line, you will get to see the inside of myfunc and you can run each line of code individually
+* Run until next breakpoint/end of script: if you have another breakpoint to come, all the lines between the current line and the breakpoint will run. If you don't, all of the rest of the script will run
+* Stop debugging now: don't run the rest of the script, just stop right now and exit debugging mode
+* Objects currently in environment: these are the objects that the current line of code can 'see'
+
+To debug a function, then:
+
+1) set a breakpoint inside the function, and source the script
+1) run the function line by line
+1) look for error messages if they exist, and investigate further
+1) pay attention to what is in the environment at each step. does it make sense? At what exact point does it stop making sense?
+1) fix the problem
+
+Note that breakpoints don't work that well with pipes. You can't set a breakpoint for the lines inside a pipe, only the first line, and you can't run each line of the pipe individually, only the pipe as a complete unit. Keep pipes short.
+
+Debugging can be a bit temperamental. Restarting/terminating R can help.
+
+#### Debugging mode when you source() your functions
+
+If you are sourcing in functions from another file, R makes things more difficult.
+
+For example, you may have functions in functions.R:
+
+```{r example-debugging-file, echo=TRUE, eval=FALSE}
+
+myfunc = function(msg) {
+  
+  print(msg)
+  
+}
+
+```
+
+Then in main.R:
+
+```{r example-debugging-source, echo=TRUE, eval=FALSE}
+
+source("functions.R")
+
+myfunc()
+
+```
+
+If you just set a breakpoint inside myfunc's definition, it will not work when you source main.R. Instead you can take one of these approaches:
+
+* set a breakpoint inside myfunc's definition, use the source button on the toolbar for functions.R, then run the code that calls the function in main.R. Using the source button when there is a breakpoint in the file will use a special version of the source function that supports breakpoints. Don't run the source() line in main.R after using the source button, as this will just use the standard source function and the breakpoint will no longer work.
+* set the breakpoint on the myfunc() line in main.R, source main.R, then step into the current line to reach the function
+* or add browser() as a line inside myfunc's definition (see below) and source main.R:
+
+```{r example-debugging-browser, echo=TRUE, eval=FALSE}
+
+myfunc = function(msg) {
+  
+  browser()
+  
+  print(msg)
+  
+}
+
+```
+
+Using browser() is a bit less convenient, but can be more reliable when breakpoints are being temperamental.
+
+### Traceback
+
+It can also be useful to run traceback() in the console immediately after an error message, before you think about running in debugging mode:
+
+![](images/functions/traceback.png)
+
+The output tells you where the error occurred. You read it bottom to top, so the output here says I first sourced test.R, then some internal R magic happens on points 2, 3, and 4, then I called myfunc() on line 16 of test.R, then I got an error on line 10 of test.R.
+
+Traceback isn't always so helpful - it won't give you a line number for errors raised inside a pipe, though it should give you a line number for the start of the pipe in question.
+
+## Scope
+
+What if we don't give a function all the objects it needs?
+
+This function needs A and k to run all the code it contains, but we're only giving it A:
+```{r example-scope-error, echo=TRUE, eval=FALSE}
+
+scopefunc_1 = function(A) {
+  
+  print("scopefunc_1 output:")
+  print(A)
+  print(k)
+  
+}
+
+scopefunc_1("A")
+
+```
+
+If we tried to run it, we'd get an error:
+
+> Error in print(k) : object 'k' not found
+
+That makes sense, there is no k. But were does R actually look for k? It's a bit more complicated than just looking for k inside the function definition and at the inputs the function is supplied with. R will actually start looking outside of the function.
+
+### Where?
+Where will it look? R has "scoping" rules that decide this. Essentially it will look first inside the function, then it will look in the environments that contain the function definition
+
+This will work:
+```{r example-where-work, echo=TRUE, eval=FALSE}
+
+l = 5
+
+scopefunc_2 = function() {
+  
+  print(l)
+  
+}
+
+scopefunc_2()
+
+```
+
+This will not work:
+
+```{r example-where-error-2func, echo=TRUE, eval=FALSE}
+
+scopefunc_3 = function() {
+  
+  m = 5
+  
+  print(m)
+  
+}
+
+scopefunc_4 = function() {
+  
+  print(m)
+  
+}
+
+scopefunc_3()
+
+# Will give an error
+scopefunc_4()
+
+```
+
+> Error in print(m) : object 'm' not found
+
+The environment for scopefunc_3 does not contain scopefunc_4, so scopefunc_4 can't access m.
+
+We also can't access objects that are inside functions more generally. This doesn't work:
+
+```{r example-where-error-1func, echo=TRUE, eval=FALSE}
+
+scopefunc_3 = function() {
+  
+  m = 5
+  
+  print(m)
+  
+}
+
+# Will give an error
+print(m)
+
+```
+
+> Error in print(m) : object 'm' not found
+
+
+
+
+
+
+
+#### Would be nice to have these throwing errors and ask the user to fix
+
+
+
+
+
+
+### When?
+
+We know where R will look, but we also need to know when. Let's define another example function:
+
+```{r example-when-func, echo=TRUE, eval=FALSE}
+
+scopefunc_5 = function() {
+  
+  print(p)
+  
+}
+
+```
+
+
+```{r example-when-call, echo=TRUE, eval=FALSE}
+
+# Will give an error
+scopefunc_5()
+
+p = 5
+
+# Will work
+scopefunc_5()
+
+```
+
+R checks for the object each time the function is run, not when it is defined. So when we call the function the second time, after we define p in the global environment, it does work.
+
+### Working around scoping rules
+
+These scoping rules increase the chance of mistakes happening, and aren't usually very useful. A big advantage of functions is making the inputs and outputs to a section of code explicit, and we lose that advantage if we rely on R to find objects defined outside a function for us.
+
+We can get R to list any objects that will be searched for outside of a function like this:
+
+```{r example-with-globals, exercise=TRUE, exercise.eval=FALSE}
+scopefunc_5 = function() {
+  
+  print(p)
+  
+}
+
+codetools::findGlobals(scopefunc_5)
+```
+
+Some of these we should ignore because it is normal to allow the scoping rules to bring in functions and special symbols, like "{" and "print" here, but it does show us that we are using "p" without defining it inside the function or specifying it as an input.
+
+So we should re-write the function:
+
+```{r example-no-globals, exercise=TRUE, exercise.eval=FALSE}
+
+scopefunc_5b = function(p) {
+  
+  print(p)
+  
+}
+
+codetools::findGlobals(scopefunc_5b)
+
+```
+
+
+## Assorted tips
+
+### Documentation
+
+It's a good idea to document your functions, unless you're sure you'll never need the code again. This is an example:
+
+```{r example-documentation, echo=TRUE, eval=FALSE}
+
+# Closes a connection to the VDL in all modes
+# Otherwise does nothing.
+#
+# Inputs
+# conn - a connection to the VDL, or NULL
+# mode - "live", "backup 1", or "backup 2"
+#
+# Returns logical indicating if close succeeded
+close_vdl_conn = function(conn, mode) {
+
+  if (mode == "live" | mode == "backup 1" | mode == "backup 2"){
+
+    # This will return TRUE or FALSE to indicate if it succeeded
+    out = odbcClose(conn)
+
+  } else {
+    stop("mode not recognised, must be live, backup 1, or backup 2.")
+  }
+
+  return(out)
+
+}
+
+```
+
+### Sourcing functions
+
+It can be a good idea to store your functions outside your main script file, unless your code is quite short already. This helps stop your script getting too long, improves the organisation of your code, and makes it easier for multiple people to work together on the same code without stepping on each other's toes.
+
+For example, you could have processing_functions.R like this:
+
+```{r example-sourcing-funcs, echo=TRUE, eval=FALSE}
+
+do_some_processing = function() {
+  
+  <your code>
+  
+}
+
+other_processing = function() {
+  
+  <your code>
+  
+}
+
+
+```
+
+Then a main_script.R like this:
+
+```{r example-sourcing-main, echo=TRUE, eval=FALSE}
+
+source(processing_functions.R)
+
+<get your data>
+  
+my_data = do_some_processing(my_data)
+
+my_data = other_processing(my_data, other data)
+
+<do other things>
+
+```
+
+If you make a change to the function, you need to re-run the source() line for it to take effect.
+
+### Working with dplyr
+
+New challenges are introduced when you start using your functions in combination with dplyr, particularly if you want to choose which columns your function works with by supplying your column names as an argument.
+
+This is really a complicated topic all of its own so there's too much to cover here, but these are some starting points if you want to learn more:
+
+* Run vignette("programming") to get an intro on how to dynamically supply column names as arguments to your functions
+* Run help("dplyr_data_masking") and help("dplyr_tidy_select") for more details on the two types of selection discussed by vignette("programming")
+* Read through this [tutorial](https://www.rebeccabarter.com/blog/2020-07-09-across/) and view vignette("colwise") for information on the across() function. Combined with all_of(), it is a convenient way to perform operations on particular columns with functions like mutate.
+
+Here are some examples of working with the mtcars dataset to give a taste of what is possible:
+
+```{r example-dplyr, echo=TRUE, eval=FALSE}
+
+# Normalise selected columns by maximum value
+normalise_col = function(df, norm_cols) {
+  
+  df =
+    df %>%
+    mutate(across(all_of(norm_cols), ~(.x / max(.x))))
+  
+  return(df)
+  
+}
+
+normalise_one = normalise_col(mtcars, "mpg")
+normalise_several = normalise_col(mtcars, c("mpg", "hp", "wt"))
+
+# Create a specified km/litre column from a specified mpg column
+add_kml = function(df, mpg_col, kml_col) {
+  
+  df = 
+    df %>%
+    mutate("{kml_col}" := .data[[mpg_col]] / 2.352)
+  
+  return(df)
+  
+}
+
+mtcars_kml = add_kml(mtcars, "mpg", "kml")
+```
+
+If you want to use your function within a pipe, keep in mind that pipes work by passing the dataframe to each function as the first argument. So you would need to define and use your function like this:
+
+```{r example-pipe, echo=TRUE, eval=FALSE}
+
+func_for_pipe = function(df, other_arg1, other_arg2) {
+  # Your code
+}
+
+dataset %>%
+  func_for_pipe(other_arg1, other_arg2)
+
+```
+
+### Useful other code
+
+If statements can be helpful inside functions, so your functions can do different things depending on the situation:
+
+```{r example-if, echo=TRUE, eval=FALSE}
+
+if (colour == "blue") {
+  
+  <code here will run only when val is blue>
+  
+}
+
+
+if (val == 5) {
+  
+  <code here will run only when val is five>
+  
+} else if (val < 2) {
+  
+  <code here will run only when val is less than two>
+  
+} else {
+  
+  <code here will run when val is not any of the above values>
+}
+
+```
+
+stop() can be useful - you can make R give an error with a message you specify like this:
+
+```{r example-stop, echo=TRUE, eval=FALSE}
+stop("error message")
+```
+
+This can be combined with an if statement to throw an error when the inputs aren't what you expect:
+
+```{r example-check-input, echo=TRUE, eval=FALSE}
+
+my_func = function(val) {
+  # do things when val <= 6, otherwise give an error
+  
+  if (val > 6) {
+    stop("val cannot be greater than 6")
+  }
+  
+  <do things>
+    
+}
+
+```
+
+
+
+
+
+## [Functionality]
+
+### Knowledge Check
+
+```{r example-quiz}
+quiz(
+  question("[Question]",
+    answer("[Incorrect answer]", correct = FALSE),
+    answer("[Incorrect answer with feedback]", correct = FALSE, message = "[Specific feedback.]"),
+    answer("[Correct answer]", correct = TRUE),
+    incorrect = "[General feedback for any incorrect answer.]",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+### Code Exercise
+
+```{r example-code-q, exercise=TRUE}
+# Hello World example
+hello_world <- "Hello World"
+
+print(hello_world)
+```
+
+```{r example-code-q-check}
+grade_result(
+  pass_if(~ startsWith(.result, "Hello") & .result != "Hello World"),
+  fail_if(~ identical(as.character(.result), "Hello World"), "Try changing the output from Hello World."),
+  fail_if(~ TRUE, "Have you entered a string to say Hello?")
+)
+```
+
+
+## Help & Feedback
+
+#### Feedback
+
+[Insert iframe for Google/Microsoft Forms]
+
