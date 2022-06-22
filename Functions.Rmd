@@ -1,5 +1,5 @@
 ---
-title: "Defining Functions"
+title: "Writing Functions"
 output: 
   learnr::tutorial:
     css: "css/style.css"
@@ -18,6 +18,7 @@ runtime: shiny_prerendered
 # Include packages here that are required throughout the training
 library(learnr)         # Required to build the Shiny app
 library(gradethis)      # Required for specific code checking and specific feedback
+library(dplyr)
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -50,10 +51,13 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## The Basics
 
+There's more to it than the basics, but just the information here will get you well on your way to writing useful functions.
+
 ### What is a function?
 
-We use functions all the time. To find the mean horsepower for the cars in the mtcars dataset, for example, we could use the mean() function:
-```{r example-predefined, exercise=TRUE, exercise.eval=FALSE}
+We use functions all the time. To find the mean horsepower for the cars in the mtcars dataset, for example, we could use the mean() function - go ahead and run this code to see the output:
+
+```{r example-predefined, exercise=TRUE}
 horsepower_values = mtcars$hp
 
 mean_horsepower = mean(horsepower_values)
@@ -81,12 +85,12 @@ my_function_name = function(arg1, arg2, arg3) {
   
 ```
 
-* my_function_name: what the function is called, the name you need to use when you want to run the function
-* function: a keyword that tells R you are defining a function
-* (arg1, arg2, arg3): specifies what inputs the function needs - these are objects that the function will use. You don't need to list any objects that are created inside the function. There can be any number of inputs, and they can be called anything you like
-* { and }: set the start and end of the function body - the function body contains all the code inside the function. { and } are used in other contexts also, for example if statements, and have the same general meaning: a block of code to be treated as a single unit
-* \<Your Code Goes Here>: write your code like normal
-* return(my_output): the object you want to get back when you run the function
+* **my_function_name**: what the function is called, the name you need to use when you want to run the function
+* **function**: a keyword that tells R you are defining a function
+* **(arg1, arg2, arg3)**: specifies what inputs the function needs - these are objects that the function will use. You don't need to list any objects that are created inside the function. There can be any number of inputs, and they can be called anything you like
+* **{ and }**: set the start and end of the function body - the function body contains all the code inside the function. { and } are used in other contexts also, for example if statements, and have the same general meaning: a block of code to be treated as a single unit
+* **\<Your Code Goes Here>**: write your code like normal, using the inputs you specified and creating any new objects you like
+* **return(my_output)**: the object you want to get back when you run the function
 
 An example of using this function:
 
@@ -96,9 +100,10 @@ val = my_function_name(A, B, C)
   
 ```
 
-Note that the names of the input and output objects don't need to match what you called them in the function definition. Inside the function, A will become arg1, B will become arg2 etc.
+Note that the names of the input and output objects don't need to match what you called them in the function definition. Inside the function, A will become arg1, B will become arg2 etc. Likewise the name of the output in the function doesn't need to match what you call it outside the function.
 
 Let's look at an example of a working function. Say we want to get some summary values for a column of data:
+
 ```{r example-summary, echo=TRUE, eval=FALSE}
 
 get_summary_data = function(df, col_name) {
@@ -106,7 +111,8 @@ get_summary_data = function(df, col_name) {
   summary_data =
     df %>%
     # col_name is a character vector containing the column name
-    # This doesn't work with dplyr (it expects e.g. col rather than "col")
+    # This doesn't work with dplyr - it expects summarise(min = min(col_name)) 
+    # rather than summarise(min = min("col_name"))
     # But .data[[]] will get the data in a column using a character vector
     summarise(min = min(.data[[col_name]]),
               mean = mean(.data[[col_name]]),
@@ -120,31 +126,102 @@ get_summary_data = function(df, col_name) {
 
 (There may be better ways of doing this, without defining our own function, but it serves as a nice example.)
 
-We can now use our function:
+The function is now ready for use. We use the function by calling it like any other - run the code to see the result:
 
-```{r example-summary-use, echo=TRUE, eval=FALSE}
+```{r example-summary-use-setup}
 
-summary_mpg = get_summary_data(mtcars, "mpg")
-summary_hp = get_summary_data(mtcars, "hp")
-summary_wt = get_summary_data(mtcars, "wt")
+get_summary_data = function(df, col_name) {
+  
+  summary_data =
+    df %>%
+    # col_name is a character vector containing the column name
+    # This doesn't work with dplyr - it expects summarise(min = min(col_name)) 
+    # rather than summarise(min = min("col_name"))
+    # But .data[[]] will get the data in a column using a character vector
+    summarise(min = min(.data[[col_name]]),
+              mean = mean(.data[[col_name]]),
+              max = max(.data[[col_name]]))
+  
+  return(summary_data)
+  
+}
 
-# Show one as an example
-print(summary_mpg)
+```
+
+```{r example-summary-use, exercise=TRUE}
+
+car_summary = get_summary_data(mtcars, "mpg")
+
+print(car_summary)
+
+```
+
+Try changing the function call to get summary data for the hp or wt columns instead of mpg, and you'll start to see how writing functions can make life easier: we can easily apply the same code to different data.
+
+### Your turn
+
+We've covered the basics now, so it's time for you to write your own function. This is what you need to do:
+
+* Define a function that:
+    * Has a single input
+    * Multiplies the input by 10
+    * Returns the new value
+* Make sure the function is named my_function
+* After you've defined the function, you need to use it. Call it with 5 as the input on the last line of your code
+
+Enter your solution here, feel free to experiment using the run code button, and submit your answer when ready. If you get stuck, a solution is available:
+```{r test-first-func, exercise=TRUE}
+
+```
+ 
+```{r test-first-func-check}
+
+grade_this( 
+  {
+    evaluate::evaluate(.user_code)
+    
+    if (!exists("my_function", mode = "function")) {
+      fail("Make sure your function is called my_function, and that it follows 
+           the standard format correctly")
+    }
+    
+    if (my_function(5) != 50) {
+      fail("Make sure your function output is 10 times the input value")
+    } 
+    
+    if (!is.numeric(.result)) {
+      fail("Make sure you call your function on the last line of your code, and 
+           that it returns a numerical value")
+    }
+
+    if (.result != 50) {
+      fail("Make sure you are calling your function with 5 as the input")
+    }
+    
+    pass("Correct! In real life we don't need to define a function just to 
+         multiply by 10, but this example is the foundation for writing all 
+         kinds of useful functions")
+
+  }
+)
+
+```
+
+```{r test-first-func-solution}
+
+my_function = function(x) {
+  
+  return(x * 10)
+  
+}
+
+my_result = my_function(5)
+
 ```
 
 
 
-
-
-#### Good place for a task writing a simple function and using it
-
-
-
-
-
-
-
-## Why define functions?
+## Why Define Functions?
 
 ### Readability
 
