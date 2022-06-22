@@ -126,7 +126,7 @@ get_summary_data = function(df, col_name) {
 
 (There may be better ways of doing this, without defining our own function, but it serves as a nice example.)
 
-The function is now ready for use. We use the function by calling it like any other - run the code to see the result:
+The function definition above has been run behind the scenes, and the function is now ready for use. We use it by calling it like any other - run the code to see the result:
 
 ```{r example-summary-use-setup}
 
@@ -178,6 +178,8 @@ Enter your solution here, feel free to experiment using the run code button, and
 
 grade_this( 
   {
+    
+    # So we have access to the user defined function
     evaluate::evaluate(.user_code)
     
     if (!exists("my_function", mode = "function")) {
@@ -190,8 +192,7 @@ grade_this(
     } 
     
     if (!is.numeric(.result)) {
-      fail("Make sure you call your function on the last line of your code, and 
-           that it returns a numerical value")
+      fail("Make sure you call your function on the last line of your code")
     }
 
     if (.result != 50) {
