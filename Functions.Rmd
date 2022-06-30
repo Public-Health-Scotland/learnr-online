@@ -19,6 +19,7 @@ runtime: shiny_prerendered
 library(learnr)         # Required to build the Shiny app
 library(gradethis)      # Required for specific code checking and specific feedback
 library(dplyr)
+library(rlang)
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -402,20 +403,19 @@ The more of these are true, the less likely it is worth the time to define funct
 #### Good place for a quiz
 
 
+## Inputs and Outputs
 
+Two key parts of writing functions are specifying the inputs the function expects and the output that it returns. You've already seen the basics, but this section goes into more detail and explains some of the flexibility you have. 
 
-
-
-
-## Exiting a function
+### Exiting a function
 
 Functions always return a value. They can do so explicitly or implicitly, and they can do so visibly or invisibly.
 
-### Explicit vs implicit return value
+#### Explicit vs implicit return value
 
 To explicitly return a value, use the return() function:
 
-```{r example-explicit, exercise=TRUE, exercise.eval=TRUE}
+```{r example-explicit, exercise=TRUE}
 
 exitfunc_1 = function(A) {
   
@@ -431,7 +431,7 @@ print(out)
 
 If you don't use the return() function, you're returning a value implicitly:
 
-```{r example-implicit, exercise=TRUE, exercise.eval=TRUE}
+```{r example-implicit, exercise=TRUE}
 
 exitfunc_2 = function(A) {
   
@@ -439,16 +439,18 @@ exitfunc_2 = function(A) {
 
 }
 
-out = exitfunc_1(5)
+out = exitfunc_2(5)
 print(out)
 ```
 
-We still get 10 back. That's because R will automatically return the value from the last line of code if you don't specify the return value yourself. It's better to use return() though - it makes the code clearer.
+If you run the code you can see we still get 10 back. That's because R will automatically return the value from the last line of code if you don't specify the return value yourself. 
 
-### Visible vs invisible
+Opinions vary on whether you should explicitly or implicitly return values. Some say that writing return() is clearer while others argue it is redundant; it's up to you which style you use.
+
+#### Visible vs invisible
 
 Let's go back to the earlier example, but this time don't print the output value ourselves:
-```{r example-visible, exercise=TRUE, exercise.eval=TRUE}
+```{r example-visible, exercise=TRUE}
 
 exitfunc_1 = function(A) {
   
@@ -461,15 +463,16 @@ exitfunc_1 = function(A) {
 exitfunc_1(5)
 ```
 
-The output of the function is visible, even though we've not used print(). 
+Run the code and the output of the function is printed, even though we've not used print(). 
 
-```{r example-invisible, exercise=TRUE, exercise.eval=TRUE}
+The invisible function gives us control over this:
+```{r example-invisible, exercise=TRUE}
 
 exitfunc_3 = function(A) {
   
   B = 2 * A
   
-  invisible(B)
+  return(invisible(B))
   
 }
 
@@ -477,13 +480,15 @@ exitfunc_3(5)
 
 ```
 
-We've used invisible() instead of return(), so the output doesn't print itself.
+Notice that the output doesn't print itself this time - the code has run even though it looks like nothing happened.
 
-### Returning multiple objects
+You won't normally need to worry about making outputs invisible, but you do have the option should the need arise.
+
+#### Returning multiple objects
 
 A function returns one object only. R doesn't make it elegant, but you can get multiple objects back like this:
 
-```{r example-multiple-return, echo=TRUE, eval=FALSE}
+```{r example-multiple-return, exercise=TRUE}
 
 exitfunc_4 = function(A, B, C) {
   
@@ -503,15 +508,22 @@ x = out[[1]]
 y = out[[2]]
 z = out[[3]]
 
+# Example of using those objects
+print(x + y + z)
+
 ```
 
-We've still only returned one object - a list. That list just happens to contain the other objects we want.
+We've still only returned one object - a list. That list just happens to contain the other objects we want. 
 
-## Function arguments
+We could also make things clearer for the user of the list by naming the items it contains with list("name1" = value1, "name2" = value2) and accessing the values with list_name[["name1"]] etc.
 
-We've seen the basic way to define the function's arguments:
+### Function parameters
 
-```{r example-basic-arg, exercise=TRUE, exercise.eval=TRUE}
+Now we swap to the other end - the inputs. An aside on terminology before we begin: strictly speaking, parameters are the inputs specified in the function definition (arg1, arg2, and arg3 in the example below), while arguments are the values that are actually supplied in a function call (1, 2, and 3 below). But these terms are basically used interchangeably.
+
+You've already seen the basic way to define a function's parameters:
+
+```{r example-basic-param, exercise=TRUE}
 
 argfunc_1 = function(arg1, arg2, arg3) {
   
@@ -523,9 +535,9 @@ argfunc_1(1, 2, 3)
   
 ```
 
-We actually don't need to have any arguments at all, if our function doesn't need them:
+We actually don't need to specify any parameters at all, if our function doesn't need them:
 
-```{r example-no-arg, exercise=TRUE, exercise.eval=TRUE}
+```{r example-no-param, exercise=TRUE}
 
 argfunc_2 = function() {
   
@@ -537,9 +549,9 @@ argfunc_2()
   
 ```
 
-We can also supply a default value for each argument:
+We can also supply a default value for each parameter:
 
-```{r example-default-arg-name, exercise=TRUE, exercise.eval=TRUE}
+```{r example-default-param-name, exercise=TRUE}
 
 argfunc_3 = function(arg1=1, arg2=2, arg3=3) {
   
@@ -551,9 +563,11 @@ argfunc_3(arg3 = 5)
   
 ```
 
+You can also include a mix of parameters with and without a default.
+
 Note that if you want to skip arguments when you are calling the function - like with arg1 and arg2 above - you need to specify the argument's name. Look what happens when we don't:
 
-```{r example-default-arg-position, exercise=TRUE, exercise.eval=TRUE}
+```{r example-default-param-position, exercise=TRUE}
 
 argfunc_3 = function(arg1=1, arg2=2, arg3=3) {
   
@@ -565,6 +579,170 @@ argfunc_3(5)
 ```
 
 We've not specified the argument's name, so we are specifying the arguments by position. The first argument is therefore arg1.
+
+### A Task
+
+You now have the chance to go beyond the basics and use some of the knowledge above.
+
+* Define a function that:
+    * Takes 3 inputs: num (no default value), mult1 (default = 5), mult2 (default = 10)
+    * Carries out 2 separate calculations:
+        * num multiplied by mult1
+        * num multiplied by mult2
+    * Returns a named list:
+        * The first element of your list should be named ans1 and contain the result of num \* mult1
+        * The second should be named ans2 and contain the result of num \* mult2
+* Call your function with num = 5 and mult2 = 3. Leave mult1 to use the default
+* Create two new objects, A and B
+    * A should equal the first value in your list (ans1)
+    * B should equal the second value in your list (ans2)
+
+Enter your code here, and remember the solution is available if you get stuck:
+```{r test-inout-func, exercise=TRUE}
+
+```
+ 
+```{r test-inout-func-check}
+
+grade_this( 
+  {
+    
+    # So we have access to the user defined function
+    evaluate::evaluate(.user_code)
+
+    if (!exists("my_function", mode = "function")) {
+      fail("Make sure your function is called my_function, and that it follows 
+           the standard format correctly")
+    }
+    
+    func_params = names(formals(my_function))
+    
+    if (!all(c("num", "mult1", "mult2") %in% func_params)) {
+      fail(paste0("Make sure your function has num, mult1, and mult2 as 
+                  parameters. You currently have: ", 
+                  str_flatten(func_params, collapse = ", ")))
+    }
+    
+    if (!all(func_params %in%  c("num", "mult1", "mult2"))) {
+      fail(paste0("Make sure your function doesn't have any extra parameters - 
+                  you should only have num, mult1, and mult2. You currently 
+                  have: ", 
+                  str_flatten(func_params, collapse = ", ")))
+    }
+    
+    if (!is_missing(formals(my_function)$num)) {
+      fail("Make sure num does not have a default value")
+    }
+    
+    if (formals(my_function)$mult1 != 5) {
+      fail("Make sure mult1 has a default value of 5")
+    }
+    
+    if (formals(my_function)$mult2 != 10) {
+      fail("Make sure mult2 has a default value of 10")
+    }
+
+    if (!is.list(my_function(5))) {
+      fail("Make sure your function returns a list")
+    }
+    
+    return_names = names(my_function(5))
+    
+    if (!all(c("ans1", "ans2") %in% return_names)) {
+      fail(paste0("Make sure the list your function returns contains values 
+                  named ans1 and ans2. You currently have: ", 
+                  str_flatten(return_names, collapse = ", ")))
+    }
+    
+    if (length(my_function(5)) > 2) {
+      fail(paste0("Make sure your function returns a list containing 2 values. 
+                  It currently contains: ", length(my_function(5))))
+    }
+    
+    # It would be best to check here whether the user actually called the
+    # function in the requested way, but I can't think of a robust way to do
+    # that
+    
+    if (!exists("A")) {
+      fail("Make sure you create the object A to hold the first result from your 
+           function")
+    }
+    
+    if (!exists("B")) {
+      fail("Make sure you create the object B to hold the second result from 
+           your function")
+    }
+    
+    if (is.list(A)) {
+      fail("Make sure you fully extract the first value from the list into A - 
+           my_list[\"name\"] returns a list, my_list[[\"name\"]] or my_list$name 
+           return the value, so use double square brackets or the dollar sign")
+    }
+    
+    if (is.list(B)) {
+      fail("Make sure you fully extract the first value from the list into B - 
+           my_list[\"name\"] returns a list, my_list[[\"name\"]] or my_list$name 
+           return the value, so use double square brackets or the dollar sign")
+    }
+
+    if (A != 25) {
+      fail(paste0("Make sure A is holding the first result, the function is 
+                  called with the right inputs, and the calculations are correct
+                  - A should equal 25, but it's currently ", A))
+    }
+    
+    if (B != 15) {
+      fail(paste0("Make sure B is holding the first result, the function is 
+                  called with the right inputs, and the calculations are correct
+                  - B should equal 15, but it's currently ", B))
+    }
+    
+    pass("Correct! These techniques, along with the others you've learned in 
+         this section, signifcantly increase the flexibility you can give your 
+         functions.")
+
+  }
+)
+
+```
+
+```{r test-inout-func-solution}
+
+my_function = function(num, mult1 = 5, mult2 = 10) {
+  
+  num1 = num * mult1
+  num2 = num * mult2
+  
+  return(list("ans1" = num1, "ans2" = num2))
+  
+}
+
+out = my_function(5, mult2 = 3)
+
+A = out[["ans1"]] 
+B = out[["ans2"]]
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Debugging
 
