@@ -225,6 +225,8 @@ my_result = my_function(5)
 
 ## Why Define Functions?
 
+At this point it seems fair to explain why we want to define functions. Eventually it'll become second nature, and you'll probably prefer it, but it will take practice to get there - read on to understand some of the benefits.
+
 ### Readability
 
 As a script gets longer, it gets more and more difficult to figure out what the code actually does. 
@@ -262,13 +264,13 @@ Compare with this, where the 800 lines of code is broken up into functions:
 
 some_object = prep_input(input_data)
 
-unrelated_object_1 = do_some_stuff_1(other_input_data)
+unrelated_object_1 = gather_info(other_input_data)
 
-unrelated_object_2 = do_some_stuff_2(other_input_data)
+unrelated_object_2 = extract_data(other_input_data)
 
 some_object = more_processing(some_object, unrelated_object_1)
 
-some_other_object = do_some_stuff_3(unrelated_object_1, unrelated_object_2)
+some_other_object = do_some_stuff(unrelated_object_1, unrelated_object_2)
 
 object_of_interest = 
   some_object %>%
@@ -280,14 +282,29 @@ object_of_interest =
 
 We can see the overall structure of the code without digging into the detail. We know what data each function is taking as an input and what it is returning. So we can see where some_object is being processed, and focus on the code in those functions if we want to make changes.
 
+```{r quiz-readability}
+quiz(
+  question("Which functions do we need to look in to understand how some_object 
+           is created and processed?",
+    answer("prep_input", correct = TRUE),
+    answer("gather_info", correct = FALSE),
+    answer("extract_data", correct = FALSE),
+    answer("more_processing", correct = TRUE),
+    answer("do_some_stuff", correct = FALSE),
+    incorrect = "Look for the functions that use some_object either as an input 
+                 or as an output - these are the ones that are working with that 
+                 data",
+    allow_retry = TRUE,
+    random_answer_order = FALSE
+  )
+)
+```
 
+### Easier code reuse
 
+For similar reasons it's much easier to take a function and use it in another script than it is to copy and paste parts of the code. A function makes it easy to see where the code you want starts and ends, and see what inputs the code needs and the output it returns. 
 
-
-#### Possible quiz: where to look to see where some_object is being processed
-
-
-
+You can simply copy and paste function definitions from one script to another, or you can have a separate file for your function definitions that you source into your scripts as needed (see the Sourcing functions section in Assorted tips).
 
 
 ### Reduce duplication of code
@@ -304,7 +321,6 @@ get_split = function(data, groups) {
     data %>%
     group_by(across(groups_with_status)) %>%
     summarise(num_appts = n(), .groups="drop") %>%
-    appt_counts %>%
     pivot_wider(names_from=derived_appt_status, values_from=num_appts) %>%
     mutate(dna_pc = round(DNA / (Attended + DNA) * 100, digits=2)) 
   
@@ -328,7 +344,7 @@ split_hbres = get_split(appt_past_joined, "hb2019name")
 split_hbres_age = get_split(appt_past_joined, c("hb2019name", "pub_age_group"))
 ```
 
-If we hadn't defined a function?
+If we hadn't defined a function, it would look like this:
 
 ```{r example-split-functionless, echo=TRUE, eval=FALSE}
 
@@ -355,7 +371,7 @@ split_age =
 
 split_hbres =
   appt_past_joined %>%
-  group_by(hb2019name, derived_appt_status) %>%
+  group_by(hb2019name, derived_status) %>%
   summarise(num_appts = n(), .groups = "drop") %>%
   pivot_wider(names_from = derived_appt_status, values_from = num_appts) %>%
   mutate(dna_pc = round(DNA / (Attended + DNA) * 100, digits = 2))
@@ -369,21 +385,41 @@ split_hbres_age =
   
 ```
 
-The main advantage to the function approach is that all of the code is kept in one place. Imagine spotting a mistake in the DNA calculation here, or deciding to make an improvement to the code. Instead of making changes in five separate places, you only need to modify the function definition. That's faster than changing it in 5 different places, you don't need to check all of those 5 places to see if there are minor differences in any of them, and there's no risk of forgetting to change it in any of the places.
+The main advantage to the function approach is that all of the code is kept in one place. Imagine spotting a mistake in the DNA calculation here, or deciding to make an improvement to the code. Instead of making changes in 5 separate places, you only need to modify the function definition. That's faster than changing it in 5 different places, you don't need to check all of those 5 places to see if there are minor differences in any of them, and there's no risk of forgetting to change it in any of the places.
 
-### Easier code reuse
+Unconvinced? There's an error in the code above, that could easily have been introduced when making a change in real life - how easy is it to find?
 
-It's much easier to take a function and use it in another script than it is to copy and paste parts of the code. A function makes it easy to see where the code you want starts and ends, and see what inputs the code needs and the output it returns.
+```{r quiz-duplication}
+
+error_string = 
+  "It's in split_hbres - derived_status in the group_by() should be 
+  derived_appt_status like in all of the other group_by calls. Working with 
+  duplicated code multiplies the opportunities for introducing this kind of 
+  error and makes them harder to spot."
+
+quiz(
+  question("The code generating which object contains the error?",
+    answer("split_simd", correct = FALSE),
+    answer("split_ur", correct = FALSE),
+    answer("split_age", correct = FALSE),
+    answer("split_hbres", correct = TRUE, message = error_string),
+    answer("split_hbres_age", correct = FALSE),
+    answer("I agree, functions are the way! Tell me the answer", 
+           correct = TRUE, message = error_string),
+    incorrect = "It's not easy to find, feel free to just ask for the answer.",
+    type = "learnr_radio",
+    allow_retry = TRUE,
+    random_answer_order = FALSE
+  )
+)
+```
 
 
+### Unit testing
 
+Unit testing is a more advanced topic that you might come back to later in your journey with functions. Essentially it involves creating automated tests that check your functions are acting in the way they should, reducing the chance of introducing bugs both when the functions are first written and when they are later modified.
 
-
-#### Possibly annoying task - make user transfer code between examples twice, once where a function was used, once where one wasn't
-
-
-
-
+The [testthat](https://testthat.r-lib.org/) package can be used for unit testing in R, and writing tests is covered in the [R Packages](https://r-pkgs.org/testing-basics.html) book. 
 
 
 ### When are functions not so useful?
@@ -395,12 +431,7 @@ The more of these are true, the less likely it is worth the time to define funct
 * Code will not be useful in any other scripts
 * Code isn't being duplicated in different parts of the script
 
-
-
-
-
-
-#### Good place for a quiz
+Writing code in functions can take a little longer than it would otherwise, depending on the situation, so don't feel you need to put everything you do inside functions. But remember that the time investment is often worth it.
 
 
 ## Inputs and Outputs
