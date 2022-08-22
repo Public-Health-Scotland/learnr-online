@@ -1,0 +1,65 @@
+---
+title: "R Packages"
+output: 
+  learnr::tutorial:
+    css: "css/style.css"
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What is an R package?
+
+An R package is essentially a collection of R function definitions. They usually also include helpful information about each function, examples of how to use them and tests to make sure they work as they should.
+
+### Structure of an R package
+
+### Where are R packages? (GitHub and CRAN)
+
+## Contributing to an R package
+
+There are two main reasons you might want to contribute to an R package:
+- To expand what it can do (e.g., by adding a new function)
+- To address a problem/issue within the package
+
+### Adding new functions
+
+You may have an idea for a function that would fit in well with a package.
+Perhaps you have written a function that you often use in conjunction with that package.
+
+For example, if you use `create_age_groups()` from our {phsmethods} package, you might find that you often want to summarise a dataset by age group after those groups have been created. So you could write a function that does this, and propose that it be added to {phsmethods} for others to use.
+
+To add a function to a package, you will usually have to 'fork' or add a branch to the package's repository on GitHub. Then you can make changes to the package's code safely, without worrying about disrupting the package until you are finished making your changes.
+
+Once you have done this you can create a new file in the folder named "R", where the R functions associated with a package are stored. The file should be named something like function-name.R, where you substitute "function-name" for the actual function name. Our new function for {phsmethods} will be called `mean_by_age()` so we will create a new file in the 'R' folder called 'mean_by_age.R'
+
+Inside that file, we will write the code that defines our function. In this case, we will make a function that takes a dataframe, the name of the column containing age groups and the name of the column we want to summarise.
+
+```{r}
+mean_by_age <- function(data, age_col, summary_col) {
+  data %>% group_by(across(age_col)) %>% 
+    summarise(
+      mean_age = mean(.data[[summary_col]])
+    )
+}
+```
+
+### Correcting/improving existing functions
+
+### Publishing your contributions
+
+## Creating an R package
+
+### Writing functions
+
+### Writing documentation
+
+### Writing tests
+
+### Publishing the package
+
+## Resources
