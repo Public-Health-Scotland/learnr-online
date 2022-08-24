@@ -806,11 +806,11 @@ filtered_data
 
 ### Download all resources from a dataset
 
-If you are interested in several resources from a dataset, it can be more efficient to download all resources in one go rather than having to extract each resource individually. This can be done by first extracting the [list of resources](#list_res) from the dataset metadata, then looping through these resource IDs to [download the data](#get_res). 
+If you are interested in several resources from a dataset, it can be more efficient to download all resources in one go rather than having to extract each resource individually. This can be done by first extracting the list of resources from the dataset metadata, then looping through these resource IDs to download the data. 
 
 In some cases, you may also want to merge the resources into a single data-frame - for example, linking up GP Practice Population files from all quarters published, or all geography codes and labels reference files into a single lookup.
 
-The [`get_dataset`](https://github.com/Public-Health-Scotland/phsopendata/blob/master/R/get_dataset.R) function in the [`phsopendata`](hhttps://github.com/Public-Health-Scotland/phsopendata) package can be used to do this, using the dataset name to identify the dataset to retrieve. Note, the dataset name will differ from the display name that appears as the dataset title - you can either extract the dataset name from the [metadata via API](#metadata), or navigate to the dataset in your browser and select the dataset name from the URL:
+The [`get_dataset`](https://github.com/Public-Health-Scotland/phsopendata/blob/master/R/get_dataset.R) function in the [`phsopendata`](hhttps://github.com/Public-Health-Scotland/phsopendata) package can be used to do this, using the dataset name to identify the dataset to retrieve. Note, the dataset name will differ from the display name that appears as the dataset title - you can either extract the dataset name from the metadata via API, or navigate to the dataset in your browser and select the dataset name from the URL:
 opendata.nhs.scot/dataset/ __geography-codes-and-labels__
 
 
