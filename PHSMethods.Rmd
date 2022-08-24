@@ -11,6 +11,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 # Author: Russell McCreath
 # Original Date: Oct 2020
+# Modified by Tina Fu on 15th July 2022
 # Version of R: 3.6.1
 
 library(learnr)
@@ -20,6 +21,7 @@ library(readr)
 library(haven)
 library(dplyr)
 library(phsmethods)
+library(tibble)
 knitr::opts_chunk$set(echo = FALSE)
 
 tutorial_options(
@@ -87,9 +89,9 @@ library(phsmethods)
 ```
 
 
-## age_group()
+## create_age_groups()
 
-The function, `age_group()`, categorises ages into groups. The function takes a number of arguments:
+The function, `create_age_groups()`, categorises ages into groups. The function takes a number of arguments:
 
 - `x` - a vector of numeric values (e.g. `c(1, 2, 3, 21, 18, 88, 91)`)
 - `from` - the start of the smallest age group (*default is 0*)
@@ -103,13 +105,13 @@ The function, `age_group()`, categorises ages into groups. The function takes a 
 
 Have a look and click 'Run Code' below to see the output. Then, change the code to return age groups from 0 to 80 in groups of 10.
 
-```{r age_group-example, exercise=TRUE}
+```{r create_age_groups-example, exercise=TRUE}
 ages <- c(54, 7, 77, 1, 26, 101)
 
-age_group(ages)
+create_age_groups(ages)
 ```
 
-```{r age_group-example-check}
+```{r create_age_groups-example-check}
 grade_result(
   pass_if(~ identical(.result, c("50-59", "0-9", "70-79", "0-9", "20-29", "80+"))),
   fail_if(~ identical(.result, c("50-54", "5-9", "75-79", "0-4", "25-29", "90+")), message = "Have you changed the groups? Read the exercise again and use the list of arguments above to construct the right function."),
@@ -146,7 +148,8 @@ The result of `chi_check()` is a character string. Depending on the validity of 
 - 'Too few characters'
 - 'Invalid date'
 - 'Invalid checksum'
-- 'Missing'
+- 'Missing (NA)'
+- 'Missing (Blank)'
 
 Have a look and click 'Run Code' below to see the output.
 
@@ -165,7 +168,7 @@ quiz(
     answer("Too few characters"),
     answer("Invalid date"),
     answer("Invalid checksum", correct = TRUE),
-    answer("Missing"),
+    answer("Missing (Blank)"),
     incorrect = "Not quite. Try running the CHI number in the code chunk above.",
     allow_retry = TRUE,
     random_answer_order = TRUE
@@ -255,16 +258,16 @@ quiz(
 ```
 
 
-## fin_year()
+## extract_fin_year()
 
-The function, `fin_year()`, takes a date and assigns to a financial year in the PHS specified format `YYYY/YY`, e.g. 2017/18. The function takes only 1 argument, the date. The date which is supplied must be in the class `Date` or `POSIXct`, `as.Date()`, `lubridate::dmy()` and `as.POSIXct()` are examples of functions which can be used to store dates as an appropriate class.
+The function, `extract_fin_year()`, takes a date and assigns to a financial year in the PHS specified format `YYYY/YY`, e.g. 2017/18. The function takes only 1 argument, the date. The date which is supplied must be in the class `Date` or `POSIXct`, `as.Date()`, `lubridate::dmy()` and `as.POSIXct()` are examples of functions which can be used to store dates as an appropriate class.
 
 Have a look and click 'Run Code' below to see the output.
 
-```{r fin_year-example, exercise=TRUE}
+```{r extract_fin_year-example, exercise=TRUE}
 dates <- lubridate::dmy(c(21012017, 04042017, 17112017))
 
-fin_year(dates)
+extract_fin_year(dates)
 ```
 
 
@@ -306,9 +309,9 @@ match_area(areas)
 ```
 
 
-## postcode()
+## format_postcode()
 
-The `postcode()` function takes a character string or vector of character strings, extracts the input values which adhere to the standard UK postcode format (with or without spaces), and formats by assigning the appropriate spacing to them (for pc7 and pc8 formats) and ensures all letters are capitalised. The function takes two arguments:
+The `format_postcode()` function takes a character string or vector of character strings, extracts the input values which adhere to the standard UK postcode format (with or without spaces), and formats by assigning the appropriate spacing to them (for pc7 and pc8 formats) and ensures all letters are capitalised. The function takes two arguments:
 
 - `x`- a character string or vector of character strings. This input is validated and must be in the standard UK postcode format (excluding case and spacing). Any values not in this format will result in an `NA` and warning (warnings will not prevent the execution of a whole vector, compared to errors which will stop all execution of the function). Warnings are also generated where input contains lower case letters to explain that they will be capitalised.
 - `format` - a character string to determine the desired output format. Options are 'pc7' and 'pc8' (*default is 'pc7'*)
@@ -324,14 +327,14 @@ The standard format for UK postcodes is:
 - 1 number - followed by
 - 2 letters
 
-*[UK government regulations](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/283357/ILRSpecification2013_14Appendix_C_Dec2012_v1.pdf) mandate which letters and numbers can be used in specific sections of a postcode. However, these regulations are liable to change over time. For this reason, `postcode()` does not validate whether a given postcode actually exists, or whether specific numbers and letters are being used in the appropriate places. It only assesses whether the given input is consistent with the above format and, if so, assigns the appropriate amount of spacing and capitalises any lower case letters.*
+*[UK government regulations](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/283357/ILRSpecification2013_14Appendix_C_Dec2012_v1.pdf) mandate which letters and numbers can be used in specific sections of a postcode. However, these regulations are liable to change over time. For this reason, `format_postcode()` does not validate whether a given postcode actually exists, or whether specific numbers and letters are being used in the appropriate places. It only assesses whether the given input is consistent with the above format and, if so, assigns the appropriate amount of spacing and capitalises any lower case letters.*
 
 Have a look and click 'Run Code' below to see the output. Read the warnings output and see if you can understand where they've come from.
 
-```{r postcode-example, exercise=TRUE}
+```{r format_postcode-example, exercise=TRUE}
 postcodes <- c("G26QE", "KA89NB", "PA152TY", "G 4 2 9 B A", "g207al", "Dg98bS", "DD37J    y", "80210")
 
-postcode(postcodes)
+format_postcode(postcodes)
 ```
 
 #### Exercise 
@@ -341,7 +344,7 @@ Have a look and click 'Run Code' below to see the output. The default format is 
 ```{r pc8-example, exercise=TRUE}
 postcodes_pc8 <- c("G26QE", "KA89NB", "PA152TY", "G 4 2 9 B A", "g207al", "Dg98bS", "DD37J    y", "80210")
 
-postcode(postcodes_pc8)
+format_postcode(postcodes_pc8)
 ```
 
 ```{r pc8-example-check}
@@ -454,6 +457,145 @@ grade_result(
 )
 ```
 
+
+## age_calculate()
+
+This function, `age_calculate()`, calculates the age between two dates using `lubridate`. It calculates age in either years or months. The function takes four arguments:
+
+- `start` - A start date (e.g. date of birth) which must be supplied with `Date` or `POSIXct` or `POSIXlt` class. `as.Date()`, `lubridate::dmy()` and `as.POSIXct()` are examples of functions which can be used to store dates as an appropriate class.
+
+- `end` - An end date which must be supplied with `Date` or `POSIXct` or `POSIXlt` class. Default is `Sys.Date()` or `Sys.time()` depending on the class of `start`.
+
+- `units` - Type of units to be used. years and months are accepted. Default is `years`.
+
+- `round_down` - Should returned ages be rounded down to the nearest whole number. Default is `TRUE`.
+
+Have a look and click ‘Run Code’ below to see the output.
+
+```{r age_calculate-example, exercise=TRUE}
+my_date <- as.Date("2020-02-29")
+end_date <- as.Date("2022-07-11")
+
+age_calculate(my_date, end_date)
+```
+
+
+## dob_from_chi()
+
+This function, `dob_from_chi()`, takes a CHI number or a vector of CHI numbers and returns the DoB as implied by the CHI number(s). If the DoB is ambiguous it will return `NA`. The function takes four arguments:
+
+- `chi_number` - a CHI number or a vector of CHI numbers with `character` class. 
+
+- `min_date` and `max_date` - optional min and/or max dates that the Date of Birth could take as the century needs to be guessed. Must be either length 1 for a 'fixed' date, or the same length as `chi_number` for a date per CHI number if it's a vector. `min_date` can be date based on common sense in the dataset, whilst `max_date` can be date when an event happens such as discharge date.
+
+- `chi_check` - logical, optionally skip checking the CHI for validity which will be faster but should only be used if you have previously checked the CHI(s). The default (`TRUE`) will check the CHI numbers.
+
+Have a look and click ‘Run Code’ below to see the output.
+
+```{r dob_from_chi-example, exercise=TRUE}
+data <- tibble(chi = c(
+  "0101336489",
+  "0101405073",
+  "0101625707"
+), adm_date = as.Date(c(
+  "1950-01-01",
+  "2000-01-01",
+  "2020-01-01"
+)))
+
+data %>%
+  mutate(chi_dob = dob_from_chi(chi,
+    min_date = as.Date("1930-01-01"),
+    max_date = adm_date
+  ))
+```
+
+#### Exercise
+
+In the last example, we set the minimum date as `1930-01-01`. How about changing it to `1940-01-01` and see what happens? 
+
+```{r min_date-example, exercise=TRUE}
+data <- tibble(chi = c(
+  "0101336489",
+  "0101405073",
+  "0101625707"
+), adm_date = as.Date(c(
+  "1950-01-01",
+  "2000-01-01",
+  "2020-01-01"
+)))
+
+data %>%
+  mutate(chi_dob = dob_from_chi(chi,
+    min_date = as.Date("1930-01-01"),
+    max_date = adm_date
+  ))
+```
+
+```{r min_date-example-check}
+grade_result(
+  pass_if(~ identical(.result[[1, 3]], as.Date(NA))),
+  fail_if(~ identical(.result[[1, 3]], as.Date("1933-01-01")), message = "Try changing the minimum date to 1940-01-01."),
+  fail_if(~ TRUE)
+)
+```
+
+As you can see the date of birth of the first record is `NA`, as it can either be 1933 or 2033 - 1933 is not within the range between minimum year 1940 and admission year 1950, 2033 is a future year, so it has to be returned as `NA`. 
+
+## age_from_chi()
+
+This function, `age_from_chi()`, takes a CHI number or a vector of CHI numbers and returns the age as implied by the CHI number(s). If the DoB is ambiguous it will return `NA`. It uses `dob_from_chi`. The function takes five arguments:
+
+- `chi_number` - a CHI number or a vector of CHI numbers with `character` class.
+
+- `ref_date` - calculate the age at this date, default is to use `Sys.Date()` i.e. today.
+
+- `min_age` and `max_age` - optional min and/or max dates that the Date of Birth could take as the century needs to be guessed. Must be either length 1 for a 'fixed' age, or the same length as `chi_number` for an age per CHI number if it's a vector. `min_age` can be age based on common sense in the dataset, whilst `max_age` can be age when an event happens such as the age at discharge.
+
+- `chi_check` - logical, optionally skip checking the CHI for validity which will be faster but should only be used if you have previously checked the CHI(s), the default (`TRUE`) will to check the CHI numbers.
+
+Have a look and click ‘Run Code’ below to see the output.
+
+```{r age_from_chi-example, exercise=TRUE}
+data <- tibble(chi = c(
+  "0101336489",
+  "0101405073",
+  "0101625707"
+), dis_date = as.Date(c(
+  "1950-01-01",
+  "2000-01-01",
+  "2020-01-01"
+)))
+
+data %>%
+  mutate(chi_age = age_from_chi(chi))
+```
+
+#### Exercise
+
+In the last example, the default ref_date is date of today. How about calculating the age at date of discharge (dis_date)?
+
+```{r dis_date-example, exercise=TRUE}
+data <- tibble(chi = c(
+  "0101336489",
+  "0101405073",
+  "0101625707"
+), dis_date = as.Date(c(
+  "1950-01-01",
+  "2000-01-01",
+  "2020-01-01"
+)))
+
+data %>%
+  mutate(chi_age = age_from_chi(chi))
+```
+
+```{r dis_date-example-check}
+grade_result(
+  pass_if(~ identical(.result[[3]], c(17, 60, 58))),
+  fail_if(~ TRUE, "Try changing the reference date to discharge date.")
+)
+```
 
 ## Help & Feedback
 
