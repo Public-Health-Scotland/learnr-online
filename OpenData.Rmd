@@ -79,7 +79,7 @@ quiz(
 
 ### Scottish Health and Social Care Open Data
 
-The [Scottish Health and Social Care Open Data Portal](opendata.nhs.scot) provides a single location for all health and social care organisations in Scotland to release open data. The minimum requirements for open data on this platform are set out in the [Scottish Government Open Data Strategy](https://www.gov.scot/publications/open-data-strategy/). This strategy seeks to create a Scotland where non-personal and non-commercially sensitive data from public services is recognised as a resource for wider societal use and as such is made open in an intelligent manner and available for re-use by others.
+The [Scottish Health and Social Care Open Data Portal](https://www.opendata.nhs.scot/) provides a single location for all health and social care organisations in Scotland to release open data. The minimum requirements for open data on this platform are set out in the [Scottish Government Open Data Strategy](https://www.gov.scot/publications/open-data-strategy/). This strategy seeks to create a Scotland where non-personal and non-commercially sensitive data from public services is recognised as a resource for wider societal use and as such is made open in an intelligent manner and available for re-use by others.
 
 Providing a single platform for the Scottish Health and Social Care data makes it much easier for users to explore the rich health and care data landscape that exists in Scotland. Users of open data are from a wide range of backgrounds: from individual citizens, health and care professionals, government and public sector, academic researchers and private businesses. 
 
