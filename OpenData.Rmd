@@ -613,9 +613,17 @@ All explored in the next chapter, you can:
 
 ## Using the CKAN API
 
+### Use the CKAN R Package
+
+The CKAN API uses web tools, however a CKAN R package, `ckanr`, has been developed that simplifies this process. If this is your first time using it, you'll need to install it. This has already been done for this application but when working on RStudio, you'll need to make sure you have the package installed, and then loaded for the session your using. To install:
+
+```{r ckanr_install, eval=FALSE, echo=TRUE}
+install.packages("ckanr")
+```
+
 ### Connect to CKAN
 
-First, we have to set up a connection to the Scottish Health and Social Care Open Data CKAN platform. You can do this easily with a handy function from the `ckanr` package:
+Then, we have to set up a connection to the Scottish Health and Social Care Open Data CKAN platform. You can do this easily with a handy function from the `ckanr` package:
 
 ```{r ckan_setup, echo=TRUE}
 ckanr_setup(url = "https://www.opendata.nhs.scot/")
