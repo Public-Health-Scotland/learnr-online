@@ -66,9 +66,9 @@ There are some examples designed to accompany this course, these can either be c
 
 #### What is openxlsx?
 
-Openxslx is an R package that allows us to read, write and edit xlsx files from within the RStudio interface. This will let us automate the creation and formatting of the excel files that usually accompany our publications. 
+Openxslx is an R package that allows us to read, write and edit xlsx files from within the RStudio interface. This will let us automate the creation and formatting of the Excel files that usually accompany our publications. 
 
-The process to create these excel publication files is usually very manual and involves several copy/paste steps. This can result in errors with data being pasted in the wrong place or wrong format which can have serious consequences. For example, in 2003 the Candian power company TransAlta lost $24 million due to a copy paste error causing misaligned rows in a spreadsheet containing bids for contracts. For more examples of excel errors see this [blog post on LinkedIn](https://www.linkedin.com/pulse/7-biggest-excel-mistakes-all-time-andrew-hoag).
+The process to create these Excel publication files is usually very manual and involves several copy/paste steps. This can result in errors with data being pasted in the wrong place or wrong format which can have serious consequences. For example, in 2003 the Candian power company TransAlta lost $24 million due to a copy paste error causing misaligned rows in a spreadsheet containing bids for contracts. For more examples of Excel errors see this [blog post on LinkedIn](https://www.linkedin.com/pulse/7-biggest-excel-mistakes-all-time-andrew-hoag).
 
 This course focuses on the openxlsx package but there are other packages available in R that interact with Excel e.g. [readxl](https://readxl.tidyverse.org/) and [writexl](https://docs.ropensci.org/writexl/). To install the package use the following code:
 
@@ -79,7 +79,7 @@ library(openxlsx)
 
 
 ### Why use Excel?
-You might wonder why we should still provide data in an excel format, aren't dashboards and infographics the way forward? 
+You might wonder why we should still provide data in an Excel format, aren't dashboards and infographics the way forward? 
 
 While dashboards and infographics are a great way of showing results and delivering messages they don't suit everyone. Many of our customers can't access dashboards due to IT setup in their organisations and others may just want the data in a spreadsheet to take away and do their own analysis. 
 
@@ -91,7 +91,7 @@ knitr::include_graphics("images/openxlsx/openxlsx_horst.jfif")
 ## Creating a workbook
 We will start by creating a blank workbook and then slowly build it up by adding tables, charts styles and formatting. 
 
-Let's start by creating a blank excel template that you build on. Note that you can't view it as you go along, only once it is saved out, so you have to keep track of what you are adding. 
+Let's start by creating a blank Excel template that you build on. Note that you can't view it as you go along, only once it is saved out, so you have to keep track of what you are adding. 
 
 The createWorkbook function creates a blank workbook that you can add data and formatting to. There are optional arguments to add the workbook properties title, subject and category. 
 
@@ -215,7 +215,7 @@ iris <- iris
 head (iris)
 ```
 
-First we need to do some data wrangling and produce tables to be included in the excel output:
+First we need to do some data wrangling and produce tables to be included in the Excel output:
 ```{r iris-wrangling, exercise=TRUE}
 # Clean variable names and data
 data <- iris %>%
@@ -238,7 +238,7 @@ count_data <- data %>%
 count_data
 ```
 
-We have two options for writing data out from R to excel, as a static table or as a pivot table. Let's look at the static table option first. We're going to write out the dataset we created with the minimum and maximum petal length for each iris species to the Data tab of the workbook we created:
+We have two options for writing data out from R to Excel, as a static table or as a pivot table. Let's look at the static table option first. We're going to write out the dataset we created with the minimum and maximum petal length for each iris species to the Data tab of the workbook we created:
 
 ```{r echo=TRUE, eval=FALSE}
 writeData(
@@ -326,7 +326,7 @@ knitr::include_graphics("images/openxlsx/openxlsx-with-chart.png")
 ```
 
 ## Adding Formulae
-Let's add an excel function to calculate the total of the second table. We could just add a total row to the dataframe but adding a formula to the excel output allows the output to dynamically update with inputs.
+Let's add an Excel function to calculate the total of the second table. We could just add a total row to the dataframe but adding a formula to the Excel output allows the output to dynamically update with inputs.
 
 ```{r echo=TRUE, eval=FALSE}
 # Create a `Total` row at the bottom of the existing tab=le
@@ -337,7 +337,7 @@ writeData(
   startCol = 2,
   startRow = 16)
 
-# Add the excel formula to calculate the total
+# Add the Excel formula to calculate the total
 writeFormula(
   wb,
   "Data",
@@ -521,7 +521,7 @@ setColWidths(
   # Columns to apply to
   cols = 2, 
   
-  # Width - check within excel by right clicking on column and clicking "Column Width"
+  # Width - check within Excel by right clicking on column and clicking "Column Width"
   widths = 15) 
 ```
 
@@ -584,7 +584,7 @@ saveWorkbook(
 ```
 
 ## What now?
-If you haven't been doing so during the course, have a go at running the code in the [examples script](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-examples.R). Once you're happy with that you can have a go at creating your own excel output! There's an [exercise](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-exercises.R) you can download from GitHub which has some basic tasks to get you started. 
+If you haven't been doing so during the course, have a go at running the code in the [examples script](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-examples.R). Once you're happy with that you can have a go at creating your own Excel output! There's an [exercise](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-exercises.R) you can download from GitHub which has some basic tasks to get you started. 
 
 Once you've done that, why not see where you can apply this in your own team (or beyond...). Good luck!
 
