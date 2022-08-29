@@ -68,7 +68,7 @@ There are some examples designed to accompany this course, these can either be c
 
 Openxslx is an R package that allows us to read, write and edit xlsx files from within the RStudio interface. This will let us automate the creation and formatting of the Excel files that usually accompany our publications. 
 
-The process to create these Excel publication files is usually very manual and involves several copy/paste steps. This can result in errors with data being pasted in the wrong place or wrong format which can have serious consequences. For example, in 2003 the Candian power company TransAlta lost $24 million due to a copy paste error causing misaligned rows in a spreadsheet containing bids for contracts. For more examples of Excel errors see this [blog post on LinkedIn](https://www.linkedin.com/pulse/7-biggest-excel-mistakes-all-time-andrew-hoag).
+The process to create these Excel publication files is usually very manual and involves several copy/paste steps. This can result in errors with data being pasted in the wrong place or wrong format which can have serious consequences. For example, in 2003 the Canadian power company TransAlta lost $24 million due to a copy and paste error causing misaligned rows in a spreadsheet containing bids for contracts. For more examples of Excel errors see this [blog post on LinkedIn](https://www.linkedin.com/pulse/7-biggest-excel-mistakes-all-time-andrew-hoag).
 
 This course focuses on the openxlsx package but there are other packages available in R that interact with Excel e.g. [readxl](https://readxl.tidyverse.org/) and [writexl](https://docs.ropensci.org/writexl/). To install the package use the following code:
 
