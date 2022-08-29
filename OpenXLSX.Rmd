@@ -72,8 +72,11 @@ The process to create these Excel publication files is usually very manual and i
 
 This course focuses on the openxlsx package but there are other packages available in R that interact with Excel e.g. [readxl](https://readxl.tidyverse.org/) and [writexl](https://docs.ropensci.org/writexl/). To install the package use the following code:
 
-```{r install_package}
-#install.packages("openxlsx")
+```{r install_package, echo=TRUE, eval=FALSE}
+# Install openxlsx
+install.packages("openxlsx")
+
+# Load openxlsx
 library(openxlsx)
 ```
 
