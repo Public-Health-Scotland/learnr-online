@@ -516,7 +516,7 @@ This looks much better! But we can do more and add some formatting.
 
 
 ## Formatting 
-Let's add some information to the notes page. Let's add a title, a hyperliked email address and a description of what's contained in the workbook. First we define them:
+Before adding the formatting, we'll add some information to the notes page. Let's add a title, a hyperlinked email address and a description of what's contained in the workbook. First we define them:
 
 ```{r echo=TRUE, eval=FALSE}
 # Title
@@ -531,7 +531,7 @@ class(email) <- "hyperlink"
 notes_text <- paste0("An overview of Fischer's iris data including 2 summary tables and a chart.")
 ```
 
-Then we add them to the Notes page of the workbook:
+Then we add them to the Notes page of the workbook just as we would with data:
 
 ```{r echo=TRUE, eval=FALSE}
 # Adding "Contact details:"
@@ -553,17 +553,17 @@ This looks ok but we could tidy it up a bit. Let's merge the cells containing th
 ```{r echo=TRUE, eval=FALSE}
 # Merge cells for description
 mergeCells(
-# Specify workbook to apply to
-wb, 
-
-# Define worksheet for formatting to apply to
-Name = "Notes",
-
-# Define columns and rows to merge
-cols = 2:7, rows = 7:8)
+  # Specify workbook to apply to
+  wb, 
+  
+  # Define worksheet for formatting to apply to
+  Name = "Notes",
+  
+  # Define columns and rows to merge
+  cols = 2:7, rows = 7:8
+)
 
 # Set row heights and column widths:
-
 setColWidths(
   # Specify workbook to apply to
   wb, 
@@ -575,12 +575,15 @@ setColWidths(
   cols = 2, 
   
   # Width - check within Excel by right clicking on column and clicking "Column Width"
-  widths = 15) 
+  widths = 15
+) 
 ```
 
 ```{r save_8_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-notes-pg2.png")
 ```
+
+</br>
 
 ### Table/Chart Titles and Column Names
 We can also tidy up the table 2 by adding better column names and add titles to both tables and the chart. Let's also apply the header style we defined earlier to the titles:
@@ -610,8 +613,11 @@ writeDataTable(wb, "Data", count_data, startCol = 2, startRow = 18)
 knitr::include_graphics("images/openxlsx/openxlsx-data-titles.png")
 ```
 
+</br>
+Now, the same for the chart worksheet:
+
 ```{r echo=TRUE, eval=FALSE}
-# chart 
+# Chart 
 ## Title
 chart_title <- "Chart 1: Sepal Length by Sepal Width Across Different Species","
 writeData(wb, "Charts", Chart_title, startCol = 2, startRow = 2)
@@ -622,27 +628,35 @@ addStyle(wb, "Charts", header_style, rows = 2, cols = 2)
 knitr::include_graphics("images/openxlsx/openxlsx-with-chart-title.png")
 ```
 
-Finally, let's save out our workbook:
+
+## Export / Save
+
+Finally, all of your hard work can pay off. Let's save out our workbook using the `saveWorkbook()` function:
 
 ```{r echo=TRUE, eval=FALSE}
 saveWorkbook(
   # Workbook to save
   wb = wb,
   
-  # File path to save out - not defined here as working directory is set by the project
+  # File path to save out 
+  # (no path defined here as working directory is set by the project)
   file = "iris_openxlsx_training.xlsx",
   
-  # If a file with the same name exists, do you want to overwrite it? Default is FALSE
-  overwrite = TRUE)
+  # Overwrite of file with same name exists? Default is FALSE
+  overwrite = TRUE
+)
 ```
 
+
+
+
 ## What now?
-If you haven't been doing so during the course, have a go at running the code in the [examples script](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-examples.R). Once you're happy with that you can have a go at creating your own Excel output! There's an [exercise](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-exercises.R) you can download from GitHub which has some basic tasks to get you started. 
+If you haven't been doing so during the course, have a go at running the code in the [examples script](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-examples.R). Once you're happy with that, you can have a go at creating your own Excel output! There's an [exercise](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-exercises.R) you can download from GitHub which has some basic tasks to get you started. 
 
 Once you've done that, why not see where you can apply this in your own team (or beyond...). Good luck!
 
 ```{r openxlsx-remoteR, fig.align='right', out.width="100%"}
-knitr::include_graphics("images/openxlsx/openxlsx-horst-remoteR.png")
+knitr::include_graphics("images/openxlsx/openxlsx-horst-remoteR.jpg")
 ```
 
 
