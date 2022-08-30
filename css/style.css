@@ -71,6 +71,12 @@ img {
   padding-top: 10px;
 }
 
+.supporting-image-right {
+  float: right;
+  width: 400px;
+  padding-top: 10px;
+}
+
 .spss-r-column {
   float: left;
   width: 50%;

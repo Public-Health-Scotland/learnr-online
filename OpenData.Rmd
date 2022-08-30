@@ -79,7 +79,7 @@ quiz(
 
 ### Scottish Health and Social Care Open Data
 
-The [Scottish Health and Social Care Open Data Portal](opendata.nhs.scot) provides a single location for all health and social care organisations in Scotland to release open data. The minimum requirements for open data on this platform are set out in the [Scottish Government Open Data Strategy](https://www.gov.scot/publications/open-data-strategy/). This strategy seeks to create a Scotland where non-personal and non-commercially sensitive data from public services is recognised as a resource for wider societal use and as such is made open in an intelligent manner and available for re-use by others.
+The [Scottish Health and Social Care Open Data Portal](https://www.opendata.nhs.scot/) provides a single location for all health and social care organisations in Scotland to release open data. The minimum requirements for open data on this platform are set out in the [Scottish Government Open Data Strategy](https://www.gov.scot/publications/open-data-strategy/). This strategy seeks to create a Scotland where non-personal and non-commercially sensitive data from public services is recognised as a resource for wider societal use and as such is made open in an intelligent manner and available for re-use by others.
 
 Providing a single platform for the Scottish Health and Social Care data makes it much easier for users to explore the rich health and care data landscape that exists in Scotland. Users of open data are from a wide range of backgrounds: from individual citizens, health and care professionals, government and public sector, academic researchers and private businesses. 
 
@@ -613,9 +613,17 @@ All explored in the next chapter, you can:
 
 ## Using the CKAN API
 
+### Use the CKAN R Package
+
+The CKAN API uses web tools, however a CKAN R package, `ckanr`, has been developed that simplifies this process. If this is your first time using it, you'll need to install it. This has already been done for this application but when working on RStudio, you'll need to make sure you have the package installed, and then loaded for the session your using. To install:
+
+```{r ckanr_install, eval=FALSE, echo=TRUE}
+install.packages("ckanr")
+```
+
 ### Connect to CKAN
 
-First, we have to set up a connection to the Scottish Health and Social Care Open Data CKAN platform. You can do this easily with a handy function from the `ckanr` package:
+Then, we have to set up a connection to the Scottish Health and Social Care Open Data CKAN platform. You can do this easily with a handy function from the `ckanr` package:
 
 ```{r ckan_setup, echo=TRUE}
 ckanr_setup(url = "https://www.opendata.nhs.scot/")
@@ -798,11 +806,11 @@ filtered_data
 
 ### Download all resources from a dataset
 
-If you are interested in several resources from a dataset, it can be more efficient to download all resources in one go rather than having to extract each resource individually. This can be done by first extracting the [list of resources](#list_res) from the dataset metadata, then looping through these resource IDs to [download the data](#get_res). 
+If you are interested in several resources from a dataset, it can be more efficient to download all resources in one go rather than having to extract each resource individually. This can be done by first extracting the list of resources from the dataset metadata, then looping through these resource IDs to download the data. 
 
 In some cases, you may also want to merge the resources into a single data-frame - for example, linking up GP Practice Population files from all quarters published, or all geography codes and labels reference files into a single lookup.
 
-The [`get_dataset`](https://github.com/Public-Health-Scotland/phsopendata/blob/master/R/get_dataset.R) function in the [`phsopendata`](hhttps://github.com/Public-Health-Scotland/phsopendata) package can be used to do this, using the dataset name to identify the dataset to retrieve. Note, the dataset name will differ from the display name that appears as the dataset title - you can either extract the dataset name from the [metadata via API](#metadata), or navigate to the dataset in your browser and select the dataset name from the URL:
+The [`get_dataset`](https://github.com/Public-Health-Scotland/phsopendata/blob/master/R/get_dataset.R) function in the [`phsopendata`](hhttps://github.com/Public-Health-Scotland/phsopendata) package can be used to do this, using the dataset name to identify the dataset to retrieve. Note, the dataset name will differ from the display name that appears as the dataset title - you can either extract the dataset name from the metadata via API, or navigate to the dataset in your browser and select the dataset name from the URL:
 opendata.nhs.scot/dataset/ __geography-codes-and-labels__
 
 
