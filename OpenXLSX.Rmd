@@ -110,32 +110,32 @@ Before we can add any data to the workbook we have to create worksheets for the 
 2. A data page
 3. A charts page
 
-To do this we use the addWorksheet command which has a number of arguments:
+To do this we use the `addWorksheet()` function which has a number of arguments:
+
+* `wb` - Name of the workbook we want to add the sheet to, e.g. wb (as created above)
+* `sheetName` - Name the worksheet, e.g. "Notes"
+* `gridLines` - Do we want to show gridlines? TRUE or FALSE
+* `tabColour`	- Colour of the worksheet tab, either a colour belonging to `colours()` or a hex code beginning with "#", e.g. "#433683"
+* `zoom` - Worksheet zoom percentage, between 10 and 400
+* `header` - Option to add header, vector of length 3 (left, centre, right). There are some built in options e.g. page numbers, date, time, and file name
+* `footer` - Option to add footer, vector of length 3 (left, centre, right). There are some built in options e.g. page numbers, date, time, and file name
+* `visible`	- Should the sheet be visible? If FALSE, sheet is hidden
+* `orientation`	- "portrait" or "landscape"
+
+It's not necessary to use all arguments. Here's an example of how that might look:
 
 ```{r echo=TRUE, eval=FALSE}
 addWorksheet(
-
-wb = Name of the workbook we want to add the sheet to e.g. wb1,
-
-sheetName = Name the worksheet e.g. "Notes",
-
-gridLines = Do we want to show gridlines? TRUE or FALSE,
-
-tabColour	= Colour of the worksheet tab, 
-
-zoom	= Worksheet zoom percentage, between 10 and 400, 
-
-header = Option to add header, Vector of length 3 (left, centre, right). There are some built in options e.g. page numbers, date, time, filename, 
-
-footer = Option to add footer, Vector of length 3 (left, centre, right). There are some built in options e.g. page numbers, date, time, filename, 
-
-visible	= Should sheet be visible? If FALSE, sheet is hidden, 
-
-orientation	 = "portrait" or "landscape"
-
+  wb = wb,
+  sheetName = "Notes",
+  gridLines = TRUE,
+  tabColour	= "#433683", 
+  zoom = 100, 
+  visible	= TRUE
 )
-
 ```
+
+Now let's use this knowledge to create our 3 worksheets: Notes, Data, and Charts.
 
 #### 1 - Notes page:
 ```{r echo=TRUE, eval=FALSE}
