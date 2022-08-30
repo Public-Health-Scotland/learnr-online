@@ -135,72 +135,80 @@ addWorksheet(
 )
 ```
 
+</br>
+
 Now let's use this knowledge to create our 3 worksheets: Notes, Data, and Charts.
 
 #### 1 - Notes page:
 ```{r echo=TRUE, eval=FALSE}
 # Add Notes Page
 addWorksheet(
-# Name of the workbook we want to add the sheet to
-wb = wb,
-
-# Define the name of the worksheet 
-sheetName = "Notes",
-
-# Do we want to show gridlines? The default is TRUE so we have to specify if we don't want them
-gridLines = FALSE,
-
-# Add headers - as a character vector for positions left, centre and right
-# You can use some in built things
-# (such as page numbers, date, time, filename etc)
-header = c("&[Date]", NA, NA))
+  # Name of the workbook we want to add the sheet to
+  wb = wb,
+  
+  # Define the name of the worksheet 
+  sheetName = "Notes",
+  
+  # Do we want to show gridlines? The default is TRUE so we have to specify if we don't want them
+  gridLines = FALSE,
+  
+  # Add headers - as a character vector for positions left, centre and right
+  # You can use some in built things
+  # (such as page numbers, date, time, file name etc)
+  header = c("&[Date]", NA, NA)
+)
 ```
+</br>
 
 #### 2 - Data Page:
 ```{r echo=TRUE, eval=FALSE}
 # Add Data Page
 addWorksheet(
-# Name of the workbook we want to add the sheet to
-wb = wb,
-
-# Define the name of the worksheet 
-sheetName = "Data",
-
-# Do we want to show gridlines? The default is TRUE so we have to specify if we don't want them
-gridLines = FALSE,
-
-# Colour of the tab - either use from colours() list or use hex code (optional)
-tabColour = "red", # Uses in built colour
-
-# Add headers - as a character vector for positions left, centre and right
-# You can use some in built things
-# (such as page numbers, date, time, filename etc)
-header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"))
+  # Name of the workbook we want to add the sheet to
+  wb = wb,
+  
+  # Define the name of the worksheet 
+  sheetName = "Data",
+  
+  # Do we want to show gridlines? The default is TRUE so we have to specify if we don't want them
+  gridLines = FALSE,
+  
+  # Colour of the tab - either use from colours() list or use hex code (optional)
+  tabColour = "red", # Uses in built colour
+  
+  # Add headers - as a character vector for positions left, centre and right
+  # You can use some in built things
+  # (such as page numbers, date, time, file name etc)
+  header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT")
+)
 ```
+</br>
 
 #### 3 - Charts Page:
 ```{r echo=TRUE, eval=FALSE}
 # Add Charts Page
 addWorksheet(
-# Name of the workbook we want to add the sheet to
-wb = wb,
-
-# Define the name of the worksheet 
-sheetName = "Charts",
-
-# Do we want to show gridlines? The default is TRUE so we have to specify if we don't want them
-gridLines = FALSE,
-
-# Colour of the tab - either use from colours() list or use hex code (optional)
-tabColour = "blue", # Uses in built colour
-
-# Add headers - as a character vector for positions left, centre and right
-# You can use some in built things
-# (such as page numbers, date, time, filename etc)
-header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"))
+  # Name of the workbook we want to add the sheet to
+  wb = wb,
+  
+  # Define the name of the worksheet 
+  sheetName = "Charts",
+  
+  # Do we want to show gridlines? The default is TRUE so we have to specify if we don't want them
+  gridLines = FALSE,
+  
+  # Colour of the tab - either use from colours() list or use hex code (optional)
+  tabColour = "blue", # Uses in built colour
+  
+  # Add headers - as a character vector for positions left, centre and right
+  # You can use some in built things
+  # (such as page numbers, date, time, file name etc)
+  header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT")
+)
 ```
+</br>
 
-This gives a blank workbook with named tabs (see image below) but no data! In the next section we'll add some tables to the workbook.
+All of this gives a blank workbook with named tabs (see image below)... but no data! In the next section we'll add some tables to the workbook.
 
 ```{r save_1_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-blank-workbook.png")
