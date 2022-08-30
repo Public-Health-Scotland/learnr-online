@@ -328,32 +328,35 @@ iris_viz <- iris_data %>%
 iris_viz
 ```
 
-Openxlsx automatically adds the most recently used plot to the workbook. The easiest way to make sure you use the correct chart is to print the chart you want and then add it. 
+openxlsx automatically adds the most recently used plot to the workbook. The easiest way to make sure you use the correct chart is to print the chart you want and then add it using the `insertPlot()` function. 
 
 ```{r echo=TRUE, eval=FALSE}
 # Print chart
 print(graph1)
 
-insertPlot(wb = wb, 
-
-          # Sheet number/name
-           sheet = "Charts",
-           
-           # Width/height of the graph - you might need to play around to get the right ratio
-           width = 6, 
-           height = 4, 
-           
-           # Define where the top and left corner of the chart should sit
-           startRow = 4, 
-           startCol = 2, 
-           
-           # Resolution of the chart
-           dpi = 300) 
+insertPlot(
+  wb = wb, 
+  
+  # Sheet number/name
+  sheet = "Charts",
+  
+  # Dimensions - you might need to play around to get the right ratio
+  width = 6, 
+  height = 4, 
+  
+  # Define where the top and left corner of the chart should sit
+  startRow = 4, 
+  startCol = 2, 
+  
+  # Resolution of the chart
+  dpi = 300
+)
 ```
 
 ```{r save_4_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-with-chart.png")
 ```
+
 
 ## Adding Formulae
 Let's add an Excel function to calculate the total of the second table. We could just add a total row to the dataframe but adding a formula to the Excel output allows the output to dynamically update with inputs.
