@@ -223,7 +223,7 @@ Let's look at the iris data:
 iris <- iris
 
 # Look at the first 5 rows of the iris data
-head (iris)
+head(iris)
 ```
 
 First we need to do some data wrangling and produce tables to be included in the Excel output:
@@ -249,11 +249,16 @@ count_data <- data %>%
 count_data
 ```
 
-We have two options for writing data out from R to Excel, as a static table or as a pivot table. Let's look at the static table option first. We're going to write out the dataset we created with the minimum and maximum petal length for each iris species to the Data tab of the workbook we created:
+We have two options for writing data out from R to Excel, as a static table or as a pivot table. Let's look at the static table option first. 
+
+
+### Static Tables
+
+We're going to write out the dataset we created with the minimum and maximum petal length for each iris species to the Data tab of the workbook we created using the `writeData()` function:
 
 ```{r echo=TRUE, eval=FALSE}
 writeData(
-# Name of the workbook we want to add the sheet to
+  # Name of the workbook we want to add the sheet to
   wb = wb,
   
   # Name of tab to save the data to 
@@ -262,16 +267,20 @@ writeData(
   # Name of the dataset we want to write out
   min_max_data, 
   
-  # Row and column we want the top left cell of the data to be in
-  startCol = 2, 
-  startRow = 4)
+  # Column we want the data to start from
+  startCol = 2,
+  # Row we want the data to start from 
+  startRow = 4
+)
 ```
 
 ```{r save_2_screenshot, fig.align='right', out.width="100%"}
 knitr::include_graphics("images/openxlsx/openxlsx-table1.png")
 ```
 
-We can aso write data to a pivot table. We'll use the dataset containing the count of iris species for this:
+
+### Pivot Tables
+We can also write data to a pivot table. We'll use the dataset containing the count of iris species and the `writeDataTable()` function for this:
 
 ```{r echo=TRUE, eval=FALSE}
 writeDataTable(
@@ -284,9 +293,11 @@ writeDataTable(
   # Name of the object we want to write out
   count_data,
 
-  # Row and column we want to have the top left cell of the data in
+  # Column we want the data to start from
   startCol = 2,
-  startRow = 12)
+  # Row we want the data to start from
+  startRow = 12
+)
 ```
 
 ```{r save_3_screenshot, fig.align='right', out.width="100%"}
