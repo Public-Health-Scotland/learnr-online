@@ -389,43 +389,55 @@ We now have all the data we want in our workbook but it doesn't look particularl
 
 
 ## Styles 
-Let's begin by setting a style for the table headers, borders, the contents/totals of any tables and any non-header text:
+Let's begin by creating a style for the headers, tables, the contents/totals of any tables, any non-header text, and a couple of border styles. This is done by creating a new variable and using the `createStyle()` function:
 
 ```{r echo=TRUE, eval=FALSE}
-header_style <- createStyle(fontSize = 11,
-                            fontName = "Arial",
-                            halign = "Left", # Horizontal Align
-                            valign = "Center", # Vertical align
-                            # Can add multiple decorations in a vector
-                            textDecoration = c("bold", "underline"))
+header_style <- createStyle(
+  fontSize = 11,
+  fontName = "Arial",
+  halign = "Left", # Horizontal Align
+  valign = "Center", # Vertical align
+  # Can add multiple decorations in a vector
+  textDecoration = c("bold", "underline")
+)
 
-table_style <- createStyle(fontSize = 11,
-                           fontName = "Arial",
-                           valign = "Bottom",
-                           halign = "Right",
-                           border = "TopBottomLeftRight",
-                           numFmt = "COMMA")
+table_style <- createStyle(
+  fontSize = 11,
+  fontName = "Arial",
+  valign = "Bottom",
+  halign = "Right",
+  border = "TopBottomLeftRight",
+  numFmt = "COMMA"
+)
                            
-total_style <- createStyle(fontSize = 11,
-                          fontName = "Arial",
-                          valign = "Bottom",
-                          halign = "Center",
-                          border = "TopBottomLeftRight",
-                          numFmt = "TEXT",
-                          textDecoration = "bold")
+total_style <- createStyle(
+  fontSize = 11,
+  fontName = "Arial",
+  valign = "Bottom",
+  halign = "Center",
+  border = "TopBottomLeftRight",
+  numFmt = "TEXT",
+  textDecoration = "bold"
+)
                            
-body_style <- createStyle(fontSize = 11,
-                          fontName = "Arial",
-                          valign = "Bottom",
-                          halign = "Left",
-                          border = "TopBottomLeftRight",
-                          numFmt = "TEXT")
+body_style <- createStyle(
+  fontSize = 11,
+  fontName = "Arial",
+  valign = "Bottom",
+  halign = "Left",
+  border = "TopBottomLeftRight",
+  numFmt = "TEXT"
+)
                           
-border_style_dash = createStyle(border = "TopBottomLeftRight",
-                                borderStyle = c("dashed"))
+border_style_dash = createStyle(
+  border = "TopBottomLeftRight",
+  borderStyle = c("dashed")
+)
                                 
-border_style_thick = createStyle(border = "TopBottomLeftRight",
-                                 borderStyle = c("thick"))
+border_style_thick = createStyle(
+  border = "TopBottomLeftRight",
+  borderStyle = c("thick")
+)
 ```
 
 You can also define colours using hex codes and use these colours within styles:
@@ -443,7 +455,7 @@ gray_style = createStyle(
 )
 ```
 
-Let's apply these styles to our workbook, we'll add styles to the tables:
+Let's apply these styles to our workbook, we'll add styles to the tables by using the `addStyle()` function:
 
 ```{r echo=TRUE, eval=FALSE}
 # Add total_style to the total row of table 2
@@ -460,7 +472,8 @@ addStyle(
 
   # Rows and Columns to apply style to
   rows = 16,
-  cols = 2:3)
+  cols = 2:3
+)
   
 # Add border styles to both tables
 addStyle(
@@ -470,7 +483,8 @@ addStyle(
   rows = 4:7, 
   cols = 2:4, 
   gridExpand = TRUE,
-  stack = TRUE)
+  stack = TRUE
+)
 
 addStyle(
   wb,
@@ -479,17 +493,19 @@ addStyle(
   rows = 12:16, 
   cols = 2:3, 
   gridExpand = TRUE,
-  stack = TRUE)
+  stack = TRUE
+)
 
 # Apply colour to background of cells in Table 1           
 addStyle(
-wb,
-"Data", 
-blue_style, 
-rows = 4:7, 
-cols = 2:4, 
-gridExpand = TRUE,
-stack = TRUE)
+  wb,
+  "Data", 
+  blue_style, 
+  rows = 4:7, 
+  cols = 2:4, 
+  gridExpand = TRUE,
+  stack = TRUE
+)
 ```
 
 ```{r save_6_screenshot, fig.align='right', out.width="100%"}
@@ -497,6 +513,7 @@ knitr::include_graphics("images/openxlsx/openxlsx-with-table-styles.png")
 ```
 
 This looks much better! But we can do more and add some formatting.
+
 
 ## Formatting 
 Let's add some information to the notes page. Let's add a title, a hyperliked email address and a description of what's contained in the workbook. First we define them:
