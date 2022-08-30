@@ -359,16 +359,17 @@ knitr::include_graphics("images/openxlsx/openxlsx-with-chart.png")
 
 
 ## Adding Formulae
-Let's add an Excel function to calculate the total of the second table. We could just add a total row to the dataframe but adding a formula to the Excel output allows the output to dynamically update with inputs.
+Let's add an Excel function to calculate the total of the second table, this is done using the `writeFormula()` function. We could just add a total row to the dataframe but adding a formula to the Excel output allows the output to dynamically update with inputs.
 
 ```{r echo=TRUE, eval=FALSE}
-# Create a `Total` row at the bottom of the existing tab=le
+# Create a `Total` row at the bottom of the existing table
 writeData(
   wb,
   "Data",
   x = "Total",
   startCol = 2,
-  startRow = 16)
+  startRow = 16
+)
 
 # Add the Excel formula to calculate the total
 writeFormula(
@@ -376,7 +377,8 @@ writeFormula(
   "Data",
   x = "=SUM(C13:C15)",
   startCol = 3,
-  startRow = 16)
+  startRow = 16
+)
 ```
 
 ```{r save_5_screenshot, fig.align='right', out.width="100%"}
@@ -384,6 +386,7 @@ knitr::include_graphics("images/openxlsx/openxlsx-with-formula.png")
 ```
 
 We now have all the data we want in our workbook but it doesn't look particularly good! In the next section we'll look at how we can use styles and formatting to improve the look of our workbook. 
+
 
 ## Styles 
 Let's begin by setting a style for the table headers, borders, the contents/totals of any tables and any non-header text:
