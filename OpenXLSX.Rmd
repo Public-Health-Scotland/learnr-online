@@ -306,18 +306,26 @@ knitr::include_graphics("images/openxlsx/openxlsx-pivot-table.png")
 
 We now have two tables in the workbook but sometimes we want to display the data visually too. In the next section we'll look at adding charts to the workbook.
 
+
 ## Adding Charts
 Let's create a chart using the iris data and view it:
 
 ```{r iris-chart, exercise=TRUE}
-graph1 <- data %>%
-  ggplot(aes(sepal_length, sepal_width, color = species))+
-  geom_point()+
-  theme_classic()+
-  labs(x="Sepal Length", y="Sepal Width",
-       color = "Species")
+# Clean variable names and data
+iris_data <- iris %>%
+  clean_names() %>%
+  mutate(species = str_to_title(species))
 
-graph1
+# Produce visualisation
+iris_viz <- iris_data %>%
+  ggplot(aes(sepal_length, sepal_width, color = species)) +
+  geom_point() +
+  theme_classic() +
+  labs(x = "Sepal Length", 
+       y = "Sepal Width",
+       colour = "Species")
+
+iris_viz
 ```
 
 Openxlsx automatically adds the most recently used plot to the workbook. The easiest way to make sure you use the correct chart is to print the chart you want and then add it. 
