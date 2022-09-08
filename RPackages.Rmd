@@ -12,9 +12,27 @@ runtime: shiny_prerendered
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## What is an R package?
+## Introduction
 
-An R package is essentially a collection of R function definitions. They usually also include helpful information about each function, examples of how to use them and tests to make sure they work as they should.
+Welcome to R Packages. This course is designed as a self-led introduction for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. This course focusses on building an understanding of packages from a development side, contributing to existing packages, and finally building your own packages.
+
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li><strong>Prerequisite:</strong> [Introduction to R](https://scotland.shinyapps.io/phs-learnr-intro/)</li>
+    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
+### What is an R package?
+
+An R package is essentially a collection of R functions They usually also include helpful information about each function, examples of how to use them and tests to make sure they work as they should. You'll probably be familiar with packages and use them already.
+
+
+## Foundations
 
 ### Structure of an R package
 
