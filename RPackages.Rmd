@@ -14,7 +14,54 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## What is an R package?
 
-An R package is essentially a collection of R function definitions. They usually also include helpful information about each function, examples of how to use them and tests to make sure they work as they should.
+An R package is essentially a collection of R functions. They usually also include helpful information about each function, examples of how to use them and tests to make sure they work as they should.
+
+You are probably familiar with installing and using R packages, e.g.:
+
+```{r familiar, eval = FALSE}
+install.packages('dplyr')
+library(dplyr)
+```
+
+...
+
+If you don't know how to write functions with R, we suggest having a look at our course on that topic <LINK TO FUNCTIONS COURSE> before proceeding with this one.
+
+### What's the point of packages?
+
+The philosophy behind creating R packages is to collate functions written to make a specific task easier. If you do not have your commonly used functions in a package, then you may end up complicating your R scripts by having to define a lot of functions before you can get into what the script is actually supposed to do. For example:
+
+```{r scriptStart, eval = FALSE}
+# functions ---------------------------------------------------------------
+mean_by_age <- function(data) {
+  ...
+  ...
+  ...
+  ...
+}
+
+summarise_column <- function(data, col_name) {
+  ...
+  ...
+  ...
+  ...
+}
+
+more functions...
+...
+...
+
+# start of script ---------------------------------------------------------
+
+The real script...
+
+```
+
+This not only makes scripts more complex and harder to read, but it can mean that you have function definitions across many different scripts. So if you want to make an improvement to one of your functions, you're going to need to find all the places you have defined it and change it in every instance. 
+
+If your functions are not well managed, you can end up with differently defined functions with the same (or similar) names in different scripts. This can give you unexpected results if those functions do slightly different things.
+
+R packages solve these problems by defining your functions in one place, and documenting them. This means that whenever you use a function, you know exactly what it's going to do. And it saves space in your scripts, making them more readable and easier to work on collaboratively.
 
 ### Structure of an R package
 
@@ -23,8 +70,10 @@ An R package is essentially a collection of R function definitions. They usually
 ## Contributing to an R package
 
 There are two main reasons you might want to contribute to an R package:
-- To expand what it can do (e.g., by adding a new function)
 - To address a problem/issue within the package
+- To expand what it can do (e.g., by adding a new function)
+
+### Correcting/improving existing functions
 
 ### Adding new functions
 
@@ -48,7 +97,6 @@ mean_by_age <- function(data, age_col, summary_col) {
 }
 ```
 
-### Correcting/improving existing functions
 
 ### Publishing your contributions
 
