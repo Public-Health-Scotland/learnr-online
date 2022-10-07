@@ -204,6 +204,17 @@ devtools::document()
 
 so it's not meant to be edited by hand. 
 
+*Example NAMESPACE file*
+
+```{r namespace_example, eval=FALSE}
+export(age_calculate)
+export(chi_check)
+export(dob_from_chi)
+export(extract_fin_year)
+importFrom(magrittr,"%<>%")
+importFrom(tibble,tibble)
+```
+
 #### The R/ directory
 
 This directory contains all your R functions. All file extensions should be
@@ -224,9 +235,27 @@ We can use "devtools" to do the package documentations. After running `devtools:
 
 The .R file with the name of your package will also be transferred to .Rd file with the package name saved in man/ directory. 
 
+#### README and NEWS files
+
+We always want to write some instructions about our package in README, so that users can see information about how to install the package and how to use the functions. You can use the following code to create a README.Rmd file:
+
+```{r create_readme, eval=FALSE}
+usethis::use_readme_rmd()
+```
+
+In YAML part of README.Rmd, you can set it as `output: github_document`. You can then click knit and it will automatically build README.md file, which will show on the main page of your package on Github if you upload it onto Github. 
+
+Sometimes you may also like to keep a record about the changes of your package. You can create a NEWS.md file:
+
+```{r create_news, eval=FALSE}
+usethis::use_news_md()
+```
+
+Then you can write the changes of each version in NEWS.md. 
+
 #### Package checks
 
-Before distributing a package, we need to ensure that it passes some basic checks. You can run `devtools::check()` to run through the checks. 
+Before distributing a package, we need to ensure that it passes some basic checks. You can run `devtools::check()` to run through the checks. If it shows any errors you shall fix them before releasing the package. 
 
 ### Writing tests
 
