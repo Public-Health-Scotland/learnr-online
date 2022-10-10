@@ -8,9 +8,9 @@ These applications are hosted online and provide functionality around quizzes an
 * [PHS Methods](https://github.com/Public-Health-Scotland/learnr-online/blob/master/PHSMethods.Rmd) - learning the internally developed R package, `phsmethods`. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-phsmethods/  
 * [Data Visualisation in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/DataViz.Rmd) - building on an the Intro to R course, learn data visualisation with `ggplot2` and an introduction to `plotly`. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-dataviz/ 
 * [Introduction to Open Data](https://github.com/Public-Health-Scotland/learnr-online/blob/master/OpenData.Rmd) - learning what open data is and how it's used in PHS, then getting interactive accessing open data using R. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-opendata/ 
-* [Introduction to OpenXLSX](https://github.com/Public-Health-Scotland/learnr-online/blob/master/OpenXLSX.Rmd) - a course providing an introduction to the `openxlsx`, used to read, write, and edit Excel files from R.
-* [SPSS to R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/SPSStoR.Rmd) - a translation course to work alongside the Introduction to R course with a focus on translating code from SPSS to R. 
-* [SQL in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/SQL.Rmd) - an introductory course for SQL with details of working with SQL and databases inside R.
+* [Introduction to OpenXLSX](https://github.com/Public-Health-Scotland/learnr-online/blob/master/OpenXLSX.Rmd) - a course providing an introduction to the `openxlsx`, used to read, write, and edit Excel files from R. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-openxlsx/ 
+* [SPSS to R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/SPSStoR.Rmd) - a translation course to work alongside the Introduction to R course with a focus on translating code from SPSS to R. Currently hosted here: https://scotland.shinyapps.io/phs-learnr-spsstor/ 
+* [SQL in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/SQL.Rmd) - an introductory course for SQL with details of working with SQL and databases inside R. https://scotland.shinyapps.io/phs-learnr-sql/ 
 
 ### Directories
 As this is a shiny prerendered project, only certain filenames are accessible from within the app. These are outlined below:
