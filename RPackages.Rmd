@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::include_graphics("images/phs-logo.png")
 ```
 
+
 ## Introduction
 
 Welcome to R Packages. This course is designed as a self-led introduction for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. This course focusses on building an understanding of packages from a development side, contributing to existing packages, and finally building your own packages.
@@ -37,7 +38,7 @@ An R package is essentially a collection of R functions They usually also includ
 
 
 ## Foundations
-=======
+
 An R package is essentially a collection of R functions. They usually also include helpful information about each function, examples of how to use them and tests to make sure they work as they should.
 
 You are probably familiar with installing and using R packages, e.g.:
@@ -89,7 +90,7 @@ R packages solve these problems by defining your functions in one place, and doc
 
 ### Structure of an R package
 
-You can use "usethis" package to create an R package. 
+You can use the `{usethis}` package to create an R package. 
 
 ```{r usethis_package, eval=FALSE}
 install.packages("usethis")
@@ -104,39 +105,46 @@ library("usethis")
 create_package(filepath)
 ```
 
-It will create a package structure for you automatically which contains a number of files and directories. The main ones are:
+This will create a package structure for you automatically which contains a number of files and directories. The main ones are:
 
 - a DESCRIPTION file
 - a NAMESPACE file
-- a directory called R/, which contains your R scripts such as functions
-- a directory called man/, which contains your documentation for exposed functions
-- an optional directory src/, which contains code written in C and FORTRAN
-- an optional directory data/, which contains any dataset that you distribute with your package
-- an optional directory demo/, which contains demos scripts
-- an optional directory vignettes/, which contains vignette files (a vignette could be a more detailed documentation)
+- a directory called `R`, which contains your R scripts, such as functions
+- a directory called `man`, which contains your documentation for exposed functions
+- `src`*, which contains code written in C and FORTRAN
+- `data`*, which contains any data-sets that you distribute with your package
+- `demo`*, which contains demos scripts
+- `vignettes`*, which contains vignette files (a vignette could be a more detailed documentation)
+
+\* *These directories are optional*
 
 ### Where are R packages? (GitHub and CRAN)
 
+
+
+
 ## Contributing to an R package
 
-There are two main reasons you might want to contribute to an R package:
-- To address a problem/issue within the package
+There are two main reasons you might want to *contribute* to an R package:
+
+- To address a problem/issue within an existing package
 - To expand what it can do (e.g., by adding a new function)
 
 ### Correcting/improving existing functions
 
+
+
 ### Adding new functions
 
-You may have an idea for a function that would fit in well with a package.
-Perhaps you have written a function that you often use in conjunction with that package.
+You may have an idea for a function that would fit in well with a package. Perhaps you have written a function that you often use in conjunction with that package.
 
-For example, if you use `create_age_groups()` from our {phsmethods} package, you might find that you often want to summarise a dataset by age group after those groups have been created. So you could write a function that does this, and propose that it be added to {phsmethods} for others to use.
+For example, if you use `create_age_groups()` from our `{phsmethods}` package, you might find that you often want to summarise a data-set by age group after those groups have been created. So you could write a function that does this, and propose that it be added to `{phsmethods}` for others to use.
 
-To add a function to a package, you will usually have to 'fork' or add a branch to the package's repository on GitHub. Then you can make changes to the package's code safely, without worrying about disrupting the package until you are finished making your changes.
+To add a function to a package, you should 'fork' or add a branch to the package's repository on GitHub. Then you can make changes to the package's code safely, without worrying about disrupting the package until you are finished making your changes.
 
-Once you have done this you can create a new file in the folder named "R", where the R functions associated with a package are stored. The file should be named something like function-name.R, where you substitute "function-name" for the actual function name. Our new function for {phsmethods} will be called `mean_by_age()` so we will create a new file in the 'R' folder called 'mean_by_age.R'
+Once you have done this you can create a new file in the folder named 'R', where the R functions associated with a package are stored. The file should be named something like `function-name.R`, where you substitute "function-name" for the actual function name. Our new function for `{phsmethods}` will be called `mean_by_age()` so we will create a new file in the 'R' folder called 'mean_by_age.R'
 
-Inside that file, we will write the code that defines our function. In this case, we will make a function that takes a dataframe, the name of the column containing age groups and the name of the column we want to summarise.
+Inside that file, we will write the code that defines our function. In this case, we will make a function that takes a data frame, the name of the column containing age groups, and the name of the column we want to summarise.
 
 ```{r}
 mean_by_age <- function(data, age_col, summary_col) {
@@ -150,38 +158,48 @@ mean_by_age <- function(data, age_col, summary_col) {
 
 ### Publishing your contributions
 
+
+
+
 ## Creating an R package
 
 ### Writing functions
 
+
+
 ### Writing documentation
+
+
 
 #### The DESCRIPTION file
 
 This file contains basic information about this package, such as:
 
-- Package: mypkg - the name you give the package.
-- Type: Package - other types could be data.
-- Title: What the package does (short line) - a single line.
-- Version: 1.0 - should relate to the current release.
-- Date: 2022-09-01 - should relate to the current release.
-- Author: Who wrote it - can be several names.
-- Maintainer: Who to complain to <yourfault@somewhere.net> - one
-name, plus a valid email address.
-- Description: More about what it does (maybe more than one line) - a
-single paragraph.
-- License: What license is it under? - e.g. GPL (>=2).
-• LazyLoad: yes/no - if yes, delays loading of functions until they are required. Usually yes.
+- `Package`: the name you give the package, e.g. mypkg.
+- `Type`: Package - other types could be data.
+- `Title`: what the package does (a short line).
+- `Version`: should relate to the current release number, e.g. 1.0.0
+- `Date`: should relate to the current release date, e.g. 2022-09-01
+- `Author`: the name of the person who wrote it, this can be several names.
+- `Maintainer`: who to complain to <yourfault@somewhere.net> - one name, plus a valid email address.
+- `Description`: more about what it does (maybe more than one line) - a single paragraph.
+- `License`: what license is it under? - e.g. GPL (>=2).
+- `LazyLoad`: yes/no - if yes, delays loading of functions until they are required. Usually yes.
 
 Further important items:
-- Depends, Imports, Suggests, Enhances and LinkingTo. These fields
-contain comma-separated list of packages which are required in order to
-fully run your package. May include details of the version required. For
-example,
+
+- `Depends`
+- `Imports`
+- `Suggests`
+- `Enhances`
+- `LinkingTo`
+
+These fields contain comma-separated list of packages which are required in order tofully run your package. May include details of the version required. For example,
 
 ```{r depends_package, eval=FALSE}
 Depends: R (>= 3.0.0)
 ```
+</br>
 
 #### NAMESPACE file
 
@@ -192,9 +210,9 @@ Typically in a package you don’t want users to access all of your functions. F
 - You will have to write documentation for all exposed functions.
 - It makes it harder to implement future changes.
 
-The NAMESPACE file allows you expose a subset of your functions. For example, to export items a and b use export(a, b). 
+The NAMESPACE file allows you expose a subset of your functions. For example, to export items `a` and `b` use `export(a, b)`. 
 
-This file is automatically generated by roxygen2 after running
+This file is automatically generated by `{roxygen2}` after running:
 
 ```{r devtools_document, eval=FALSE}
 install.packages("devtools")
@@ -202,9 +220,9 @@ install.packages("devtools")
 devtools::document()
 ```
 
-so it's not meant to be edited by hand. 
+so it **should not be edited by hand**. 
 
-*Example NAMESPACE file*
+**Example NAMESPACE file**
 
 ```{r namespace_example, eval=FALSE}
 export(age_calculate)
@@ -214,38 +232,41 @@ export(extract_fin_year)
 importFrom(magrittr,"%<>%")
 importFrom(tibble,tibble)
 ```
+</br>
 
-#### The R/ directory
+#### The `R` directory
 
-This directory contains all your R functions. All file extensions should be
-.R Your functions typically don’t call `require()` or `library()` - instead
-use `importFrom()`. You can create a function file by running
+This directory contains all your R functions. All file extensions should be '.R'. Your functions typically don’t call `require()` or `library()` - instead use `importFrom()`. You can create a function file by running:
 
 ```{r create_function, eval=FALSE}
 usethis::use_r(function_name)
 ```
 
-It will automatically create a function file with the function name you set and get saved in R/ directory. 
+It will automatically create a function file with the function name you set and get saved in the `R` directory. 
 
-You should create a .R file with the name of your package, which will store some information of the package such as a description of the package. You can also use roxygen2 `@importFrom` to import specific functions in certain packages. It will then be automatically added into NAMESPACE file. 
+You should create a .R file with the name of your package, which will store some information of the package such as a description of the package. You can also use `{roxygen2}`s `@importFrom` to import specific functions in certain packages. It will then be automatically added into NAMESPACE file. 
 
-#### Help files: man/ directory
+</br>
 
-We can use "devtools" to do the package documentations. After running `devtools::document()` in Console it will transfer the roxygen2 to help files stored in man/ directory. 
+#### Help files: `man` directory
 
-The .R file with the name of your package will also be transferred to .Rd file with the package name saved in man/ directory. 
+We can use `{devtools}` to do the package documentations. After running `devtools::document()` in the console, it will transfer the `{roxygen2}` to help files stored in `man` directory. 
+
+The .R file with the name of your package will also be transferred to .Rd file with the package name saved in the `man` directory. 
+
+</br>
 
 #### README and NEWS files
 
-We always want to write some instructions about our package in README, so that users can see information about how to install the package and how to use the functions. You can use the following code to create a README.Rmd file:
+We always want to write some instructions about our package in the README, so that users can see information about how to install the package and how to use the functions. You can use the following code, from `{usethis}` to create a README.Rmd file:
 
 ```{r create_readme, eval=FALSE}
 usethis::use_readme_rmd()
 ```
 
-In YAML part of README.Rmd, you can set it as `output: github_document`. You can then click knit and it will automatically build README.md file, which will show on the main page of your package on Github if you upload it onto Github. 
+In the YAML part of README.Rmd, you can set it as `output: github_document`. You can then click knit and it will automatically build a README.md file, which will show on the main page of your package on Github if you upload it onto Github. 
 
-Sometimes you may also like to keep a record about the changes of your package. You can create a NEWS.md file:
+Sometimes you may also like to keep a record about the changes of your package. You can create a NEWS.md file to do this:
 
 ```{r create_news, eval=FALSE}
 usethis::use_news_md()
@@ -253,12 +274,15 @@ usethis::use_news_md()
 
 Then you can write the changes of each version in NEWS.md. 
 
+</br>
+
 #### Package checks
 
-Before distributing a package, we need to ensure that it passes some basic checks. You can run `devtools::check()` to run through the checks. If it shows any errors you shall fix them before releasing the package. 
+Before distributing a package, we need to ensure that it passes some basic checks. You can run `devtools::check()` to run through the checks. If it shows any errors you should fix them before releasing the package. 
 
 ### Writing tests
 
 ### Publishing the package
+
 
 ## Resources
