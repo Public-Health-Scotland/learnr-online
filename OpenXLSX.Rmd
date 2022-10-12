@@ -59,7 +59,7 @@ The course will also show progress through sections, a green tick will appear on
 
 </ul>
 
-There are some examples designed to accompany this course, these can either be completed bit by bit as you work through the course or as a whole at the end.  There is also an exercise for you to try when you finish the course to apply what you've learned. Both can be downloaded from [Github](https://github.com/Public-Health-Scotland/learnr-online/openxlsx_materials).
+There are some examples designed to accompany this course, these can either be completed bit by bit as you work through the course or as a whole at the end.  There is also an exercise for you to try when you finish the course to apply what you've learned. Both can be downloaded from [Github](https://github.com/Public-Health-Scotland/learnr-online/tree/master/openxlsx_materials).
   </div>
 </br>
 
@@ -651,7 +651,7 @@ saveWorkbook(
 
 
 ## What now?
-If you haven't been doing so during the course, have a go at running the code in the [examples script](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-examples.R). Once you're happy with that, you can have a go at creating your own Excel output! There's an [exercise](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx-exercises.R) you can download from GitHub which has some basic tasks to get you started. 
+If you haven't been doing so during the course, have a go at running the code in the [examples script](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx_materials/openxlsx_examples.R). Once you're happy with that, you can have a go at creating your own Excel output! There's an [exercise](https://github.com/Public-Health-Scotland/learnr-online/blob/master/openxlsx_materials/openxlsx_exercises.R) you can download from GitHub which has some basic tasks to get you started. 
 
 Once you've done that, why not see where you can apply this in your own team (or beyond...). Good luck!
 
