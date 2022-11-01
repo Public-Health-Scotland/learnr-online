@@ -623,6 +623,7 @@ You now have the chance to go beyond the basics and use some of the knowledge ab
     * Returns a named list:
         * The first element of your list should be named ans1 and contain the result of num \* mult1
         * The second should be named ans2 and contain the result of num \* mult2
+* Make sure the function is named my_function
 * Call your function with num = 5 and mult2 = 3. Leave mult1 to use the default
 * Create two new objects, A and B
     * A should equal the first value in your list (ans1)
@@ -771,11 +772,254 @@ B = out[["ans2"]]
 
 
 
+## Scope
+### Environments
+Before we can get into the main purpose of this section, we need to understand the concept of environments. You can think of an environment as a container of objects - functions, lists, dataframes, and so on - and you're hopefully familiar with the Environment pane in RStudio. This pane shows the objects you create as you work, which are objects stored in one specific environment: the global environment. 
 
+![](images/functions/environment_pane.png)
 
+Other environments exist too, and each function has its own environment. If we create and run this function, we do not see A show up in the global environment:
 
+```{r example-function-env, echo=TRUE, eval=FALSE}
+
+envfunc = function() {
+  
+  A = 5
+  
+  print(A)
+  
+}
+
+envfunc()
+
+```
+
+That's because A is stored in the function's environment, not the global environment. 
+
+Another important point is that environments can contain other environments; each environment has a parent environment. This allows R to search for objects across different environments. For example, it can check an enviroment for an object named X, see that it does not exist, then check the parent environment, and so on until the object is found or the final parent is reached.
+
+There's much more to say about environments, and you can check out the [Environments](https://adv-r.hadley.nz/environments.html) chapter of Advanced R if you want some detailed technical reading. But we've covered enough ground to return to functions.
+
+### Missing Objects
+An important question, when writing functions, is what happens when we don't give a function all the objects it needs?
+
+This function needs A and k to run all the code it contains, but we're only giving it A:
+
+```{r example-scope-error, echo=TRUE, eval=FALSE}
+
+scopefunc_1 = function(A) {
+  
+  print("scopefunc_1 output:")
+  print(A)
+  print(k)
+  
+}
+
+scopefunc_1("A")
+
+```
+
+If we tried to run it, we'd get an error:
+
+> Error in print(k) : object 'k' not found
+
+That makes sense, there is no k. But were does R actually look for k? It's a bit more complicated than just looking for k inside the function definition and at the inputs the function is supplied with. R will actually start looking outside of the function.
+
+#### Where?
+
+Where will R look it look? R has "scoping" rules that decide this. Essentially it will look first inside the function, then it will look in the environments that contain the function definition.
+
+This will work, because both l and the function are defined in the global environment:
+
+```{r example-where-work, echo=TRUE, eval=FALSE}
+
+l = 5
+
+scopefunc_2 = function() {
+  
+  print(l)
+  
+}
+
+scopefunc_2()
+
+```
+
+This will not work:
+
+```{r example-where-error-2func, echo=TRUE, eval=FALSE}
+
+scopefunc_3 = function() {
+  
+  m = 5
+  
+  print(m)
+  
+}
+
+scopefunc_4 = function() {
+  
+  print(m)
+  
+}
+
+scopefunc_3()
+
+# Will give an error
+scopefunc_4()
+
+```
+
+> Error in print(m) : object 'm' not found
+
+The environment for scopefunc_3 does not contain scopefunc_4, so scopefunc_4 can't access m - remember that R will search through parent evironments only when looking for objects.
+
+We also can't access objects that are inside functions more generally. This doesn't work:
+
+```{r example-where-error-1func, echo=TRUE, eval=FALSE}
+
+scopefunc_3 = function() {
+  
+  m = 5
+  
+  print(m)
+  
+}
+
+# Will give an error
+print(m)
+
+```
+
+> Error in print(m) : object 'm' not found
+
+scopefunc_3's environment is a child - not a parent - of the global environment, so R will not look there.
+
+#### When?
+
+We know where R will look, but we also need to know when. Let's define another example function and try to use it:
+
+```{r example-when-func, echo=TRUE, eval=FALSE}
+
+scopefunc_5 = function() {
+  
+  print(p)
+  
+}
+
+# Will give an error
+scopefunc_5()
+
+p = 5
+
+# Will work
+scopefunc_5()
+
+```
+
+R checks for the object each time the function is run, not when it is defined. So when we call the function the second time, after we define p in the global environment, it does work.
+
+### Coping with scoping
+
+These scoping rules increase the chance of mistakes happening, and aren't usually very useful. A big advantage of functions is making the inputs and outputs to a section of code explicit, and we lose that advantage if we rely on R to find objects defined outside a function for us.
+
+We can get R to list any objects that will be searched for outside of a function like this:
+
+```{r example-with-globals, echo=TRUE, eval=FALSE}
+scopefunc_5 = function() {
+  
+  print(p)
+  
+}
+
+codetools::findGlobals(scopefunc_5)
+```
+
+> "{"     "p"     "print"
+
+Some of these we should ignore because it is normal to allow the scoping rules to bring in functions and special symbols, like "{" and "print" here, but it does show us that we are using "p" without defining it inside the function or specifying it as an input.
+
+Try modifying this function so that all the inputs used in the calculation are listed as parameters. It is possible to find the missing parameters manually, but codetools::findGlobals should be easier.
+
+```{r test-fix-globals, exercise=TRUE}
+
+calc_func = function(y, d, j, w) {
+  
+  i = y + d
+  e = i - o
+  m = w * j
+  v = b / r
+  
+  result = ((i + e) * (m / v) * j) / u
+  
+  return(result)
+  
+}
+
+calc_func(1, 2, 3, 4)
+
+```
+
+```{r test-fix-globals-check}
+
+grade_this( 
+  {
+    
+    # So we have access to the user defined function
+    evaluate::evaluate(.user_code)
+
+    if (!exists("calc_func", mode = "function")) {
+      fail("Make sure your function is called calc_func, and that it follows 
+           the standard format correctly")
+    }
+    
+    func_params = names(formals(my_function))
+    
+    expected_params = c("y", "d", "j", "w", "b", "o", "r", "u")
+
+    if (!all(expected_params %in% func_params)) {
+      fail(paste0("Make sure your function has all of the objects required for 
+                  the caulcation as parameters. You currently have: ", 
+                  str_flatten(func_params, collapse = ", ")))
+    }
+    
+    if (!all(func_params %in% expected_params)) {
+      fail(paste0("Make sure your function doesn't have any extra parameters - 
+                  you should only have the objects required for the calculation.
+                  You currently have: ", 
+                  str_flatten(func_params, collapse = ", ")))
+    }
+    
+    pass("Correct! The inputs the function requires are now clear to its users, and there's no risk of an input being forgotten and R finding a separate object that has the same name.")
+
+  },
+  maybe_code_feedback = FALSE
+)
+
+```
+
+```{r test-fix-globals-solution}
+
+calc_func = function(y, d, j, w, b, o, r, u) {
+  
+  i = y + d
+  e = i - o
+  m = w * j
+  v = b / r
+  
+  result = ((i + e) * (m / v) * j) / u
+  
+  return(result)
+  
+}
+
+calc_func(1, 2, 3, 4, 5, 6, 7, 8)
+
+```
 
 ## Debugging
+
+
 
 Debugging your code gets a little more complex when working with functions. Normally, if there's a problem you can just run a line of code in your script and see what it does, or you can source the script, let it stop where the error occurs, and look at the environment.
 
@@ -800,12 +1044,12 @@ To create a breakpoint:
 
 Once you are in debugging mode:
 
-* Current line: this line of code has not been run yet - it is the next line of code to run
-* Run current line: the current line will be run, then R will pause again
-* Step into current line: say the current line was something like myvar = myfunc(myarg). If you pressed the button to run the current line, the entirety of myfunc would be run in one go. But if you step into the current line, you will get to see the inside of myfunc and you can run each line of code individually
-* Run until next breakpoint/end of script: if you have another breakpoint to come, all the lines between the current line and the breakpoint will run. If you don't, all of the rest of the script will run
-* Stop debugging now: don't run the rest of the script, just stop right now and exit debugging mode
-* Objects currently in environment: these are the objects that the current line of code can 'see'
+* **Current line**: this line of code has not been run yet - it is the next line of code to run
+* **Run current line**: the current line will be run, then R will pause again
+* **Step into current line**: say the current line was something like myvar = myfunc(myarg). If you pressed the button to run the current line, the entirety of myfunc would be run in one go. But if you step into the current line, you will get to see the inside of myfunc and you can run each line of code individually
+* **Run until next breakpoint/end of script**: if you have another breakpoint to come, all the lines between the current line and the breakpoint will run. If you don't, all of the rest of the script will run
+* **Stop debugging now**: don't run the rest of the script, just stop right now and exit debugging mode
+* **Objects currently in environment**: these are the objects that the current line of code can 'see'
 
 To debug a function, then:
 
@@ -875,170 +1119,7 @@ The output tells you where the error occurred. You read it bottom to top, so the
 
 Traceback isn't always so helpful - it won't give you a line number for errors raised inside a pipe, though it should give you a line number for the start of the pipe in question.
 
-## Scope
 
-What if we don't give a function all the objects it needs?
-
-This function needs A and k to run all the code it contains, but we're only giving it A:
-```{r example-scope-error, echo=TRUE, eval=FALSE}
-
-scopefunc_1 = function(A) {
-  
-  print("scopefunc_1 output:")
-  print(A)
-  print(k)
-  
-}
-
-scopefunc_1("A")
-
-```
-
-If we tried to run it, we'd get an error:
-
-> Error in print(k) : object 'k' not found
-
-That makes sense, there is no k. But were does R actually look for k? It's a bit more complicated than just looking for k inside the function definition and at the inputs the function is supplied with. R will actually start looking outside of the function.
-
-### Where?
-Where will it look? R has "scoping" rules that decide this. Essentially it will look first inside the function, then it will look in the environments that contain the function definition
-
-This will work:
-```{r example-where-work, echo=TRUE, eval=FALSE}
-
-l = 5
-
-scopefunc_2 = function() {
-  
-  print(l)
-  
-}
-
-scopefunc_2()
-
-```
-
-This will not work:
-
-```{r example-where-error-2func, echo=TRUE, eval=FALSE}
-
-scopefunc_3 = function() {
-  
-  m = 5
-  
-  print(m)
-  
-}
-
-scopefunc_4 = function() {
-  
-  print(m)
-  
-}
-
-scopefunc_3()
-
-# Will give an error
-scopefunc_4()
-
-```
-
-> Error in print(m) : object 'm' not found
-
-The environment for scopefunc_3 does not contain scopefunc_4, so scopefunc_4 can't access m.
-
-We also can't access objects that are inside functions more generally. This doesn't work:
-
-```{r example-where-error-1func, echo=TRUE, eval=FALSE}
-
-scopefunc_3 = function() {
-  
-  m = 5
-  
-  print(m)
-  
-}
-
-# Will give an error
-print(m)
-
-```
-
-> Error in print(m) : object 'm' not found
-
-
-
-
-
-
-
-#### Would be nice to have these throwing errors and ask the user to fix
-
-
-
-
-
-
-### When?
-
-We know where R will look, but we also need to know when. Let's define another example function:
-
-```{r example-when-func, echo=TRUE, eval=FALSE}
-
-scopefunc_5 = function() {
-  
-  print(p)
-  
-}
-
-```
-
-
-```{r example-when-call, echo=TRUE, eval=FALSE}
-
-# Will give an error
-scopefunc_5()
-
-p = 5
-
-# Will work
-scopefunc_5()
-
-```
-
-R checks for the object each time the function is run, not when it is defined. So when we call the function the second time, after we define p in the global environment, it does work.
-
-### Working around scoping rules
-
-These scoping rules increase the chance of mistakes happening, and aren't usually very useful. A big advantage of functions is making the inputs and outputs to a section of code explicit, and we lose that advantage if we rely on R to find objects defined outside a function for us.
-
-We can get R to list any objects that will be searched for outside of a function like this:
-
-```{r example-with-globals, exercise=TRUE, exercise.eval=FALSE}
-scopefunc_5 = function() {
-  
-  print(p)
-  
-}
-
-codetools::findGlobals(scopefunc_5)
-```
-
-Some of these we should ignore because it is normal to allow the scoping rules to bring in functions and special symbols, like "{" and "print" here, but it does show us that we are using "p" without defining it inside the function or specifying it as an input.
-
-So we should re-write the function:
-
-```{r example-no-globals, exercise=TRUE, exercise.eval=FALSE}
-
-scopefunc_5b = function(p) {
-  
-  print(p)
-  
-}
-
-codetools::findGlobals(scopefunc_5b)
-
-```
 
 
 ## Assorted tips
