@@ -1,0 +1,92 @@
+---
+title: "[Training Title]"
+output: 
+  learnr::tutorial:
+    css: "css/style.css"
+    progressive: false
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+# Author: 
+# Original Date: 
+# Version of R: 
+
+# See here for learnr package documentation: https://rstudio.github.io/learnr/
+
+# Include packages here that are required throughout the training
+library(learnr)         # Required to build the Shiny app
+library(gradethis)      # Required for specific code checking and specific feedback
+
+knitr::opts_chunk$set(echo = FALSE)
+
+tutorial_options(
+  exercise.checker = gradethis::grade_learnr
+)
+```
+
+```{r phs-logo, echo=FALSE, fig.align='right', out.width="40%"}
+knitr::include_graphics("images/phs-logo.png")
+```
+
+## Introduction
+
+[Insert some introductory text about the training here.]
+
+<div class="info_box">
+  <h4>Course Info</h4>
+  <ul>
+    <li> [Add some details about how the app works here. Include the following items if they are relevant.]</li>
+    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+  </ul>
+</div>
+</br>
+
+### What is [topic]?
+
+[Detailed description of topic with overview of course.]
+
+
+## [Functionality]
+
+### Knowledge Check
+
+```{r example-quiz}
+quiz(
+  question("[Question]",
+    answer("[Incorrect answer]", correct = FALSE),
+    answer("[Incorrect answer with feedback]", correct = FALSE, message = "[Specific feedback.]"),
+    answer("[Correct answer]", correct = TRUE),
+    incorrect = "[General feedback for any incorrect answer.]",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+### Code Exercise
+
+```{r example-code-q, exercise=TRUE}
+# Hello World example
+hello_world <- "Hello World"
+
+print(hello_world)
+```
+
+```{r example-code-q-check}
+grade_result(
+  pass_if(~ startsWith(.result, "Hello") & .result != "Hello World"),
+  fail_if(~ identical(as.character(.result), "Hello World"), "Try changing the output from Hello World."),
+  fail_if(~ TRUE, "Have you entered a string to say Hello?")
+)
+```
+
+
+## Help & Feedback
+
+#### Feedback
+
+[Insert iframe for Google/Microsoft Forms]
+
