@@ -1,0 +1,83 @@
+---
+title: "Open Data"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+---
+
+```{r setup, include=FALSE}
+
+# Source the statistics data from our setup file
+source("open_data_setup.R")
+
+```
+
+
+Page 1
+=====================================
+
+Row 1 {data-height=200}
+-------------------------------------
+
+### Value Box
+
+```{r}
+
+# Use the valueBox function to create a tile containing a summary statistic or other key information
+valueBox(
+  value = prettyNum(cum_total_cases, big.mark = ","), 
+  icon = "fa-virus", 
+  caption = "Total Covid-19 cases in Scotland (2020 - 2023)", 
+  color = phs_colours("phs-magenta")
+)
+
+```
+
+### Gauge
+
+```{r}
+
+gauge(
+  value = current_percent_reinfections, 
+  min = 0, 
+  max = 100, 
+  symbol = "%",
+  label = "Reinfections",
+  gaugeSectors(
+    colors = phs_colours("phs-blue")
+  )
+)
+
+
+```
+
+> Current percentage of new daily Covid-19 infections that are reinfections in Scotland
+
+
+Row 2 {data-height=800}
+-------------------------------------
+
+### Total Covid-19 Cases by Council Area
+
+```{r}
+
+# Discuss how to best fit an R Graphic then use plotly example on next page with line chart
+current_totals_la_plot
+
+```
+
+### Covid-19 Cases in the last week by Council Area
+
+```{r}
+
+last_week_start <- last_week_totals_ca %>% pull(week) %>% unique()
+
+# Use knitr::kable() to add a basic data table
+last_week_totals_ca %>%
+  select("Council Area" = "ca_name", "Total Cases" = "weekly_positive") %>%
+  knitr::kable(row.names = TRUE, 
+               caption = paste0("Total Covid-19 cases in the last complete week of data, week beginning: ", format(last_week_start, "%d %b %Y")))
+
+```
+
+

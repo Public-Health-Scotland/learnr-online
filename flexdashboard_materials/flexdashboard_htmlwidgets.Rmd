@@ -1,0 +1,218 @@
+---
+title: "Open Data"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+
+# Source the statistics data from our setup file
+source("open_data_setup.R")
+
+# Source the Leaflet setup script to load Leaflet map example using covid data
+source("leaflet_setup.R")
+
+```
+
+
+Page 1
+=====================================
+
+Row 1 {data-height=200}
+-------------------------------------
+
+### Value Box
+
+```{r}
+
+# Use the valueBox function to create a tile containing a summary statistic or other key information
+valueBox(
+  value = prettyNum(cum_total_cases, big.mark = ","), 
+  icon = "fa-virus", 
+  caption = "Total Covid-19 cases in Scotland (2020 - 2023)", 
+  color = phs_colours("phs-magenta"),
+  href = "#page-2"
+)
+
+```
+
+### Gauge
+
+```{r}
+
+gauge(
+  value = current_percent_reinfections, 
+  min = 0, 
+  max = 100, 
+  symbol = "%",
+  label = "Reinfections",
+  gaugeSectors(
+    colors = phs_colours("phs-blue")
+  )
+)
+
+
+```
+
+> Current percentage of new daily Covid-19 infections that are reinfections in Scotland
+
+
+Row 2 {data-height=800}
+-------------------------------------
+
+### Total Covid-19 Cases by Council Area
+
+```{r}
+
+# Discuss how to best fit an R Graphic then use plotly example on next page with line chart
+current_totals_la_plot
+
+```
+
+### Covid-19 Cases in the last week by Council Area
+
+```{r}
+
+last_week_start <- last_week_totals_ca %>% pull(week) %>% unique()
+
+# Use knitr::kable() to add a basic data table
+last_week_totals_ca %>%
+  select("Council Area" = "ca_name", "Total Cases" = "weekly_positive") %>%
+  knitr::kable(row.names = TRUE, 
+               caption = paste0("Total Covid-19 cases in the last complete week of data, week beginning: ", format(last_week_start, "%d %b %Y")))
+
+```
+
+
+
+Page 2
+=====================================
+
+Row 1 {.tabset}
+-------------------------------------
+
+### Weekly Covid-19 Cases in Scotland
+
+```{r}
+
+# Use ggplotly() to convert this ggplot object into an interactive plotly chart
+#ggplotly(weekly_totals_plot)
+
+# Add code to modify the default ggplotly options:
+
+# The dynamicTicks parameter automatically rescales the tick labels 
+# when we zoom into an area of the plot.
+ggplotly(weekly_totals_plot, dynamicTicks = TRUE) %>%
+  
+  # layout() is used to modify the appearance of y-axis ticklabels 
+  # to use commas instead of truncating numbers over 1000
+  layout(yaxis = list(tickformat = ",")) %>%
+  
+  # config() contains options to modify the Mode Bar icons (Zoom, Pan etc.)
+  config(displayModeBar = TRUE,
+         modeBarButtonsToAdd = c("toggleSpikelines")) %>%
+  
+  # style() is used to modify the tooltip text to make it more presentable
+  style(hovertemplate = paste0('<i>Cases</i>: %{y:,.0f}',
+                               '<br><i>Week Start</i>: %{x|%_d %b %Y}',
+                               "<extra></extra>"))
+
+```
+
+### Chart Data
+
+```{r}
+
+# Use DT::datatable() function to create a data table containing the data used to make the plotly chart in the 1st tab
+datatable(weekly_totals)
+
+```
+
+### Daily Totals Open Data
+
+```{r}
+
+# Add the open data extract to the dashboard as a DT data table with additional formatting options
+daily_totals %>%
+  
+  # Remove some columns that aren't relevant to keep info concise (depends on the intended use)
+  select(-matches("(lfd|pcr|percent|deaths)")) %>% 
+  
+  # Add columns to represent Year and Month of each record as a factor. 
+  # This allows easier filtering by year/month in comparison to the default slider bar on the Date column
+  mutate(year = factor(year(date)), month = month(date, label = TRUE), .after = 1) %>%
+  
+  # Change column names to Title Case for readability
+  clean_names(case = "title") %>%
+  
+  # Pipe data into the DT datatable() function and specify custom options
+  datatable(
+    rownames = FALSE,    # Remove the default row number column
+    
+    # Add a caption for the table
+    caption = "Daily and cumulative counts and rates for positive COVID-19 cases at Scotland level.",
+    
+    # Add filter boxes to the top of each column
+    filter = "top",
+    
+    # Enable extensions which allow Buttons and Column Re-ordering features
+    extensions = c("Buttons", "ColReorder"),
+    
+    # Specify formatting options
+    options = list(
+      dom = "Brtip",    # Specify the position of table elements from top to bottom
+      colReorder = TRUE,    # Enable click-and-drag column re-ordering
+      pageLength = 20,    # Specify the max number of rows visible per page
+      
+      # Disable filters on columns with index 3 to 8 (the 4th column to 9th column)
+      columnDefs = list(list(targets = 3:8, searchable = FALSE)),    
+      
+      buttons = list(list(extend = 'colvis'),    # Add button to hide/show specific columns
+                     # Add buttons to allow the user to copy or download a CSV/PDF version of the table
+                     list(
+                       extend = "collection",
+                       text = "Export",
+                       align = "button-right",
+                       buttons = c("copy", "csv", "pdf")
+                     )
+      )
+    )
+  )
+
+```
+
+
+
+
+Page 3
+=====================================
+
+Sidebar {.sidebar}
+-------------------------------------
+
+### Covid-19 Cases
+
+The Covid-19 cases map uses the Leaflet package to visualise Covid-19 cases in the most recent week of data in two formats:
+
+- **Total Cases**
+- **Crude Rate per 1,000 Population**
+
+Information on Covid-19 datasets can be found on the [open data website](https://www.opendata.nhs.scot/dataset/covid-19-in-scotland).
+For new Covid-19 data, see [Viral Respiratory Diseases (Including Influenza and COVID-19) Data in Scotland](https://www.opendata.nhs.scot/dataset/viral-respiratory-diseases-including-influenza-and-covid-19-data-in-scotland).
+
+
+Row 1
+-------------------------------------
+
+### Covid Cases Map
+
+```{r}
+
+map
+
+```
+
+
+
