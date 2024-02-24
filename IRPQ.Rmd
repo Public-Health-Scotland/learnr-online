@@ -20,7 +20,7 @@ library(haven)
 library(dplyr)
 library(purrr)
 library(ggplot2)
-library(shiny)
+
 knitr::opts_chunk$set(echo = FALSE)
 
 tutorial_options(
