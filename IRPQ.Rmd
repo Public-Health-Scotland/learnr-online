@@ -734,7 +734,7 @@ IRs can be requested by anyone, so long as the requests are made in line with le
 </br>
 
 
-#### When PHS will provide analysis
+### When PHS will provide analysis
 
 PHS will provide a bespoke analysis in response to an IR, subject to resource, 
 priority assessment and potentially a charge, provided that:
@@ -748,11 +748,10 @@ enable PHS staff to understand the request;
 * PHS’s statistical governance rules are met.
 
 
-#### When PHS will not provide analysis
+### When PHS will not provide analysis
 
-PHS will not provide information in response to an IR where to do so would breach 
-rules on early access to Official Statistics. Where the requested data is scheduled for 
-publication within the next 12 weeks then it will not be released in response to the IR. 
+PHS will not provide information in response to an IR if said information is due to be released in a publication within 12 weeks.
+
 Exceptions to this are where data is made available for the following purposes:
 
 * In compliance with Pre-Release Access legislation on Official Statistics
@@ -761,6 +760,12 @@ Exceptions to this are where data is made available for the following purposes:
 
 * Early Access for Management Information
 
+<div class="info_box">
+  <h4>Important</h4>
+  <ul>
+  <li> Stats Gov (phs.statsgov@phs.scot) can be contacted in the first instance, should there be any concerns whether or not an IR should be answered.
+</div>
+</br>
 
 ## IR - Guidelines & Charging
 
@@ -807,6 +812,8 @@ Release where Public Benefit & Privacy Panel (PBPP) have given approval
 IRs from the media – phs.comms@phs.scot 
 
 
+## IR - Charging & Sign Off
+
 ### Charging
 
 Charge for IRs that require new data extraction, aggregation, analysis and reporting to be carried out
@@ -832,7 +839,7 @@ knitr::include_graphics("images/irpq-Charging.png")
 
 * There will be three months from the date of the issue of the fees notice for them to decide whether to pay the charge to obtain the information.
 
-### sign off
+### Sign off
 
 ## IR - Using Information Request Service
 
