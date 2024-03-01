@@ -37,7 +37,6 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-test
 
 Welcome to the Parliamentary Questions & Information Requests course. This course is designed to provide an overview of the Information Request (IR) and Parliamentary Question (PQ) process. 
 
@@ -362,7 +361,9 @@ The following are a list of considerations which you could refer to during this 
 ## PQ - Guiding Principles
 
 
-Below is a checklist of Guiding Principles which users are encouraged to have their draft answers and methods meet when providing a response, in order to ensure they are clear and effective.
+When you are in a position where you are required to provide a response, there are certain Guiding Principles which you should adhere to, in order to provide an answer that is clear and effective.
+
+Below is a checklist of said principles which users can work through.
 
 It is important to remember that PHS staff should know best about the quality of the data that we are providing. As such, we should not be leaving those who receive the PHS draft answer to interpret the data for themselves.
 
@@ -444,29 +445,25 @@ The following criteria should be met:
 
 #### Background Notes
 
-<input type="checkbox" unchecked> Plain English </input> 
-</br>
-</br>
-<input type="checkbox" unchecked> Non technical</input>
-</br>
-</br>
-<input type="checkbox" unchecked> Tables should be clearly and fully labelled </input> 
-</br>
-</br>
-<input type="checkbox" unchecked> Acronyms explained</input>
-</br>
-</br>
-<input type="checkbox" unchecked> **No first release of stats if there is a plan to release in the next 12 weeks** </input> 
-</br>
-</br>
+Background notes are provided to give additional contextual information. 
 
-* To provide additional contextual information
+This could include:
+
+<input type="checkbox" unchecked> State why question is answered in a certain way </input> 
+</br>
+</br>
+<input type="checkbox" unchecked> Explain issues with data used within teh Draft Answer</input>
+</br>
+</br>
+<input type="checkbox" unchecked> Sources and other useful briefings </input> 
+
+<!-- * To provide additional contextual information
 * State why question is answered in a certain way
 * Explain issues with data over and above Draft Answer
 * Sources and other useful briefings
-* Ordered in importance
+* Ordered in importance -->
 
-**SG may leave this out of their final response.**
+**SG will most likely leave Background Notes out of their final response.**
 
 <div class="info_box">
   <h4>Important</h4>
