@@ -717,13 +717,22 @@ It is important to ensure that the process detailed in previous sections are und
 
 ### About Information Requests
 
-In the previous sections of this course, you have covered what PQ's are - they are a type of Information Request from MSP's. On a broader level, etc.
+In the previous sections of this course, you covered what PQs are. In a broader sense, PQs are a type of Information Request from MSP's.
 
-Define what an IR is.
-Talk about the responsibilities and duties of the PHS. 
-Talk about how anyone can request them.
+Information Requests are requests for bespoke analysis of information and data which PHS holds.
 
-Note that FOIs are dealt with by the FOI team and link to them.
+IRs can be requested by anyone, so long as the requests are made in line with legislation, agreed principles, and public expectations regarding access to statistical information under which public bodies operate.
+
+<div class="info_box">
+  <h4>Important</h4>
+  <ul>
+  <li> Freedom of Information Requests are dealt with by the FOI team to ensure all FOI obligations are met under the Freedom Of Information Act 2002. Guidance can be found <a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/data-protection-handbook/freedom-of-information-foi/" target="_blank">here.</a>
+  
+  <li> All responses made to IR are subject to PHS's overarching rules regarding <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/releasing-statistics/" target="_blank">statistical governance</a>, which includes <a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/" target="_blank">data protection</a>, <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">statistical disclosure control </a> and <a href="https://code.statisticsauthority.gov.uk/" target="_blank">Code of Practise for Statistics </a>obligations.
+  
+</div>
+</br>
+
 
 #### When PHS will provide analysis
 
@@ -736,7 +745,7 @@ unpublished analysis by PHS is not suitable;
 * The user has stated clearly what they want to find out and if possible why, to 
 enable PHS staff to understand the request;
 
-* PHS’s statistical governance rules are met
+* PHS’s statistical governance rules are met.
 
 
 #### When PHS will not provide analysis
