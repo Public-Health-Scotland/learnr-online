@@ -193,7 +193,8 @@ knitr::include_graphics("images/irpq-allocatedTeamEmail.png")
 ```
 
 
-### Quiz
+
+### Knowledge Check 
 
 ```{r PQ-AllocationsQuiz}
 quiz(
@@ -370,10 +371,10 @@ It is important to remember that PHS staff should know best about the quality of
 
 #### Draft Answer
 
-<input type="checkbox" unchecked> Be brief, but with enough information. </input> 
+<input type="checkbox" unchecked> Be brief, while supplying enough information. </input> 
 </br>
 </br>
-<input type="checkbox" unchecked> Have a purpose with every phrase. </input>
+<input type="checkbox" unchecked> Have a purpose to every phrase. </input>
 </br>
 </br>
 <input type="checkbox" unchecked> Provide data to answer the question, or explain why you cannot. </input>
@@ -389,7 +390,7 @@ It is important to remember that PHS staff should know best about the quality of
 <input type="checkbox" unchecked> Explain why a question cannot be answered - e.g. *This dataset is not held by PHS* </input>
 </br>
 </br>
-<input type="checkbox" unchecked> Data not fit to be used in the draft answer is not used as a Background Note. </input>
+<input type="checkbox" unchecked> Data not fit to be used in the draft answer is not to be used as a Background Note. </input>
 </br>
 </br>
 
@@ -452,7 +453,7 @@ This could include:
 <input type="checkbox" unchecked> State why question is answered in a certain way </input> 
 </br>
 </br>
-<input type="checkbox" unchecked> Explain issues with data used within teh Draft Answer</input>
+<input type="checkbox" unchecked> Explain issues with data used within the Draft Answer</input>
 </br>
 </br>
 <input type="checkbox" unchecked> Sources and other useful briefings </input> 
@@ -470,7 +471,7 @@ This could include:
   <ul>
   <li>The SG may change the response provided by the PHS when preparing the final answer for the MSP. Such changes are often checked with PHS, but not always. 
   
-  <li>For particularly hot topics, PHS staff should specifically request they be consulted of any proposed hcanges to the content or wording of the PQ by the SG.
+  <li>For particularly hot topics, PHS staff should specifically request they be consulted of any proposed changes to the content or wording of the PQ by the SG.
   
   <li>If there are any issues with the process, please get in touch with Stats Gov and your Service Manager in the first instance.
   
@@ -480,9 +481,34 @@ This could include:
 </div>
 </br>
 
+### Quiz
+
+```{r PQ-GuidingPrinciples}
+quiz(
+  question("You have received a PQ which you have been asked to respond to by the SG. The data you have access to is not clear, and as such, you cannot fully answer the question. What do you do?",
+           answer("Do not offer the limited insight.", correct = TRUE),
+           answer("Do not pass on the data that is not clear.", correct = TRUE),
+           answer("Contact Scottish Government, and explain why you cannot assist.", correct = TRUE),
+           answer("Send the SG the data, and explain why you cannot answer it.", correct = FALSE),
+           answer("Contact specialists on the data to gain clarity, to assist in answering.", correct = TRUE),
+           answer("Do nothing. You cannot answer the question so it is better not to confuse anyone.", correct = FALSE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("Your response to a question will include data that is contained in a publication due to be released in 10 weeks. You should release the answer with the data since PQs are important, and should be answered as soon as possible.",
+           answer("TRUE"),
+           answer("FALSE", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           )
+)
+```
+
 ## PQ - Processing and Responding
 
-For ease of understanding, the following is 
+The following is the workflow when processing and responding to a PQ:
 
 ### Assess the PQ
 
@@ -560,11 +586,12 @@ The following rules should be applied:
 
 * Check draft answer for accuracy, typing mistakes, etc. *Best practise is to have a colleague check the answer.*
 
-* Submit for Sign Off
+
+Once checks are done, and the answer is produced in accordance with the above, it can proceed to the sign-off stage.
 
 ### Example of PQ Response
 
-‘To ask the Scottish Government how many hedgehog deaths on the roads there have been in each of the last 10 calendar years, broken down by local council area.’
+**To ask the Scottish Government how many hedgehog deaths on the roads there have been in each of the last 10 calendar years, broken down by local council area.**
 
 
 What we know:
@@ -617,25 +644,29 @@ knitr::include_graphics("images/irpq-signOffProcess.png")
 ### Submit answer to SG and Close PQ.
 
 
-* Following sign off, send draft answer via email to the assigned SG contact. Confirmation of receipt of the answer should be requested.
+Following sign off, you should send the draft answer via email to the assigned SG contact. 
 
-* If sub-Scotland analysis has been provided in the draft answer, then a copy of this should be sent to the relevant NHS Board(s). Email phs.releasepreview@phs.scot detailing:
-
-• the NHS Board/Boards who are to receive a copy 
-
-•	that it is a PQ 
-
-•	a copy of the draft answer 
+Confirmation of receipt of the answer should be requested.
 
 
-* Update the IRS and close the record
+If sub-Scotland analysis has been provided in the draft answer, then a copy of this should be sent to the relevant NHS Board(s). Email phs.releasepreview@phs.scot detailing:
 
-* Review answer published on PQ website to check if answer provided by PHS was used.
+* the NHS Board/Boards who are to receive a copy 
+
+* that it is a PQ 
+
+* a copy of the draft answer 
+
+
+Update the IRS and close the record
+
+Review answer published on PQ website to check if answer provided by PHS was used.
 
 <div class="info_box">
   <h4>Important</h4>
   <ul>
-  <li>A copy of your draft answer will be submitted to the relevant NHS boards using the standard template found within the IR Protocol (insert link)
+  <li>A copy of your draft answer will be submitted to the relevant NHS boards using the standard template found within 
+  <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Appendix 2 of the IR Protocol</a>.
   
 </div>
 </br>
@@ -643,23 +674,31 @@ knitr::include_graphics("images/irpq-signOffProcess.png")
 
 ## PQ - Knowledge Check
 
-Input some questions about the previous 
+You have reached the end of the PQ portion of this course. Here is a short quiz to see how familiar you are with the process.
 
 ```{r final_PQ_knowledge_check}
 quiz(
-  question("Question 1",
-           answer("Camilla"),
-           answer('Cathy'),
-           answer("Sadia"),
-           answer("Vay", correct = TRUE),
+  question("All PQs require a response.",
+           answer("TRUE", correct = FALSE),
+           answer("FALSE", correct = TRUE),
            incorrect = "Not quite, have another go!",
+           correct = "Not all PQs require a response. SG and Stats Gov will inform teams when a response is required from them.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
-  question("Question 2",
-           answer("TRUE", correct = TRUE),
-           answer("FALSE"),
+  question("If I receive a PQ under the action 'For Information', I should not take any action.",
+           answer("TRUE", correct = FALSE),
+           answer("FALSE", correct = TRUE),
            incorrect = "Not quite, have another go!",
+           correct = "Whether you receive a PQ under the action 'For Information' or 'For Review', all PQs must be read and appropriate action should be taken by the recipients.",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("I MUST supply a response by the PQ's policy deadline.",
+           answer("TRUE", correct = FALSE),
+           answer("FALSE", correct = TRUE),
+           incorrect = "Not quite, have another go!",
+           correct = "The deadline can be negotiated with the SG. It is important to have enough time and resources to sufficiently answer the question.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            )
@@ -668,9 +707,11 @@ quiz(
 
 ### Conclusion
 
-Summarise PQ's and the importance of them, and the role we play in supplying information.
+Parliamentary Questions are extremely important functions which facilitate the democratic process.
 
-Lead on to information requests. 
+It is important to ensure that the process detailed in previous sections are understood and adhered to. If there are any issues, the Statistical Governance team (phs.statsgov@phs.scot) is available to answer any queries.
+
+
 
 ## Information Requests
 
