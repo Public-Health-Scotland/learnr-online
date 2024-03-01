@@ -21,7 +21,6 @@ library(dplyr)
 library(purrr)
 library(ggplot2)
 
-test
 
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -38,7 +37,7 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-checkboxInput("checkboxId", "Check me", value = FALSE)
+
 
 Welcome to the Parliamentary Questions & Information Requests course. This course is designed to provide an overview of the Information Request (IR) and Parliamentary Question (PQ) process. 
 
@@ -49,8 +48,10 @@ knitr::include_graphics("images/irpq-ImageToFollowPNG.png")
 <div class="info_box">
   <h4>Course Info</h4>
   <ul>
-    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+    <li>This course is separated into two main sections: **Parliamentary Questions** and **Information Requests**</li>
     <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
+    <li>If you are comfortable with the content and are looking for specific information or guidance, feel free to navigate through to the appropriate section located in the navigation banner.</li>
+    <li>If this is your first exposure to PQs and IRs, it is highly recommended to work through the course from beginning till end.
   </ul>
 </div>
 </br>
@@ -95,9 +96,7 @@ knitr::include_graphics("images/irpq-pq-sg-process.png")
   <h4>Important</h4>
   <ul>
     <li>While it is true that there is a short turnaround time in responding to PQs, the timeframe in which PHS should respond to SG (this will be known as our *Policy Deadline Date*) can be negotiated with SG.
-    
     <li>All attempts should be made to adhere to the above timeline.
-    
   </ul>
 </div>
 </br>
@@ -360,41 +359,106 @@ The following are a list of considerations which you could refer to during this 
 
 
 
-### Guiding Principles
+## PQ - Guiding Principles
+
+
+Below is a checklist of Guiding Principles which users are encouraged to have their draft answers and methods meet when providing a response, in order to ensure they are clear and effective.
 
 It is important to remember that PHS staff should know best about the quality of the data that we are providing. As such, we should not be leaving those who receive the PHS draft answer to interpret the data for themselves.
-
-If are providing a response to the PQ, the following are some Guiding Principles which you should always bear in mind in order to provide a clear and effective response.
 
 
 #### Draft Answer
 
-* Be brief but ensure enough information is supplied.
-* Always have a purpose to every phrase.
-* Provide data to answer the question or say why you cannot.
+<input type="checkbox" unchecked> Be brief, but with enough information. </input> 
+</br>
+</br>
+<input type="checkbox" unchecked> Have a purpose with every phrase. </input>
+</br>
+</br>
+<input type="checkbox" unchecked> Provide data to answer the question, or explain why you cannot. </input>
+</br>
+</br>
 
 
 #### Data Quality/Incomplete Data
 
+<input type="checkbox" unchecked> Data must be understandable and fit for purpose. </input> 
+</br>
+</br>
+<input type="checkbox" unchecked> Explain why a question cannot be answered - e.g. *This dataset is not held by PHS* </input>
+</br>
+</br>
+<input type="checkbox" unchecked> Data not fit to be used in the draft answer is not used as a Background Note. </input>
+</br>
+</br>
+
+<!--
 * Data must be understandable, and fit for purpose.
 * Explain why question cannot be answered e.g. *This dataset is not held by PHS*
 * If the quality of the Data is not fit for a draft answer, then it should generally not be used as a Background Note.
+-->
 
 #### Unwise to Carry Out Speculative Analysis 
 
+
+<input type="checkbox" unchecked> Do not offer very limited insight. </input> 
+</br>
+</br>
+<input type="checkbox" unchecked> If necessary, seek specialist advice (e.g. CPHM, Clinical Coders, Nurse, Pharmacist) before proceeding to answer the question. </input>
+</br>
+</br>
+
+
+<!--
 * Do not do it if it will offer very limited insight. 
-* Seek specialist advice (e.g. CPHM, Clinical Coders, Nurse, Pharmacist) before proceeding.
+* Seek specialist advice (e.g. CPHM, Clinical Coders, Nurse, Pharmacist) before proceeding. -->
 
 
 #### View Answer as a Publication
 
+The following criteria should be met:
+
+<input type="checkbox" unchecked> Plain English </input> 
+</br>
+</br>
+<input type="checkbox" unchecked> Non technical</input>
+</br>
+</br>
+<input type="checkbox" unchecked> Tables should be clearly and fully labelled </input> 
+</br>
+</br>
+<input type="checkbox" unchecked> Acronyms explained</input>
+</br>
+</br>
+<input type="checkbox" unchecked> **No first release of stats if there is a plan to release in the next 12 weeks** </input> 
+</br>
+</br>
+
+
+<!--
 * Plain English
 * Non technical
 * Tables should be clearly and fully labelled
 * Acronyms explained
-* No first release of stats if there is a plan to release in next 12 weeks
+* No first release of stats if there is a plan to release in next 12 weeks -->
 
 #### Background Notes
+
+<input type="checkbox" unchecked> Plain English </input> 
+</br>
+</br>
+<input type="checkbox" unchecked> Non technical</input>
+</br>
+</br>
+<input type="checkbox" unchecked> Tables should be clearly and fully labelled </input> 
+</br>
+</br>
+<input type="checkbox" unchecked> Acronyms explained</input>
+</br>
+</br>
+<input type="checkbox" unchecked> **No first release of stats if there is a plan to release in the next 12 weeks** </input> 
+</br>
+</br>
 
 * To provide additional contextual information
 * State why question is answered in a certain way
@@ -617,7 +681,7 @@ Lead on to information requests.
 
 In the previous sections of this course, you have covered what PQ's are - they are a type of Information Request from MSP's. On a broader level, etc.
 
-Define what an IR is. 
+Define what an IR is.
 Talk about the responsibilities and duties of the PHS. 
 Talk about how anyone can request them.
 
