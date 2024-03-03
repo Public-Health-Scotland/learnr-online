@@ -40,10 +40,6 @@ knitr::include_graphics("images/phs-logo.png")
 
 Welcome to the Parliamentary Questions & Information Requests course. This course is designed to provide an overview of the Information Request (IR) and Parliamentary Question (PQ) process. 
 
-```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%"}
-knitr::include_graphics("images/irpq-ImageToFollowPNG.png")
-```
-
 <div class="info_box">
   <h4>Course Info</h4>
   <ul>
@@ -101,14 +97,47 @@ knitr::include_graphics("images/irpq-pq-sg-process.png")
 </br>
 
 
-Once the questions are available, the PHS Statistical Governance Team (phs.statsgov@phs.scot) retrieves the PQs and distributes them to the appropriate team(s) who may be able to offer a response, or have relevant interest in the PQ.
+## PQ - Workflow
 
-Next we will learn how the PQs are retrieved. 
+The following section contains a general workflow for PHS Users to understand the PQ process. 
 
-</br>
-</br>
+More detailed breakdowns of each stage of the process can be found in later sections of this course.
 
-#### Retrieving new PQs 
+<ol>
+  <li>PQs are made available.</li>
+  </br>
+  <li>The PHS Statistical Governance Team (phs.statsgov@phs.scot) retrieves and assigns the PQs to the appropriate PHS teams (see section *PQ - Retrieving & Assigning PQs*).</li>
+  </br>
+  <li>Teams receive and assess the PQ </li>
+  </br>
+  <li>If correctly assigned and the team are able to answer, contact SG to enquire whether a response is required (see section *PQ - Processing & Responding*)</li>
+  </br>
+  <li>If a response is required, log the PQ in the IRS (see section *IR - Using Information Request Service*).</li>
+  </br>
+  <li>Discuss the PQ with SG, gaining clarification as necessary, establishing deadlines, and conveying all relevant information.</li>
+  </br>
+  <li>Once all is agreed, proceed with answering the PQ. **Follow <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">PHS's Statistical Disclosure Control flowchart</a>. ** If required, contact Stats Gov for assistance </li>
+  </br>
+  <li>Produce draft answer in accordance with style guidelines, using the appropriate template.</li>
+  </br>
+  <li>Complete the sign-off procedure (see section *PQ - Sign Off*).</li>
+  </br>
+  <li>Send the draft answer to the SG contact.</li>
+  </br>
+  <li>Update IRS and close the record.</li>
+  </br>
+  <li>Review the answer once it has been published at the <a href="https://www.parliament.scot/chamber-and-committees/questions-and-answers" target="_blank">Scottish Parliament's Questions and Answers page</a>. </li>
+  </br>
+</ol>
+
+
+Next, we will cover the first stages of the above workflow - how PQs are retrieved and assigned by Stats Gov. 
+
+## PQ - Retrieving & Assigning PQs
+
+In this section, we will look at how the PHS Statistical Governance Team (phs.statsgov@phs.scot) retrieves the PQs from the Parliament website, and assigns them to teams within PHS.
+
+### Retrieving new PQs
 
 Every Tuesday and Thursday morning, Stats Gov runs a script which scrapes **all** the PQs from the Parliamentary website, up till midnight of the previous day.
 
@@ -184,7 +213,7 @@ Once the PQ has been assigned by StatsGov, it is then sent out to the relevant t
 
 The email contains information on how to proceed, the SG contact email, as well as the deadline dates. 
 
-**The 'Answer expected' date is for when the question will need to be sent to the relevant MSP. It is not the deadline for PHS to supply relevant information.
+**The 'Answer expected' date is for when the question will need to be sent to the relevant MSP. It is not the deadline for PHS to respond to the SG.**
 
 Here is an example of the email which teams will receive if they are assigned PQs, which holds all the information we have discussed so far:
 
@@ -323,13 +352,13 @@ The data would be provided to the SG as a background note.
 
 ### Considerations 
 
-In the event you receive a PQ, you should carefully consider whether or not you are able to provide a response, and what it may involve, and what you may need to discuss with your, or another, team.
+In the event you receive a PQ, you should carefully consider whether or not you are able to provide a response, what it may involve, and what you may need to discuss with your, or another, team.
 
-The following are a list of considerations which you could refer to during this process:
+The following are a list of considerations which you should discuss with your team:
 
 #### Is your team able to answer the question?
 
-* If your team is unable to answer the question, why is that? Perhaps you incorrectly received the PQ, and that error needs to be fed back to the StatsGov team?
+* If your team is unable to answer the question, why is that? Did you incorrectly receive the PQ, and that error needs to be fed back to the StatsGov team?
 
 * Is input from a specialist (medic/HOP/Clinical Coding Helpdesk) required?
 
@@ -351,7 +380,7 @@ The following are a list of considerations which you could refer to during this 
 
 * Can the question be interpreted in more than one way? If yes, how can you get clarification?
 
-* Has a similar question been answered before? (Where would you check for this?)
+* Has a similar question been answered before? (This could be searched for on the <a href="https://www.parliament.scot/chamber-and-committees/questions-and-answers" target="_blank">Scottish Parliament's Questions and Answers page</a>)
 
 * Is there a published source, which they can be referred to?
 
@@ -364,11 +393,15 @@ The following are a list of considerations which you could refer to during this 
 
 When you are in a position where you are required to provide a response, there are certain Guiding Principles which you should adhere to, in order to provide an answer that is clear and effective.
 
-Below is a checklist of said principles which users can work through.
+Below are some guiding principles which Draft Answer producers should consider and adhere to.
 
 It is important to remember that PHS staff should know best about the quality of the data that we are providing. As such, we should not be leaving those who receive the PHS draft answer to interpret the data for themselves.
 
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/irpq-guidelines.png")
+```
 
+<!--
 #### Draft Answer
 
 <input type="checkbox" unchecked> Be brief, while supplying enough information. </input> 
@@ -394,11 +427,6 @@ It is important to remember that PHS staff should know best about the quality of
 </br>
 </br>
 
-<!--
-* Data must be understandable, and fit for purpose.
-* Explain why question cannot be answered e.g. *This dataset is not held by PHS*
-* If the quality of the Data is not fit for a draft answer, then it should generally not be used as a Background Note.
--->
 
 #### Unwise to Carry Out Speculative Analysis 
 
@@ -411,9 +439,7 @@ It is important to remember that PHS staff should know best about the quality of
 </br>
 
 
-<!--
-* Do not do it if it will offer very limited insight. 
-* Seek specialist advice (e.g. CPHM, Clinical Coders, Nurse, Pharmacist) before proceeding. -->
+
 
 
 #### View Answer as a Publication
@@ -437,7 +463,6 @@ The following criteria should be met:
 </br>
 
 
-<!--
 * Plain English
 * Non technical
 * Tables should be clearly and fully labelled
@@ -450,13 +475,11 @@ Background notes are provided to give additional contextual information.
 
 This could include:
 
-<input type="checkbox" unchecked> State why question is answered in a certain way </input> 
-</br>
-</br>
-<input type="checkbox" unchecked> Explain issues with data used within the Draft Answer</input>
-</br>
-</br>
-<input type="checkbox" unchecked> Sources and other useful briefings </input> 
+* Explain why the question has been answered in a certain way 
+
+* Explain issues with data used within the Draft Answer
+
+* Sources and other useful briefings 
 
 <!-- * To provide additional contextual information
 * State why question is answered in a certain way
@@ -481,7 +504,7 @@ This could include:
 </div>
 </br>
 
-### Quiz
+### Knowledge Check
 
 ```{r PQ-GuidingPrinciples}
 quiz(
@@ -506,7 +529,7 @@ quiz(
 )
 ```
 
-## PQ - Processing and Responding
+## PQ - Processing & Responding
 
 The following is the workflow when processing and responding to a PQ:
 
@@ -514,7 +537,7 @@ The following is the workflow when processing and responding to a PQ:
 
 Upon receiving a PQ, assess if it is:
 
-* **Incorrectly assigned** - Forward the question to the appropriate team, coping Stats Gov for future reference. If there are no appropriate teams, contact Stats Gov and make them aware. No further action is required.
+* **Incorrectly assigned** - Forward the question to the appropriate team, copying Stats Gov for future reference. If there are no appropriate teams, contact Stats Gov and make them aware. No further action is required.
 
 * **Correctly assigned, For Information** - No further action required, unless SG makes contact to request input.
 
@@ -568,28 +591,28 @@ Once a response is determined to be required, then the following should be under
 
 All answers should be produced using Appendix 3 of the <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/parliamentary-questions/" target="_blank">Parliamentary Questions Protocol Guide.</a>
 
-The following rules should be applied:
+The following style guidelines checklist should be applied:
 
-* Font should be Arial size 12 for text and tables.
+<input type="checkbox" unchecked> Font should be Arial size 12 for text and tables.</input> 
 
-* Only Word tables should be included in the answer.
+<input type="checkbox" unchecked> Only Word tables should be included in the answer.</input> 
 
-* All tables should be portrait.
+<input type="checkbox" unchecked> All tables should be portrait.</input> 
 
-* The left hand column in a table should be left justified, including the heading.
+<input type="checkbox" unchecked> The left hand column in a table should be left justified, including the heading.</input> 
 
-* The table rows containing information/figures should be right justified.
+<input type="checkbox" unchecked> The table rows containing information/figures should be right justified.</input> 
 
-* Table headings and titles should not be in bold.
+<input type="checkbox" unchecked> Table headings and titles should not be in bold.</input> 
 
-* Very large tables should not be included in the answer. Instead, save these as separate Excel sheets and include that with the answer.
+<input type="checkbox" unchecked> Very large tables should not be included in the answer. Instead, save these as separate Excel sheets and include that with the answer.</input> 
 
-* Check draft answer for accuracy, typing mistakes, etc. *Best practise is to have a colleague check the answer.*
+Check draft answer for accuracy, typing mistakes, etc. *Best practise is to have a colleague check the answer.*
 
 
 Once checks are done, and the answer is produced in accordance with the above, it can proceed to the sign-off stage.
 
-### Example of PQ Response
+### PQ - Example
 
 **To ask the Scottish Government how many hedgehog deaths on the roads there have been in each of the last 10 calendar years, broken down by local council area.**
 
@@ -608,7 +631,7 @@ knitr::include_graphics("images/irpq-ExampleAnswer.png")
 
 
 
-### Sign Off
+## PQ - Sign Off
 
 
 Once your answer has been completed and checked, then it has reached the sign off stage.
@@ -715,13 +738,12 @@ It is important to ensure that the process detailed in previous sections are und
 
 ## Information Requests
 
-### About Information Requests
-
-In the previous sections of this course, you covered what PQs are. In a broader sense, PQs are a type of Information Request from MSP's.
+In the previous sections of this course you covered what PQs are. In a broader sense, PQs are a type of Information Request from MSP's.
 
 Information Requests are requests for bespoke analysis of information and data which PHS holds.
 
 IRs can be requested by anyone, so long as the requests are made in line with legislation, agreed principles, and public expectations regarding access to statistical information under which public bodies operate.
+
 
 <div class="info_box">
   <h4>Important</h4>
@@ -729,6 +751,8 @@ IRs can be requested by anyone, so long as the requests are made in line with le
   <li> Freedom of Information Requests are dealt with by the FOI team to ensure all FOI obligations are met under the Freedom Of Information Act 2002. Guidance can be found <a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/data-protection-handbook/freedom-of-information-foi/" target="_blank">here.</a>
   
   <li> All responses made to IR are subject to PHS's overarching rules regarding <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/releasing-statistics/" target="_blank">statistical governance</a>, which includes <a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/" target="_blank">data protection</a>, <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">statistical disclosure control </a> and <a href="https://code.statisticsauthority.gov.uk/" target="_blank">Code of Practise for Statistics </a>obligations.
+  
+  <li> PHS generally aims to answer IRs within 20 days from the point where the specification is agreed with the customer.
   
 </div>
 </br>
@@ -750,7 +774,7 @@ enable PHS staff to understand the request;
 
 ### When PHS will not provide analysis
 
-PHS will not provide information in response to an IR if said information is due to be released in a publication within 12 weeks.
+**PHS will not provide information in response to an IR if said information is due to be released in a publication within 12 weeks.**
 
 Exceptions to this are where data is made available for the following purposes:
 
@@ -767,9 +791,160 @@ Exceptions to this are where data is made available for the following purposes:
 </div>
 </br>
 
-## IR - Guidelines & Charging
+## IR - Workflow
+
+While individual teams may have their own local protocols for responding to IRs, the following is a general workflow which PHS users may use:
+
+<ol>
+  <li>Team receives IR.</li>
+  </br>
+  <li>Team sends the **Information Request Form** (see section *Useful Documents*) to the customer and awaits for the information to be returned.
+  </br>
+  <li>IR is logged in the IRS (see section *IR - Using Information Request Service*) and given a reference number.</li>
+  </br>
+  <li>IR is assessed by the team (see section *IR - Assessing the Request*)</li>
+  </br>
+  <li>Team makes contact with the customer to discuss the IR, and communicate what is being provided, the timescale required, and any applicable charges.</li>
+  </br>
+  <li>Once all parties are in agreement, analysis can be performed. **Note: If a charge is applicable, payment must be received before proceeding.**</li>
+  </br>
+  <li>Once complete, a second team member should check the work.</li>
+  </br>
+  <li>Complete <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">Disclosure Risk Assessment form</a> and apply Statistical Disclosure Control as required.</li>
+  </br>
+  <li>Have the analysis checked by an appropriate member of the team (e.g. Principal Analyst or Service Manager).</li>
+  </br>
+  <li>If this is the first time the information is being released, it should be sent to preview 48 hours before it is released to the customer as follow: 
+    <ul>
+      <li> Analysis relating to specific Health Board: Email PHS preview mailbox. Request that the IR is sent to the Chief Executive and Communications Manager at that specific board.
+      <li> Analysis at national level: Email the IR to your policy contact at the Scottish Government. 
+      </li>
+  </br>
+</ol>
+
+## IR - Using Information Request Service
+
+As already discussed, all IRs should be logged into the Information Request Service.
+
+Below is a step by step tutorial of how to log and close IRs into the system.
+
+1) Log on and select *New Record*
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-UsingIRS1.png")
+```
+
+2) **Summary** - Select *Information Request (Non ISD)* as the Request Type, and fill in relevant information as shown below. *Note: The default deadline is 20 working days from when IR is received. This should be updated after discussion with the customer.* 
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-UsingIRS2.png")
+```
+
+3) **Customer** - As a minimum, fill in the name, telephone and email.
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-UsingIRS3.png")
+```
+
+4) **Time Log** - Click *Define New Role* and select a Lead Analyst (this can initially be the individual logging the request, and can be changed later).
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-UsingIRS4.png")
+```
+
+5) Once the Lead Analyst has been found and chosen, click *Submit Record*.
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-UsingIRS5.png")
+```
+
+6) **Closing Record** - Click *Search* and find the IR using the IR number. Once found, click *edit* to proceed.
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-UsingIRS6.png")
+```
+
+7) **Update Time Log** - You must update the amount of time worked in order to close the request. At this stage, you can also re-assign who is the lead analyst.
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-UsingIRS7.png")
+```
+
+8) **Complete and Close** - Back in the *Summary* screen,fill in the *Completion Date* and click *Submit Record* and confirm. You can then log off.
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-UsingIRS8.png")
+```
+
+## IR - Charging 
+
+### Core / Non-Core Customers
+
+There are two types of customers who will make IRs to PHS - **Core Customers** and **Non-Core Customers**.
+
+It is important to distinguish between the two, as charging principles will differ depending on the customer.
+
+Below are the two categories, as well as what certain organisations/individuals would fall under:
+
+
+```{r echo=FALSE, fig.align='center', out.width="100%"}
+knitr::include_graphics("images/IR-CustomerType.png")
+```
+
+### Charging
+
+IRs should be charged if PHS is required to carry out new work in fulfilling the request. 
+
+Customers are charged based on their type, and only if the work required exceeds a certain estimated timescale.
+
+**Core Customers** are charged when the estimated work time exceeds 2 days.
+
+**Non-Core Customers** are charged when the estimated work time exceeds 3.5 hours.
+
+If a customer is to be charged, a fees notice and explanation of the fees must be sent whent the specification of the IR is being discussed. 
+
+From the issuance of the fees notice, the customer will have 3 months to decide whether or not to pay the charge to obtain the information.
+
+Below is a table of Estimated Day Rates, dependent on the Type of Analysis required in responding to an IR.
+
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/irpq-Charging.png")
+```
+
+
+<div class="info_box">
+  <h4>Important</h4>
+  <ul>
+  <li> Do not charge for IRs where the analytical work is already available.
+  <li> Do not charge when work is part of our normal business activity i.e. part of a planned programme of work, funded project, etc.
+  <li> Do not charge for discussing specification.
+  <
+</div>
+</br>
+
+
+## IR - Assessing the Request
+
+As stated in *IR - Workflow*, once you have logged the IR within the IRS, you should then assess the request with your team.
+
+Each team will have their own local methods to assess the request. 
+
+Below are some general principles and considerations which should be discussed with your team, and understood before proceeding to contact the customer.
 
 ### General Principles
+
+* Is the request clear, or do you need further clarification from the customer?
+
+* Do you have the resources available to respond to the IR?
+
+* Does responding to the IR impact on any Statistical Governance or Data Protection principles which the PHS adheres to?
+
+* Can the IR be responded to within 20 working days from when the specification is agreed with the customer?
+
+* Is this a repeat or similar request?
+
+* Is this request 
 
 Understand customer requirements
 
@@ -812,42 +987,6 @@ Release where Public Benefit & Privacy Panel (PBPP) have given approval
 IRs from the media – phs.comms@phs.scot 
 
 
-## IR - Charging & Sign Off
-
-### Charging
-
-Charge for IRs that require new data extraction, aggregation, analysis and reporting to be carried out
-
-Charge when the estimated time to produce this analysis is more than 3.5 hours work for non-core customers and >2 days for core customers
-
-Do not charge for IRs where the analytical work is already available
-
-Do not charge when work is part of our normal business activity i.e. part of a planned programme of work, funded project, etc
-
-
-```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/irpq-Charging.png")
-```
-
-* Core customers - no charge for all work requiring <= 2 working days.
-
-* Non-core customers - no charge for all work requiring <3.5 hours.
-
-* No charge for dicsussing specification.
-
-* If charge is applied, issue a notification of the charge (a fees notice) and explain.
-
-* There will be three months from the date of the issue of the fees notice for them to decide whether to pay the charge to obtain the information.
-
-### Sign off
-
-## IR - Using Information Request Service
-
-include various screenshots and information about using the IR system
-
-```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/irpq-ImageToFollowPNG.png")
-```
 
 
 ## IR - Example
