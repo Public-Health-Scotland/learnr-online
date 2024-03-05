@@ -614,6 +614,10 @@ Once checks are done, and the answer is produced in accordance with the above, i
 
 ### PQ - Example
 
+Below is an example of a Draft Answer. 
+
+Further examples can be found in the *Further PQ Examples* document located in the *Useful Documentation & Links* section of the course.
+
 **To ask the Scottish Government how many hedgehog deaths on the roads there have been in each of the last 10 calendar years, broken down by local council area.**
 
 
@@ -798,7 +802,8 @@ While individual teams may have their own local protocols for responding to IRs,
 <ol>
   <li>Team receives IR.</li>
   </br>
-  <li>Team sends the **Information Request Form** (see section *IR - Information Request Form*) to the customer and await for the information to be returned.
+  <li>If the request has not been made via the **Information Request Form** (see section *IR - Information Request Form*), the team should send this form to the customer, and request it be filled out and returned. Proceed to the next stage once it has been returned.
+  </br>
   </br>
   <li>IR is logged in the IRS (see section *IR - Using Information Request Service*) and given a reference number.</li>
   </br>
@@ -812,13 +817,18 @@ While individual teams may have their own local protocols for responding to IRs,
   </br>
   <li>Complete <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">Disclosure Risk Assessment form</a> and apply Statistical Disclosure Control as required.</li>
   </br>
-  <li>Have the analysis checked by an appropriate member of the team (e.g. Principal Analyst or Service Manager).</li>
+  <li>The analysis must be approved by an appropriate member of the team (e.g. Principal Analyst or Service Manager).</li>
   </br>
   <li>If this is the first time the information is being released, it should be sent to preview 48 hours before it is released to the customer as follow: 
     <ul>
-      <li> Analysis relating to specific Health Board: Email PHS preview mailbox. Request that the IR is sent to the Chief Executive and Communications Manager at that specific board.
+      <li> Analysis relating to specific Health Board: Email PHS preview mailbox. Request that the IR is sent to the Chief Executive and Communications Manager at that specific board.</li>
       <li> Analysis at national level: Email the IR to your policy contact at the Scottish Government using the e-mail templates in Appendix 1 of the <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Information Request Protocol.</a> 
       </li>
+    </ul>
+  </br>
+  <li>Send the IR to the customer.</li>
+  </br>
+  <li>Close the IR on the IRS.
   </br>
 </ol>
 
@@ -830,7 +840,7 @@ While teams may have their own local procedures in dealing with Information Requ
 
 This form not only aids in the team assessment stage of deadling with IRs, but also directs customers to relevant policies and protocols concerning data and statistical governance. 
 
-A screen grab of the form can be seen below. The attachable document file (with working hyperlinks) can be found in the *Useful Documents* section of this course.
+A screen grab of the form can be seen below. The attachable document file (with working hyperlinks) can be found in the *Useful Documentation & Links* section of this course.
 
 **Please ensure you enter an appropriate team email address where prompted in the document.**
 
@@ -985,12 +995,22 @@ Please work through the following checklist when assessing the IR with your team
 </div>
 </br>
 
-### Close IR
+### Completing the IR
+
+Once an agreement of the specifications has been made with customer, and any necessary Charges have been paid, the work can be carried out.
+
+Teams will have their own methods and resources in carrying out the work necessary to fulfill an Information Request.
+
+Users should apply <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">Statistical Disclosure Control</a> as required (e.g. If there are small figures, etc.).
+
+
+### Sending and Closing the IR
+
+If this is the first release of the information, the IR should be sent for preview 48 hours before it is released to the customer, using the templates contained within the Appendix of the <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Information Request Protocol.</a>
 
 Once all the appropriate works and checks have been completed and the preview of the answer is sent off (if necessary) then the IR can be sent to the customer.
 
 The IRS file should then be updated and closed.
-
 
 
 ## IR - Example
@@ -1001,19 +1021,38 @@ Include an IR.
 
 ```{r final_IR_knowledge_check}
 quiz(
-  question("Question 1",
-           answer("Camilla"),
-           answer('Cathy'),
-           answer("Sadia"),
-           answer("Vay", correct = TRUE),
+  question("Only specific people and organisations are permitted to submit an IR to PHS.",
+           answer("TRUE", correct = FALSE),
+           answer("FALSE", correct = TRUE),
            incorrect = "Not quite, have another go!",
+           correct = "Anyone is allowed to submit an IR to PHS.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
-  question("Question 2",
-           answer("TRUE", correct = TRUE),
-           answer("FALSE"),
+  question("The customer is making an IR which specifically requires small numbers to be disclosed. What should you do? (select all that apply",
+           answer("Contact Stats Gov and seek guidance.", correct = TRUE),
+           answer("Do not supply the information without applying SDC.", correct = TRUE),
+           answer("Release the information. It is only going to one customer, so it is fine.", correct = FALSE),
+           answer("Have a discussion with the customer regarding the issues with supplying the information.", correct = TRUE),
            incorrect = "Not quite, have another go!",
+           correct = "Anyone is allowed to submit an IR to PHS.",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("All work must be checked by an appropriate member of the team (e.g. Service Manager/Principal Analyst) prior to being sent to the customer.",
+           answer("TRUE", correct = TRUE),
+           answer("FALSE", correct = FALSE),
+           incorrect = "Not quite, have another go!",
+           correct = "Well done!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("An IR has been sent to your team from a researcher in a Private Company. They have asked for national level information which has not been released before. What additional stages would you have to do when processing this IR?",
+           answer("It must be sent for preview to your policy contact at SG using the template in Appendix 1 of the IR Protocol, at least 48 hours before being released to the customer.", correct = TRUE),
+           answer("Nothing. As this is new information, it is fine to pass it on to the customer.", correct = FALSE),
+           answer("It should be checked very thoroughly by a member of the team.", correct = FALSE),
+           incorrect = "Not quite, have another go!",
+           correct = "First release of information should be sent to preview 48 hours before being released to the customer. Details can be found in the IR - Workflow section of this course",
            allow_retry = TRUE,
            random_answer_order = TRUE
            )
