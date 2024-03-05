@@ -43,6 +43,16 @@ Welcome to Reproducible Environments in R. This course is designed as a self-led
 </div>
 </br>
 
+### Learning Outcomes
+
+* Reinforced understanding of the importance of reproducibility in data projects.
+* Be able to set up and configure renv for managing project dependencies.
+* Create reproducible environments for R projects using renv.
+* Understand best practices for version control and collaboration with renv.
+* Troubleshoot common issues related to reproducible environments.
+* Awareness of advanced features for customisation options.
+* Be able to confidently apply reproducibility principles to improve reliability and transparency of projects.
+
 
 ## Help & Feedback
 
