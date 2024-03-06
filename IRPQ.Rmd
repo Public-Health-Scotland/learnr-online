@@ -832,7 +832,7 @@ knitr::include_graphics("images/ir-UsingIRS6.png")
 knitr::include_graphics("images/ir-UsingIRS7.png")
 ```
 
-8) **Complete and Close** - Back in the *Summary* screen,fill in the *Completion Date* and click *Submit Record* and confirm. You can then log off.
+8) **Complete and Close** - Back in the *Summary* screen, fill in the *Completion Date* and click *Submit Record* and confirm. You can then log off.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
 knitr::include_graphics("images/ir-UsingIRS8.png")
@@ -864,7 +864,7 @@ Customers are charged based on their type, and only if the work required exceeds
 
 **Non-Core Customers** are charged when the estimated work time exceeds 3.5 hours.
 
-If a customer is to be charged, a fees notice and explanation of the fees must be sent whent the specification of the IR is being discussed. 
+If a customer is to be charged, a fees notice and explanation of the fees must be sent when the specification of the IR is being discussed. 
 
 From the issuance of the fees notice, the customer will have 3 months to decide whether or not to pay the charge to obtain the information.
 
@@ -950,7 +950,7 @@ The IRS file should then be updated and closed.
 
 ## IR - Example
 
-Include an IR.
+*Include an IR example*
 
 ## IR - Knowledge Check
 
