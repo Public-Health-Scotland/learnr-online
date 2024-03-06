@@ -61,12 +61,12 @@ The nature and themes of the questions may change to reflect the ever changing s
 
 For instance, during the flu seasons SG may receive a number of PQs such as:
 
-**To ask the Scottish Government how many vaccinations took place in Glasgow this year, and it compares to the amount of vaccinations which took place last year.**
+**To ask the Scottish Government how many vaccinations took place in Glasgow this year, and how it compares to the amount of vaccinations which took place last year.**
 
 **To ask the Scottish Government how many vaccines are available in preparation for the 2024 Flu season.**
 
 
-While topical questions are not certain to be asked, it is a good idea for teams to be aware of possible trends, so that they are not caught unaware.
+While topical questions are not certain to be asked, it is a good idea for teams to be aware of possible trends and topics they may be faced with.
 
 PQs (both answered and unanswered) can be found on the <a href="https://www.parliament.scot/chamber-and-committees/questions-and-answers" target="_blank">Scottish Parliament's Questions and Answers page</a>. 
 
@@ -75,7 +75,7 @@ In the next few sections, we will cover how a Parliamentary Question is created,
 
 ### About PQs
 
-PQs can asked in two ways:
+PQs can be asked in two ways:
 
 **Oral Questions** are asked in Parliament during First Minister's Questions, and are submitted on a Wednesday, one week before they are to be asked in Parliament. The timescale to respond to the MSP is 5 working days.
 
@@ -109,19 +109,19 @@ More detailed breakdowns of each stage of the process can be found in later sect
   </br>
   <li>The PHS Statistical Governance Team (phs.statsgov@phs.scot) retrieves and assigns the PQs to the appropriate PHS teams (see section *PQ - Retrieving & Assigning PQs*).</li>
   </br>
-  <li>Teams receive and assess the PQ </li>
+  <li>Teams receive and assess the PQ. </li>
   </br>
-  <li>If correctly assigned and the team are able to answer, contact SG to enquire whether a response is required (see section *PQ - Processing & Responding*)</li>
+  <li>If correctly assigned and the team are able to answer, contact SG to enquire whether a response is required (see section *PQ - Processing & Responding*).</li>
   </br>
-  <li>If a response is required, log the PQ in the IRS (see section *IR - Using Information Request Service*).</li>
+  <li>If a response is required, log the PQ in the IRS. (see section *IR - Using Information Request Service*)</li>
   </br>
   <li>Discuss the PQ with SG, gaining clarification as necessary, establishing deadlines, and conveying all relevant information.</li>
   </br>
-  <li>Once all is agreed, proceed with answering the PQ. **Follow <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">PHS's Statistical Disclosure Control flowchart</a>. ** If required, contact Stats Gov for assistance </li>
+  <li>Once all is agreed, proceed with answering the PQ. **Follow <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">PHS's Statistical Disclosure Control flowchart</a>. ** If required, contact Stats Gov for assistance. </li>
   </br>
-  <li>Produce draft answer in accordance with style guidelines, using the appropriate template.</li>
+  <li>Produce draft answer in accordance with style guidelines, using the appropriate template. (see section *PQ - Processing & Responding*)</li>
   </br>
-  <li>Complete the sign-off procedure (see section *PQ - Sign Off*).</li>
+  <li>Complete the sign-off procedure. (see section *PQ - Sign Off*)</li>
   </br>
   <li>Send the draft answer to the SG contact.</li>
   </br>
@@ -145,7 +145,7 @@ Every Tuesday and Thursday morning, Stats Gov runs a script which scrapes **all*
 
 Questions which hit certain keywords relating to health (NHS, blood, etc.) are flagged in order to aid Stats Gov by highlighting important health-related questions.
 
-Through the retrieval process, all questions (flagged and non-flagged)are retrieved and are manually reviewed by Stats Gov. 
+Through the retrieval process, all questions (flagged and non-flagged) are retrieved and are manually reviewed by Stats Gov. 
 
 Throughout the year, there may be times where Stats Gov will increase the frequency of these retrievals (such as around Holiday periods).
 
@@ -179,7 +179,7 @@ The following is an excerpt from the topic area/team allocation guide which Stat
 knitr::include_graphics("images/irpq-allocationGuideScreenshot.png")
 ```
 
-
+It is important to note that questions may pertain to multiple teams. If this is the case, it will be allocated to all related teams, and such an allocation be detailed in the *Notes* section explained below. 
 
 #### Action
 
@@ -193,12 +193,12 @@ Regardless of the action assigned to the PQ, the recipients should read said PQ 
 
 #### Notes
 
-Any relevant notes (such as previously answered PQ's relating to this PQ, and to what other teams this PQ has been allocated to, including the action).
+Any relevant notes (such as previously answered PQs relating to this PQ, and to what other teams this PQ has been allocated to, including the action).
 
 <div class="info_box">
   <h4>Important</h4>
   <ul>
-  <li>It is important to remember that Stats Gov are not specialists within the individual topic areas, and may occasionally assign a PQ's Topic Area or Action in error. Teams are expected to read through all PQs assigned to them and collaborate with appropriate teams and personnel in order to provide SG with as much assistance as possible.
+  <li>Stats Gov are not specialists within the individual topic areas, and may occasionally assign a PQ's Topic Area or Action in error. Teams are expected to read through all PQs assigned to them and communicate with appropriate teams and personnel in order to provide SG with as much assistance as possible.
   
   <li>Stats Gov (phs.statsgov@phs.scot) welcomes any and all corrections in order to improve their services. 
   </ul>
@@ -209,7 +209,7 @@ Any relevant notes (such as previously answered PQ's relating to this PQ, and to
 
 ###  Assigned PQ
 
-Once the PQ has been assigned by StatsGov, it is then sent out to the relevant teams, relating to the topic areas. Each topic area will generate one email, containing all the PQs for that allocation session. 
+Once the PQ has been assigned by StatsGov, it is then sent out to the relevant teams, relating to the topic areas. Each topic area will generate one email containing all the PQs for that allocation session. 
 
 The email contains information on how to proceed, the SG contact email, as well as the deadline dates. 
 
@@ -401,73 +401,6 @@ It is important to remember that PHS staff should know best about the quality of
 knitr::include_graphics("images/irpq-guidelines.png")
 ```
 
-<!--
-#### Draft Answer
-
-<input type="checkbox" unchecked> Be brief, while supplying enough information. </input> 
-</br>
-</br>
-<input type="checkbox" unchecked> Have a purpose to every phrase. </input>
-</br>
-</br>
-<input type="checkbox" unchecked> Provide data to answer the question, or explain why you cannot. </input>
-</br>
-</br>
-
-
-#### Data Quality/Incomplete Data
-
-<input type="checkbox" unchecked> Data must be understandable and fit for purpose. </input> 
-</br>
-</br>
-<input type="checkbox" unchecked> Explain why a question cannot be answered - e.g. *This dataset is not held by PHS* </input>
-</br>
-</br>
-<input type="checkbox" unchecked> Data not fit to be used in the draft answer is not to be used as a Background Note. </input>
-</br>
-</br>
-
-
-#### Unwise to Carry Out Speculative Analysis 
-
-
-<input type="checkbox" unchecked> Do not offer very limited insight. </input> 
-</br>
-</br>
-<input type="checkbox" unchecked> If necessary, seek specialist advice (e.g. CPHM, Clinical Coders, Nurse, Pharmacist) before proceeding to answer the question. </input>
-</br>
-</br>
-
-
-
-
-
-#### View Answer as a Publication
-
-The following criteria should be met:
-
-<input type="checkbox" unchecked> Plain English </input> 
-</br>
-</br>
-<input type="checkbox" unchecked> Non technical</input>
-</br>
-</br>
-<input type="checkbox" unchecked> Tables should be clearly and fully labelled </input> 
-</br>
-</br>
-<input type="checkbox" unchecked> Acronyms explained</input>
-</br>
-</br>
-<input type="checkbox" unchecked> **No first release of stats if there is a plan to release in the next 12 weeks** </input> 
-</br>
-</br>
-
-
-* Plain English
-* Non technical
-* Tables should be clearly and fully labelled
-* Acronyms explained
-* No first release of stats if there is a plan to release in next 12 weeks -->
 
 #### Background Notes
 
@@ -481,11 +414,6 @@ This could include:
 
 * Sources and other useful briefings 
 
-<!-- * To provide additional contextual information
-* State why question is answered in a certain way
-* Explain issues with data over and above Draft Answer
-* Sources and other useful briefings
-* Ordered in importance -->
 
 **SG will most likely leave Background Notes out of their final response.**
 
@@ -1101,11 +1029,8 @@ The next few sections will contain various helpful documents, links and contacts
 
 Thank User for completing the course.
 
-Please take some time to give some feedback so that we may improve the course for future use.
+Please take some time to give some feedback so that we may improve the course for future users.
 
-THIS CURRENTLY IS THE FORM FOR THE INTRO R COURSE. CHANGE IT TO IRPQ COURSE
-
-<iframe width="100%" height= "2300" src= "https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5JmibxHi_yzZ9Pvduh8IqoF_5UQzVRTUE2NEZPQktaR1BUMkZKWE05S1lETSQlQCN0PWcu&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-
+<iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5Jmr6qmxVdaxdPt6Pzcihf4zhUODkxTTRQNlBQR1lBRExGNEkwTVVHREVJVS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
 
 
