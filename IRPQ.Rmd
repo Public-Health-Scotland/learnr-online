@@ -766,7 +766,7 @@ While individual teams may have their own local protocols for responding to IRs,
 
 While teams may have their own local procedures in dealing with Information Requests, it is encouraged to have customers fill in and return the *Information Request Form* in the first instance.
 
-This form not only aids in the team assessment stage of deadling with IRs, but also directs customers to relevant policies and protocols concerning data and statistical governance. 
+This form not only aids in the team assessment stage of dealing with IRs, but also directs customers to relevant policies and protocols concerning data and statistical governance. 
 
 A screen grab of the form can be seen below. The attachable document file (with working hyperlinks) can be found in the *Useful Documentation & Links* section of this course.
 
@@ -776,6 +776,13 @@ A screen grab of the form can be seen below. The attachable document file (with 
 knitr::include_graphics("images/ir-IRForm.png")
 ```
 
+<div class="info_box">
+  <h4>Important</h4>
+  <ul>
+    <li>The 20 day deadline to fulfil the IR will be from when the specification has been agreed with the customer, following the team assessment of the IR Form.
+  </ul>
+</div>
+</br>
 
 ### Information Request Service
 
