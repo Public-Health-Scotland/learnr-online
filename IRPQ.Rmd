@@ -540,28 +540,55 @@ Check draft answer for accuracy, typing mistakes, etc. *Best practise is to have
 
 Once checks are done, and the answer is produced in accordance with the above, it can proceed to the sign-off stage.
 
-### PQ - Example
+## PQ - Example
 
-Below is an example of a Draft Answer. 
+
+In this section, we will consider a case study as an example of how to create a Draft Answer for the PQs.
 
 Further examples can be found in the *Further PQ Examples* document located in the *Useful Documentation & Links* section of the course.
+
+### Example Scenario
+
+Your team has received the following PQ and have been asked by SG to respond to it:
+
 
 **To ask the Scottish Government how many hedgehog deaths on the roads there have been in each of the last 10 calendar years, broken down by local council area.**
 
 
 What we know:
 
-* Since 1970, we have collected information on the information on hedgehog deaths on its PHS(H)1 dataset. 
+* Since 1970, we have collected information on hedgehog deaths on its PHS(H)1 dataset. 
 * It is possible to identify the place of death=highway from this dataset. 
 * Local council area is not identified on this dataset. 
 * Data for 2020 is currently being processed and will be available soon.
 
+Take a moment and think about how you would create a Draft Answer in the above scenario. When you are ready, click next in order to see an example of how this has been answered.
+
+
+### Example Draft Answer
+
+**Draft Answer**
 
 ```{r echo=FALSE, fig.align='center', out.width="100%"}
-knitr::include_graphics("images/irpq-ExampleAnswer.png")
+knitr::include_graphics("images/irpq-PQExample.png")
 ```
 
+The Draft Answer above is appropriate in answering the question, as it:
 
+* Explains why the question cannot be answered.
+* Gives alternative information relating to the same type of question which may be used by SG.
+* Supplies a table of the information in the correct style format.
+* Provides appropriate Background Information, including source of data.
+
+How did you do? Did you meet all the points above? 
+
+<div class="info_box">
+  <h4>Important</h4>
+  <ul>
+    <li>Please remember to use the template located in Appendix 3 of the <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/parliamentary-questions/" target="_blank">Parliamentary Questions Protocol Guide</a> when Drafting PQ Answers.
+  </ul>
+</div>
+</br>
 
 ## PQ - Sign Off
 
