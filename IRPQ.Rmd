@@ -997,7 +997,7 @@ In discussion with the customer, the team was able to clarify the following:
 * Confirmation customer would like to proceed with the IR.
 * Confirmation of IR Number and Deadline, which was conveyed to the customer.
 
-Following this discussion, the teams outputted the following spreadsheet to the customer via email:
+Following this discussion, the team outputted the following spreadsheet to the customer via email:
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
 knitr::include_graphics("images/ir-example1.png")
