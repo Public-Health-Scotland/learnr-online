@@ -21,8 +21,6 @@ library(dplyr)
 library(purrr)
 library(ggplot2)
 
-
-
 knitr::opts_chunk$set(echo = FALSE)
 
 tutorial_options(
@@ -48,6 +46,7 @@ Welcome to the Parliamentary Questions & Information Requests course. This cours
     <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
     <li>If you are comfortable with the content and are looking for specific information or guidance, feel free to navigate through to the appropriate section located in the navigation banner.
     <li>If this is your first exposure to PQs and IRs, it is highly recommended to work through the course from beginning till end.
+    <li>Should you have any difficulties whilst navigating the course please contact the Statistical Governance team at phs.statsgov@phs.scot.
   </ul>
 </div>
 </br>
@@ -117,7 +116,7 @@ More detailed breakdowns of each stage of the process can be found in later sect
   </br>
   <li>Discuss the PQ with SG, gaining clarification as necessary, establishing deadlines, and conveying all relevant information.</li>
   </br>
-  <li>Once all is agreed, proceed with answering the PQ. **Follow <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">PHS's Statistical Disclosure Control flowchart</a>. ** If required, contact Stats Gov for assistance. </li>
+  <li>Once all is agreed, proceed with answering the PQ. **Follow <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">PHS Statistical Disclosure Control flowchart</a>. ** If required, contact Stats Gov for assistance. </li>
   </br>
   <li>Produce draft answer in accordance with style guidelines, using the appropriate template. (see section *PQ - Processing & Responding*)</li>
   </br>
@@ -147,17 +146,17 @@ Questions which hit certain keywords relating to health (NHS, blood, etc.) are f
 
 Through the retrieval process, all questions (flagged and non-flagged) are retrieved and are manually reviewed by Stats Gov. 
 
-Throughout the year, there may be times where Stats Gov will increase the frequency of these retrievals (such as around Holiday periods).
+Throughout the year, there may be times where Stats Gov will increase the frequency of these retrievals if necessary due to large volumes.
 
 
-```{r pq-review-quiz}
+```{r pq-review-quiz, results='asis'}
 quiz(
-  question("Which of the following PQ's have Stats Gov reviewed? 'To ask the Scottish Government...",
+  question("Which of the following PQ's have Stats Gov reviewed? Please select all that apply. 'To ask the Scottish Government...",
     answer("how many stoats have there been in Orkney in each of the last seven years, and what it estimates the figure will be for 2019?", correct = TRUE),
     answer("what plans it has to reduce the working week for public sector staff", correct = TRUE),
     answer("whether guidance on flying flags from its buildings changed in 2021; what any such changes were, and what the reasons were for any changes made.", correct = TRUE),
     answer("to ask the Scottish Government how many full-time equivalent British Sign Language tutors are currently employed by each local authority.", correct = TRUE),
-    incorrect = "Not quite, have another go!",
+    incorrect = "There are a few more!",
     allow_retry = TRUE,
     random_answer_order = TRUE
   )
@@ -167,7 +166,7 @@ quiz(
 
 ### Assigning PQs
 
-PQs are manually reviewed by StatsGov, who decide the following:
+PQs are manually reviewed by Stats Gov, who decide the following:
 
 #### Topic Area
 
@@ -209,7 +208,7 @@ Any relevant notes (such as previously answered PQs relating to this PQ, and to 
 
 ###  Assigned PQ
 
-Once the PQ has been assigned by StatsGov, it is then sent out to the relevant teams, relating to the topic areas. Each topic area will generate one email containing all the PQs for that allocation session. 
+Once the PQ has been assigned by Stats Gov, it is then sent out to the relevant teams, relating to the topic areas. Each topic area will generate one email containing all the PQs for that allocation session. 
 
 The email contains information on how to proceed, the SG contact email, as well as the deadline dates. 
 
@@ -232,14 +231,14 @@ quiz(
            answer("Pass the PQ on to the appropriate team, ccing Stats Gov into the email", correct = TRUE),
            answer("Contact Scottish Government, and tell them PHS cannot assist", correct = FALSE),
            answer("Do nothing and wait for Scottish Government to ask for assistance", correct = FALSE),
-           incorrect = "Not quite, have another go!",
+           incorrect = "You should make sure the PQ reaches the appropriate team, and ensure the allocation error does not. (There are 2 correct options)",
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
   question("If you receive a PQ with Action 'For Information', you do not need to take any further action other than reading the PQ",
            answer("TRUE"),
            answer("FALSE", correct = TRUE),
-           incorrect = "Not quite, have another go!",
+           incorrect = "Teams should still read the PQs and take further action if necessary.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            )
@@ -283,7 +282,7 @@ For example:
 
 **Draft answer Example:**
 
-*The information is published on PHS's website under (insert section of website and link).*
+*The information is published on the PHS website under (insert section of website and link).*
 
 
 Relevant background notes should be provided. Keep it brief, but provide enough information to ensure the question is answered and understood.
@@ -300,22 +299,22 @@ What information might you need to interpret in order to fully answer the questi
 
 ```{r interpretationQuestions}
 quiz(
-  question("To ask the Scottish Government how many (a) adults and (b) children have been registered with a dentist in each year since 2005.",
+  question("To ask the Scottish Government how many (A) adults and (B) children have been registered with a dentist in each year since 2005.",
            answer("Definition of Adult - over 16, over 18", correct = TRUE),
            answer("NHS or Private Dentist", correct = TRUE),
            answer("Definition of Children - under 16s, under 18s", correct = TRUE),
            answer("Reason for visiting the dentist", correct = FALSE),
-           incorrect = "Not quite, have another go!",
+           incorrect = "There is no need to know the reason for visiting the dentist. Try again.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
-  question("To ask the Scottish Government how many people have been prescribed drugs for depression in each year since 2005, broken down into (a) children, (b) adolescents, (c) adults and (d) elderly people in each NHS board area.",
+  question("To ask the Scottish Government how many people have been prescribed drugs for depression in each year since 2005, broken down into (A) children, (B) adolescents, (C) adults and (D) elderly people in each NHS board area.",
            answer("Time Period - since Jan 2005 or April 2005?", correct = TRUE),
            answer("Definition of adult, child, elderly?", correct = TRUE),
-           answer("Could the prescribed drug also be prescribed to treat other conditions? Do we need specialist advicep?", correct = TRUE),
+           answer("Could the prescribed drug also be prescribed to treat other conditions? Do we need specialist advice?", correct = TRUE),
            answer("Is it possible for us to differ between the number of people, and the number of prescriptions?", correct = TRUE),
            answer("How long have the individuals been on the prescribed drugs?", correct = FALSE),
-           incorrect = "Not quite, have another go!",
+           incorrect = "There is no need to know how long an individual has been prescribed drugs. Try again.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            )
@@ -324,7 +323,7 @@ quiz(
 
 **To ask the Scottish Government how many attendances at GP surgeries by prostate cancer patients there have been in each year since 1997-98, also broken down by (a) NHS Board and (b) parliamentary constituency.**
 
-For this question, the data is not collected by PHS, but a similar data set may be available. It may also require some advice from SMs or Medical Colleagues.
+For this question, the data is not collected by PHS, but a similar data set may be available. It may also require some advice from Medical Colleagues and will need to be checked by an appropriate Service Manager.
 
 **Example Draft Answer:**
 
@@ -358,7 +357,7 @@ The following are a list of considerations which you should discuss with your te
 
 #### Is your team able to answer the question?
 
-* If your team is unable to answer the question, why is that? Did you incorrectly receive the PQ, and that error needs to be fed back to the StatsGov team?
+* If your team is unable to answer the question, why is that? Did you incorrectly receive the PQ, and that error needs to be fed back to the Stats Gov team?
 
 * Is input from a specialist (medic/HOP/Clinical Coding Helpdesk) required?
 
@@ -393,7 +392,7 @@ The following are a list of considerations which you should discuss with your te
 
 When you are in a position where you are required to provide a response, there are certain Guiding Principles which you should adhere to, in order to provide an answer that is clear and effective.
 
-Below are some guiding principles which Draft Answer producers should consider and adhere to.
+Below are some guiding principles which draft answer producers should consider and adhere to.
 
 It is important to remember that PHS staff should know best about the quality of the data that we are providing. As such, we should not be leaving those who receive the PHS draft answer to interpret the data for themselves.
 
@@ -410,7 +409,7 @@ This could include:
 
 * Explain why the question has been answered in a certain way 
 
-* Explain issues with data used within the Draft Answer
+* Explain issues with data used within the draft answer
 
 * Sources and other useful briefings 
 
@@ -437,20 +436,19 @@ This could include:
 ```{r PQ-GuidingPrinciples}
 quiz(
   question("You have received a PQ which you have been asked to respond to by the SG. The data you have access to is not clear, and as such, you cannot fully answer the question. What do you do?",
-           answer("Do not offer the limited insight.", correct = TRUE),
            answer("Do not pass on the data that is not clear.", correct = TRUE),
            answer("Contact Scottish Government, and explain why you cannot assist.", correct = TRUE),
            answer("Send the SG the data, and explain why you cannot answer it.", correct = FALSE),
            answer("Contact specialists on the data to gain clarity, to assist in answering.", correct = TRUE),
            answer("Do nothing. You cannot answer the question so it is better not to confuse anyone.", correct = FALSE),
-           incorrect = "Not quite, have another go!",
+           incorrect = "You should not be sending unclear data to SG. You should still provide an explanation to the SG. (there are 3 correct answers)",
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
-  question("Your response to a question will include data that is contained in a publication due to be released in 10 weeks. You should release the answer with the data since PQs are important, and should be answered as soon as possible.",
+  question("Your response to a question will include data that is contained in a publication due to be released in 12 weeks. You should release the answer with the data since PQs are important, and should be answered as soon as possible.",
            answer("TRUE"),
            answer("FALSE", correct = TRUE),
-           incorrect = "Not quite, have another go!",
+           incorrect = "You should not be releasing data that is due to to be released within the next 12 weeks of an official release.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            )
@@ -512,7 +510,7 @@ Once a response is determined to be required, then the following should be under
 
 * Information should not be the first public release of the data.
 
-* **Follow <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">PHS's Statistical Disclosure Control flowchart</a>. ** If required, contact Stats Gov for assistance.
+* **Follow <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">PHS Statistical Disclosure Control flowchart</a>. ** If required, contact Stats Gov for assistance.
 
 
 ### Producing Draft Answer
@@ -543,7 +541,7 @@ Once checks are done, and the answer is produced in accordance with the above, i
 ## PQ - Example
 
 
-In this section, we will consider a case study as an example of how to create a Draft Answer for the PQs.
+In this section, we will consider a case study as an example of how to create a draft answer for the PQs.
 
 Further examples can be found in the *Further PQ Examples* document located in the *Useful Documentation & Links* section of the course.
 
@@ -562,18 +560,17 @@ What we know:
 * Local council area is not identified on this dataset. 
 * Data for 2020 is currently being processed and will be available soon.
 
-Take a moment and think about how you would create a Draft Answer in the above scenario. When you are ready, click next in order to see an example of how this has been answered.
+Take a moment and think about how you would create a draft answer in the above scenario. When you are ready, click next in order to see an example of how this has been answered.
 
 
 ### Example Draft Answer
 
-**Draft Answer**
 
 ```{r echo=FALSE, fig.align='center', out.width="100%"}
 knitr::include_graphics("images/irpq-PQExample.png")
 ```
 
-The Draft Answer above is appropriate in answering the question, as it:
+The draft answer above is appropriate in answering the question, as it:
 
 * Explains why the question cannot be answered.
 * Gives alternative information relating to the same type of question which may be used by SG.
@@ -697,7 +694,9 @@ It is important to ensure that the process detailed in previous sections are und
 
 ## Information Requests
 
-In the previous sections of this course you covered what PQs are. In a broader sense, PQs are a type of Information Request from MSP's.
+In the previous sections of this course you covered what PQs are. 
+
+In a broader sense, PQs are a type of Information Request from MSPs.
 
 Information Requests are requests for bespoke analysis of information and data which PHS holds.
 
@@ -707,9 +706,9 @@ IRs can be requested by anyone, so long as the requests are made in line with le
 <div class="info_box">
   <h4>Important</h4>
   <ul>
-  <li> Freedom of Information Requests and Environmental Information Regulation Requests are dealt with by the FOI team to ensure all FOI obligations are met under the Freedom Of Information Act 2002. Guidance can be found <a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/data-protection-handbook/freedom-of-information-foi/" target="_blank">here.</a>
+  <li> Freedom of Information Requests and Environmental Information Regulation Requests are dealt with by the FOI team to ensure all FOI obligations are met under the Freedom Of Information Act 2002. Guidance can be found on <a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/data-protection-handbook/freedom-of-information-foi/" target="_blank">The Spark.</a>
   
-  <li> All responses made to IR are subject to PHS's overarching rules regarding <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/releasing-statistics/" target="_blank">statistical governance</a>, which includes <a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/" target="_blank">data protection</a>, <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">statistical disclosure control </a> and <a href="https://code.statisticsauthority.gov.uk/" target="_blank">Code of Practise for Statistics </a>obligations.
+  <li> All responses made to IR are subject to PHS overarching rules regarding <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/releasing-statistics/" target="_blank">statistical governance</a>, which includes <a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/" target="_blank">data protection</a>, <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">statistical disclosure control </a> and <a href="https://code.statisticsauthority.gov.uk/" target="_blank">Code of Practise for Statistics </a>obligations.
   
   <li> PHS generally aims to answer IRs within 20 days from the point where the specification is agreed with the customer.
   
@@ -787,15 +786,17 @@ While individual teams may have their own local protocols for responding to IRs,
   </br>
 </ol>
 
+In the next section, we will cover the first few stages of the IR workflow.
+
 ## IR - Form & Service
 
 ### Information Request Form
 
-While teams may have their own local procedures in dealing with Information Requests, it is encouraged to have customers fill in and return the *Information Request Form* in the first instance.
+While teams may have their own local procedures in dealing with Information Requests, it is encouraged to have customers fill in and return an *Information Request Form* in the first instance. We have provided an example form for teams to adapt for their purposes.
 
 This form not only aids in the team assessment stage of dealing with IRs, but also directs customers to relevant policies and protocols concerning data and statistical governance. 
 
-A screen grab of the form can be seen below. The attachable document file (with working hyperlinks) can be found in the *Useful Documentation & Links* section of this course.
+A screen grab of the form can be seen below. The attachable document file (with working hyperlinks) can be found in the *Useful Documentation & Links* section of this course, as well as on Spark (insert hyperlink for document).
 
 **Please ensure you enter an appropriate team email address where prompted in the document.**
 
@@ -806,16 +807,16 @@ knitr::include_graphics("images/ir-IRForm.png")
 <div class="info_box">
   <h4>Important</h4>
   <ul>
-    <li>The 20 day deadline to fulfil the IR will be from when the specification has been agreed with the customer, following the team assessment of the IR Form.
+    <li>The 20 day deadline to fulfil the IR will begin from when the specification has been agreed with the customer, following the team's assessment of the IR Form.
   </ul>
 </div>
 </br>
 
 ### Information Request Service
 
-As already discussed, all IRs should be logged into the Information Request Service.
+As already discussed, all IRs should be logged in the Information Request Service.
 
-Below is a step by step tutorial of how to log and close IRs into the system.
+Below is a step by step tutorial of how to log and close IRs in the system.
 
 1) Log on and select *New Record*
 
@@ -823,7 +824,8 @@ Below is a step by step tutorial of how to log and close IRs into the system.
 knitr::include_graphics("images/ir-UsingIRS1.png")
 ```
 
-2) **Summary** - Select *Information Request (Non ISD)* as the Request Type, and fill in relevant information as shown below. *Note: The default deadline is 20 working days from when IR is received. This should be updated after discussion with the customer.* 
+2) **Summary** - Select *Information Request (Non ISD)* as the Request Type, and fill in relevant information as shown below. 
+*Note: The default deadline is 20 working days from when IR is received. This should be updated after discussion with the customer.* 
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
 knitr::include_graphics("images/ir-UsingIRS2.png")
@@ -865,6 +867,7 @@ knitr::include_graphics("images/ir-UsingIRS7.png")
 knitr::include_graphics("images/ir-UsingIRS8.png")
 ```
 
+Next, we will move onto the guidelines surrounding Charges.
 
 ## IR - Charging 
 
@@ -931,6 +934,9 @@ Please work through the following checklist when assessing the IR with your team
 <input type="checkbox" unchecked> Do we have the resources available to respond to the IR?</input> 
 </br>
 </br>
+<input type="checkbox" unchecked> Is the information readily available?</input> 
+</br>
+</br>
 <input type="checkbox" unchecked> Does responding to the IR impact on any Statistical Governance or Data Protection principles?</input> 
 </br>
 </br>
@@ -977,7 +983,37 @@ The IRS file should then be updated and closed.
 
 ## IR - Example
 
-*Include an IR example*
+
+The below is a well-answered IR, and may be used as an example of how teams may tackle such requests.
+
+### Example
+
+A PHS team received an IR via email, requesting the **list size of patients aged 18-74 per practice in NHS Tayside**.
+
+In discussion with the customer, the team was able to clarify the following:
+
+* What the requirements were.
+* If existing data was sufficient to answer the question.
+* Confirmation customer would like to proceed with the IR.
+* Confirmation of IR Number and Deadline, which was conveyed to the customer.
+
+Following this discussion, the teams outputted the following spreadsheet to the customer via email:
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-example1.png")
+```
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/ir-example2.png")
+```
+
+<div class="info_box">
+  <h4>Important</h4>
+  <ul>
+  <li> This section only shows one example of how an IR has been answered. Individual teams will be able to provide their own examples of how they have answered IRs in the past.
+  <li> Unlike with PQs, there is no standardised template to be used when answering an IR, as teams will have their own methods, and each IR may be different in their requirements to eachother.
+</div>
+</br>
 
 ## IR - Knowledge Check
 
@@ -991,9 +1027,8 @@ quiz(
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
-  question("The customer is making an IR which specifically requires small numbers to be disclosed. What should you do? (select all that apply",
+  question("The customer is making an IR which specifically requires small numbers to be disclosed. What should you do? (select all that apply)",
            answer("Contact Stats Gov and seek guidance.", correct = TRUE),
-           answer("Do not supply the information without applying SDC.", correct = TRUE),
            answer("Release the information. It is only going to one customer, so it is fine.", correct = FALSE),
            answer("Have a discussion with the customer regarding the issues with supplying the information.", correct = TRUE),
            incorrect = "Not quite, have another go!",
