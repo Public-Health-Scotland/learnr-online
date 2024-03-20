@@ -92,3 +92,9 @@ img {
 .colour-purple {
   color: #433683;
 }
+
+.center-align {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
