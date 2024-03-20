@@ -157,7 +157,7 @@ Throughout the year, there may be times where Stats Gov will increase the freque
 
 ```{r pq-review-quiz, results='asis'}
 quiz(
-  question("Which of the following PQ's have Stats Gov reviewed? Please select all that apply. 'To ask the Scottish Government... (select ALL that apply)",
+  question("Which of the following PQ's have Stats Gov reviewed? 'To ask the Scottish Government... (select ALL that apply)",
     answer("how many stoats have there been in Orkney in each of the last seven years, and what it estimates the figure will be for 2019?", correct = TRUE),
     answer("what plans it has to reduce the working week for public sector staff", correct = TRUE),
     answer("whether guidance on flying flags from its buildings changed in 2021; what any such changes were, and what the reasons were for any changes made.", correct = TRUE),
