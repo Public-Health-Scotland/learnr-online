@@ -312,7 +312,7 @@ quiz(caption = "What information might you need to interpret in order to fully a
            random_answer_order = TRUE
            ),
   question("To ask the Scottish Government how many people have been prescribed drugs for depression in each year since 2005, broken down into (A) children, (B) adolescents, (C) adults and (D) elderly people in each NHS board area. (select ALL that apply)",
-           answer("Time Period - since Jan 2005 or April 2005?", correct = TRUE),
+           answer("Time Period - since Jan 2005 or April 2005? (calendar year or financial year)", correct = TRUE),
            answer("Definition of adult, child, elderly?", correct = TRUE),
            answer("Could the prescribed drug also be prescribed to treat other conditions? Do we need specialist advice?", correct = TRUE),
            answer("Is it possible for us to differ between the number of people, and the number of prescriptions?", correct = TRUE),
@@ -487,7 +487,7 @@ Should a response be required, a discussion should be had with SG:
 
 * Obtain SG's contact details.
 
-* Record PQ in IRS (refer to later section on 'IR - Using Information Request Service')
+* Record PQ in IRS (refer to later section on 'IR - Form & Service')
 
 * Clarify SG understanding of PQ.
 
