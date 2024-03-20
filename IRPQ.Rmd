@@ -47,6 +47,7 @@ Welcome to the Parliamentary Questions & Information Requests course. This cours
     <li>If you are comfortable with the content and are looking for specific information or guidance, feel free to navigate through to the appropriate section located in the navigation banner.
     <li>If this is your first exposure to PQs and IRs, it is highly recommended to work through the course from beginning till end.
     <li>Should you have any difficulties whilst navigating the course please contact the Statistical Governance team at phs.statsgov@phs.scot.
+    <li>If you wish to reset all the quizzes and start over from the beginning, locate and press the 'Start Over' button beneath the navigation banner on the left hand side.
   </ul>
 </div>
 </br>
