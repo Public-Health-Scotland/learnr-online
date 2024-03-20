@@ -151,7 +151,7 @@ Throughout the year, there may be times where Stats Gov will increase the freque
 
 ```{r pq-review-quiz, results='asis'}
 quiz(
-  question("Which of the following PQ's have Stats Gov reviewed? Please select all that apply. 'To ask the Scottish Government...",
+  question("Which of the following PQ's have Stats Gov reviewed? Please select all that apply. 'To ask the Scottish Government... (select ALL that apply)",
     answer("how many stoats have there been in Orkney in each of the last seven years, and what it estimates the figure will be for 2019?", correct = TRUE),
     answer("what plans it has to reduce the working week for public sector staff", correct = TRUE),
     answer("whether guidance on flying flags from its buildings changed in 2021; what any such changes were, and what the reasons were for any changes made.", correct = TRUE),
@@ -226,19 +226,17 @@ knitr::include_graphics("images/irpq-allocatedTeamEmail.png")
 
 ```{r PQ-AllocationsQuiz}
 quiz(
-  question("You have received a PQ which is not related to your service area, and has only been sent to your team. What should you do?",
+  question("You have received a PQ which is not related to your service area, and has only been sent to your team. What should you do? (select ALL that apply)",
            answer("Contact Stats Gov and inform them of the error", correct = TRUE),
            answer("Pass the PQ on to the appropriate team, ccing Stats Gov into the email", correct = TRUE),
-           answer("Contact Scottish Government, and tell them PHS cannot assist", correct = FALSE),
-           answer("Do nothing and wait for Scottish Government to ask for assistance", correct = FALSE),
-           incorrect = "You should make sure the PQ reaches the appropriate team, and ensure the allocation error does not. (There are 2 correct options)",
+           answer("Contact Scottish Government, and tell them PHS cannot assist", message="You should not contact Scottish Government, as this PQ has been incorrectly assigned to your team."),
+           answer("Do nothing and wait for Scottish Government to ask for assistance", message="You should make every effort to ensure the PQ is received by the correct team, and that Stats Gov are informed of this error."),
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
   question("If you receive a PQ with Action 'For Information', you do not need to take any further action other than reading the PQ",
-           answer("TRUE"),
+           answer("TRUE", message = "Teams should still read the PQs and take further action if necessary."),
            answer("FALSE", correct = TRUE),
-           incorrect = "Teams should still read the PQs and take further action if necessary.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            )
@@ -294,27 +292,25 @@ A question may seem straightforward, but might not map to a specific available d
 
 Below are some examples of PQs which require interpretation. 
 
-What information might you need to interpret in order to fully answer the question?
+
 
 
 ```{r interpretationQuestions}
-quiz(
-  question("To ask the Scottish Government how many (A) adults and (B) children have been registered with a dentist in each year since 2005.",
+quiz(caption = "What information might you need to interpret in order to fully answer the question?",
+  question("To ask the Scottish Government how many (A) adults and (B) children have been registered with a dentist in each year since 2005. (select ALL that apply)",
            answer("Definition of Adult - over 16, over 18", correct = TRUE),
            answer("NHS or Private Dentist", correct = TRUE),
            answer("Definition of Children - under 16s, under 18s", correct = TRUE),
-           answer("Reason for visiting the dentist", correct = FALSE),
-           incorrect = "There is no need to know the reason for visiting the dentist. Try again.",
+           answer("Reason for visiting the dentist", message = "There is no need to know the reason for visiting the dentist. Try again."),
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
-  question("To ask the Scottish Government how many people have been prescribed drugs for depression in each year since 2005, broken down into (A) children, (B) adolescents, (C) adults and (D) elderly people in each NHS board area.",
+  question("To ask the Scottish Government how many people have been prescribed drugs for depression in each year since 2005, broken down into (A) children, (B) adolescents, (C) adults and (D) elderly people in each NHS board area. (select ALL that apply)",
            answer("Time Period - since Jan 2005 or April 2005?", correct = TRUE),
            answer("Definition of adult, child, elderly?", correct = TRUE),
            answer("Could the prescribed drug also be prescribed to treat other conditions? Do we need specialist advice?", correct = TRUE),
            answer("Is it possible for us to differ between the number of people, and the number of prescriptions?", correct = TRUE),
-           answer("How long have the individuals been on the prescribed drugs?", correct = FALSE),
-           incorrect = "There is no need to know how long an individual has been prescribed drugs. Try again.",
+           answer("How long have the individuals been on the prescribed drugs?", message = "There is no need to know how long an individual has been prescribed drugs. Try again."),
            allow_retry = TRUE,
            random_answer_order = TRUE
            )
@@ -435,13 +431,13 @@ This could include:
 
 ```{r PQ-GuidingPrinciples}
 quiz(
-  question("You have received a PQ which you have been asked to respond to by the SG. The data you have access to is not clear, and as such, you cannot fully answer the question. What do you do?",
+  question("You have received a PQ which you have been asked to respond to by the SG. The data you have access to is not clear, and as such, you cannot fully answer the question. What do you do? (select ALL that apply)",
            answer("Do not pass on the data that is not clear.", correct = TRUE),
            answer("Contact Scottish Government, and explain why you cannot assist.", correct = TRUE),
-           answer("Send the SG the data, and explain why you cannot answer it.", correct = FALSE),
+           answer("Send the SG the data, and explain why you cannot answer it.", message = "You should not be sending unclear data to SG."),
            answer("Contact specialists on the data to gain clarity, to assist in answering.", correct = TRUE),
-           answer("Do nothing. You cannot answer the question so it is better not to confuse anyone.", correct = FALSE),
-           incorrect = "You should not be sending unclear data to SG. You should still provide an explanation to the SG. (there are 3 correct answers)",
+           answer("Do nothing. You cannot answer the question so it is better not to confuse anyone.", message = "You have been asked to respond by SG, and you should provide a response of some kind."),
+           correct = "That is correct! You should be open and transparent about your capabilities in answering a PQ, and specialist assistance should be sought in helping to answer a question.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
@@ -660,7 +656,7 @@ quiz(
   question("All PQs require a response.",
            answer("TRUE", correct = FALSE),
            answer("FALSE", correct = TRUE),
-           incorrect = "Not quite, have another go!",
+           incorrect = "That is not correct. Have another go!",
            correct = "Not all PQs require a response. SG and Stats Gov will inform teams when a response is required from them.",
            allow_retry = TRUE,
            random_answer_order = TRUE
@@ -1029,10 +1025,10 @@ quiz(
            ),
   question("The customer is making an IR which specifically requires small numbers to be disclosed. What should you do? (select all that apply)",
            answer("Contact Stats Gov and seek guidance.", correct = TRUE),
-           answer("Release the information. It is only going to one customer, so it is fine.", correct = FALSE),
+           answer("Release the information. It is only going to one customer, so it is fine.", message = "The information should not be released without consulting Stats Gov, and discussing the issue with the customer."),
            answer("Have a discussion with the customer regarding the issues with supplying the information.", correct = TRUE),
            incorrect = "Not quite, have another go!",
-           correct = "Anyone is allowed to submit an IR to PHS.",
+           correct = "A discussion should be had with the Stats Gov and the customer (seperately) to discuss the issue and find a way forward.",
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
