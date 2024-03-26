@@ -31,7 +31,7 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-Welcome to Reproducible Environments in R. This course is designed as a self-led dive into reproducible environments: what they are and how to use them. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
+Welcome to Reproducible Environments in R. If you've ever had code stop working or it runs fine for you but not a colleague, this course is for you! This course is designed as a self-led dive into reproducible environments: what they are and how to use them. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
 
 <div class="info_box">
   <h4>Course Info</h4>
