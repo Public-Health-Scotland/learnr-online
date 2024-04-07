@@ -276,3 +276,179 @@ quiz(
 
 ```
 
+## Tracking changes
+
+When setting `{renv}` up on an existing project, we see more of the process and that it immediately captures the packages used in the project. The output could look something like this:
+
+```shell
+- Linking packages into the project library ... Done!
+- Resolving missing dependencies ... 
+# Installing packages --------------------------------------------------------
+The following package(s) will be updated in the lockfile:
+
+# CRAN -----------------------------------------------------------------------
+- base64enc     [* -> 0.1-3]
+- bslib         [* -> 0.6.1]
+- glue          [* -> 1.7.0]
+- here          [* -> 1.0.1]
+- magrittr      [* -> 2.0.3]
+- renv          [* -> 1.0.5]
+
+The version of R recorded in the lockfile will be updated:
+- R             [* -> 4.1.2]
+
+- Lockfile written to '~/project/renv.lock'
+
+Restarting R session...
+```
+
+The `[* -> 1.0.0]` syntax is telling us that it's going from not included, `*`, to the specified version, e.g. `1.0.0`. How does this work?
+
+```{r renv-snapshot, echo=FALSE, fig.align='center', out.width='100%'}
+knitr::include_graphics("images/renv-snapshot.png")
+```
+
+We've had to take a step down into the workings of `{renv}`, and from this we can see that `renv::init()` calls 3 other functions to get things set up:
+
+1. `renv::scaffold()` to create the files and structure, creating the `renv.lock` file and the project library, and updating .Rprofile to call the other created `renv/activate.R` file which not only creates the environment but we can see sets the project library as the one to use.
+2. `renv::hydrate()` searches for currently installed packages and ensures they get installed in the project library.
+3. `renv::snapshot()` updates the lockfile with the project installed packages.
+
+*A worthy mention is the cache system used. You can probably imagine storing multiple versions of the same package across projects would become a storage issue. The cache resolves this issue and also makes everything much faster. Generally, it works by setting up the project library with links to the global cache for each package. The next time a package is installed, it goes to the cache first and if it's not there, it will retrieve from the defined package manager.*
+
+### New packages
+
+As we start working on our projects, we're quickly going to want packages. At this point we need to remember that, with `{renv}`, we have created a project-level library. If set up from new, this library doesn't contain any of the packages we installed in our user-level library and we need to think of our workflow as starting from a blank slate. 
+
+As we determine packages that we would like to use in our project, we should first install them. We already know a function that will do this, `install.packages()`, but `{renv}` offers a function, `renv::install()` taking arguments in the same way. When installing packages, you may need to follow additional prompts in the R console as it will alert and request approval for installing package dependencies where they occur.
+
+```{r renv-install, echo=FALSE, fig.align='center', out.width='100%'}
+knitr::include_graphics("images/renv-install.png")
+```
+
+We can see that the `renv::install()` function adds the package to our project library. Another useful function that we've been able to add to our toolkit is `renv::status()`, this compares the project library with the lockfile but considers packages only when they are installed *and used*, triggered with `library()` or `require()` functions across the codebase. When the package is used, we then need to update the lockfile, we directly use the `renv::snapshot()` function to do this. A workflow looks something like this...
+
+```shell
+> renv::install("here")
+# Downloading packages -------------------------------------------------------
+- Downloading here from CRAN ...                OK
+- Downloading rprojroot from CRAN ...           OK
+Successfully downloaded 2 packages.
+
+The following package(s) will be installed:
+- here      [1.0.1]
+- rprojroot [2.0.4]
+These packages will be installed into "~/Project/renv/library".
+
+Do you want to proceed? [Y/n]: y
+
+# Installing packages --------------------------------------------------------
+- Installing rprojroot ...                      OK
+- Installing here ...                           OK
+Successfully installed 2 packages.
+
+> renv::status()
+No issues found -- the project is in a consistent state.
+
+> renv::snapshot()
+- The lockfile is already up to date.
+```
+
+... creates a script using the `{here}` package...
+
+```shell
+> renv::status()
+The following package(s) are in an inconsistent state:
+
+ package   installed recorded used
+ here      y         n        y   
+ rprojroot y         n        y   
+
+See ?renv::status() for advice on resolving these issues.
+
+> renv::snapshot()
+The following package(s) will be updated in the lockfile:
+
+# CRAN -----------------------------------------------------------------------
+- here        [* -> 1.0.1]
+- rprojroot   [* -> 2.0.4]
+
+Do you want to proceed? [Y/n]: y
+
+- Lockfile written to "~/Project/renv.lock".
+```
+
+### Updating packages
+
+Updating packages works in much the same way as installing them, except the function used is `renv::update()`. Individual packages can be targeted for updating or by leaving the packages argument blank, all packages in the project library will be updated. It's worth noting that the update function will look in the same place the package was originally installed from only (e.g. if a GitHub package was installed before but a newer version is available via CRAN, this will not be identified).
+
+```R
+renv::update()
+```
+
+### Removing packages
+
+The last thing to cover when dealing with out packages is if we need to remove them. To delete packages from our project library, we use `renv::delete()` with the name of any packages to remove. 
+
+```R
+renv::delete()
+```
+
+When a package that has a minor change but doesn't update the version number, or we need to remove a package not just from the project library but our system, we need to consider the cache system used. The cache is there to minimise installation of packages across projects but can impact our workflow when we do want to install a completely fresh version of a package. To do this, we need to "purge" the cache of the package, using:
+
+```R
+renv::purge()
+```
+
+</br>
+
+With any of the functions used to handle packages in this section, `renv::install()`, `renv::update()`, or `renv::delete()`, we always need to update the lockfile with `renv::snapshot()`. This workflow can be considered separately like below:
+
+```{r renv-packages, echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/renv-packages.png")
+```
+
+Finally, let's update our complete map:
+
+```{r renv-delete, echo=FALSE, fig.align='center', out.width='100%'}
+knitr::include_graphics("images/renv-delete.png")
+```
+
+### Knowledge Check
+
+#### Exercise
+
+Due to the way this course is set up, it's not possible to continue to run `{renv}` functions in this environment. However, you should now go to RStudio ([PHS Posit Workbench](https://pwb.publichealthscotland.org/)) and:
+
+1. Set up a new RStudio Project with `{renv}` called `renv-test`.
+2. Check the lockfile and look at the `renv/library/` directory.
+3. Install `{dplyr}`.
+4. Add a script that includes `{dplyr}`, further code is optional.
+5. Check the status of `{renv}`, reading any output.
+6. Update the lockfile using `{renv}` functions.
+7. Check the lockfile and look at the `renv/library/` directory again.
+
+</br>
+
+```{r packages-quiz}
+quiz(
+  question("When installing `{dplyr}`, which of these other packages were installed?",
+           answer("`{glue}`", correct = TRUE),
+           answer("No other packages were installed."),
+           answer("`{tidyverse}`"),
+           answer("`{here}`"),
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("What is the general process of installing a package?",
+           answer("`renv::install()` > `library()` > `rev::snapshot()`", correct = TRUE),
+           answer("`renv::update()` > `library()` > `rev::snapshot()`"),
+           answer("`renv::install()` > `rev::snapshot()` > `library()`"),
+           answer("`renv::install()` > `library()` > `rev::status()`"),
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           )
+)
+
+```
+
