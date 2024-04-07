@@ -487,3 +487,61 @@ quiz(
 
 ```
 
+
+## Restoring environments
+
+We've set up a reproducible environment, know how to keep it updated, and have even version controlled and shared it using Git. How do we get from the files we included in the repo to a working environment? Well, `{renv}` helps us along the way. When we open a project that has the associated files, `{renv}` will show something like this in the R console:
+
+```shell
+* Downloading renv ... OK
+* Installing renv ... Done!
+* Successfully installed and loaded renv.
+* Project '~/Project' loaded.
+* The project library is out of sync with the lockfile.
+* Use `renv::restore()` to install packages recorded in the lockfile.
+```
+
+```{r renv-restore, echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/renv-restoring.png")
+```
+
+Running `renv::status()` will give us a similar message, but even without this message or if we're coming to this point as part of a different workflow, use the R console to run:
+
+```R
+renv::restore()
+```
+
+This will follow up with installing the various packages required in the project and will require confirmation to go through these steps so follow along in the console until everything is complete. Feel free to double check with another `renv::status()`.
+
+```{r renv-restored, echo=FALSE, fig.align='center', out.width='90%'}
+knitr::include_graphics("images/illustrations/bakers_done.png")
+```
+
+## Getting advanced
+
+### Complete `{renv}` workflow
+
+The whole map with each element of `{renv}` is shown below. To take things further, have a look below at some more sections at what else you can do with `{renv}`.
+
+```{r renv-complete, echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/renv-restore.png")
+```
+
+### Python
+
+It's possible to use `{renv}` when developing with Python using RStudio Projects. The workflow is effectively identical to working with R packages, and is started with by running:
+
+```R
+renv::use_python()
+```
+
+The lockfile will now include details about the Python version used, and with `renv::snapshot()` can be updated with package details as you go through development. For more see [renv::use_python()](https://rstudio.github.io/renv/reference/use_python.html)
+
+### CI/CD pipelines
+
+[Content to be added]
+
+### Other advanced customisation
+
+[Content to be added]
+
