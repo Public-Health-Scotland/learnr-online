@@ -3,7 +3,7 @@ title: "Reproducible Environments in R"
 output: 
   learnr::tutorial:
     css: "css/style.css"
-    progressive: true
+    progressive: false
     allow_skip: true
 runtime: shiny_prerendered
 ---
@@ -28,35 +28,61 @@ tutorial_options(
 knitr::include_graphics("images/phs-logo.png")
 ```
 
-
 ## Introduction
 
-Welcome to Reproducible Environments in R. If you've ever had code stop working or it runs fine for you but not a colleague, this course is for you! This course is designed as a self-led dive into reproducible environments: what they are and how to use them. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. 
+Welcome to Reproducible Environments in R. If you've ever had code stop working at the next iteration of a run or it runs fine for you but not a colleague, this course is for you! This course is designed as a self-led dive into reproducible environments: what they are and how to use them, specifically using the `{renv}` package. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code.
 
-<div class="info_box">
-  <h4>Course Info</h4>
-  <ul>
-    <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
-    <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
-    <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
-  </ul>
-</div>
+::: info_box
+<h4>Course Info</h4>
+
+<ul>
+
+<li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
+
+<li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
+
+<li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
+
+</ul>
+:::
+
 </br>
 
 ### Learning Outcomes
 
-* Reinforced understanding of the importance of reproducibility in data projects.
-* Be able to set up and configure renv for managing project dependencies.
-* Create reproducible environments for R projects using renv.
-* Understand best practices for version control and collaboration with renv.
-* Troubleshoot common issues related to reproducible environments.
-* Awareness of advanced features for customisation options.
-* Be able to confidently apply reproducibility principles to improve reliability and transparency of projects.
+-   Reinforced understanding of the importance of reproducibility in data projects.
+-   Be able to set up and configure `{renv}` for managing project dependencies.
+-   Create reproducible environments for R projects using `{renv}`.
+-   Understand best practices for version control and collaboration with `{renv}`.
+-   Troubleshoot common issues related to reproducible environments.
+-   Awareness of advanced features for customisation options.
+-   Be able to confidently apply reproducibility principles to improve reliability and transparency of projects.
 
+### What is `{renv}`?
 
-## Help & Feedback
+R manages packages through a central library and shares this across all projects. In PHS Posit Workbench, we expand on this slightly, with a system-level library (used for base packages) and then user-level where each user-installed package will go. On any system, this location can be found using the `.libPaths()` function, where the list of locations is listed in order of priority.
 
+This works well until versions of packages are considered. Each project may require different versions of packages, resulting in deprecated or missing functionality. This issue is only made worse the moment the project is shared with someone else, someone with their very own library of packages with different versions. The `{renv}` package solves this issue by creating a separate, reproducible environment that is attached to the project, creating:
 
-#### Feedback
+-   a project-specific library, and
+-   a list of dependencies and their version.
 
-<iframe width="100%" height= "2300" src= "" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+```{r renv-libraries, echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/renv-libraries.png")
+```
+
+#### Knowledge Check
+
+```{r intro-quiz}
+question("What are benefits of using `{renv}`?",
+    answer("Tracks package versions", correct = TRUE),
+    answer("Tracks package dependencies", correct = TRUE),
+    answer("Links to a project and can be shared", correct = TRUE),
+    answer("Supports reproducibility", correct = TRUE),
+    answer("Tracks project history", message = "Unfortunately, {renv} doesn't track project history, that's where version control comes in... more on that later!"),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+```
+
