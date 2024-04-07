@@ -86,3 +86,68 @@ question("What are benefits of using `{renv}`?",
   )
 ```
 
+
+## Foundations
+
+Predictably, the foundations for this course lie in reproducibility and environments. The below sections go into a bit of detail to shape our mental model for these concepts and how to work so that we're able to use the `{renv}` package in the most effective way.
+
+### Reproducibility
+
+Reproducibility is the cornerstone of effective science and research. Packaged, a reproducible project should allow anyone with the original data to achieve the same results and draw the same conclusions, ultimately improving reliability and trustworthiness of any data products.
+
+There are various components of setting up projects to enable reproducibility, this course isn't going to go through all of this but instead set out a foundation to benefit the use of `{renv}`.
+
+#### Code
+
+The R console is the interface for directly entering R code and having it be interpreted, any computation processed, and results either returned directly or variables be made available in the main environment pane. The mental model of considering the environment pane as reality is quickly broken when the R session restarts, you forgot the process, or have to start from the beginning due to a mistyped change in a long process. Instead, we should **use scripts for all code in our projects** to have any chance of being reproducible.
+
+Including the packages used, **all the code is saved in context and documented with comments in scripts**. This also gives benefits such as syntax highlighting, diagnostics, auto-completion of functions, etc.
+
+To support this way of working, changing the RStudio Global Options to not save or load previous .RData files (your workspace) will encourage you to work with a reproducible mindset and write code in scripts.
+
+```{r renv-globalops, echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/renv-globalops.jpg")
+```
+
+*When using PHS Posit Workbench, your R session doesn't end or restart when you close your browser as it's hosted on a server. It's important to consider this in terms of your workflow for managing your R workspace and saving elements but also as a use of resources within the organisation. See [Best Practice with R in Posit Workbench](https://public-health-scotland.github.io/knowledge-base/docs/Posit%20Infrastructure?doc=Best%20Practice%20with%20R%20in%20Posit%20Workbench.md) guidance.*
+
+From this, we can layer other best practice:
+
+-   Follow [PHS R Style Guide](https://public-health-scotland.github.io/knowledge-base/docs/R?doc=R%20Style%20Guide.md)
+-   File (script) names should be meaningful, machine- and human-readable.
+-   Files should be ordered within a single project directory, provided with leading numbers for ordered lists.
+-   Outputs are stored in a set location and excluded from version control.
+
+</br>
+
+#### Projects
+
+The next major component of setting up a project for reproducibility is using RStudio Projects. R accesses a working directory, found using `getwd()`, and can be changed using `setwd()` (not recommended). This is likely to change between users but also between your projects which could cause confusion and issue when switching from one bit of work to another. This can be set up as below from File > New Project (we'll come back to setting up projects with renv - the green box):
+
+```{r renv-newproj, echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/renv-newproj1.png")
+```
+
+Building on the solid foundations that RStudio Projects provide, we need to use relative paths within our code. A relative path is *relative* to the current working directory (set by the project). This means that if an output is saved using a relative path: `data/project_data.csv`, different users would access the same location regardless of where their working version of the project (i.e. `project`) is stored, e.g.:
+
+* `/Projects/user1/project/data/project_data.csv`
+* `/Projects/user2/phs_projects/project/data/project_data.csv`
+
+While less of an issue in PHS as we all use Posit Workbench to access RStudio, there can also be differences introduced depending on operating systems. If you're working with external collaborators for instance, they may use a Windows system which would require different formatting for file paths. 
+
+Taking this a step further, the [`{here}` package](https://here.r-lib.org/) offers up a simple function that protects this way of working even further, and is closely linked with RStudio Projects. The `data/project_data.csv` would be be accessed with `here::here('data', 'project_data.csv')`.
+
+```{r renv-proj, echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/illustrations/r_cracked_setwd.png")
+```
+
+### Environments
+
+Understanding environments in this context is the next fundamental. In the context of using computers to handle and analyse data, to developing outputs such as dashboards and applications, an environment refers to the collection of software tools, libraries, configurations, and dependencies that are required to run a particular program or project. Environments can vary based on factors such as programming language, project requirements, and external dependencies. Also, while we use Posit Workbench in PHS, this eliminates some problems as we're all starting from the same point, but each user can then set their own configuration and packages that will inevitably be different from the next person. Managing these environments effectively is crucial for ensuring that workflows are reproducible across time but also between users and, ultimately, across systems.
+
+```{r renv-env, echo=FALSE, fig.align='center', out.width='100%'}
+knitr::include_graphics("images/renv-positenv.png")
+```
+
+Using Posit Workbench means that our local environment has little impact on any development work. The main difference that can occur between projects and users for R projects is packages, which packages and which version of those packages. That's where `{renv}` comes in, so lets get a look at how to set it up...
+
