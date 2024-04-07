@@ -545,3 +545,20 @@ The lockfile will now include details about the Python version used, and with `r
 
 [Content to be added]
 
+
+## Help & Feedback
+
+Hope you enjoyed the course and now feel confident to take forward your new found knowledge of reproducible environments. The sooner you start working with the new technology in real projects, the better you'll be able to embed the skill and learn more about how it works for you.
+
+### Help
+
+* [`{renv}` reference docs](https://rstudio.github.io/renv/reference/index.html)
+* Google / StackOverflow '[renv]'
+* [Data & Intelligence Forum](https://teams.microsoft.com/l/team/19%3Ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) - [Reproducible Environments channel](https://teams.microsoft.com/l/channel/19%3Aa786ffd4a70d4941b87f023942d21b6a%40thread.tacv2/Reproducible%20Environments?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
+* [Data Science team mailbox](mailto:phs.datascience@phs.scot?subject=R renv Training Online - Help)
+
+### Feedback
+
+<iframe width="100%" height="2300" src="https://forms.office.com/e/qBthjqHbdx?embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen>
+
+</iframe>
