@@ -151,3 +151,128 @@ knitr::include_graphics("images/renv-positenv.png")
 
 Using Posit Workbench means that our local environment has little impact on any development work. The main difference that can occur between projects and users for R projects is packages, which packages and which version of those packages. That's where `{renv}` comes in, so lets get a look at how to set it up...
 
+## Setting up `{renv}`
+
+The `{renv}` package is a package like any other, so this needs to be installed in order to work with it. This package is available through the PHS Package Manager (or generally through CRAN) and can be installed using `install.packages("renv")`. On PHS Posit Workbench, this will be installed in your user library as standard, this is then used from here to generate the project level library.
+
+### Process
+
+#### New project
+
+Using `{renv}` is now so fundamental, RStudio provides the interface to get things set up as part of the normal interface for creating a new project. Go to File > New Project and follow the interface as below to find the 'use renv with this project' check box:
+
+```{r renv-new, echo=FALSE, fig.align='center', out.width='100%'}
+knitr::include_graphics("images/renv-newproj2.png")
+```
+
+#### Existing project
+
+If you forget to set up alongside the project or have an existing project that's not using `{renv}`, it's not too late. In fact, it's always better late than never, so even older projects can get in on the action. It's worth highlighting at this point, while we're aware of the importance of using scripts for the codebase in a project, the work `{renv}` does occurs outside that scope so functions related to `{renv}` need to happen in the R console. To set up on a project, enter the below in the R console:
+
+```R
+renv::init()
+```
+
+### What's happened?
+
+Setting up a project to use `{renv}` runs a couple of sub processes to generate:
+
+* **Project library** - a nested directory structure containing the project dependencies. 
+* **renv.lock file** - a file containing a description of the project's configuration and dependencies. This is the core of the reproducibility, like a recipe for getting the environment back to the necessary state. We interact with this through `{renv}` functions, not directly.
+* **renv/activate.R** - the R code that pulls everything together and activates the environment.
+
+To automate the process of running the `renv/activate.R` file, `.Rprofile` is also updated to automatically call the script and get things set up whenever you open the project. It's possible to use a user-level or project-level `.Rprofile` for other things, like environment variables. If it doesn't exist for the project, `{renv}` will create it with just the code to call `renv/activate.R`.
+
+```{r renv-init, echo=FALSE, fig.align='center'}
+knitr::include_graphics("images/renv-init.png")
+```
+
+#### Lockfile
+
+A new project will produce the simplest lockfile, so it's a good place to start and see what's included. The lockfile is a JSON formatted file so is both human- and machine-readable, it describes:
+
+* R settings:
+  * R version used in the project
+  * A repository to find packages (default CRAN mirror). 
+* Packages:
+  * Name of the package
+  * Package version
+  * Where to find the package for installation
+  * Requirements (dependencies for that package)
+
+```json
+{
+  "R": {
+    "Version": "4.1.2",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://packagemanager.posit.co/cran/latest"
+      }
+    ]
+  },
+  "Packages": {
+    "renv": {
+      "Package": "renv",
+      "Version": "1.0.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "utils"
+      ],
+      "Hash": "21d2f84e8263f657ca5863272cb8ba6a"
+    }
+  }
+}
+```
+
+### Knowledge Check
+
+#### Exercise
+
+What about an existing project? Well, this course is built in R, and a new environment is set up for each session. So, let's run the command to initiate `{renv}` and see what the output looks like for this:
+
+```{r init, exercise=TRUE}
+
+```
+
+```{r init-hint-1}
+renv::...()
+```
+
+```{r init-solution}
+renv::init()
+```
+
+</br>
+
+```{r init-quiz}
+quiz(
+  question("From the above output, what version of `{rmarkdown}` does this course use?",
+           answer("2.25", correct = TRUE),
+           answer("It doesn't use RMarkdown"),
+           answer("2.26"),
+           answer("2.20"),
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           ),
+  question("What does `renv::init()` \"create\"?",
+    answer("A project-level library", correct = TRUE),
+    answer("A lockfile for configuration", correct = TRUE),
+    answer("An environment activation script", correct = TRUE),
+    answer("The RStudio project (`.Rproj`) file", message = "While absolutely required, the .Rproj file isn't created by renv."),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("It's only possible to start renv for new projects, true or false?",
+      answer("False", correct = TRUE),
+      answer("True", message = "Thankfully not, the sooner the better but it's possible to start at any point."),
+      incorrect = "Not quite, have another go!",
+      allow_retry = TRUE,
+      random_answer_order = TRUE
+    )
+)
+
+```
+
