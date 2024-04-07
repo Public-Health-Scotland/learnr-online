@@ -452,3 +452,38 @@ quiz(
 
 ```
 
+
+## Collaboration
+
+It's more than likely you'll be working with others on projects, `{renv}` benefits this by describing the environment to allow it to be reproduced, not just for ourselves but anyone working on the project. To share it with others, we use Git and GitHub (or Gitea). This in turns benefits `{renv}`, adding version control to track changes to the environment over time. This means that identifying issues from package changes are easier to identify and undo. That's why [Introduction to Git](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-git) is a prerequisite, and therefore out of scope, for this course. 
+
+To get `{renv}` to work with Git, we need to include certain files as part of the repository. This should include:
+
+* `renv.lock` - unsurprisingly, as the file that describes each dependency for the project, this file is crucial to be able to rebuild the project library and set up the environment.
+* `renv/activate.R` - this file is just an R script but sets up the environment, including the project library so helps keep a standardised approach for everyone contributing to the project.
+* `.Rprofile` - this is a project-level file that calls the above script but can include other project requirements, it's a good idea to get this included.
+
+Helpfully, `renv.init()` produces a `.gitignore` file that stops some files from being committed. Most notably, the project library doesn't get added. The point of having the lockfile is to describe what's necessary to reproduce the environment, this approach saves significant storage, time, and complexity than storing the library along with the codebase on version control. 
+
+Another important note is that any R project that uses `{renv}` on Git, should include this detail, ideally on the `README`. It's common to also include `CONTRIBUTE` files which can go into more detail. However, the expectation isn't to provide a course for using `{renv}` in every repo where it's used, a link to this course or other available guidance while letting people know about it is more than enough.
+
+```{r renv-collab, echo=FALSE, fig.align='center', out.width='90%'}
+knitr::include_graphics("images/illustrations/bakers.png")
+```
+
+### Knowledge Check
+
+```{r collab-quiz}
+quiz(
+  question("What files should **not** be committed to Git on a `{renv}` project?",
+           answer("`renv/library`", correct = TRUE),
+           answer("`.Rproj.user`", correct = TRUE),
+           answer("`renv.lock`"),
+           answer("`renv/activate.R`"),
+           allow_retry = TRUE,
+           random_answer_order = TRUE
+           )
+)
+
+```
+
