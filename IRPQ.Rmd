@@ -790,14 +790,6 @@ While individual teams may have their own local protocols for responding to IRs,
   </br>
 </ol>
 
-<div class="info_box">
-  <h4>Important</h4>
-  <ul>
-    <li>The use of the **Information Request Form** is a suggestion only, and may not be appropriate for all cases (such as when requested data is complex and requires detailed discussion). Individual teams should operate by their own discretion. 
-  </ul>
-</div>
-</br>
-
 In the next section, we will cover the first few stages of the IR workflow.
 
 ## IR - Form & Service
@@ -820,6 +812,7 @@ knitr::include_graphics("images/ir-IRForm.png")
   <h4>Important</h4>
   <ul>
     <li>The 20 day deadline to fulfil the IR will begin from when the specification has been agreed with the customer, following the team's assessment of the IR Form.
+    <li>The use of the **Information Request Form** is a suggestion only, and may not be appropriate for all cases (such as when requested data is complex and requires detailed discussion). Individual teams should operate by their own discretion. 
   </ul>
 </div>
 </br>
