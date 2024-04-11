@@ -145,7 +145,7 @@ In this section, we will look at how the PHS Statistical Governance Team (phs.st
 
 ### Retrieving new PQs
 
-Every Tuesday and Thursday morning, Stats Gov runs a script which scrapes **all** the PQs from the Parliamentary website, up till midnight of the previous day.
+Every Tuesday and Thursday morning, Stats Gov runs a script which scrapes **all** the PQs from the Parliamentary website, until midnight of the previous day.
 
 
 Questions which hit certain keywords relating to health (NHS, blood, etc.) are flagged in order to aid Stats Gov by highlighting important health-related questions.
@@ -181,7 +181,7 @@ The team will decide what topic areas the question corresponds to, and to which 
 The following is an excerpt from the topic area/team allocation guide which Stats Gov uses to allocated the PQs to the appropriate team. It includes what topics should be allocated to the team (in this case, Quality Indicators) and what should not.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/irpq-allocationGuideScreenshot.png")
+knitr::include_graphics("images/irpq-pqallocation.png")
 ```
 
 It is important to note that questions may pertain to multiple teams. If this is the case, it will be allocated to all related teams, and such an allocation be detailed in the *Notes* section explained below. 
@@ -616,6 +616,8 @@ knitr::include_graphics("images/irpq-signOffProcess.png")
   
   <li>If further work is advised, this must be clearly explained and agreed with the service area.
   
+  <li>Teams should ensure records of the PQ sign-offs are retained for proper record-keeping - this could be storing the email chain with the sign-off request and approval in a designated Sharepoint team folder, for example.
+  
   </ul>
 </div>
 </br>
@@ -758,7 +760,7 @@ While individual teams may have their own local protocols for responding to IRs,
 <ol>
   <li>Team receives IR.</li>
   </br>
-  <li>If the request has not been made via the **Information Request Form** (see section *IR - Information Request Form*), the team should send this form to the customer, and request it be filled out and returned. Proceed to the next stage once it has been returned.
+  <li>If the request has not been made via the **Information Request Form** (see section *IR - Information Request Form*), teams are encouraged to send this form to the customer and request it be filled out and returned. Proceed to the next stage once it has been returned.
   </br>
   </br>
   <li>IR is logged in the IRS (see section *IR - Using Information Request Service*) and given a reference number.</li>
@@ -788,6 +790,14 @@ While individual teams may have their own local protocols for responding to IRs,
   </br>
 </ol>
 
+<div class="info_box">
+  <h4>Important</h4>
+  <ul>
+    <li>The use of the **Information Request Form** is a suggestion only, and may not be appropriate for all cases (such as when requested data is complex and requires detailed discussion). Individual teams should operate by their own discretion. 
+  </ul>
+</div>
+</br>
+
 In the next section, we will cover the first few stages of the IR workflow.
 
 ## IR - Form & Service
@@ -816,7 +826,11 @@ knitr::include_graphics("images/ir-IRForm.png")
 
 ### Information Request Service
 
-As already discussed, all IRs should be logged in the Information Request Service.
+The Information Request Service is where all Information Request should be logged. 
+
+By doing so, users are able to be allocated to Information Requests, the time spent on the requests are able to be logged, and Information Request reference numbers are able to be generated. 
+
+Users who require access to the IRS should contacts the Stats Gov team (phs.statsgov@phs.scot) via email to request access. 
 
 Below is a step by step tutorial of how to log and close IRs in the system.
 
@@ -914,6 +928,7 @@ knitr::include_graphics("images/irpq-Charging.png")
   <li> Do not charge for IRs where the analytical work is already available.
   <li> Do not charge when work is part of our normal business activity i.e. part of a planned programme of work, funded project, etc.
   <li> Do not charge for discussing specification.
+  <li> For further information on Charging and the fees notice, consult the PHS Charging Mechanism and your respective teams.
 </div>
 </br>
 
