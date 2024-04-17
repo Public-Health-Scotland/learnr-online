@@ -259,9 +259,9 @@ renv::init()
 ```{r init-quiz}
 quiz(
   question("From the above output, what version of `{rmarkdown}` does this course use?",
-           answer("2.25", correct = TRUE),
+           answer("2.26", correct = TRUE),
            answer("It doesn't use RMarkdown"),
-           answer("2.26"),
+           answer("2.25"),
            answer("2.20"),
            allow_retry = TRUE,
            random_answer_order = TRUE
@@ -324,7 +324,7 @@ We've had to take a step down into the workings of `{renv}`, and from this we ca
 2. `renv::hydrate()` searches for currently installed packages and ensures they get installed in the project library.
 3. `renv::snapshot()` updates the lockfile with the project installed packages.
 
-*A worthy mention is the cache system used. You can probably imagine storing multiple versions of the same package across projects would become a storage issue. The cache resolves this issue and also makes everything much faster. Generally, it works by setting up the project library with links to the global cache for each package. The next time a package is installed, it goes to the cache first and if it's not there, it will retrieve from the defined package manager.*
+*A worthy mention is the cache system used. You can probably imagine storing multiple versions of the same package across projects would become a storage issue. The cache resolves this issue and also makes everything much faster. Generally, it works by setting up the project library with links to the global cache for each package. The next time a package is installed, it goes to the cache first and if it's not there, it will retrieve from the defined package manager. This means that referencing the packages reduces the capacity issue but also each subsequent install of the package when using `{renv}` will be almost instantaneous.*
 
 ### New packages
 
