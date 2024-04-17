@@ -537,6 +537,12 @@ The whole map with each element of `{renv}` is shown below. To take things furth
 knitr::include_graphics("images/renv-restore.png")
 ```
 
+### Geospatial packages
+
+Geospatial R packages tend to have slightly different requirements of the system they are on than other packages. This often goes unnoticed as it's handled on the system you are using. However, in the PHS Posit infrastructure, there is some manual work involved to get things working. This is documented in [Installing and using geospatial R packages](https://public-health-scotland.github.io/knowledge-base/docs/Posit%20Infrastructure?doc=How%20to%20Install%20and%20Use%20Geospatial%20R%20Packages.md).
+
+However, these instructions require code to be ran each time these packages are used within a relevant project. The using of `{renv}` can be a significant support.
+
 ### Python
 
 It's possible to use `{renv}` when developing with Python using RStudio Projects. The workflow is effectively identical to working with R packages, and is started with by running:
