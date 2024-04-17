@@ -555,7 +555,7 @@ The lockfile will now include details about the Python version used, and with `r
 
 ### CI/CD pipelines
 
-[Content to be added]
+A major step toward automation requires reproducibility, using `{renv}` we've created the framework required to get there. While the focus has been on users working on projects, we can also use this framework with CI/CD pipelines. Using GitHub actions and the [`setup-renv` action](https://github.com/r-lib/actions/tree/v2-branch/setup-renv), steps can be added that will recreate the necessary environment on a remote server for everything from testing to deployment. More information available in [Using renv with continuous integration](https://rstudio.github.io/renv/articles/ci.html).
 
 ### Other advanced customisation
 
