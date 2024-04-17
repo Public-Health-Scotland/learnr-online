@@ -143,7 +143,9 @@ knitr::include_graphics("images/illustrations/r_cracked_setwd.png")
 
 ### Environments
 
-Understanding environments in this context is the next fundamental. In the context of using computers to handle and analyse data, to developing outputs such as dashboards and applications, an environment refers to the collection of software tools, libraries, configurations, and dependencies that are required to run a particular program or project. Environments can vary based on factors such as programming language, project requirements, and external dependencies. Also, while we use Posit Workbench in PHS, this eliminates some problems as we're all starting from the same point, but each user can then set their own configuration and packages that will inevitably be different from the next person. Managing these environments effectively is crucial for ensuring that workflows are reproducible across time but also between users and, ultimately, across systems.
+Understanding environments in this context is the next fundamental. In the context of using computers to handle and analyse data, to developing outputs such as dashboards and applications, an environment refers to the collection of software tools, libraries, configurations, and dependencies that are required to run a particular program or project. Environments can vary based on factors such as programming language, project requirements, and external dependencies. 
+
+While we use Posit Workbench in PHS, this eliminates some problems as we're all starting from the same point, but each user can then set their own configuration and packages that will inevitably be different from the next person. Our infrastructure also provides a benefit of multiple versions of R being available, but at the same time this raises issues when the project is being accessed by different people and across time. Managing these environments effectively is crucial for ensuring that workflows are reproducible across time but also between users and, ultimately, across systems.
 
 ```{r renv-env, echo=FALSE, fig.align='center', out.width='100%'}
 knitr::include_graphics("images/renv-positenv.png")
