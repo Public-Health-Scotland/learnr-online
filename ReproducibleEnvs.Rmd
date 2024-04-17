@@ -149,11 +149,11 @@ Understanding environments in this context is the next fundamental. In the conte
 knitr::include_graphics("images/renv-positenv.png")
 ```
 
-Using Posit Workbench means that our local environment has little impact on any development work. The main difference that can occur between projects and users for R projects is packages, which packages and which version of those packages. That's where `{renv}` comes in, so lets get a look at how to set it up...
+Using Posit Workbench means that our local environment has little impact on any development work. The main difference that can occur between projects and users for R projects is packages, which packages and which version of those packages. That's where `{renv}` comes in, so let's look at how to set it up.
 
 ## Setting up `{renv}`
 
-The `{renv}` package is a package like any other, so this needs to be installed in order to work with it. This package is available through the PHS Package Manager (or generally through CRAN) and can be installed using `install.packages("renv")`. On PHS Posit Workbench, this will be installed in your user library as standard, this is then used from here to generate the project level library.
+`{renv}` is a package like any other, so must first be installed. It is available through the PHS Package Manager (or generally through CRAN) and can be installed using `install.packages("renv")`. On PHS Posit Workbench, this will be installed in your user library as standard, this is then used to generate the project level library.
 
 ### Process
 
@@ -265,7 +265,7 @@ quiz(
     allow_retry = TRUE,
     random_answer_order = TRUE
   ),
-  question("It's only possible to start renv for new projects, true or false?",
+  question("It's only possible to start renv for new projects?",
       answer("False", correct = TRUE),
       answer("True", message = "Thankfully not, the sooner the better but it's possible to start at any point."),
       incorrect = "Not quite, have another go!",
@@ -388,7 +388,7 @@ renv::update()
 
 ### Removing packages
 
-The last thing to cover when dealing with out packages is if we need to remove them. To delete packages from our project library, we use `renv::delete()` with the name of any packages to remove. 
+The last thing to cover when dealing with our packages is if we need to remove them. To delete packages from our project library, we use `renv::delete()` with the name of any packages to remove. 
 
 ```R
 renv::delete()
@@ -440,11 +440,11 @@ quiz(
            allow_retry = TRUE,
            random_answer_order = TRUE
            ),
-  question("What is the general process of installing a package?",
-           answer("`renv::install()` > `library()` > `rev::snapshot()`", correct = TRUE),
-           answer("`renv::update()` > `library()` > `rev::snapshot()`"),
-           answer("`renv::install()` > `rev::snapshot()` > `library()`"),
-           answer("`renv::install()` > `library()` > `rev::status()`"),
+  question("What is the usual process for installing a package?",
+           answer("`renv::install()` > `library()` > `renv::snapshot()`", correct = TRUE),
+           answer("`renv::update()` > `library()` > `renv::snapshot()`"),
+           answer("`renv::install()` > `renv::snapshot()` > `library()`"),
+           answer("`renv::install()` > `library()` > `renv::status()`"),
            allow_retry = TRUE,
            random_answer_order = TRUE
            )
@@ -455,7 +455,7 @@ quiz(
 
 ## Collaboration
 
-It's more than likely you'll be working with others on projects, `{renv}` benefits this by describing the environment to allow it to be reproduced, not just for ourselves but anyone working on the project. To share it with others, we use Git and GitHub (or Gitea). This in turns benefits `{renv}`, adding version control to track changes to the environment over time. This means that identifying issues from package changes are easier to identify and undo. That's why [Introduction to Git](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-git) is a prerequisite, and therefore out of scope, for this course. 
+It's more than likely you'll be working with others on projects, `{renv}` benefits this by describing the environment to allow it to be reproduced, not just for us but anyone working on the project. To share it with others, we use Git and GitHub (or Gitea). This in turn benefits `{renv}`, adding version control to track changes to the environment over time. This means that identifying issues from package changes are easier to identify and undo. That's why [Introduction to Git](https://public-health-scotland.github.io/knowledge-base/develop/introduction-to-git) is a prerequisite, and therefore out of scope, for this course. 
 
 To get `{renv}` to work with Git, we need to include certain files as part of the repository. This should include:
 
@@ -475,7 +475,7 @@ knitr::include_graphics("images/illustrations/bakers.png")
 
 ```{r collab-quiz}
 quiz(
-  question("What files should **not** be committed to Git on a `{renv}` project?",
+  question("Which file(s) should **not** be committed to Git on a `{renv}` project?",
            answer("`renv/library`", correct = TRUE),
            answer("`.Rproj.user`", correct = TRUE),
            answer("`renv.lock`"),
