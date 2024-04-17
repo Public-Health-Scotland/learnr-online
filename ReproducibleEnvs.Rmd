@@ -559,7 +559,7 @@ A major step toward automation requires reproducibility, using `{renv}` we've cr
 
 ### Other advanced customisation
 
-[Content to be added]
+Project profiles are another abstraction that could be useful when working with `{renv}`. While we've thought of `{renv}` being useful for individual users and even up to automations on systems with CI/CD pipelines, there is also differences required in the environment for different operations or modes. This could be useful for splitting published and live versions away from development, or even project analysis from Shiny applications. More information available in [Project profiles](https://rstudio.github.io/renv/articles/profiles.html).
 
 
 ## Help & Feedback
