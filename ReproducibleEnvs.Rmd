@@ -167,6 +167,14 @@ Using `{renv}` is now so fundamental, RStudio provides the interface to get thin
 knitr::include_graphics("images/renv-newproj2.png")
 ```
 
+Similarly, when using [`{phstemplates}`](https://github.com/Public-Health-Scotland/phstemplates), when setting up projects from a template, the interface also allows you to start them with `{renv}`. 
+
+```{r renv-phstemplates, echo=FALSE, fig.align='center', out.width='70%'}
+knitr::include_graphics("images/renv-phstemplates.png")
+```
+
+</br>
+
 #### Existing project
 
 If you forget to set up alongside the project or have an existing project that's not using `{renv}`, it's not too late. In fact, it's always better late than never, so even older projects can get in on the action. It's worth highlighting at this point, while we're aware of the importance of using scripts for the codebase in a project, the work `{renv}` does occurs outside that scope so functions related to `{renv}` need to happen in the R console. To set up on a project, enter the below in the R console:
