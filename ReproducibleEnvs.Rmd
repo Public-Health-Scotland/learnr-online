@@ -537,6 +537,25 @@ The whole map with each element of `{renv}` is shown below. To take things furth
 knitr::include_graphics("images/renv-complete.png")
 ```
 
+#### Troubleshooting
+
+Working with `{renv}` involves more about the system you're working on and improving the ability to move projects around with confidence. This course covers the typical workflow but there's a lot of potentially new concepts and things not directly covered that could come up as you start to use the package. Here's some tips to keep you going:
+
+* **Read any error messages** - sometimes these can appear cryptic and unrelated to your knowledge of the problem. However, they often include steps to take and functions to run to resolve the issues, or at least point you in the direction of suspicious code.
+* **Follow normal troubleshooting steps** - while the issue might not be in your codebase now, the usual steps of going through the process, searching the web, and narrowing the problem scope before seeking help from colleagues are all part of a valuable skill set. 
+* **Library and lockfile are out of sync** - this error message usually comes with a couple of options and it depends where you are in the workflow, but either `renv::snapshot()` when changes have been made and to update the lockfile or `renv::restore()` to set the environment back up to the specification created by the lockfile. However, a couple of other tips for this:
+  * Make sure to use the `renv::install()` function, other options may be wrapped and handled by `{renv}` but options such as `remotes::install_github()` are not and may cause issues.
+  * Within a shiny deployment workflow, the `{rsconnect}` package at v1.0.0 has implemented a change that is trying to work with `{renv}` but bugs have been reported. If these are affecting you, you can prevent this from happening by running `options(rsconnect.packrat = TRUE)` to turn this feature off and use the original dependency discovery.
+* **Slow package installation?** - there are ongoing changes to the infrastructure to improve everyone's experience but it might be worth running the below line of code when restoring to ensure the correct package manager and type of packages are being installed to keep things running as fast as possible:
+
+    ```R
+    renv::restore(repos = c("https://ppm.publichealthscotland.org/all-r/__linux__/centos7/latest"))
+    ```
+
+```{r renv-support, echo=FALSE, fig.align='center', out.width='90%'}
+knitr::include_graphics("images/illustrations/monster_support.jpg")
+```
+
 ### Geospatial packages
 
 Geospatial R packages tend to have slightly different requirements of the system they are on than other packages. This often goes unnoticed as it's handled on the system you are using. However, in the PHS Posit infrastructure, there is some manual work involved to get things working. This is documented in [Installing and using geospatial R packages](https://public-health-scotland.github.io/knowledge-base/docs/Posit%20Infrastructure?doc=How%20to%20Install%20and%20Use%20Geospatial%20R%20Packages.md).
