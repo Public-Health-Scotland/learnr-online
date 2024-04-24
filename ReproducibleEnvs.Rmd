@@ -541,7 +541,7 @@ knitr::include_graphics("images/renv-restore.png")
 
 Geospatial R packages tend to have slightly different requirements of the system they are on than other packages. This often goes unnoticed as it's handled on the system you are using. However, in the PHS Posit infrastructure, there is some manual work involved to get things working. This is documented in [Installing and using geospatial R packages](https://public-health-scotland.github.io/knowledge-base/docs/Posit%20Infrastructure?doc=How%20to%20Install%20and%20Use%20Geospatial%20R%20Packages.md).
 
-However, these instructions require code to be ran each time these packages are used within a relevant project. The using of `{renv}` can be a significant support.
+The instructions for geospatial packages require code to be ran each time these packages are used within a relevant project. The use of `{renv}`, therefore, is a requirement when on Posit Workbench. 
 
 ### Python
 
