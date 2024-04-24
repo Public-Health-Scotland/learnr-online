@@ -534,7 +534,7 @@ knitr::include_graphics("images/illustrations/bakers_done.png")
 The whole map with each element of `{renv}` is shown below. To take things further, have a look below at some more sections at what else you can do with `{renv}`.
 
 ```{r renv-complete, echo=FALSE, fig.align='center'}
-knitr::include_graphics("images/renv-restore.png")
+knitr::include_graphics("images/renv-complete.png")
 ```
 
 ### Geospatial packages
