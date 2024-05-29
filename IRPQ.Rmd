@@ -959,7 +959,7 @@ Once checks are done, and the answer is produced in accordance with the above, i
 
 In this section, we will consider a case study as an example of how to create a draft answer for the PQs.
 
-Further examples can be found in the *Further PQ Examples* document located in the *Useful Documentation & Links* section of the course.
+Further examples can be found in Appendix 4 of the <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/parliamentary-questions/" target="_blank">Parliamentary Questions Protocol.</a>
 
 ### Example Scenario
 
@@ -1121,7 +1121,7 @@ It is important to ensure that the process detailed in previous sections are und
 | <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">SDC Protocol / Risk Assessment Form / SDC Flowchart</a></span> | 
 | <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/data-protection-handbook/freedom-of-information-foi/" target="_blank">FOI/EIR Protocol</a></span> |
 | <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">INSERT LINK TO Information Request Form</a></span> | 
-| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">INSERT LINK TO PQ EXAMPLES</a></span> | 
+
 
 
 
