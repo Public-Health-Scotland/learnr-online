@@ -131,6 +131,7 @@ While individual teams may have their own local protocols for responding to IRs,
   </br>
   <li>If the request has not been made via the **Information Request Form** (see section *IR - Information Request Form*), teams are encouraged to send this form to the customer and request it be filled out and returned. Proceed to the next stage once it has been returned.
   </br>
+  </br>
   <li>Team makes contact with the customer to discuss the IR, and communicate what is being provided, the timescale required, and any applicable charges.</li>
   </br>
   <li>Once all parties are in agreement, analysis can be performed. **Note: If a charge is applicable, payment must be received before proceeding.**</li>
@@ -1122,12 +1123,6 @@ It is important to ensure that the process detailed in previous sections are und
 | <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Information Request Form</a></span> 
 | <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/parliamentary-questions/" target="_blank">Parliamentary Questions Protocol</a></span> 
 | <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">SDC Protocol / Risk Assessment Form / SDC Flowchart</a></span> 
-
-
-
-
-
-
 
 
 #### Contacts
