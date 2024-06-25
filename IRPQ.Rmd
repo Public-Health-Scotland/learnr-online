@@ -160,7 +160,7 @@ In the next section, we will cover the first few stages of the IR workflow.
 
 ### Information Request Form
 
-While teams may have their own local procedures in dealing with Information Requests, it is encouraged to have customers fill in and return an *Information Request Form* after the request has been assessed and deemed feasible. We have provided an example form for teams to adapt for their purposes.
+While teams may have their own local procedures in dealing with Information Requests, it is encouraged to have customers fill in and return an <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Information Request Form</a> after the request has been assessed and deemed feasible. We have provided an example form for teams to adapt for their purposes.
 
 This form not only aids in the team assessment stage of dealing with IRs, but also directs customers to relevant policies and protocols concerning data and statistical governance. 
 
@@ -1116,11 +1116,15 @@ It is important to ensure that the process detailed in previous sections are und
 
 |  Document                       |
 |---------------------------------|
-| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/parliamentary-questions/" target="_blank">Parliamentary Questions Protocol</a></span> | 
-| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Information Request Protocol</a></span> | 
-| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">SDC Protocol / Risk Assessment Form / SDC Flowchart</a></span> | 
-| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/data-protection-handbook/freedom-of-information-foi/" target="_blank">FOI/EIR Protocol</a></span> |
-| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">INSERT LINK TO Information Request Form</a></span> | 
+
+| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/information-governance/data-protection/data-protection-handbook/freedom-of-information-foi/" target="_blank">FOI/EIR Protocol</a></span> 
+| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Information Request Protocol</a></span>  
+| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Information Request Form</a></span> 
+| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/parliamentary-questions/" target="_blank">Parliamentary Questions Protocol</a></span> 
+| <span class="center-align"><a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">SDC Protocol / Risk Assessment Form / SDC Flowchart</a></span> 
+
+
+
 
 
 
