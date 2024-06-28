@@ -48,4 +48,4 @@ Other directories:
 
 ## Get in touch
 
-* Email: phs.transformingpublishing@phs.scot
+* Email: phs.datascience@phs.scot
