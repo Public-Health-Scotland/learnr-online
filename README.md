@@ -14,6 +14,8 @@ These applications are hosted online and provide functionality around quizzes an
     * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-opendata/ 
 * [Introduction to OpenXLSX](https://github.com/Public-Health-Scotland/learnr-online/blob/master/OpenXLSX.Rmd) - a course providing an introduction to the `openxlsx`, used to read, write, and edit Excel files from R. 
     * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-openxlsx/ 
+* [R Reproducible Environments](https://github.com/Public-Health-Scotland/learnr-online/blob/master/ReproducibleEnvs.Rmd) - a course based around the utility of the `{renv}` package while exploring general reproducibility concepts.
+    * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-renv/
 * [SPSS to R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/SPSStoR.Rmd) - a translation course to work alongside the Introduction to R course with a focus on translating code from SPSS to R. 
     * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-spsstor/ 
 * [SQL in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/SQL.Rmd) - an introductory course for SQL with details of working with SQL and databases inside R. 
@@ -35,6 +37,7 @@ Other directories:
   * `OpenData.Rmd` - RMarkdown file containing all necessary code to build app for the open data course
   * `OpenXLSX.Rmd` - RMarkdown file containing all necessary code to build app for the openxlsx course
   * `PHSMethods.Rmd` - RMarkdown file containing all necessary code to build app for the phsmethods course
+  * `ReproducibleEnvs.Rmd` - RMarkdown file containing all necessary code to build app for the renv course
   * `SPSStoR.Rmd` - RMarkdown file containing all necessary code to build app for the SPSS to R course
   * `SQL.Rmd` - RMarkdown file containing all necessary code to build app for the SQL in R course
   * `.gitignore` - tells git what files and folders *not* to track or upload to GitHub
@@ -45,4 +48,4 @@ Other directories:
 
 ## Get in touch
 
-* Email: phs.transformingpublishing@phs.scot
+* Email: phs.datascience@phs.scot
