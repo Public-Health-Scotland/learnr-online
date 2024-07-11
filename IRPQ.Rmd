@@ -1,5 +1,5 @@
 ---
-title: "Parliamentary Questions & Information Requests"
+title: "Information Requests & Parliamentary Questions"
 output: 
   learnr::tutorial:
     css: "css/style.css"
@@ -37,7 +37,7 @@ knitr::include_graphics("images/phs-logo.png")
 ## Introduction
 
 
-Welcome to the Parliamentary Questions & Information Requests course. This course is designed to provide an overview of the Information Request (IR) and Parliamentary Question (PQ) process. 
+Welcome to the Information Requests & Parliamentary Questions course. This course is designed to provide an overview of the Information Request (IR) and Parliamentary Question (PQ) process. 
 
 <div class="info_box">
   <h4>Course Info</h4>
@@ -125,11 +125,11 @@ While individual teams may have their own local protocols for responding to IRs,
   <li>Team receives IR.</li>
   </br>
   </br>
-  <li>IR is logged in the IRS (see section *IR - Using Information Request Service*) and given a reference number.</li>
+  <li>IR is logged in the IRS (see section <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-ir---form-service" target="_blank">*IR - Form & Service*</a>) and given a reference number.</li>
   </br>
-  <li>IR is assessed by the team (see section *IR - Assessing the Request*)</li>
+  <li>IR is assessed by the team (see section <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-ir---assessing-the-request" target="_blank">*IR - Assessing the Request*</a>)</li>
   </br>
-  <li>If the request has not been made via the **Information Request Form** (see section *IR - Information Request Form*), teams are encouraged to send this form to the customer and request it be filled out and returned. Proceed to the next stage once it has been returned.
+  <li>If the request has not been made via the **Information Request Form** (see section <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-ir---form-service" target="_blank">*IR - Form & Service*</a>), teams are encouraged to send this form to the customer and request it be filled out and returned. Proceed to the next stage once it has been returned.
   </br>
   </br>
   <li>Team makes contact with the customer to discuss the IR, and communicate what is being provided, the timescale required, and any applicable charges.</li>
@@ -165,7 +165,7 @@ While teams may have their own local procedures in dealing with Information Requ
 
 This form not only aids in the team assessment stage of dealing with IRs, but also directs customers to relevant policies and protocols concerning data and statistical governance. 
 
-A screen grab of the form can be seen below. The attachable document file (with working hyperlinks) can be found in the *Useful Documentation & Links* section of this course, as well as on Spark (insert hyperlink for document).
+A screen grab of the form can be seen below. The attachable document file (with working hyperlinks) can be found in the <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-useful-documentation-links" target="_blank">*Useful Documentation & Links*</a> section of this course, as well as on <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/information-requests/" target="_blank">Spark</a>.
 
 **Please ensure you enter an appropriate team email address where prompted in the document.**
 
@@ -497,21 +497,21 @@ More detailed breakdowns of each stage of the process can be found in later sect
 <ol>
   <li>PQs are made available.</li>
   </br>
-  <li>The PHS Statistical Governance Team (phs.statsgov@phs.scot) retrieves and assigns the PQs to the appropriate PHS teams (see section *PQ - Retrieving & Assigning PQs*).</li>
+  <li>The PHS Statistical Governance Team (phs.statsgov@phs.scot) retrieves and assigns the PQs to the appropriate PHS teams (see section <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-pq---retrieving-assigning-pqs" target="_blank">*PQ - Retrieving & Assigning PQs*</a>).</li>
   </br>
   <li>Teams receive and assess the PQ. </li>
   </br>
-  <li>If correctly assigned and the team are able to answer, contact SG to enquire whether a response is required (see section *PQ - Processing & Responding* for further information on the process at this stage, including for instances where PQs have been incorrectly assigned, or unable to be answered).</li>
+  <li>If correctly assigned and the team are able to answer, contact SG to enquire whether a response is required (see section <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-pq---processing-responding" target="_blank">*PQ - Processing & Responding*</a> for further information on the process at this stage, including for instances where PQs have been incorrectly assigned, or unable to be answered).</li>
   </br>
-  <li>If a response is required, log the PQ in the IRS. (see section *IR - Using Information Request Service*)</li>
+  <li>If a response is required, log the PQ in the IRS. (see section <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-ir---form-service" target="_blank">*IR - Form & Service*</a>)</li>
   </br>
   <li>Discuss the PQ with SG, gaining clarification as necessary, establishing deadlines, and conveying all relevant information.</li>
   </br
   <li>Once all is agreed, proceed with answering the PQ. **Follow <a href="https://spark.publichealthscotland.org/corporate-guidance/statistical-governance/statistical-disclosure-control/overview-of-disclosure-control-protocol/" target="_blank">PHS Statistical Disclosure Control flowchart</a>. ** If required, contact Stats Gov for assistance. </li>
   </br>
-  <li>Produce draft answer in accordance with style guidelines, using the appropriate template. (see section *PQ - Processing & Responding*)</li>
+  <li>Produce draft answer in accordance with style guidelines, using the appropriate template. (see section <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-pq---processing-responding" target="_blank">*PQ - Processing & Responding*</a>)</li>
   </br>
-  <li>Complete the sign-off procedure. (see section *PQ - Sign Off*)</li>
+  <li>Complete the sign-off procedure. (see section <a href="https://scotland.shinyapps.io/phs-learn-irpq/#section-pq---sign-off" target="_blank">*PQ - Sign Off*</a>)</li>
   </br>
   <li>Send the draft answer to the SG contact.</li>
   </br>
@@ -524,7 +524,7 @@ More detailed breakdowns of each stage of the process can be found in later sect
 <div class="info_box">
   <h4>Important</h4>
   <ul>
-    <li>PHS Teams may, at times, receive PQs directly from Scottish Government contacts. In this instance, teams should carry out the PQ process above as normal proceeding from **Teams receive and assess the PQ.**
+    <li>PHS Teams may, at times, receive PQs directly from Scottish Government contacts. In this instance, teams should carry out the PQ process above as normal proceeding from the **Teams receive and assess the PQ** of the above list.
   </ul>
 </div>
 </br>
