@@ -170,7 +170,7 @@ A screen grab of the form can be seen below. The attachable document file (with 
 **Please ensure you enter an appropriate team email address where prompted in the document.**
 
 ```{r echo=FALSE, fig.align='center', out.width="80%"}
-knitr::include_graphics("images/ir-IRForm.png")
+knitr::include_graphics("images/irpq/ir-IRForm.png")
 ```
 
 <div class="info_box">
@@ -195,50 +195,50 @@ Below is a step by step tutorial of how to log and close IRs in the system.
 1) Log on and select *New Record*
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-UsingIRS1.png")
+knitr::include_graphics("images/irpq/ir-UsingIRS1.png")
 ```
 
 2) **Summary** - Select *Information Request (Non ISD)* as the Request Type, and fill in relevant information as shown below. 
 *Note: The default deadline is 20 working days from when IR is received. This should be updated after discussion with the customer.* 
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-UsingIRS2.png")
+knitr::include_graphics("images/irpq/ir-UsingIRS2.png")
 ```
 
 3) **Customer** - As a minimum, fill in the name, telephone and email.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-UsingIRS3.png")
+knitr::include_graphics("images/irpq/ir-UsingIRS3.png")
 ```
 
 4) **Time Log** - Click *Define New Role* and select a Lead Analyst (this can initially be the individual logging the request, and can be changed later).
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-UsingIRS4.png")
+knitr::include_graphics("images/irpq/ir-UsingIRS4.png")
 ```
 
 5) Once the Lead Analyst has been found and chosen, click *Submit Record*.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-UsingIRS5.png")
+knitr::include_graphics("images/irpq/ir-UsingIRS5.png")
 ```
 
 6) **Closing Record** - Click *Search* and find the IR using the IR number. Once found, click *edit* to proceed.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-UsingIRS6.png")
+knitr::include_graphics("images/irpq/ir-UsingIRS6.png")
 ```
 
 7) **Update Time Log** - You must update the amount of time worked in order to close the request. At this stage, you can also re-assign who is the lead analyst.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-UsingIRS7.png")
+knitr::include_graphics("images/irpq/ir-UsingIRS7.png")
 ```
 
 8) **Complete and Close** - Back in the *Summary* screen, fill in the *Completion Date* and click *Submit Record* and confirm. You can then log off.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-UsingIRS8.png")
+knitr::include_graphics("images/irpq/ir-UsingIRS8.png")
 ```
 
 Next, we will move onto the guidelines surrounding Charges.
@@ -255,7 +255,7 @@ Below are the two categories, as well as what certain organisations/individuals 
 
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/IR-CustomerType.png")
+knitr::include_graphics("images/irpq/IR-CustomerType.png")
 ```
 
 ### Charging
@@ -276,7 +276,7 @@ Below is a table of Estimated Day Rates, dependent on the Type of Analysis requi
 
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/irpq-Charging.png")
+knitr::include_graphics("images/irpq/irpq-Charging.png")
 ```
 
 
@@ -376,11 +376,11 @@ In discussion with the customer, the team was able to clarify the following:
 Following this discussion, the team outputted the following spreadsheet to the customer via email:
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-example1.png")
+knitr::include_graphics("images/irpq/ir-example1.png")
 ```
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/ir-example2.png")
+knitr::include_graphics("images/irpq/ir-example2.png")
 ```
 
 <div class="info_box">
@@ -475,7 +475,7 @@ PQs can be asked in two ways:
 An overview of the PQ process can be seen below:
 
 ```{r PQ-process, echo=FALSE, fig.align='center', out.width="80%"}
-knitr::include_graphics("images/irpq-pq-sg-process.png")
+knitr::include_graphics("images/irpq/irpq-pq-sg-process.png")
 ```
 
 <div class="info_box">
@@ -573,7 +573,7 @@ The team will decide what topic areas the question corresponds to, and to which 
 The following is an excerpt from the topic area/team allocation guide which Stats Gov uses to allocated the PQs to the appropriate team. It includes what topics should be allocated to the team (in this case, Quality Indicators) and what should not.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/irpq-pqallocation.png")
+knitr::include_graphics("images/irpq/irpq-pqallocation.png")
 ```
 
 It is important to note that questions may pertain to multiple teams. If this is the case, it will be allocated to all related teams, and such an allocation be detailed in the *Notes* section explained below. 
@@ -618,7 +618,7 @@ The email contains information on how to proceed, the SG contact email, as well 
 #### Example
 
 ```{r echo=FALSE, fig.align='center', out.width="100%"}
-knitr::include_graphics("images/irpq-allocatedTeamEmail.png")
+knitr::include_graphics("images/irpq/irpq-allocatedTeamEmail.png")
 ```
 
 
@@ -802,7 +802,7 @@ Below are some guiding principles which draft answer producers should consider a
 It is important to remember that PHS staff should know best about the quality of the data that we are providing. As such, we should not be leaving those who receive the PHS draft answer to interpret the data for themselves.
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/irpq-guidelines.png")
+knitr::include_graphics("images/irpq/irpq-guidelines.png")
 ```
 
 
@@ -984,7 +984,7 @@ Take a moment and think about how you would create a draft answer in the above s
 
 
 ```{r echo=FALSE, fig.align='center', out.width="100%"}
-knitr::include_graphics("images/irpq-PQExample.png")
+knitr::include_graphics("images/irpq/irpq-PQExample.png")
 ```
 
 The draft answer above is appropriate in answering the question, as it:
@@ -1012,13 +1012,13 @@ Once your answer has been completed and checked, then it has reached the sign of
 Here, your answer will undergo a two-stage sign off process, conducted by two separate senior personnel - authorised personnel/roles can be found in the following table:
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/irpq-signOff.png")
+knitr::include_graphics("images/irpq/irpq-signOff.png")
 ```
 
 The sign off process is as follows:
 
 ```{r echo=FALSE, fig.align='center', out.width="50%"}
-knitr::include_graphics("images/irpq-signOffProcess.png")
+knitr::include_graphics("images/irpq/irpq-signOffProcess.png")
 ```
 
 
