@@ -41,14 +41,45 @@ Welcome to the Information Requests & Parliamentary Questions course. This cours
 
 <div class="info_box">
   <h4>Course Info</h4>
-  1. This course is separated into two main sections: **Information Requests** and **Parliamentary Questions**  
+  1. This course is separated into two main sections: **Information Requests** followed by **Parliamentary Questions**  
   
   2. Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.
+  
+  3. The Navigation Pane on the left hand side of this page contains all the sections of this course.
+  
   3. If you are comfortable with the content and are looking for specific information or guidance, feel free to navigate through to the appropriate section located in the navigation banner.  
   
   4. If this is your first exposure to PQs and IRs, it is highly recommended to work through the course from beginning till end.  
   
   5. Should you have any difficulties whilst navigating the course please contact the Statistical Governance team at phs.statsgov@phs.scot.  
+  
+</div>
+
+</br>
+
+<div class="info_box">
+  <h4>Course Structure</h4>
+  1. By the end of the first half of the course, which focuses on **Information Requests**, you will have learned the following:
+  
+        * What is an IR?
+        * How long do I have to respond to an IR?
+        * How do I work with my team to deal with an IR?
+        * How do I log, retrieve and answer an IR?
+        * What factors should I consider when answering an IR?
+        * How do I close an IR?  
+</br>
+  2. By the end of the second half of the course, which focuses on **Parliamentary Questions**, you will have learned the following:
+        
+        * What is a PQ?
+        * How are PQs created, retrieved and allocated to PHS teams?
+        * What do I do if a PQ has been allocated to my team?
+        * What considerations should I bear in mind when answering a PQ?
+        * How do I answer a PQ?
+        * How do I sign off a PQ answer?
+        * How do I submit a PQ answer?
+  
+  There will be a checklist at the end of the course with the above learning outcomes - take some time to reflect whether you have fully learned all the above outcomes by the end of the course.
+
   
 </div>
 
@@ -154,6 +185,8 @@ While individual teams may have their own local protocols for responding to IRs,
 
 
 In the next section, we will cover the first few stages of the IR workflow.
+
+
 
 ## IR - Form & Service
 
@@ -274,7 +307,7 @@ From the issuance of the fees notice, the customer will have 3 months to decide 
 Below is a table of Estimated Day Rates, dependent on the Type of Analysis required in responding to an IR.
 
 | Types of Analysis|  Description | Estimated Day Rate (incl. VAT)|
-|:-----------------|:--------------------:|:--------------------:|
+|:-----------------|:--------------------|:--------------------|
 | Standard Analysis|Basic tabulations or data extracts that require a certain level of skilled statistical expertise in order to extrapolate, manipulate and format the data to meet the customer requirements|Band 5 - Band 6|
 | Complex Analysis |Higher level of skilled statistical expertise is required. For example the need for record linkage and/or the application of advanced statistical methodologies e.g. the use of modelling techniques, standardisation rates.|Band 7 - Band 8a|
 | Highly Complex Analysis|Similar to the above, though with additional complex analysis requiring senior management staff to complete the statistical analysis.|Band 8b - Band 9 |
@@ -438,11 +471,9 @@ quiz(
 
 ### Conclusion
 
-You have reached the end of the Parliamentary Question and Information Request course. 
+You have reached the end of the Information Request section of the IRPQ course.
 
-We realise that the processes we have discussed may have been a lot to take in, and may require refreshing when and if PQs and IRs are posed to yourself and your team.
-
-The next few sections will contain various helpful documents, links and contacts in order to aid you in dealing with PQs and IRs.
+The next half of the course will focus on Parliamentary Questions.
 
 
 
@@ -1014,7 +1045,7 @@ Once your answer has been completed and checked, then it has reached the sign of
 Here, your answer will undergo a two-stage sign off process, conducted by two separate senior personnel - authorised personnel/roles can be found in the following table:
 
 | Role                                  |    First sign off    |    Final sign off    |
-|:--------------------------------------|:--------------------:|:--------------------:|
+|:--------------------------------------|:---------------------|:---------------------|
 | Associate Directors                   |         ✓            |         ✓            |
 | Head of Service                       |         ✓            |         ✓            |
 | Consultants in Public Health Medicine |         ✓            |         ✓            |
@@ -1113,10 +1144,54 @@ quiz(
 
 ### Conclusion
 
-Parliamentary Questions are extremely important functions which facilitate the democratic process.
+You have reached the end of the Parliamentary Question and Information Request course. Take a moment and reflect on your learning using the following learning outcomes checklist.  
 
-It is important to ensure that the process detailed in previous sections are understood and adhered to. If there are any issues, the Statistical Governance team (phs.statsgov@phs.scot) is available to answer any queries.
+Remember, if you have any gaps in your knowledge, you can always navigate back to the appropriate sections using the navigation banner on the left hand side:
 
+<div class="info_box">
+  <h4>Learning Outcomes</h4>
+  
+  Are you able to answer the following questions?
+  
+  1. **Information Requests**
+  
+        <input type="checkbox" unchecked> What is an IR? </input>  
+        
+        <input type="checkbox" unchecked> How long do I have to respond to an IR? </input>  
+        
+        <input type="checkbox" unchecked> How do I work with my team to deal with an IR? </input>  
+        
+        <input type="checkbox" unchecked> How do I log, retrieve and answer an IR? </input>  
+        
+        <input type="checkbox" unchecked> What factors should I consider when answering an IR? </input>  
+        
+        <input type="checkbox" unchecked> How do I close an IR? </input>  
+        
+
+  2. **Parliamentary Questions**
+        
+        <input type="checkbox" unchecked> What is a PQ? </input>  
+        
+        <input type="checkbox" unchecked> How are PQs created, retrieved and allocated to PHS teams? </input>  
+        
+        <input type="checkbox" unchecked> What do I do if a PQ has been allocated to my team? </input>  
+        
+        <input type="checkbox" unchecked> What considerations should I bear in mind when answering a PQ? </input>  
+        
+        <input type="checkbox" unchecked> How do I answer a PQ? </input>  
+        
+        <input type="checkbox" unchecked> How do I sign off a PQ answer? </input>  
+        
+        <input type="checkbox" unchecked> How do I submit a PQ answer? </input>  
+        
+  
+</div>
+
+</br>
+
+We realise that the processes we have discussed may have been a lot to take in, and may require refreshing when and if PQs and IRs are posed to yourself and your team.
+
+The next few sections will contain various helpful documents, links and contacts in order to aid you in dealing with PQs and IRs.
 
 
 ## Useful Documentation & Links
@@ -1139,7 +1214,7 @@ The following is a list of useful documents and their location:
 #### Contacts
 
 | Team                            | Email                       |
-|:--------------------------------|:---------------------------:|
+|:--------------------------------|:---------------------------|
 | PHS Statistical Governance Team | phs.statsgov@phs.scot       |
 | PHS Communications Team         | phs.comms@phs.scot          |
 | PHS Preview Mailbox             | phs.releasepreview@phs.scot |
@@ -1153,6 +1228,6 @@ Thank User for completing the course.
 
 Please take some time to give some feedback so that we may improve the course for future users.
 
-<iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5Jmr6qmxVdaxdPt6Pzcihf4zhUODkxTTRQNlBQR1lBRExGNEkwTVVHREVJVS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+<iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5Jmr0sIZ-lbnFLgOZzAjI8c8BUMDU5WU5YOTYwRkVZQzMxWDNVTERTRTZVWSQlQCN0PWcu" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
 
 

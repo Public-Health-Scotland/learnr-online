@@ -6,6 +6,8 @@ These applications are hosted online and provide functionality around quizzes an
 
 * [Introduction to R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/Intro.Rmd) - learning R from the basics, including its integration to PHS; workflow, tools, templates, and other resources. 
     * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-intro/
+* [IRPQ](INSERT GITHUB LINK TO IRPQ) - learning the Information Requests & Parliamentary Questions process.
+    * Currently hosted here: https://scotland.shinyapps.io/phs-learn-irpq/
 * [PHS Methods](https://github.com/Public-Health-Scotland/learnr-online/blob/master/PHSMethods.Rmd) - learning the internally developed R package, `phsmethods`. 
     * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-phsmethods/  
 * [Data Visualisation in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/DataViz.Rmd) - building on an the Intro to R course, learn data visualisation with `ggplot2` and an introduction to `plotly`. 
@@ -32,6 +34,7 @@ Other directories:
 ### Files
   * `DataViz.Rmd` - RMarkdown file containing all necessary code to build app for the data viz course
   * `Intro.Rmd` - RMarkdown file containing all necessary code to build app for the intro course
+  * `IRPQ.Rmd` - RMarkdown file containing all necessary code to build app for the IRPQ course
   * `OpenData.Rmd` - RMarkdown file containing all necessary code to build app for the open data course
   * `OpenXLSX.Rmd` - RMarkdown file containing all necessary code to build app for the openxlsx course
   * `PHSMethods.Rmd` - RMarkdown file containing all necessary code to build app for the phsmethods course
