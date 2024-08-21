@@ -545,7 +545,7 @@ More detailed breakdowns of each stage of the process can be found in later sect
   
 8. Produce draft answer in accordance with style guidelines, using the appropriate template. (see section [PQ - Processing & Responding](https://scotland.shinyapps.io/phs-learn-irpq/#section-pq---processing-responding))  
 
-9. Complete the sign-off procedure. (see section [PQ - Sign Offza](https://scotland.shinyapps.io/phs-learn-irpq/#section-pq---sign-off))  
+9. Complete the sign-off procedure. (see section [PQ - Sign Off](https://scotland.shinyapps.io/phs-learn-irpq/#section-pq---sign-off))  
 
 10. Send the draft answer to the SG contact.  
 
