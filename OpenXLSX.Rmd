@@ -233,7 +233,7 @@ data <- iris %>%
   clean_names() %>%
   mutate(species = str_to_title(species))
 
-# Create a table with the minimum and maximum petal length for each iris species and view it
+# Create a table with the maximum petal length and width for each iris species and view it
 min_max_data <- data %>%
   group_by(species) %>%
   summarise(max_pet_length = max(petal_length),
@@ -262,7 +262,7 @@ writeData(
   wb = wb,
   
   # Name of tab to save the data to 
-  sheetName = "Data", 
+  sheet = "Data", 
   
   # Name of the dataset we want to write out
   min_max_data, 
