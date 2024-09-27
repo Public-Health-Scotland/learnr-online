@@ -332,7 +332,7 @@ openxlsx automatically adds the most recently used plot to the workbook. The eas
 
 ```{r echo=TRUE, eval=FALSE}
 # Print chart
-print(graph1)
+print(iris_viz)
 
 insertPlot(
   wb = wb, 
