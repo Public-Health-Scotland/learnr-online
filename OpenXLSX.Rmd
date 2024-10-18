@@ -642,7 +642,7 @@ saveWorkbook(
   # (no path defined here as working directory is set by the project)
   file = "iris_openxlsx_training.xlsx",
   
-  # Overwrite of file with same name exists? Default is FALSE
+  # Overwrite if file with same name exists? Default is FALSE
   overwrite = TRUE
 )
 ```
