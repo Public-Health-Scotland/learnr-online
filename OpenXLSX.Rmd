@@ -233,7 +233,7 @@ data <- iris %>%
   clean_names() %>%
   mutate(species = str_to_title(species))
 
-# Create a table with the minimum and maximum petal length for each iris species and view it
+# Create a table with the maximum petal length and width for each iris species and view it
 min_max_data <- data %>%
   group_by(species) %>%
   summarise(max_pet_length = max(petal_length),
@@ -262,7 +262,7 @@ writeData(
   wb = wb,
   
   # Name of tab to save the data to 
-  sheetName = "Data", 
+  sheet = "Data", 
   
   # Name of the dataset we want to write out
   min_max_data, 
@@ -332,7 +332,7 @@ openxlsx automatically adds the most recently used plot to the workbook. The eas
 
 ```{r echo=TRUE, eval=FALSE}
 # Print chart
-print(graph1)
+print(iris_viz)
 
 insertPlot(
   wb = wb, 
@@ -396,7 +396,7 @@ header_style <- createStyle(
   fontSize = 11,
   fontName = "Arial",
   halign = "Left", # Horizontal Align
-  valign = "Center", # Vertical align
+  valign = "Center", # Vertical align (US spelling of 'center')
   # Can add multiple decorations in a vector
   textDecoration = c("bold", "underline")
 )
@@ -492,8 +492,8 @@ addStyle(
   border_style_dash, 
   rows = 12:16, 
   cols = 2:3, 
-  gridExpand = TRUE,
-  stack = TRUE
+  gridExpand = TRUE, # apply style to all combos of rows and cols
+  stack = TRUE # adds to other styles, FALSE replaces
 )
 
 # Apply colour to background of cells in Table 1           
@@ -535,7 +535,7 @@ Then we add them to the Notes page of the workbook just as we would with data:
 
 ```{r echo=TRUE, eval=FALSE}
 # Adding "Contact details:"
-writeData(wb, sheet = 1, x = contact, startCol = 2, startRow = 9)
+writeData(wb, sheet = 1, x = contact, startCol = 2, startRow = 9) # sheet can be identified with numbered index or name
 
 # Adding the email address hyperlink
 writeData(wb, sheet = 1, x = email, startCol = 3, startRow = 9)
@@ -557,7 +557,7 @@ mergeCells(
   wb, 
   
   # Define worksheet for formatting to apply to
-  Name = "Notes",
+  sheet = "Notes",
   
   # Define columns and rows to merge
   cols = 2:7, rows = 7:8
@@ -619,8 +619,8 @@ Now, the same for the chart worksheet:
 ```{r echo=TRUE, eval=FALSE}
 # Chart 
 ## Title
-chart_title <- "Chart 1: Sepal Length by Sepal Width Across Different Species","
-writeData(wb, "Charts", Chart_title, startCol = 2, startRow = 2)
+chart_title <- "Chart 1: Sepal Length by Sepal Width Across Different Species"
+writeData(wb, "Charts", chart_title, startCol = 2, startRow = 2)
 addStyle(wb, "Charts", header_style, rows = 2, cols = 2)
 ```
 
@@ -642,7 +642,7 @@ saveWorkbook(
   # (no path defined here as working directory is set by the project)
   file = "iris_openxlsx_training.xlsx",
   
-  # Overwrite of file with same name exists? Default is FALSE
+  # Overwrite if file with same name exists? Default is FALSE
   overwrite = TRUE
 )
 ```
