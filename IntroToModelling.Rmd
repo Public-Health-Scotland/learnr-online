@@ -11,7 +11,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 # Author: Al Morgan
 # Date: Oct 2024
-# R Version: 4.4.1?
+# R Version: 4.4.2
 
 # Learnr Package Documentation: https://rstudio.github.io/learnr/
 
