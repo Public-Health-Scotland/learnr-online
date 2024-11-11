@@ -65,8 +65,8 @@ This learning material will cover linear models, i.e. modelling relationships th
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, fig.align='center'}
 # created a dataframe with the x and y values
 data <- tibble(
-  temperature_celsius = c(20, 30),
-  n_ice_creams_sold = c(100, 300)
+  temperature_celsius = c(10, 20, 30),
+  n_ice_creams_sold = c(-100, 100, 300)
 )
 
 # plot the points and line
@@ -74,6 +74,7 @@ data %>%
   ggplot(aes(x = temperature_celsius, y = n_ice_creams_sold)) +
   geom_line(colour = "red", linewidth = 2) +
   geom_point(size = 3) +
+  coord_cartesian(ylim = c(0, NA)) +
   geom_segment(aes(x = 25, xend = 25,   # Vertical dashed line up to y_intercept
                    y = min(n_ice_creams_sold), yend = 200),
                linetype = "dashed", linewidth = 1.5, color = "blue") +
@@ -343,6 +344,7 @@ If you were to draw a line-of-best-fit that was as close to as many data points 
 mtcars %>%
   ggplot(aes(x = wt, y = mpg)) +
   geom_point() +
+  coord_cartesian(ylim = c(0, NA)) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_minimal()
 ```
@@ -353,6 +355,7 @@ This can be achieved with the following code:
 mtcars %>%
   ggplot(aes(x = wt, y = mpg)) +
   geom_point() +
+  coord_cartesian(ylim = c(0, NA)) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_minimal()
 ```
@@ -553,9 +556,9 @@ $$
 
 <br>
 
-### The `modelr` package
+### The `{modelr}` package
 
-Base R provides some fiddly functions for dealing with our model, but the `modelr` package offers functions that allow us to deal with our `lm()` output in a `tidyverse` way.
+Base R provides some fiddly functions for dealing with our model, but the `{modelr}` package offers functions that allow us to deal with our `lm()` output in a `tidyverse` way.
 
 ```{r, echo = TRUE, eval = FALSE}
 install.packages("modelr")
@@ -710,7 +713,7 @@ This might sound technical and intimidating, but it's really not that bad. Spend
 
 <br>
 
-We will need to install the `ggfortify` package so we can use the `autoplot` function on our model to quickly view all the residuals-based plots we're interested in.
+We will need to install the `{ggfortify}` package so we can use the `autoplot` function on our model to quickly view all the residuals-based plots we're interested in.
 
 ```{r, eval = FALSE, echo = TRUE}
 install.packages("ggfortify")
@@ -813,7 +816,7 @@ quiz(
 
 If the assumptions about the residuals required to use a linear regression model don't hold up (i.e. the diagnostic plots look iffy), then there are several alternative models you could use.
 
-These include **decision trees** and **generalised linear models (GLMs)**, although these aren't covered here.
+These include [decision trees](https://medium.com/@MrBam44/decision-trees-91f61a42c724) and [generalised linear models (GLMs)](https://towardsdatascience.com/generalized-linear-models-9ec4dfe3dc3f), although these aren't covered here.
 
 <br>
 
@@ -857,7 +860,7 @@ In reality, you may have to/want to clean the data, create some new variables ba
 
 ### Using `ggpairs()`
 
-Before we start trying to build a model, let's see if we can spot any correlations. Whereas before we used the `cor()` function and examined a single scatter plot, with numerous variables we can use the `ggpairs()` function from the `GGally` package to see this information for all variable combinations in one go.
+Before we start trying to build a model, let's see if we can spot any correlations. Whereas before we used the `cor()` function and examined a single scatter plot, with numerous variables we can use the `ggpairs()` function from the `{GGally}` package to see this information for all variable combinations in one go.
 
 ```{r, eval = FALSE, echo = TRUE}
 install.packages("GGally")
@@ -1000,7 +1003,7 @@ Our model tells us that the number of smoothie advertisements and number of suns
 
 The fitness trend score is still worth examining, even if its p-value didn't quite meet our arbitrary thresholds of \<0.05 or \<0.01. The argument *for* vs *against* strict p-value thresholds rages on in the stats community - so just be mindful of this.
 
-We can use the `modelr` functions to view the predicted values our new model produced:
+We can use the `{modelr}` functions to view the predicted values our new model produced:
 
 ```{r, eval = TRUE, echo = TRUE}
 smoothie_data %>% 
@@ -1028,7 +1031,7 @@ smoothies_predict %>%
 
 ## Review & Feedback
 
-The world of modelling is vast and we've only covered basic concepts here. There are still interactions between predictors, dealing with non-continuous numeric variables, degrees of freedom and so on.
+The world of modelling is vast and we've only covered basic concepts here. There are still [interactions between predictors](https://quantifyinghealth.com/why-and-when-to-include-interactions-in-a-regression-model/), [dealing with non-continuous numeric variables](https://www.statology.org/r-linear-regression-with-categorical-variables/), [degrees of freedom](https://articles.outlier.org/degrees-of-freedom) and so on.
 
 However, the tools you've acquired here are a great start to build your own models! Just research what you need as you go.
 
