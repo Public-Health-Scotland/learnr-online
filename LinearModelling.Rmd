@@ -321,7 +321,7 @@ data %>%
   theme_minimal()
 ```
 
-## Simple linear regression
+## The fundamentals of simple linear regression
 
 You may be wondering, why all the algrebra? Well, linear regression is really all about creating an equation for a line that best 'fits' your data. This equation is our **model** which, if good enough, we can use to make further predictions.
 
@@ -530,7 +530,7 @@ Our fitting algorithms try to **minimise** this sum of squares, so the method is
 
 <br>
 
-### Using `lm()`
+## Building a simple linear regression model using `lm()`
 
 Hopefully you're now familiar with way in which the fitting algorithm used by R is seeking to **minimise the sum of squared residuals**.
 
@@ -645,7 +645,7 @@ summary(model)
 
   - The `Std. Error` and `t value` columns, which we don't need to worry about for our purposes.
 
-  - The `Pr(>|t|)` column shows us the p-values for the intercept and coefficient. If you're unfamiliar with this term, we will cover them shortly don't worry. For now: if $p$ is very small, we consider this feature of the model to have a significant effect on the outcome variable.
+  - The `Pr(>|t|)` column shows us the $p$-values for the intercept and coefficient. If you're unfamiliar with this term, we will cover them shortly don't worry. For now: if $p$ is very small, we consider this feature of the model to have a significant effect on the outcome variable.
 
 4. **Signif. codes:** standard $p$ significance thresholds and their associated symbols, e.g. a $p$ < 0.001 is denoted with "***".
 
@@ -681,17 +681,17 @@ The higher this value, the better the line fits the data (and the more useful ou
 
 ### Coefficients and p-values
 
-We looked at the p-value related to our `weight` coefficient earlier: 0.000135. As this is so small, i.e. lower than 0.001, R assigned it '\*\*\*'.
+We looked at the $p$-value related to our `weight` coefficient earlier: 0.000135. As this is so small, i.e. lower than 0.001, R assigned it '\*\*\*'.
 
-Without getting too complex, this p-value is the product of a hypothesis test of the coefficient. This tests whether the coefficient is **significantly different** from zero. A low p-value indicates a very low probability that the coefficient is zero, and therefore changes in the predictor variable are very likely to affect our outcome variable.
+Without getting too complex, this $p$-value is the product of a hypothesis test of the coefficient. This tests whether the coefficient is **significantly different** from zero. A low $p$-value indicates a very low probability that the coefficient is zero, and therefore changes in the predictor variable are very likely to affect our outcome variable.
 
-We typically set a p-value threshold of \<0.05 or \<0.01 for coefficient significance, but these are fairly arbitrary.
+We typically set a $p$-value threshold of \<0.05 or \<0.01 for coefficient significance, but these are fairly arbitrary.
 
 <br>
 
 #### When to trust p-values
 
-As much as we may want to trust our p-value and run off to tell the world that, based on our sampled data and the model we created, weight is a statistically-significant predictor of height, it's important that we check that the **residuals of our model fulfill certain conditions**. This is what we will cover now.
+As much as we may want to trust our $p$-value and run off to tell the world that, based on our sampled data and the model we created, weight is a statistically-significant predictor of height, it's important that we check that the **residuals of our model fulfill certain conditions**. This is what we will cover now.
 
 <br>
 
@@ -699,21 +699,16 @@ As much as we may want to trust our p-value and run off to tell the world that, 
 
 We need to check that our residuals:
 
-<ul>
+- are independent of each other
+- are normally distributed
+- show no systematic increase or decrease in variation across the range of data
 
-<li>are independent of each other</li>
-
-<li>are normally distributed</li>
-
-<li>show no systematic increase or decrease in variation across the range of data</li>
-
-</ul>
 
 This might sound technical and intimidating, but it's really not that bad. Spending a few minutes learning how to read diagnostic plots will make you a much better model builder and interpreter!
 
 <br>
 
-We will need to install the `{ggfortify}` package so we can use the `autoplot` function on our model to quickly view all the residuals-based plots we're interested in.
+We will need to install the `{ggfortify}` package so we can use the `autoplot()` function on our model to quickly view all the residuals-based plots we're interested in.
 
 ```{r, eval = FALSE, echo = TRUE}
 install.packages("ggfortify")
@@ -774,19 +769,16 @@ Feel free to learn about the fourth plot, Residuals vs Leverage, in your own tim
 
 What have we done here?
 
-<ol>
+1. We checked our data and saw the two numeric variables, `height` and `weight`, show a linear relationship and are correlated.
 
-<li>We checked our data and saw the two numeric variables, `height` and `weight`, show a linear relationship and are correlated.</li>
+2. Based on this, we built a linear regression model using `lm()`.
 
-<li>Based on this, we built a linear regression model using `lm()`.</li>
+3. We used `summary()` to examine the $p$-value of the model's weight coefficient and the r-squared value. Both indicated a useful model with predictive power.
 
-<li>We used `summary()` to examine the p-value of the model's weight coefficient and the r-squared value. Both indicated a useful model with predictive power.</li>
+4. We used `autoplot()` to check out the diagnostic plots of the model to make sure it met the necessary assumptions.
 
-<li>We used `autoplot()` to check out the diagnostic plots of the model to make sure it met the necessary assumptions.</li>
+5. These checks passed, meaning we can have confidence in using our model.
 
-<li>These checks passed, meaning we can have confidence in using our model.</li>
-
-</ol>
 
 ```{r lm-quiz}
 quiz(
@@ -820,7 +812,7 @@ These include [decision trees](https://medium.com/@MrBam44/decision-trees-91f61a
 
 <br>
 
-## Multiple linear regression
+## Multiple linear regression: model building
 
 You now have the tools and knowledge needed to effectively to build a **simple linear regression model**, i.e. a model that simply has one predictor variable. However, we often will have several predictors to insert into our models...
 
@@ -933,13 +925,17 @@ We can no longer plot this as a 2D line without examining the predictors one at 
 
 <br>
 
+## Multiple linear regression: model evaluation
+
+As with our simple linear model, there are several metrics we can use to evaluate how useful our multiple linear model is.
+
 ### p-values of the coefficients
 
 ```{r echo=FALSE, fig.align='centre', out.width="60%"}
 knitr::include_graphics("images/intro_modelling/p_values.png")
 ```
 
-The output from `summary()` also shows us the p-values (in the rightmost column) are all small. We can ignore the intercept's p-value in most cases as this isn't very informative, but the others tell us that our chosen predictors are all significant (or close to).
+The output from `summary()` also shows us the $p$-values (in the rightmost column) are all small. We can ignore the intercept's $p$-value in most cases as this isn't very informative, but the others tell us that our chosen predictors are all significant (or close to).
 
 -   the `advertisements` coefficient is \<0.05 and so is assigned a single `*`
 -   the `fitness_trend` coefficient is \<0.1 and so is assigned a `.` (which many would see as not small enough)
@@ -965,9 +961,7 @@ If we were a sales/marketing team, *knowing that these three predictors affect s
 knitr::include_graphics("images/intro_modelling/residual_error.png")
 ```
 
-We haven't mentioned this yet but residual standard error (RSE), shown just above R-squared in our model summary, is also a useful metric of model 'goodness-of-fit'.
-
-We can think about it as being the 'average error' in the model's estimated response variable values - i.e. by how far on average do our fitted values differ from the actual values. Therefore, small is better. Handily, it is measured in the same units as our outcome variable.
+We touched on this briefly earlier: residual standard error (RSE), shown just above R-squared in our model summary, is also a useful metric of model 'goodness-of-fit'. It is a value representing the average amount by which our fitted values differ from our actual values.
 
 Here, our RSE is £493, which isn't all that bad considering our smoothie sales are in the £6000-8000 range.
 
@@ -993,15 +987,15 @@ How does it do?
 
 </ol>
 
-Based on this, we can safely trust and rely on the p-values reported in our model summary.
+Based on this, we can safely trust and rely on the $p$-values reported in our model summary.
 
 <br>
 
 ### Summary
 
-Our model tells us that the number of smoothie advertisements and number of sunshine hours in a month are, given their small p-values, **significant predictors** of smoothie sales (£).
+Our model tells us that the number of smoothie advertisements and number of sunshine hours in a month are, given their small $p$-values, **significant predictors** of smoothie sales (£).
 
-The fitness trend score is still worth examining, even if its p-value didn't quite meet our arbitrary thresholds of \<0.05 or \<0.01. The argument *for* vs *against* strict p-value thresholds rages on in the stats community - so just be mindful of this.
+The fitness trend score is still worth examining, even if its $p$-value didn't quite meet our arbitrary thresholds of \<0.05 or \<0.01. The argument *for* vs *against* strict $p$-value thresholds rages on in the stats community - so just be mindful of this.
 
 We can use the `{modelr}` functions to view the predicted values our new model produced:
 
