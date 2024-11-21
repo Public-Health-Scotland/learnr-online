@@ -62,7 +62,7 @@ By using data we already have, we can make estimates about results we don't have
 
 This learning material will cover linear models, i.e. modelling relationships that can be expressed as a straight line. Imagine temperature on the x-axis and ice creams sold on the y-axis. A straight line on this plot could give us a prediction of how many ice creams we would sell at any given temperature.
 
-```{r, echo = FALSE, eval = TRUE, warning = FALSE, fig.align='center'}
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, fig.align='center', fig.alt="A line plot showing temperature (degrees Celcius) on the x-axis and 'number of ice creams sold' on the y-axis. A vertical dashed line at 25 degrees meets a horizontal dashed line at 200 ice creams, indicating the prediction mentioned in the text."}
 # created a dataframe with the x and y values
 data <- tibble(
   temperature_celsius = c(10, 20, 30),
@@ -98,7 +98,7 @@ More advanced modelling techniques (those that we might call **machine learning*
 
 Let's start with correlation, a term you may be familiar with. Two numeric variables in our data are correlated when, as one increases in value, the other noticeably increases or decreases in value. We can often spot this by glancing at a scatter plot and seeing a 'direction' to the data points.
 
-```{r echo=FALSE, fig.align='centre', out.width="100%"}
+```{r echo=FALSE, fig.align='centre', out.width="100%", fig.alt="Three scatterplots are shown: the first showing a positive correlation, the second a negative correlation, and the third no correlation. Lines-of-best-fit are included."}
 knitr::include_graphics("images/intro_modelling/correlations.png")
 ```
 
@@ -148,7 +148,7 @@ This value of -0.87 tells us that these variables are strongly negatively correl
 
 A word of warning: you can use `cor()` on any two variables, regardless of what the real trend (if any) may be! The four plots below each have the same correlation coefficient - even though you can see that most of them are not linear trends.
 
-```{r echo=FALSE, fig.align='centre', out.width="100%"}
+```{r echo=FALSE, fig.align='centre', out.width="100%", fig.alt="The Anscombes quartet of scatterplots is shown. All four are scatterplots with the same correlation coefficient, but only the first one is linear and therefore appropriate to measured using this method."}
 knitr::include_graphics("images/intro_modelling/anscombes_quartet.png")
 ```
 
@@ -228,7 +228,7 @@ We can look at these as (x,y) coordinates to be plotted:
 
 Plotting them would look like this:
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, fig.alt="A plot with the coordinates above plotted and a line joining these."}
 # load in the necessary packages
 library(dplyr)
 library(ggplot2)
@@ -300,11 +300,7 @@ quiz(
 )
 ```
 
-```{r, echo = FALSE}
-# load in the necessary packages
-library(dplyr)
-library(ggplot2)
-
+```{r, echo = FALSE, fig.alt="A simple line plot with 3 coordinates."}
 # created a dataframe with the x and y values
 data <- tibble(
   x_values = c(0, 1, 2),
@@ -331,7 +327,7 @@ You may be wondering, why all the algrebra? Well, linear regression is really al
 
 Earlier in this course, we saw that the weight (`wt`) and miles-per-gallon (`mpg`) values in the `mtcars` data set were strongly negatively correlated.
 
-```{r, echo = FALSE, warning = FALSE}
+```{r, echo = FALSE, warning = FALSE, fig.alt="A scatterplot of the `wt` snd `mpg` variables from the `mtcars` dataset."}
 mtcars %>%
   ggplot(aes(x = wt, y = mpg)) +
   geom_point() +
@@ -340,7 +336,7 @@ mtcars %>%
 
 If you were to draw a line-of-best-fit that was as close to as many data points as possible, it would look something like this:
 
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, echo = FALSE, warning=FALSE, message=FALSE, fig.alt="The above scatterplot with a line-of-best-fit overlaid."}
 mtcars %>%
   ggplot(aes(x = wt, y = mpg)) +
   geom_point() +
@@ -382,7 +378,7 @@ Note: the act of applying a line-of-best-fit to our data points is known as **fi
 
 Let's make some sample data that we might want to fit a model to. Our numerical variables will be `height` (cm) and `weight` (kg).
 
-```{r, echo = TRUE, eval = TRUE}
+```{r, echo = TRUE, eval = TRUE, fig.alt="A scatterplot showing height and weight values from the created sample."}
 # create variables
 height <- c(176, 164, 181, 168, 195, 185, 166, 180, 188, 174)
 weight <- c(82, 65, 85, 76, 90, 92, 68, 83, 94, 74 )
@@ -437,7 +433,7 @@ sample
 
 3.  Plot these fitted heights, along with the fitted line, and the sample data we initially created
 
-```{r}
+```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, fig.alt="A scatterplot showing height and weight values from the sample as filled circles, fitted values as open circles, and a red line through these fitted values to represent the linear model."}
 sample %>%
   ggplot(aes(x = weight, y = height)) +
   geom_point() +
@@ -578,7 +574,7 @@ sample
 
 We can then use the predicted outcomes to plot the best fit line:
 
-```{r, echo = TRUE, eval = TRUE}
+```{r, echo = TRUE, eval = TRUE, fig.alt= "A scatterplot showing weight and height from the vample, with the linear model overlaid."}
 sample %>%
   ggplot(aes(x = weight)) +
   geom_point(aes(y = height)) +
@@ -659,7 +655,7 @@ summary(model)
 
 7. **F-statistic:** tests whether there is a meaningful relationship between the outcome variable and predictor variable(s). A high value is better, as is a low $p$ associated with the statistic. This is another value we don't need to worry about too much.
 
-```{r echo=FALSE, fig.align='centre', out.width="100%"}
+```{r echo=FALSE, fig.align='centre', out.width="100%", fig.alt="A screenshot of the `summary()` function output, highlighting the intercept, coefficient, p-value of this coefficient, and the R-squared value."}
 knitr::include_graphics("images/intro_modelling/diagnostics.PNG")
 ```
 
@@ -715,7 +711,7 @@ install.packages("ggfortify")
 library(ggfortify)
 ```
 
-```{r, eval = TRUE, echo = TRUE}
+```{r, eval = TRUE, echo = TRUE, fig.alt="The output of using the `autoplot()` function on our model is shown. These are four scatterplots representing different diagnostic elements of the model."}
 autoplot(model)
 ```
 
@@ -727,7 +723,7 @@ This produces **four** diagnostic plots - we're concerned with the first three.
 
 We know both of these terms from earlier: the **fitted** values are the y values predicted by our model, and the **residuals** are the differences between these and the actual y values from our data sample.
 
-```{r, eval = TRUE, echo = FALSE, fig.width= 10}
+```{r, eval = TRUE, echo = FALSE, fig.width= 10, fig.alt="The first of the diagnostic plots: 'Residuals vs Fitted values'."}
 a <- autoplot(model)
 
 a[1]
@@ -741,7 +737,7 @@ This is acceptable in our case, with so few data points.
 
 This **quantile-quantile** plot tests the **normality** of the residuals. For context: a normal variable is a numeric variable that, if we plotted it on a histogram, is distributed evenly around 0 in a bell shape.
 
-```{r, eval = TRUE, echo = FALSE, fig.width= 10}
+```{r, eval = TRUE, echo = FALSE, fig.width= 10, fig.alt="The second of the diagnostic plots: 'Normal Q-Q plot'."}
 a[2]
 ```
 
@@ -753,7 +749,7 @@ This looks fine here.
 
 This plot tests the **constancy of variation** of the residuals. This diagnostic plot has fitted values on the x-axis, like with plot 1, and the standardised, square-rooted residuals on the y-axis.
 
-```{r, eval = TRUE, echo = FALSE, fig.width= 10}
+```{r, eval = TRUE, echo = FALSE, fig.width= 10, fig.alt="The third of the diagnostic plots: 'Scale-Location plot'."}
 a[3]
 ```
 
@@ -865,7 +861,7 @@ library("GGally")
 
 Simply insert the data frame object into the function:
 
-```{r, eval = TRUE, echo = TRUE}
+```{r, eval = TRUE, echo = TRUE, fig.alt="The output of the `ggpairs()` function on the data. This is a collection of scatterplots, correlation coefficients and variable distributions."}
 ggpairs(smoothie_data)
 ```
 
@@ -937,7 +933,7 @@ As with our simple linear model, there are several metrics we can use to evaluat
 
 ### p-values of the coefficients
 
-```{r echo=FALSE, fig.align='centre', out.width="60%"}
+```{r echo=FALSE, fig.align='centre', out.width="60%", fig.alt="Part of the `summary()` output of the model, with the p-values of the predictor coefficients highlighted."}
 knitr::include_graphics("images/intro_modelling/p_values.png")
 ```
 
@@ -951,7 +947,7 @@ The output from `summary()` also shows us the $p$-values (in the rightmost colum
 
 ### R-squared
 
-```{r echo=FALSE, fig.align='centre', out.width="70%"}
+```{r echo=FALSE, fig.align='centre', out.width="70%",  fig.alt="Part of the `summary()` output of the model, with the r-squared value of the model highlighted."}
 knitr::include_graphics("images/intro_modelling/multiple_r_squared.png")
 ```
 
@@ -963,7 +959,7 @@ If we were a sales/marketing team, *knowing that these three predictors affect s
 
 ### Residual standard error
 
-```{r echo=FALSE, fig.align='centre', out.width="70%"}
+```{r echo=FALSE, fig.align='centre', out.width="70%", fig.alt="Part of the `summary()` output of the model, with the residual standard error (RSE) of the model highlighted."}
 knitr::include_graphics("images/intro_modelling/residual_error.png")
 ```
 
@@ -977,7 +973,7 @@ Here, our RSE is £493, which isn't all that bad considering our smoothie sales 
 
 Now if we run `autoplot()` on the model we can check that it meets the necessary assumptions for a linear regression model.
 
-```{r, eval = TRUE, echo = TRUE}
+```{r, eval = TRUE, echo = TRUE, fig.alt="The output of the `autoplot()` function on the model, showing four diagnostic plots."}
 autoplot(smoothie_model)
 ```
 
