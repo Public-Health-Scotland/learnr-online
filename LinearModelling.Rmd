@@ -360,7 +360,7 @@ mtcars %>%
   theme_minimal()
 ```
 
-By telling `geom_smooth()` that we want the `lm` method (i.e. linear model), we can add this best-fitting line to our plot. (Note: `se` stands for standard error and setting this to FALSE removes the fairly redundant error bar from the plot)
+By telling `geom_smooth()` that we want the `lm` method (i.e. linear model), we can add this best-fitting line to our plot. (Note: `se` stands for [standard error](https://www.statology.org/standard-error-regression/) and setting this to FALSE removes the fairly redundant error bar from the plot)
 
 If we know the equation of this line, we can plug in any `wt` value and calculate the corresponding `mpg` value - thereby producing a prediction from our model. The linear regression model-building process is what created this line, and that's what we're now going to learn.
 
@@ -844,9 +844,13 @@ smoothie_data <- tibble(smoothie_sales_gbp, advertisements, fitness_trend, sunsh
 head(smoothie_data)
 ```
 
-So, with each row representing a month, we have our smoothie sales in £, the  number of smoothie adverts shown, a  score representing people's fitness interest, and the number of hours of sunshine.
+So, with each row representing a month, we have our smoothie sales in £, the  number of smoothie adverts shown, a score representing people's fitness interest, and the number of hours of sunshine.
 
-In reality, you may have to/want to clean the data, create some new variables based on the ones you have (known as **feature engineering**), and remove variables that are intrinsically linked to other variables so as to avoid what we call **multicollinearity** in our model. We won't cover these here, though.
+In reality, you may have to/want to clean the data, create some new variables based on the ones you have (known as **feature engineering**), and remove variables that are intrinsically linked to other variables so as to avoid what we call **multicollinearity** in our model. 
+
+The problem with multicollinearity of our predictor variables is that *"it becomes difficult for the model to estimate the relationship between each [predictor] variable and the [outcome] variable independently because the [predictor] variables tend to change in unison".* ([source](https://statisticsbyjim.com/regression/multicollinearity-in-regression-analysis/))
+
+We won't cover these topics in any more detail here, though.
 
 <br>
 
@@ -886,6 +890,8 @@ Luckily there is also very little correlation between our predictors so we don't
 ### Building our model
 
 Like with our simple linear regression model, we can use `lm()` to build a multiple linear regression model - only this time we add in our multiple predictors, separated by `+`.
+
+Note: all of our potential predictor variables are feasibly related to `smoothie_sales_gpb` here - so we're justified in adding them to our model. In your own modelling, try not to add strange assortments of variables that you'd struggle to explain (even if it makes your model more accurate).
 
 ```{r, eval = TRUE, echo = TRUE}
 smoothie_model <- lm(formula = smoothie_sales_gbp ~ advertisements + fitness_trend + sunshine_hours, data = smoothie_data)
