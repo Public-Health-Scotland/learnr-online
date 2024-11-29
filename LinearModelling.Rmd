@@ -17,11 +17,13 @@ runtime: shiny_prerendered
 
 # Packages
 library(learnr)
+library(gradethis)
 library(dplyr)
 library(janitor)
 library(stringr)
 library(openxlsx)
 library(ggplot2)
+library(phsstyles)
 library(modelr)
 library(ggfortify)
 library(GGally)
@@ -72,12 +74,12 @@ data <- tibble(
 # plot the points and line
 data %>%
   ggplot(aes(x = temperature_celsius, y = n_ice_creams_sold)) +
-  geom_line(colour = "red", linewidth = 2) +
+  geom_line(colour = phs_colours("phs-rust"), linewidth = 2) +
   geom_point(size = 3) +
   coord_cartesian(ylim = c(0, NA)) +
   geom_segment(aes(x = 25, xend = 25,   # Vertical dashed line up to y_intercept
                    y = min(n_ice_creams_sold), yend = 200),
-               linetype = "dashed", linewidth = 1.5, color = "blue") +
+               linetype = "dashed", linewidth = 1.5, color = phs_colours("phs-blue")) +
   geom_segment(aes(x = min(temperature_celsius), xend = 25,   # Horizontal dashed line up to x_intercept
                    y = 200, yend = 200),
                linetype = "dashed", linewidth = 1.5, color = "blue") +
@@ -157,13 +159,13 @@ The lesson here is: always visualise your data first to see if a correlation coe
 ```{r corr-quiz}
 quiz(
   question("If we use `cor()` to calculate $r$ for our linear data and get a value of 0.43, how should we interpret this?",
-    answer("A moderate positive correlation", correct = TRUE),
-    answer("A strong negative correlation"),
-    answer("A weak positive correlation"),
-    answer("No correlation"),
-    incorrect = "Not quite, have another go!",
-    allow_retry = TRUE,
-    random_answer_order = TRUE
+           answer("A moderate positive correlation", correct = TRUE),
+           answer("A strong negative correlation"),
+           answer("A weak positive correlation"),
+           answer("No correlation"),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
   )
 )
 ```
@@ -258,22 +260,22 @@ This is the line that the equation $y = 2 \times x + 1$ represents! It's linear 
 The gradient of the equation, referred to above as $a$, can be thought of as the answer to the question "How many units of $y$ do we travel if we travel one $x$ unit to the right?
 
 -   A large positive gradient means a steep, upward-sloping line.
-    -   e.g. $a = 6$ means +6 units upward along $y$ for every +1 unit rightward along $x$
+  -   e.g. $a = 6$ means +6 units upward along $y$ for every +1 unit rightward along $x$
 -   A large negative gradient means a steep, downward-sloping line.
-    -   e.g. $a = -6$ means -6 units downward along $y$ for every +1 unit rightward along $x$
+  -   e.g. $a = -6$ means -6 units downward along $y$ for every +1 unit rightward along $x$
 
 <br>
 
 ```{r gradient-quiz}
 quiz(
   question("Which one of these gradients would produce a line with a shallow descent?",
-    answer("$a = -0.5$", correct = TRUE),
-    answer("$a = -8$"),
-    answer("$a = 5$"),
-    answer("$a = 1$"),
-    incorrect = "Not quite, have another go!",
-    allow_retry = TRUE,
-    random_answer_order = TRUE
+           answer("$a = -0.5$", correct = TRUE),
+           answer("$a = -8$"),
+           answer("$a = 5$"),
+           answer("$a = 1$"),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
   )
 )
 ```
@@ -289,13 +291,13 @@ Our line from before had an intercept of 1, and you can see from the plot above 
 ```{r intercept-quiz}
 quiz(
   question("From examining the line plot below, what is the intercept?",
-    answer("$b = 3$", correct = TRUE),
-    answer("$b = 0$"),
-    answer("$b = -5$"),
-    answer("$b = 4$"),
-    incorrect = "Not quite, have another go!",
-    allow_retry = TRUE,
-    random_answer_order = TRUE
+           answer("$b = 3$", correct = TRUE),
+           answer("$b = 0$"),
+           answer("$b = -5$"),
+           answer("$b = 4$"),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
   )
 )
 ```
@@ -316,6 +318,41 @@ data %>%
   geom_hline(yintercept = 0) +
   theme_minimal()
 ```
+
+<br>
+
+Try playing around with the **gradient** and **intercept** values of the line function below to see the effects on the line that is subsequently plotted.
+
+```{r line-building, exercise=TRUE, warning=FALSE, message=FALSE}
+# Build the function - no need to change anything here for the exercise
+line_function <- function(x, gradient, intercept){
+  # linear equation
+  y <- gradient*x + intercept
+  
+  # create dataframe of x and y values
+  data <- tibble(
+    x, y
+  )    
+  
+  # plot line
+  plot <- data %>% 
+    ggplot(aes(x, y)) +
+    geom_point() +
+    geom_line(colour = "red") +
+    geom_vline(xintercept = 0) +
+    geom_hline(yintercept = 0) +
+    theme_minimal() +
+    lims(x = c(0,10), y = c(0,10)) # restrict axes from 0-10
+  
+  print(plot)
+}
+
+
+# Change values below:
+line_function(x = c(0:10), gradient = 1, intercept = 0)
+```
+
+<br>
 
 ## The fundamentals of simple linear regression
 
@@ -347,7 +384,7 @@ mtcars %>%
 
 This can be achieved with the following code:
 
-```{r, echo = TRUE, eval = FALSE}
+```{r mt-cars-plotter, exercise = TRUE, warning=FALSE, message=FALSE}
 mtcars %>%
   ggplot(aes(x = wt, y = mpg)) +
   geom_point() +
@@ -381,16 +418,16 @@ Let's make some sample data that we might want to fit a model to. Our numerical 
 ```{r, echo = TRUE, eval = TRUE, fig.alt="A scatterplot showing height and weight values from the created sample."}
 # create variables
 height <- c(176, 164, 181, 168, 195, 185, 166, 180, 188, 174)
-weight <- c(82, 65, 85, 76, 90, 92, 68, 83, 94, 74 )
+weight <- c(82, 65, 85, 76, 90, 92, 68, 83, 94, 74)
 
 # place them into a dataframe
-sample <- tibble(
+measurements_sample <- tibble(
   weight,
   height
 )
 
 # create a scatter plot
-sample %>%
+measurements_sample %>%
   ggplot(aes(x = weight, y = height)) +
   geom_point() +
   theme_minimal()
@@ -423,10 +460,10 @@ line <- function(x, b0, b1){
 2.  Let's pick an intercept of 95 and a gradient of 1 and use the line() function to get **fitted heights** for our data
 
 ```{r eval = TRUE, echo = TRUE}
-sample <- sample %>%
+measurements_sample <- measurements_sample %>%
   mutate(fit_height = line(weight, b0 = 95, b1 = 1))
 
-sample
+measurements_sample
 ```
 
 (see how we now have actual heights and fitted/predicted heights in our data)
@@ -434,7 +471,7 @@ sample
 3.  Plot these fitted heights, along with the fitted line, and the sample data we initially created
 
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, fig.alt="A scatterplot showing height and weight values from the sample as filled circles, fitted values as open circles, and a red line through these fitted values to represent the linear model."}
-sample %>%
+measurements_sample %>%
   ggplot(aes(x = weight, y = height)) +
   geom_point() +
   geom_point(aes(y = fit_height), shape = 1) +
@@ -447,35 +484,67 @@ On this graph, the solid circles are the sample data, the open circles are the f
 
 We also show the **residuals** as vertical line segments.
 
-A **residual** is the difference between a fitted outcome value and an actual outcome value. These are also sometimes called **errors**, but ‘residuals’ is better, as the term ‘error’ gets used everywhere in statistics!
+A **residual** is the difference between an actual outcome value and a fitted outcome value. These are also sometimes called **errors**, but ‘residuals’ is better, as the term ‘error’ gets used everywhere in statistics!
 
 <br>
 
-```{r residuals-quiz}
-quiz(
-  question("If we wanted to add a 'residuals' column to our data, what calculation would we require?",
-    answer("mutate(residual = height - fit_height)", correct = TRUE),
-    answer("mutate(residual = weight - fit_height)"),
-    answer("mutate(residual = height + fit_height)"),
-    answer("mutate(residual = height x weight)"),
-    incorrect = "Not quite, have another go!",
-    allow_retry = TRUE,
-    random_answer_order = TRUE
-  )
+Task: If we wanted to add a `residual` column to our data, what calculation would we require? Enter the code into the `mutate()` below.
+
+```{r setup-2, include=FALSE}
+# need to recreate `sample` here for use in subsequent exercise code block
+library(dplyr)
+# create variables
+height <- c(176, 164, 181, 168, 195, 185, 166, 180, 188, 174)
+weight <- c(82, 65, 85, 76, 90, 92, 68, 83, 94, 74 )
+
+# place them into a dataframe
+measurements_sample <- tibble(
+  weight,
+  height
 )
+# line function
+line <- function(x, b0, b1){
+  return(b0 + b1*x)
+}
+# add predicted heights
+measurements_sample <- measurements_sample %>%
+  mutate(fit_height = line(weight, b0 = 95, b1 = 1))
+```
+
+
+```{r residual-input, exercise=TRUE, exercise.setup = "setup-2"}
+measurements_sample <- measurements_sample %>%
+  mutate() # enter code here
+```
+
+```{r residual-input-check}
+grade_this({
+  # Use `.result` to access the user's output
+  if (!"residual" %in% colnames(.result)) {
+    fail("The 'residual' column is missing. Did you use `mutate()`?")
+  }
+  
+  # Check if the 'residual' column is calculated correctly
+  if (!all.equal(.result$residual, .result$height - .result$fit_height, check.attributes = FALSE)) {
+    fail("The 'residual' column is not calculated correctly - try again.")
+  }
+  
+  # If all checks pass
+  pass("Great job! The 'residual' column is correctly calculated.")
+})
 ```
 
 <br>
 
 ### Residuals
 
-To calculate the residuals created by our line/model, we would just calculate the difference between the actual height values in our data and the fitted/predicted height values.
+To calculate the residuals created by our line/model, we would just subtract the fitted/predicted height values from the actual height values in our data (or the reverse is fine).
 
 ```{r, echo = TRUE, eval = TRUE}
-sample <- sample %>%
+measurements_sample <- measurements_sample %>%
   mutate(residual = height - fit_height)
 
-sample
+measurements_sample
 ```
 
 When we **fit** the linear model to the data, we vary $b_0$ and $b_1$ to make the residuals **as small as possible**. We don't need to worry about doing this manually, as the `lm()` function will handle this - it's more important to understand the concept!
@@ -485,7 +554,7 @@ When we **fit** the linear model to the data, we vary $b_0$ and $b_1$ to make th
 Let's calculate the sum of the residuals for an overall measure of how our model is fitting:
 
 ```{r, echo = TRUE, eval = TRUE}
-sample %>%
+measurements_sample %>%
   summarise(sum_residuals = sum(residual))
 ```
 
@@ -494,12 +563,12 @@ sample %>%
 ```{r residuals-quiz2}
 quiz(
   question("Scroll up and look at the residuals column - can you spot the problem with taking the sum of these?",
-    answer("Some values are positive and some are negative.", correct = TRUE),
-    answer("Some values are much larger than others."),
-    answer("Some values are odd and some are even."),
-    incorrect = "Not quite, have another go!",
-    allow_retry = TRUE,
-    random_answer_order = TRUE
+           answer("Some values are positive and some are negative.", correct = TRUE),
+           answer("Some values are much larger than others."),
+           answer("Some values are odd and some are even."),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
   )
 )
 ```
@@ -511,14 +580,14 @@ quiz(
 If we simply summed the residuals, the positive and negative values would **cancel out**. For this reason, we tend to **square the residuals** before we sum them. This ensures no cancellation!
 
 ```{r, echo = TRUE, eval = TRUE}
-sample <- sample %>%
+measurements_sample <- measurements_sample %>%
   mutate(sq_residual = residual^2)
 
-sample
+measurements_sample
 ```
 
 ```{r, echo = TRUE, eval = TRUE}
-sample %>%
+measurements_sample %>%
   summarise(sum_sq_residuals = sum(sq_residual))
 ```
 
@@ -533,7 +602,7 @@ Hopefully you're now familiar with way in which the fitting algorithm used by R 
 At last, here is how we fit a simple linear regression model in R:
 
 ```{r, echo = TRUE, eval = TRUE}
-model <- lm(formula = height ~ weight, data = sample)
+model <- lm(formula = height ~ weight, data = measurements_sample)
 ```
 
 Our **outcome variable**, height, goes *before* the tilde (\~) and our **predictor variable**, weight, goes *after* the tilde.
@@ -564,18 +633,18 @@ library(modelr)
 For example, we can add predicted values and residuals using the `add_predictions()` and `add_residuals()` functions (first we remove our earlier columns, leaving just `height` and `weight`):
 
 ```{r, echo = TRUE, eval = TRUE}
-sample <- sample %>%
+measurements_sample <- measurements_sample %>%
   select(-c(fit_height, residual, sq_residual)) %>%
   add_predictions(model, var = "predicted_height") %>% # adds the fitted values
   add_residuals(model) #  adds the residuals
 
-sample
+measurements_sample
 ```
 
 We can then use the predicted outcomes to plot the best fit line:
 
 ```{r, echo = TRUE, eval = TRUE, fig.alt= "A scatterplot showing weight and height from the vample, with the linear model overlaid."}
-sample %>%
+measurements_sample %>%
   ggplot(aes(x = weight)) +
   geom_point(aes(y = height)) +
   geom_line(aes(y = predicted_height), col = "red") +
@@ -593,7 +662,7 @@ weights_predict <- tibble(
 )
 # use our model to predict corresponding height values
 weights_predict %>%
-  add_predictions(model)
+  add_predictions(model, var = "predicted_height")
 ```
 
 <br>
@@ -637,21 +706,21 @@ summary(model)
 
 3. **Coefficients:**
 
-  - The `Estimate` column shows us the intercept and the coefficient (gradient) for the `weight` variable, i.e. $b_0$ and $b_1$.
+- The `Estimate` column shows us the intercept and the coefficient (gradient) for the `weight` variable, i.e. $b_0$ and $b_1$.
 
-  - The `Std. Error` and `t value` columns, which we don't need to worry about for our purposes.
+- The `Std. Error` and `t value` columns, which we don't need to worry about for our purposes.
 
-  - The `Pr(>|t|)` column shows us the $p$-values for the intercept and coefficient. If you're unfamiliar with this term, we will cover them shortly don't worry. For now: if $p$ is very small, we consider this feature of the model to have a significant effect on the outcome variable.
+- The `Pr(>|t|)` column shows us the $p$-values for the intercept and coefficient. If you're unfamiliar with this term, we will cover them shortly don't worry. For now: if $p$ is very small, we consider this feature of the model to have a significant effect on the outcome variable.
 
 4. **Signif. codes:** standard $p$ significance thresholds and their associated symbols, e.g. a $p$ < 0.001 is denoted with "***".
 
 5. **Residual standard error:** is a value we can think about as being the ‘average error’ in the model’s estimated response variable values - i.e. by how far on average do our fitted values differ from the actual values? Therefore, small is better. Handily, it is measured in the same units as our outcome variable.
 
-6. **Multiple R-squared:** the proportion of the variation in the outcome variable that can be **explained** by variation in the predictor variable (or variables plural for multiple regression). The closer to 1 this is the 'better' the model. 
+6. **Multiple r-squared:** the proportion of the variation in the outcome variable that can be **explained** by variation in the predictor variable (or variables plural for multiple regression). The closer to 1 this is the 'better' the model. 
 
-  - *Adjusted* R-squared includes a penalty based on the number of predictor variables and the the size of our sample to prevent overestimating of explained variance. Feel free to do some more research on this.
-  
-  - Just make sure to correctly state the R-squared value you're reporting to keep things clear. 
+- *Adjusted* r-squared includes a penalty based on the number of predictor variables and the the size of our sample to prevent overestimating of explained variance. Feel free to do some more research on this.
+
+- Just make sure to correctly state the R-squared value you're reporting to keep things clear. 
 
 7. **F-statistic:** tests whether there is a meaningful relationship between the outcome variable and predictor variable(s). A high value is better, as is a low $p$ associated with the statistic. This is another value we don't need to worry about too much.
 
@@ -659,7 +728,7 @@ summary(model)
 knitr::include_graphics("images/intro_modelling/diagnostics.PNG")
 ```
 
-The highlighted components of the model summary above are the main ones to be aware of for now. We can quickly see our coefficient and whether it is considered statistically significant, as well as R-squared at the bottom.
+The highlighted components of the model summary above are the main ones to be aware of for now. We can quickly see our coefficient and whether it is considered statistically significant, as well as r-squared at the bottom.
 
 Remember that R-squared is:
 
@@ -775,25 +844,62 @@ What have we done here?
 
 5. These checks passed, meaning we can have confidence in using our model.
 
+Have a look and click 'Run Code' below to see the output. Then, change the code to get R to print "Hello \<your name\>".
+
+
+
+Task: when creating our model object using `lm()`, how do we structure the function call? Try on the dataset below.
+
+```{r lm-input, exercise=TRUE}
+# create a dataframe that you will use to build a model
+fake_data <- tibble(
+  predictor_variable = c(0:10),
+  outcome_variable = c(20:30)
+)
+# create the regression model using the `lm()` function
+model <- lm(formula = , data = ) # enter code here
+```
+
+```{r lm-input-check}
+grade_this({
+  # Ensure the user's code can be evaluated
+  fail_if_error()
+
+  # Check if the user's code produced an `lm` object
+  fail_if(
+    !inherits(.result, "lm"),
+    "Your code did not produce a linear model. Did you use the `lm()` function?"
+  )
+  
+  # Verify the formula used in the model
+  model_formula <- formula(.result)
+  correct_formula <- outcome_variable ~ predictor_variable
+  fail_if(
+    !identical(model_formula, correct_formula),
+    "The formula in your `lm()` is incorrect."
+  )
+  
+  # Verify the data used in the model
+  fail_if(
+    !identical(.result$call$data, quote(fake_data)),
+    "The `data` argument in the `lm()` function is incorrect. Did you use `fake_data`?"
+    )
+  
+  
+  # If all checks pass
+  pass("Great job! Your model is correctly specified.")
+})
+```
 
 ```{r lm-quiz}
 quiz(
-  question("When creating our model object using `lm()`, how do we structure the formula?",
-    answer("formula = outcome_variable ~ predictor_variable", correct = TRUE),
-    answer("formula = predictor_variable ~ outcome_variable"),
-    answer("formula = outcome_variable * predictor_variable"),
-    answer("formula ~ predictor_variable = outcome_variable"),
-    incorrect = "Not quite, have another go!",
-    allow_retry = TRUE,
-    random_answer_order = TRUE
-  ),
   question("What does r-squared tell us about our model?",
-    answer("The proportion of variance in the outcome variable explained by the predictor variable.", correct = TRUE),
-    answer("The probability that, if we ran this on a new sample, our coefficient would be 0."),
-    answer("The intercept multiplied by the coefficient."),
-    incorrect = "Not quite, have another go!",
-    allow_retry = TRUE,
-    random_answer_order = TRUE
+           answer("The proportion of variance in the outcome variable explained by the predictor variable.", correct = TRUE),
+           answer("The probability that, if we ran this on a new sample, our coefficient would be 0."),
+           answer("The intercept multiplied by the coefficient."),
+           incorrect = "Not quite, have another go!",
+           allow_retry = TRUE,
+           random_answer_order = TRUE
   )
 )
 ```
@@ -1009,14 +1115,37 @@ smoothie_data %>%
   add_residuals(smoothie_model)
 ```
 
-Or make a prediction based on a specific set of predictor values:
+Or make a prediction based on a specific set of predictor values. Try calculating the predicted smoothie sales in a month with 50 `advertisements`, a `fitness_trend` score of 70, and 60 `sunshine_hours`. Feel free to play around with the values after this!
 
-```{r, eval = TRUE, echo = TRUE}
+```{r setup-3, include = FALSE}
+# Recreate the data:
+## Set seed for reproducibility
+set.seed(123)
+
+## Number of observations
+n <- 50
+
+## Generate fun independent variables
+advertisements <- sample(10:50, n, replace = TRUE)  # Random number of smoothie ads each month
+fitness_trend <- sample(50:100, n, replace = TRUE)  # Monthly fitness trend score out of 100
+sunshine_hours <- sample(100:300, n, replace = TRUE)  # Monthly sunshine hours
+
+## Generate dependent variable (smoothie sales) with a relationship to the independent variables
+smoothie_sales_gbp <- 5000 + 15 * advertisements + 10 * fitness_trend + 5 * sunshine_hours + rnorm(n, mean = 0, sd = 500)
+
+## Create a data frame
+smoothie_data <- tibble(smoothie_sales_gbp, advertisements, fitness_trend, sunshine_hours)
+
+# Recreate the model
+smoothie_model <- lm(formula = smoothie_sales_gbp ~ advertisements + fitness_trend + sunshine_hours, data = smoothie_data)
+```
+
+```{r prediction-input, exercise = TRUE, exercise.setup = "setup-3"}
 # create a data frame of predictor values
 smoothies_predict <- tibble(
-  advertisements = 50,
-  fitness_trend = 70,
-  sunshine_hours = 60
+  advertisements = , # enter here
+  fitness_trend = , # enter here
+  sunshine_hours =  # enter here
 )
 # use our model to predict corresponding sales value
 smoothies_predict %>%
