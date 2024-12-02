@@ -26,7 +26,7 @@ tutorial_options(
   exercise.checker = gradethis::grade_learnr
 )
 
-titanic_data <- readcsv("www/data/titanic_decision_tree_data.csv")
+titanic_data <- read_csv("www/data/titanic_decision_tree_data.csv")
 set.seed(19)
 ```
 
@@ -109,8 +109,7 @@ Following this, we will create a **random forest** model and see how if this imp
 We can read in our Titanic data using `read_csv()` from the `{dplyr}` package:
 ```{r, echo = TRUE, eval = TRUE}
 library(dplyr)
-titanic_data <- readcsv("www/data/titanic_decision_tree_data.csv")
-```
+titanic_data <- read_csv("www/data/titanic_decision_tree_data.csv")
 
 # check out the first 10 rows of the data
 head(titanic_data)
@@ -153,13 +152,15 @@ o	We’ll remove fare and cabin as the information in these is better represente
 o	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as otherwise we sacrifice rows for the sake of variables we don’t want anyway
 
 Try having a go at the above list of cleaning/wrangling tasks on your own before looking at the answers below.
-```{r, exercise = TRUE}
+```{r wrangle-input, exercise = TRUE}
 titanic_clean <- titanic_data %>%
 ## start coding here
 ```
 
 <details>
 <summary>Data cleaning code</summary>
+
+```{r, echo = TRUE, eval = TRUE}
 titanic_clean <- titanic_data %>%
 # Filter out those without a survived flag
   filter(survived %in% c(0,1)) %>%
@@ -171,7 +172,7 @@ titanic_clean <- titanic_data %>%
            port_embarkation = as.factor(embarked)) %>%
 # Select variables of interest
   select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
-  drop_na()
+  tidyr::drop_na()
 
 head(titanic_clean)
 ```
@@ -186,7 +187,7 @@ Now our data is trimmed and consists of a) the outcome variable of interest, the
 This isn’t a strictly necessary step when building a decision tree, but it’s good practice to understand your data before building a model with it. Creating some quick visualisations is a great way to better understand your data.
 
 Use ggplot2 to create some visualisations to see which variables appear to have the greatest effect on survival.
-```{r, exercise = TRUE}
+```{r ggplot-input, exercise = TRUE}
 titanic_clean <- titanic_data %>%
 ## start coding here
 ```
