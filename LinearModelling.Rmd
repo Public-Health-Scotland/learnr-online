@@ -798,7 +798,7 @@ a <- autoplot(model)
 a[1]
 ```
 
-This plot tests the **independence** of residuals - we want to see them randomly scattered around 0 as opposed to e.g. increasing in size as the size of our fitted values increase. The blue line can help us - as long as hovers somewhat close to 0 it's fine.
+This plot tests the **independence** of residuals - we want to see them randomly scattered around 0 as opposed to e.g. increasing in size as the size of our fitted values increase. The blue line can help us - as long as it hovers somewhat close to 0 it's fine.
 
 This is acceptable in our case, with so few data points.
 
@@ -862,20 +862,21 @@ model <- lm(formula = , data = ) # enter code here
 
 ```{r lm-input-check}
 grade_this({
-  # Ensure the user's code can be evaluated
-  fail_if_error()
-
+  
+  print(.result)
+  
   # Check if the user's code produced an `lm` object
   fail_if(
     !inherits(.result, "lm"),
     "Your code did not produce a linear model. Did you use the `lm()` function?"
   )
   
-  # Verify the formula used in the model
+  # Verify the formula used in the mode
   model_formula <- formula(.result)
   correct_formula <- outcome_variable ~ predictor_variable
   fail_if(
-    !identical(model_formula, correct_formula),
+    # !identical(model_formula, correct_formula),
+    !isTRUE(all.equal(model_formula, correct_formula)),
     "The formula in your `lm()` is incorrect."
   )
   
@@ -883,8 +884,7 @@ grade_this({
   fail_if(
     !identical(.result$call$data, quote(fake_data)),
     "The `data` argument in the `lm()` function is incorrect. Did you use `fake_data`?"
-    )
-  
+  )
   
   # If all checks pass
   pass("Great job! Your model is correctly specified.")
