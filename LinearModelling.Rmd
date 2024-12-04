@@ -861,10 +861,7 @@ model <- lm(formula = , data = ) # enter code here
 ```
 
 ```{r lm-input-check}
-grade_this({
-  
-  print(.result)
-  
+grade_this({  
   # Check if the user's code produced an `lm` object
   fail_if(
     !inherits(.result, "lm"),
