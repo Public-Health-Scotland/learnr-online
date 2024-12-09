@@ -54,7 +54,10 @@ Welcome to an introduction to modelling in R. This course is designed as a self-
 </ul>
 :::
 
-</br>
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/illustrations/presenting_monster.png")
+```
+
 
 ## What is modelling?
 
