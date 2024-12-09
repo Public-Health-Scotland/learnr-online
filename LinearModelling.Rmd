@@ -38,20 +38,23 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-Welcome to an introduction to modelling in R. This course is designed as a self-directed introduction to statistical modelling for anyone in Public Health Scotland.
+Welcome to an introduction to linear modelling in R. This course is designed as a self-directed introduction to statistical modelling for anyone in Public Health Scotland.
+
+<br>
 
 ::: info_box
 <h4>Course Info</h4>
-
-<ul>
-
-<li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
-
-<li>Some sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
-
-<li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
-
-</ul>
+  <ul>
+    <li>
+      This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.
+    </li>
+    <li>
+      Some sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.
+    </li>
+    <li>
+      The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.
+    </li>
+  </ul>
 :::
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
@@ -85,7 +88,7 @@ data %>%
                linetype = "dashed", linewidth = 1.5, color = phs_colours("phs-blue")) +
   geom_segment(aes(x = min(temperature_celsius), xend = 25,   # Horizontal dashed line up to x_intercept
                    y = 200, yend = 200),
-               linetype = "dashed", linewidth = 1.5, color = "blue") +
+               linetype = "dashed", linewidth = 1.5, color = phs_colours("phs-blue")) +
   theme_minimal() +
   labs(x = "\nTemperature (\u00B0C)",
        y = "Number of ice creams sold\n")
@@ -140,7 +143,7 @@ As for the magnitude (i.e. size) of $r$, J. D. Evans (1996) suggests the followi
 
 <br>
 
-Let’s calculate the correlation coefficient for the `wt` (weight) and `mpg` (miles-per-gallon) variables in the `mtcars` dataset:
+Let's calculate the correlation coefficient for the `wt` (weight) and `mpg` (miles-per-gallon) variables in the `mtcars` dataset:
 
 ```{r echo=TRUE, eval=TRUE}
 mtcars %>%
@@ -182,9 +185,7 @@ This often-used phrased simply means that just because two of our variables may 
 -   There may be a 'hidden variable' (also known as a confounding variable) that is causing the observed changes to both of our variables of interest. For example, it may appear as though increased ice cream sales and increased sunglasses sales are linked, but temperature (or, e.g. number of sunny days) is the likely hidden variable affecting both.
 -   We don't usually know the direction of any effects without rigorous experimentation. For example, does more exercise lead to increased happiness, or do happier people exercise more?
 
-<br>
-
-Accidental correlations, or those with hidden/confounding variables, crop up in all kinds of places and can often be quite entertaining. Follow this [link](https://www.datasciencecentral.com/spurious-correlations-15-examples/) to see some examples of when correlation almost certainly does not mean causation.
+Accidental correlations, or those with hidden/confounding variables, crop up in all kinds of places and can often be quite entertaining. See [Data Science Central - spurious correlation examples](https://www.datasciencecentral.com/spurious-correlations-15-examples/) to see some examples of when correlation almost certainly does not mean causation.
 
 <br>
 
@@ -209,19 +210,19 @@ line_function <- function(x){
 }
 ```
 
--   Therefore, an $x$ of 0 would give a $y$ of 1:
+- Therefore, an $x$ of 0 would give a $y$ of 1:
 
 ```{r, echo = TRUE}
 line_function(0)
 ```
 
--   An $x$ of 1 would give a $y$ of 3:
+- An $x$ of 1 would give a $y$ of 3:
 
 ```{r, echo = TRUE}
 line_function(1)
 ```
 
--   An $x$ of 2 would give a $y$ of 5:
+- An $x$ of 2 would give a $y$ of 5:
 
 ```{r, echo = TRUE}
 line_function(2)
@@ -262,10 +263,10 @@ This is the line that the equation $y = 2 \times x + 1$ represents! It's linear 
 
 The gradient of the equation, referred to above as $a$, can be thought of as the answer to the question "How many units of $y$ do we travel if we travel one $x$ unit to the right?
 
--   A large positive gradient means a steep, upward-sloping line.
-  -   e.g. $a = 6$ means +6 units upward along $y$ for every +1 unit rightward along $x$
--   A large negative gradient means a steep, downward-sloping line.
-  -   e.g. $a = -6$ means -6 units downward along $y$ for every +1 unit rightward along $x$
+- A large positive gradient means a steep, upward-sloping line.
+  - e.g. $a = 6$ means +6 units upward along $y$ for every +1 unit rightward along $x$
+- A large negative gradient means a steep, downward-sloping line.
+  - e.g. $a = -6$ means -6 units downward along $y$ for every +1 unit rightward along $x$
 
 <br>
 
@@ -359,7 +360,7 @@ line_function(x = c(0:10), gradient = 1, intercept = 0)
 
 ## The fundamentals of simple linear regression
 
-You may be wondering, why all the algrebra? Well, linear regression is really all about creating an equation for a line that best 'fits' your data. This equation is our **model** which, if good enough, we can use to make further predictions.
+You may be wondering, why all the algebra? Well, linear regression is really all about creating an equation for a line that best 'fits' your data. This equation is our **model** which, if good enough, we can use to make further predictions.
 
 <br>
 
@@ -452,7 +453,7 @@ This sub-section covers the 'behind the scenes' calculations of building a linea
 
 So we have our data frame with weight and height values, let's create another line function, and predict height based on weight using this model.
 
-1.  Create a line function
+1. Create a line function
 
 ```{r, eval = TRUE, echo = TRUE}
 line <- function(x, b0, b1){
@@ -460,7 +461,7 @@ line <- function(x, b0, b1){
 }
 ```
 
-2.  Let's pick an intercept of 95 and a gradient of 1 and use the line() function to get **fitted heights** for our data
+2. Let's pick an intercept of 95 and a gradient of 1 and use the line() function to get **fitted heights** for our data
 
 ```{r eval = TRUE, echo = TRUE}
 measurements_sample <- measurements_sample %>%
@@ -471,7 +472,7 @@ measurements_sample
 
 (see how we now have actual heights and fitted/predicted heights in our data)
 
-3.  Plot these fitted heights, along with the fitted line, and the sample data we initially created
+3. Plot these fitted heights, along with the fitted line, and the sample data we initially created
 
 ```{r, message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, fig.alt="A scatterplot showing height and weight values from the sample as filled circles, fitted values as open circles, and a red line through these fitted values to represent the linear model."}
 measurements_sample %>%
@@ -487,7 +488,7 @@ On this graph, the solid circles are the sample data, the open circles are the f
 
 We also show the **residuals** as vertical line segments.
 
-A **residual** is the difference between an actual outcome value and a fitted outcome value. These are also sometimes called **errors**, but ‘residuals’ is better, as the term ‘error’ gets used everywhere in statistics!
+A **residual** is the difference between an actual outcome value and a fitted outcome value. These are also sometimes called **errors**, but 'residuals' is better, as the term 'error' gets used everywhere in statistics!
 
 <br>
 
@@ -702,29 +703,23 @@ The base R function, `summary()`, provides an overview of the inner workings of 
 summary(model)
 ```
 
-
 1. **Call:** the model formula, with outcome variable \~ predictor variable.
 
 2. **Residuals:** the minimum, medium, maximum and quartile values of the residuals. We don't need to worry about these too much.
 
 3. **Coefficients:**
-
-- The `Estimate` column shows us the intercept and the coefficient (gradient) for the `weight` variable, i.e. $b_0$ and $b_1$.
-
-- The `Std. Error` and `t value` columns, which we don't need to worry about for our purposes.
-
-- The `Pr(>|t|)` column shows us the $p$-values for the intercept and coefficient. If you're unfamiliar with this term, we will cover them shortly don't worry. For now: if $p$ is very small, we consider this feature of the model to have a significant effect on the outcome variable.
-
+    - The `Estimate` column shows us the intercept and the coefficient (gradient) for the `weight` variable, i.e. $b_0$ and $b_1$.
+    - The `Std. Error` and `t value` columns, which we don't need to worry about for our purposes.
+    - The `Pr(>|t|)` column shows us the $p$-values for the intercept and coefficient. If you're unfamiliar with this term, we will cover them shortly don't worry. For now: if $p$ is very small, we consider this feature of the model to have a significant effect on the outcome variable.
+    
 4. **Signif. codes:** standard $p$ significance thresholds and their associated symbols, e.g. a $p$ < 0.001 is denoted with "***".
 
-5. **Residual standard error:** is a value we can think about as being the ‘average error’ in the model’s estimated response variable values - i.e. by how far on average do our fitted values differ from the actual values? Therefore, small is better. Handily, it is measured in the same units as our outcome variable.
+5. **Residual standard error:** is a value we can think about as being the 'average error' in the model's estimated response variable values - i.e. by how far on average do our fitted values differ from the actual values? Therefore, small is better. Handily, it is measured in the same units as our outcome variable.
 
 6. **Multiple r-squared:** the proportion of the variation in the outcome variable that can be **explained** by variation in the predictor variable (or variables plural for multiple regression). The closer to 1 this is the 'better' the model. 
-
-- *Adjusted* r-squared includes a penalty based on the number of predictor variables and the the size of our sample to prevent overestimating of explained variance. Feel free to do some more research on this.
-
-- Just make sure to correctly state the R-squared value you're reporting to keep things clear. 
-
+    - *Adjusted* r-squared includes a penalty based on the number of predictor variables and the the size of our sample to prevent overestimating of explained variance. Feel free to do some more research on this.
+    - Just make sure to correctly state the R-squared value you're reporting to keep things clear. 
+    
 7. **F-statistic:** tests whether there is a meaningful relationship between the outcome variable and predictor variable(s). A high value is better, as is a low $p$ associated with the statistic. This is another value we don't need to worry about too much.
 
 ```{r echo=FALSE, fig.align='centre', out.width="100%", fig.alt="A screenshot of the `summary()` function output, highlighting the intercept, coefficient, p-value of this coefficient, and the R-squared value."}
@@ -770,7 +765,6 @@ We need to check that our residuals:
 - are independent of each other
 - are normally distributed
 - show no systematic increase or decrease in variation across the range of data
-
 
 This might sound technical and intimidating, but it's really not that bad. Spending a few minutes learning how to read diagnostic plots will make you a much better model builder and interpreter!
 
@@ -848,8 +842,6 @@ What have we done here?
 5. These checks passed, meaning we can have confidence in using our model.
 
 Have a look and click 'Run Code' below to see the output. Then, change the code to get R to print "Hello \<your name\>".
-
-
 
 Task: when creating our model object using `lm()`, how do we structure the function call? Try on the dataset below.
 
@@ -973,15 +965,9 @@ ggpairs(smoothie_data)
 
 Don't panic. This may look like a horrendous mega-plot but if we take it part by part it is a lot easier to digest. Notice that each column and row is a variable in our data.
 
-<ul>
-
-<li>Several panels show the **correlation coefficient** we discussed earlier. This gives us a simple way of assessing the correlation of each combination of variables.</li>
-
-<li>The scatter plos produced by all combinations of variables are also shown. Due to the repeated combinations shown in the plot, these scatter plots correspond to their associated correlation values on the other half of the whole plot.</li>
-
-<li>The top-left to bottom-right diagonal is comprised of matching variable combinations (e.g. `smoothie_sales` vs `smoothie_sales`). In these cases, the distribution of the variable is shown. You can think of these as histograms represented by curves.</li>
-
-</ul>
+- Several panels show the **correlation coefficient** we discussed earlier. This gives us a simple way of assessing the correlation of each combination of variables.
+- The scatter plots produced by all combinations of variables are also shown. Due to the repeated combinations shown in the plot, these scatter plots correspond to their associated correlation values on the other half of the whole plot.
+- The top-left to bottom-right diagonal is comprised of matching variable combinations (e.g. `smoothie_sales` vs `smoothie_sales`). In these cases, the distribution of the variable is shown. You can think of these as histograms represented by curves.
 
 As `smoothie_sales` is our outcome variable of interest, examining the top row and/or left column is of most interest for us here. It seems as though all three predictors are somewhat correlated with `smoothie_sales` and will make good candidates as predictors in our model.
 
@@ -1045,9 +1031,9 @@ knitr::include_graphics("images/intro_modelling/p_values.png")
 
 The output from `summary()` also shows us the $p$-values (in the rightmost column) are all small. We can ignore the intercept's $p$-value in most cases as this isn't very informative, but the others tell us that our chosen predictors are all significant (or close to).
 
--   the `advertisements` coefficient is \<0.05 and so is assigned a single `*`
--   the `fitness_trend` coefficient is \<0.1 and so is assigned a `.` (which many would see as not small enough)
--   the `sunshine_hours` coefficient is \<0.001 so is assigned `***`
+- the `advertisements` coefficient is \<0.05 and so is assigned a single `*`
+- the `fitness_trend` coefficient is \<0.1 and so is assigned a `.` (which many would see as not small enough)
+- the `sunshine_hours` coefficient is \<0.001 so is assigned `***`
 
 <br>
 
@@ -1085,15 +1071,9 @@ autoplot(smoothie_model)
 
 How does it do?
 
-<ol>
-
-<li>The **Residuals vs Fitted plot** shows a random distribution of points around zero - so this looks fine, our residuals are independent ✓</li>
-
-<li>The **Normal Q-Q plot** shows a nice, mostly-straight line of points along the dashed line - so we can rest easy knowing our residuals are normally distributed ✓</li>
-
-<li>The **Scale-Location plot** shows a scattershot pattern of data points that neither expands or narrows as we move along the x-axis - so the variation of our residuals looks to remain constant ✓</li>
-
-</ol>
+1. The **Residuals vs Fitted plot** shows a random distribution of points around zero - so this looks fine, our residuals are independent ✓
+2. The **Normal Q-Q plot** shows a nice, mostly-straight line of points along the dashed line - so we can rest easy knowing our residuals are normally distributed ✓
+3. The **Scale-Location plot** shows a scattershot pattern of data points that neither expands or narrows as we move along the x-axis - so the variation of our residuals looks to remain constant ✓
 
 Based on this, we can safely trust and rely on the $p$-values reported in our model summary.
 
@@ -1163,18 +1143,17 @@ However, the tools you've acquired here are a great start to build your own mode
 
 #### Helpful links
 
--   [geeksforgeeks.org page on linear regression](https://www.geeksforgeeks.org/ml-linear-regression/)
--   [ibm.com page on supervised vs unsupervised learning](https://www.ibm.com/think/topics/supervised-vs-unsupervised-learning)
+- [geeksforgeeks.org page on linear regression](https://www.geeksforgeeks.org/ml-linear-regression/)
+- [ibm.com page on supervised vs unsupervised learning](https://www.ibm.com/think/topics/supervised-vs-unsupervised-learning)
 
 #### Help
 
--   Vignettes (Help) / `?<function_name>`
--   Google / Stack Overflow (tag queries with "[r]", "[ggplot]")
--   [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
--   [Data Science Team email](mailto:phs.datascience@phs.scot?subject=Linear%20Modelling%20Online%20R%20Training%20-%20Help)
+- Vignettes (Help) / `?<function_name>`
+- Google / Stack Overflow (tag queries with "[r]", "[ggplot]")
+- [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
+- [Data Science Team email](mailto:phs.datascience@phs.scot?subject=Linear%20Modelling%20Online%20R%20Training%20-%20Help)
 
 #### Feedback
 
 <iframe width="100%" height="2300" src="https://forms.office.com/Pages/ResponsePage.aspx?id=veDvEDCgykuAnLXmdF5JmibxHi_yzZ9Pvduh8IqoF_5UOVg1T0hCVDkzSUJNU0hYSkxSWUJLUzZEOCQlQCN0PWcu&amp;embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen>
-
 </iframe>
