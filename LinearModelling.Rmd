@@ -70,11 +70,11 @@ By using data we already have, we can make estimates about results we don't have
 
 This learning material will cover linear models, i.e. modelling relationships that can be expressed as a straight line. Imagine temperature on the x-axis and ice creams sold on the y-axis. A straight line on this plot could give us a prediction of how many ice creams we would sell at any given temperature.
 
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, fig.align='center', fig.alt="A line plot showing temperature (degrees Celcius) on the x-axis and 'number of ice creams sold' on the y-axis. A vertical dashed line at 25 degrees meets a horizontal dashed line at 200 ice creams, indicating the prediction mentioned in the text."}
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, fig.align='center', fig.alt="A line plot showing temperature (degrees Celcius) on the x-axis and 'number of ice creams sold' on the y-axis. A vertical dashed line at 25 degrees meets a horizontal dashed line at 150 ice creams, indicating the prediction mentioned in the text."}
 # created a dataframe with the x and y values
 data <- tibble(
   temperature_celsius = c(10, 20, 30),
-  n_ice_creams_sold = c(-100, 100, 300)
+  n_ice_creams_sold = c(0, 100, 200)
 )
 
 # plot the points and line
@@ -82,13 +82,16 @@ data %>%
   ggplot(aes(x = temperature_celsius, y = n_ice_creams_sold)) +
   geom_line(colour = phs_colours("phs-rust"), linewidth = 2) +
   geom_point(size = 3) +
-  coord_cartesian(ylim = c(0, NA)) +
-  geom_segment(aes(x = 25, xend = 25,   # Vertical dashed line up to y_intercept
-                   y = min(n_ice_creams_sold), yend = 200),
-               linetype = "dashed", linewidth = 1.5, color = phs_colours("phs-blue")) +
-  geom_segment(aes(x = min(temperature_celsius), xend = 25,   # Horizontal dashed line up to x_intercept
-                   y = 200, yend = 200),
-               linetype = "dashed", linewidth = 1.5, color = phs_colours("phs-blue")) +
+  # Vertical dashed line up to y_intercept
+  annotate("segment", 
+           x = 25, xend = 25, 
+           y = min(data$n_ice_creams_sold), yend = 150, 
+           linetype = "dashed", linewidth = 1.5, color = phs_colours("phs-blue")) +
+  # Horizontal dashed line up to x_intercept
+  annotate("segment", 
+           x = min(data$temperature_celsius), xend = 25, 
+           y = 150, yend = 150,
+           linetype = "dashed", linewidth = 1.5, color = phs_colours("phs-blue")) +
   theme_minimal() +
   labs(x = "\nTemperature (\u00B0C)",
        y = "Number of ice creams sold\n")
