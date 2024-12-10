@@ -356,7 +356,7 @@ line_function(x = c(0:10), gradient = 1, intercept = 0)
 
 <br>
 
-## The fundamentals of simple linear regression
+## Linear regression fundamentals
 
 You may be wondering, why all the algebra? Well, linear regression is really all about creating an equation for a line that best 'fits' your data. This equation is our **model** which, if good enough, we can use to make further predictions.
 
@@ -591,7 +591,7 @@ Our fitting algorithms try to **minimise** this sum of squares, so the method is
 
 <br>
 
-## Building a simple linear regression model using `lm()`
+## Build a linear regression model
 
 Hopefully you're now familiar with way in which the fitting algorithm used by R is seeking to **minimise the sum of squared residuals**.
 
@@ -900,7 +900,7 @@ These include [decision trees](https://medium.com/@MrBam44/decision-trees-91f61a
 
 <br>
 
-## Multiple linear regression: model building
+## Multiple linear regression (MLR)
 
 You now have the tools and knowledge needed to effectively to build a **simple linear regression model**, i.e. a model that simply has one predictor variable. However, we often will have several predictors to insert into our models...
 
@@ -1015,7 +1015,7 @@ We can no longer plot this as a 2D line without examining the predictors one at 
 
 <br>
 
-## Multiple linear regression: model evaluation
+## MLR evaluation
 
 As with our simple linear model, there are several metrics we can use to evaluate how useful our multiple linear model is.
 
@@ -1130,7 +1130,7 @@ smoothies_predict %>%
 
 <br>
 
-## Review & Feedback
+## Review and feedback
 
 The world of modelling is vast and we've only covered basic concepts here. There are still [interactions between predictors](https://quantifyinghealth.com/why-and-when-to-include-interactions-in-a-regression-model/), [dealing with non-continuous numeric variables](https://www.statology.org/r-linear-regression-with-categorical-variables/), [degrees of freedom](https://articles.outlier.org/degrees-of-freedom) and so on.
 
