@@ -7,7 +7,9 @@ These applications are hosted online and provide functionality around quizzes an
 * [Introduction to R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/Intro.Rmd) - learning R from the basics, including its integration to PHS; workflow, tools, templates, and other resources. 
     * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-intro/
 * [Data Visualisation in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/DataViz.Rmd) - building on an the Intro to R course, learn data visualisation with `ggplot2` and an introduction to `plotly`. 
-    * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-dataviz/ 
+    * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-dataviz/
+* [Introduction to Linear Modelling in R](https://github.com/Public-Health-Scotland/learnr-online/blob/master/LinearModelling.Rmd) - an introduction to linear modelling and building models using R.
+    * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-linearmodelling/
 * [Introduction to Open Data](https://github.com/Public-Health-Scotland/learnr-online/blob/master/OpenData.Rmd) - learning what open data is and how it's used in PHS, then getting interactive accessing open data using R. 
     * Currently hosted here: https://scotland.shinyapps.io/phs-learnr-opendata/ 
 * [Introduction to OpenXLSX](https://github.com/Public-Health-Scotland/learnr-online/blob/master/OpenXLSX.Rmd) - a course providing an introduction to the `openxlsx`, used to read, write, and edit Excel files from R. 
@@ -35,6 +37,7 @@ Other directories:
   * `DataViz.Rmd` - RMarkdown file containing all necessary code to build app for the data viz course
   * `Intro.Rmd` - RMarkdown file containing all necessary code to build app for the intro course
   * `IRPQ.Rmd` - RMarkdown file containing all necessary code to build app for the IRPQ course
+  * `LinearModelling.Rmd` - RMarkdown file containing all necessary code to build all for the linear modelling course
   * `OpenData.Rmd` - RMarkdown file containing all necessary code to build app for the open data course
   * `OpenXLSX.Rmd` - RMarkdown file containing all necessary code to build app for the openxlsx course
   * `PHSMethods.Rmd` - RMarkdown file containing all necessary code to build app for the phsmethods course
@@ -48,4 +51,4 @@ Other directories:
 
 ## Get in touch
 
-* Email: phs.transformingpublishing@phs.scot
+* Email: phs.datascience@phs.scot
