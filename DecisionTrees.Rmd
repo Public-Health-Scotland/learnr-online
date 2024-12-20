@@ -40,8 +40,10 @@ knitr::include_graphics("images/phs-logo.png")
 Welcome to an Introduction to Decision Trees. This course is designed as a self-led introduction to decision trees for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. Below is an overview of the learning pathway.
 
 ```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%"}
-knitr::include_graphics("images/r-intro-pathway-2.png")
+knitr::include_graphics("images/trees/tree_schematic.jpg")
 ```
+
+<br>
 
 <div class="info_box">
   <h4>Course Info</h4>
@@ -69,35 +71,55 @@ or categorical:
 
 > e.g. if it’s a Monday morning with high wind and rain, will John go for a bike ride, yes or no?
 
-(turn into a diagram?)
+<br>
 
+### Example: films worth watching
 
-<div>
+Imagine you have a data set containing many films: with information on genre, awards won, run time etc. for each and, critically, a binary (yes/no) variable on whether you would enjoying watching each movie.
+
+Below is an example of a tree, created using this fictional data, that you could use to decide whether to watch a given film. The process of creating a decision tree produces questions (or 'forks') that the algorithm deems are the best ways of separating our data - in this case, the films we consider watchable from those we do not. By simply answering questions about said film, we could work our way from top to bottom to reach a decision. 
+
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/illustrations/r_welcome_twitter.png")
+knitr::include_graphics("images/trees/movies_tree.jpg")
 ```
-</div>
+
 
 </br>
 
-Since we're getting started, here's a quiz to get familiar with the layout:
-
 ```{r intro-quiz}
 quiz(
-  question("Which of the following can R help to produce?",
-    answer("Tidy Data", correct = TRUE),
-    answer("Dashboards", correct = TRUE),
-    answer("Static/Interactive Reports", correct = TRUE),
-    answer("Web Apps", correct = TRUE),
-    answer("Magic", message = "It may seem like R is magic but unfortunately not"),
-    answer("Databases", correct = TRUE),
-    answer("Presentations", correct = TRUE),
+  question("What would the decision tree above recommend for a fantasy film with 0 Oscars, a duration of 1 hour and 43 mins, an age rating of 15, streamable at home, an enjoyable soundtrack, and no giant sandworms?",
+    answer("Watch the film", correct = FALSE),
+    answer("Don't watch the film", correct = TRUE),
     incorrect = "Not quite, have another go!",
     allow_retry = TRUE,
     random_answer_order = TRUE
   )
 )
 ```
+
+<br>
+
+### Decision tree structure
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/trees/tree_schematic.jpg")
+```
+
+Notice that, when interpreting a decision tree, we start at the top of the tree. Unintuitively, this top node is referred to as the **root node**. The questions/forks we use to get to a final prediction/decision are known as **intermediate nodes** and the bottom nodes are called **leaf nodes**.
+
+<br>
+
+```{r echo=FALSE, fig.align='center', out.width="75%"}
+knitr::include_graphics("images/trees/flipped_tree.jpg")
+```
+
+
+You can think of it as an upside-down tree, really. Starting from the root at the top to the leaves at the bottom.
+
+<br>
+
+
 ## Goal of this course
 
 In this course, we’re going to build a decision tree based off a dataset about passengers onboard the Titanic. This model will allow us to predict who was most likely to survive the unfortunate sinking of the vessel (apologies for the morbid nature of this data!).
