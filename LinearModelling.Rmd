@@ -737,7 +737,7 @@ The higher this value, the better the line fits the data (and the more useful ou
 
 <br>
 
-### Coefficients and p-values
+### Coefficients and $p$-values
 
 We looked at the $p$-value related to our `weight` coefficient earlier: 0.000135. As this is so small, i.e. lower than 0.001, R assigned it '\*\*\*'.
 
@@ -747,7 +747,7 @@ We typically set a $p$-value threshold of \<0.05 or \<0.01 for coefficient signi
 
 <br>
 
-#### When to trust p-values
+#### When to trust $p$-values
 
 As much as we may want to trust our $p$-value and run off to tell the world that, based on our sampled data and the model we created, weight is a statistically-significant predictor of height, it's important that we check that the **residuals of our model fulfill certain conditions**. This is what we will cover now.
 
@@ -802,13 +802,13 @@ This **quantile-quantile** plot tests the **normality** of the residuals. For co
 a[2]
 ```
 
-Here, we just want to see the data points lie close to the dashed line. If so, our residuals are well-described as normally-distributed. It's normal to see a some outliers at the extreme ends.
+Here, we just want to see the data points lie close to the dashed line. If so, our residuals are well-described as normally-distributed. It's normal to see a couple of outliers at the extreme ends.
 
 This looks fine here.
 
 #### **3. Scale-Location: do the residuals show no systematic increase or decrease in variation across the range of data?**
 
-This plot tests the **constancy of variation** of the residuals. This diagnostic plot has fitted values on the x-axis, like with plot 1, and the standardised, square-rooted residuals on the y-axis.
+This plot tests the **constancy of variation** of the residuals. It shows fitted values on the x-axis, like with plot 1, and the standardised, square-rooted residuals on the y-axis.
 
 ```{r, eval=TRUE, echo=FALSE, fig.width=10, fig.align='center', fig.alt="The third of the diagnostic plots: 'Scale-Location plot'."}
 a[3]
@@ -836,7 +836,7 @@ What have we done here?
 
 5. These checks passed, meaning we can have confidence in using our model.
 
-Have a look and click 'Run Code' below to see the output. Then, change the code to get R to print "Hello \<your name\>".
+<br>
 
 Task: when creating our model object using `lm()`, how do we structure the function call? Try on the dataset below.
 
@@ -1022,7 +1022,7 @@ We can no longer plot this as a 2D line without examining the predictors one at 
 
 As with our simple linear model, there are several metrics we can use to evaluate how useful our multiple linear model is.
 
-### p-values of the coefficients
+### $p$-values of the coefficients
 
 ```{r echo=FALSE, out.width="60%", fig.align='center', fig.alt="Part of the `summary()` output of the model, with the p-values of the predictor coefficients highlighted."}
 knitr::include_graphics("images/intro_modelling/p_values.png")
