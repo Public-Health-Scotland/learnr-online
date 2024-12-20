@@ -57,9 +57,19 @@ knitr::include_graphics("images/r-intro-pathway-2.png")
 
 * A useful type of model that allow us to make predictions from our data
 * A map of the possible outcomes of a series of related choices, often seen in businesses as ‘decision flowcharts’ or ‘process flowcharts’
-* A series of choices/questions that are read downwards, that lead to a final prediction for any given data point. 
+* A series of choices/questions that are read downwards, that lead to a final prediction for any given data point
+
 Similar to a regression model (see Intro to Linear Regression), we can build a decision tree using our data, and subsequently predict the chosen outcome variable based on the predictor variables used to build a model.
-The useful part of a decision tree is that the predicted outcome variable can be continuous (e.g. if I consumed four eggs, two slices of toast, and a cup of coffee for breakfast, how many miles will I cycle today?) or categorical (e.g. if it’s a Monday morning with high wind and rain, will John go for a bike ride, yes or no?). turn into a diagram?
+
+The useful part of a decision tree is that the predicted outcome variable can be continuous:
+
+> e.g. if I consumed four eggs, two slices of toast, and a cup of coffee for breakfast, how many miles will I cycle today?
+
+or categorical:
+
+> e.g. if it’s a Monday morning with high wind and rain, will John go for a bike ride, yes or no?
+
+(turn into a diagram?)
 
 
 <div>
@@ -93,13 +103,21 @@ quiz(
 In this course, we’re going to build a decision tree based off a dataset about passengers onboard the Titanic. This model will allow us to predict who was most likely to survive the unfortunate sinking of the vessel (apologies for the morbid nature of this data!).
 
 To do this we’re going to:
+
 1.	Read in the relevant data
+
 2.	Wrangle the data and perform some **feature engineering**
+
 3.	Create some simple plots to help identify useful predictors for our model
+
 4.	Build a decision tree model using `rpart()` from the `{rpart}` package
+
 5.	Visualise the decision tree using `rpart.plot()` from the `{rpart.plot}` package
+
 6.	Interpret the model
+
 7.	Test the model’s predictive power by comparing predicted values to those in our data
+
 Following this, we will create a **random forest** model and see how if this improves the predictive power we can attain.
 
 <br>
@@ -107,10 +125,12 @@ Following this, we will create a **random forest** model and see how if this imp
 ## Exploring the dataset
 
 We can read in our Titanic data using `read_csv()` from the `{dplyr}` package:
-```{r, echo = TRUE, eval = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 library(dplyr)
 titanic_data <- read_csv("www/data/titanic_decision_tree_data.csv")
+```
 
+```{r, echo = TRUE, eval = TRUE}
 # check out the first 10 rows of the data
 head(titanic_data)
 ```
@@ -118,19 +138,30 @@ head(titanic_data)
 ### Data dictionary
 
 What variables do we have here?
-•	X1: the default column name given by R to this column which is simply the row number
-•	passenger_id: a unique number given to each passenger
-•	pclass : ticket class, 1 = 1st (upper class), 2 = 2nd (middle class), 3 = 3rd (lower class)
-•	name: passenger name
-•	sex: biological sex, male or female
-•	age: passenger age
-•	sib_sp : number of siblings / spouses on board
-•	parch: number of parents / children aboard the Titanic; some children travelled only with a nanny, therefore parch=0 for them
-•	ticket: ticket ID
-•	fare: the cost of the passenger’s ticket
-•	cabin: cabin number (if known/relevant)
-•	embarked: city of embarkation; C = Cherbourg, Q = Queenstown, S = Southampton
-•	survived : did they survive? 0 = No, 1 = Yes
+
+•	`passenger_id`: a unique number given to each passenger
+
+•	`pclass` : ticket class, 1 = 1st (upper class), 2 = 2nd (middle class), 3 = 3rd (lower class)
+
+•	`name`: passenger name
+
+•	`sex`: biological sex, male or female
+
+•	`age`: passenger age
+
+•	`sib_sp` : number of siblings / spouses on board
+
+•	`parch`: number of parents / children aboard the Titanic; some children travelled only with a nanny, therefore `parch` = 0 for them
+
+•	`ticket`: ticket ID
+
+•	`fare`: the cost of the passenger’s ticket
+
+•	`cabin`: cabin number (if known/relevant)
+
+•	`embarked`: city of embarkation; C = Cherbourg, Q = Queenstown, S = Southampton
+
+•	`survived` : did they survive? 0 = No, 1 = Yes
 
 <br>
 
@@ -139,17 +170,29 @@ What variables do we have here?
 Prior to building a model, cleaning and wrangling our data is always the first step.
 
 Here is what we’ll do in this section:
-1.	Filter down to only observations which have a survived flag (i.e. that aren’t missing)
-2.	Turn the relevant variables into factors (sex, survived, pclass, embarkation)
-o	This way the model will identify sex e.g. as a factor with 2 levels as opposed to a character variable
-3.	Create an age_status variable which groups individuals under (and including) 16 years of age into a category called “child” category and those over 16 into a category called “adult”.
-o	This is an example of **feature engineering** in which we are creating a child/adult variable based on a variable we already have, age
+
+1.	Filter down to only observations which have a `survived` flag (i.e. that aren’t missing)
+
+2.	Turn the relevant variables into factors (`sex`, `survived`, `pclass`, `embarkation`)
+
+  o	This way the model will identify `sex`, for example, as a factor with 2 levels as opposed to a         character variable
+
+3.	Create an `age_status` variable which groups individuals under (and including) 16 years of age into a category called “child” category and those over 16 into a category called “adult”.
+
+  o	This is an example of **feature engineering** in which we are creating a new child/adult variable        based on a variable we already have, `age`
+
 4.	Drop any variables we don’t need
-o	It’s important to identify and remove the variables which will be of no use inside a decision tree prior to building it
-o	We’ll remove those variables that are unique to each row and can’t be grouped into meaningful categories: X1, passenger_id, name, ticket
-o	We’ll remove fare and cabin as the information in these is better represented in the categorical pclass variable already 
-5.	Drop any rows with NA
-o	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as otherwise we sacrifice rows for the sake of variables we don’t want anyway
+
+  o	It’s important to identify and remove the variables which will be of no use inside a decision tree         prior to building it
+
+  o	We’ll remove those variables that are unique to each row and can’t be grouped into meaningful            categories: `passenger_id`, `name`, `ticket`
+
+  o	We’ll remove `fare` and `cabin` as the information in these is better represented in the categorical `pclass` variable already 
+
+5.	Drop any rows with `NA`
+
+  o	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as        otherwise we sacrifice rows for the sake of variables we don’t want anyway
+
 
 Try having a go at the above list of cleaning/wrangling tasks on your own before looking at the answers below.
 ```{r wrangle-input, exercise = TRUE}
@@ -158,7 +201,7 @@ titanic_clean <- titanic_data %>%
 ```
 
 <details>
-<summary>Data cleaning code</summary>
+<summary>Data cleaning code - *click here to expand*</summary>
 
 ```{r, echo = TRUE, eval = TRUE}
 titanic_clean <- titanic_data %>%
@@ -178,7 +221,13 @@ head(titanic_clean)
 ```
 </details>
 
-Now our data is trimmed and consists of a) the outcome variable of interest, the `survived` flag, and b) a collection of potential predictors that may be useful in our model when predicting `survived`.
+<br>
+
+Now our data is trimmed and consists of:
+
+a) the outcome variable of interest, the `survived` flag
+
+b) a collection of potential predictors that may be useful in our model when predicting `survived`
 
 <br>
 
@@ -224,13 +273,15 @@ We can check how *balanced* the data frames are, in terms of our outcome variabl
 titanic_train %>%
  	janitor::tabyl(survived_flag)
 ```
-This shows us that x% of passengers in the training data survived and y% did not.
+This shows us that 40.9% of passengers in the training data survived and 59.1% did not.
+
+*Note: be aware that the `percentage` column actually represents proportions (i.e. between 0 and 1)*
 
 ```{r, echo = TRUE, eval = TRUE}
 titanic_test %>%
  janitor::tabyl(survived_flag)
 ```
-And this shows us that y% of passengers in the testing data survived and x% did not.
+And this shows us that 38.7% of passengers in the testing data survived and 61.3% did not.
 
 It’s very unlikely that we’ll get an exact match between data sets, but in general the gap between the two will be smaller with larger datasets. For now, this seems like a pretty even split.
 
