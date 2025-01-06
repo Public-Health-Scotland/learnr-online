@@ -37,10 +37,10 @@ knitr::include_graphics("images/phs-logo.png")
 
 ## Introduction
 
-Welcome to an Introduction to Decision Trees. This course is designed as a self-led introduction to decision trees for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code. Below is an overview of the learning pathway.
+Welcome to an Introduction to Decision Trees. This course is designed as a self-led introduction to decision trees for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code.
 
-```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%"}
-knitr::include_graphics("images/trees/tree_schematic.jpg")
+```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%", fig.cap = "source: vecteezy.com"}
+knitr::include_graphics("images/trees/bussinessman20-08.jpg")
 ```
 
 <br>
@@ -146,9 +146,9 @@ Following this, we will create a **random forest** model and see how if this imp
 
 ## Exploring the dataset
 
-We can read in our Titanic data using `read_csv()` from the `{dplyr}` package:
+We can read in our Titanic data using `read_csv()` from the `{readr}` package:
 ```{r, echo = TRUE, eval = FALSE}
-library(dplyr)
+library(readr)
 titanic_data <- read_csv("www/data/titanic_decision_tree_data.csv")
 ```
 
@@ -227,16 +227,17 @@ titanic_clean <- titanic_data %>%
 
 ```{r, echo = TRUE, eval = TRUE}
 titanic_clean <- titanic_data %>%
-# Filter out those without a survived flag
+  # Filter out those without a survived flag
   filter(survived %in% c(0,1)) %>%
-# Convert to factor level
-    mutate(sex = as.factor(sex), 
-           age_status = as.factor(if_else(age <= 16, "child", "adult")),
-         class = factor(pclass, levels = c(3, 2, 1), labels = c("Lower", "Middle", "Upper")), 
-           survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
-           port_embarkation = as.factor(embarked)) %>%
-# Select variables of interest
+  # Convert to factor level
+  mutate(sex = as.factor(sex), 
+         age_status = as.factor(if_else(age <= 16, "child", "adult")),
+         class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")), 
+         survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
+         port_embarkation = as.factor(embarked)) %>%
+  # Select variables of interest
   select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  # Drop NAs
   tidyr::drop_na()
 
 head(titanic_clean)
@@ -259,10 +260,12 @@ This isn’t a strictly necessary step when building a decision tree, but it’s
 
 Use ggplot2 to create some visualisations to see which variables appear to have the greatest effect on survival.
 ```{r ggplot-input, exercise = TRUE}
-titanic_clean <- titanic_data %>%
-## start coding here
+titanic_clean %>%
+  ggplot() +
+  ## start coding here
 ```
 Once we create the model in the next section, we’ll see if your predictions were correct.
+
 <br>
 
 ## Build and plot the decision tree
@@ -272,11 +275,12 @@ In this section, we’re going to build the decision tree itself. However, we wi
 ### Train/test split
 
 The following code will split the data into ‘training’ and ‘testing’ subsets.
-```{r, echo = TRUE, eval = TRUE}
+```{r echo = TRUE, eval = TRUE}
 # number of rows in the data
 n_data <- nrow(titanic_clean)
 
 # create a test sample index, i.e. a collection of row numbers for the test sample
+set.seed(123)
 test_index <- sample(1:n_data, size = n_data*0.2)
 
 # create the test set, i.e. keep rows from the data using the index above
@@ -286,7 +290,13 @@ titanic_test  <- slice(titanic_clean, test_index)
 titanic_train <- slice(titanic_clean, -test_index)
 ```
 
-This now gives us two data frames to work with: the larger training data `titanic_train` with which we’ll build the decision tree, and the smaller training data `titanic_train` with which we’ll test the tree with later. It’s important that we leave this training data aside until then.
+::: {style="color: blue;"}
+Note the use of `set.seed()`. This just means that the random sampling carried out by the `sample()` function on the next line is done in the same way each time. This means if *you* run this code you will get the same values that are *presented in this course*. You won't need `set.seed()` outside of this course unless you need a random sample to remain the same across several iterations!
+:::
+
+<br>
+
+This now gives us two data frames to work with: the larger training data `titanic_train` with which we’ll build the decision tree, and the smaller testing data `titanic_train` with which we’ll test the tree with later. It’s important that we leave this testing data aside until then.
 
 We can check how *balanced* the data frames are, in terms of our outcome variable of interest `survived`, by using the `tabyl()` function from the `{janitor}` package. If one side of the train/test split had the large majority of passengers who survived, and the other side had the large majority of passengers who did not, it would be a good idea to resample the data.
 
@@ -295,22 +305,267 @@ We can check how *balanced* the data frames are, in terms of our outcome variabl
 titanic_train %>%
  	janitor::tabyl(survived_flag)
 ```
-This shows us that 40.9% of passengers in the training data survived and 59.1% did not.
+This shows us that 41.2% of passengers in the training data survived and 58.8% did not.
 
-*Note: be aware that the `percentage` column actually represents proportions (i.e. between 0 and 1)*
+*Note: be aware that the* `percentage` *column actually represents proportions (i.e. between 0 and 1)*
 
 ```{r, echo = TRUE, eval = TRUE}
 titanic_test %>%
  janitor::tabyl(survived_flag)
 ```
-And this shows us that 38.7% of passengers in the testing data survived and 61.3% did not.
+And this shows us that 37.3% of passengers in the testing data survived and 62.7% did not.
 
 It’s very unlikely that we’ll get an exact match between data sets, but in general the gap between the two will be smaller with larger datasets. For now, this seems like a pretty even split.
 
-###
+<br>
 
-## Interpreting decision trees
+### Build tree using training data
+
+Now we've got our training data ready, we can build the tree using the `rpart()` function from the `{rpart}` package. `rpart` stands for `recursive partitioning and regression trees` - catchy name.
+
+This function requires:
+
+1) The target variable of interest, `survived_flag`, to be passed to the `formula` argument. The syntax used here is: `target_variable ~ .`, specifying that we want to predict `target_variable` using all available variables as predictors (denoted by the `.`).
+
+2) The training data, `titanic_train`, to be passed to the `data` argument
+
+3) The type of variable we are interested in to be passed to the `method` argument: `class` for  predicting categorical variables (e.g. survived or not), `anova` for predicting continuous variables.
+
+We'll call the tree model `titanic_fit`. Have a go at creating the model below:
+
+```{r tree-setup, echo = FALSE, eval = TRUE}
+titanic_clean <- titanic_data %>%
+  filter(survived %in% c(0,1)) %>%
+  mutate(sex = as.factor(sex), 
+         age_status = as.factor(if_else(age <= 16, "child", "adult")),
+         class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")), 
+         survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
+         port_embarkation = as.factor(embarked)) %>%
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  tidyr::drop_na()
+
+n_data <- nrow(titanic_clean)
+set.seed(123)
+test_index <- sample(1:n_data, size = n_data*0.2)
+titanic_test  <- slice(titanic_clean, test_index)
+titanic_train <- slice(titanic_clean, -test_index)
+```
+
+```{r tree-build, exercise = TRUE, exercise.setup = 'tree-setup'}
+library(rpart)
+
+titanic_fit <- rpart(
+  formula = , 
+  data = ,
+  method = '' # method argument needs to be in quotation marks
+)
+```
+
+```{r tree-build-check}
+grade_this({
+  pass_if(
+    identical(
+      .result,
+      rpart(
+        formula = survived_flag ~ .,
+        data = titanic_train,
+        method = 'class'
+      )
+    ),
+    "Great job! Your answer is correct."
+  )
+  fail_if(
+    !identical(.result$formula, survived_flag ~ .),
+    "The formula argument is incorrect. Make sure it's `target_variable ~ .`."
+  )
+  fail_if(
+    !identical(.result$data, titanic_train),
+    "The data argument is incorrect. Ensure you're using the appropriate training dataset."
+  )
+  fail_if(
+    .result$method != 'class',
+    "The method argument is incorrect - and remember it should be in quotation marks."
+  )
+  fail("Something isn't quite right. Check your code and try again.")
+})
+```
+
+Great! Now we have our tree model, let's do the exciting part and plot it.
+
+<br>
+
+### Plot the decision tree
+
+For visualising trees, we use the `rpart.plot()` function from the `{rpart.plot}` package. Don't worry about all the other arguments for now, just notice that the first argument we pass to it is the tree model object itself.
+
+```{r, include = FALSE}
+titanic_fit <- rpart(
+  formula = survived_flag ~ ., 
+  data = titanic_train,
+  method = 'class'
+)
+```
+
+
+```{r, echo = TRUE, eval = TRUE}
+library(rpart.plot)
+
+rpart.plot(titanic_fit,
+           yesno = 2,
+           fallen.leaves = TRUE,
+           faclen = 6,
+           digits = 4)
+```
+
+<br>
+
+Voila! Here is our decision tree in visual form. See if you can interpret it yourself before we investigate it properly in the next section.
+
+<br>
+
+## Interpret the decision tree
+
+One advantage to decision trees over other types of machine learning models is that they are more easily-interpretable due to their 'flow chart' format.
+
+```{r, echo = FALSE, eval = TRUE}
+rpart.plot(titanic_fit,
+           yesno = 2,
+           fallen.leaves = TRUE,
+           faclen = 6,
+           digits = 2)
+```
+
+Let's start from the top and interpret the tree along a single route top to bottom (or root to leaf).
+
+* All of the training data, before being split up by any questions, is represented in the **root node** at the top: the tree predicts that `survived = No` is the most likely outcome overall, with a probability of surviving of 0.41.  The % value shown in each node represents the proportion of the dataset that passes through that node (here, 100%).
+
+* The first 'question' asked of our data is `sex = male` (think of it like an operator, `sex == male`) with two potential branches: `yes` or `no`.
+
+* `yes` (or male) leads us left down to an **intermediate node**, which predicts `No` to survival, with a probability of survival of 0.22. 64% of the training data ends up here, essentially meaning that 64% of the data are males.
+
+* From this node, the question `class = lower, middle` is asked (i.e. `class %in% c("lower", "middle")`).
+
+* `yes` leads us to another **intermediate node**, which again predicts `No` to survival (prob(survival = 0.16)) and contains 49% of the data.
+
+* This node asks whether `age_status = adult` and, if `yes`, leads us along a branch to a **leaf node** at the bottom left that predicts `No`, with prob(survival) = 0.13. 43% of the data set ends up at this node.
+
+The algorithm used to build the model uses a probability of 0.5 as the threshold for classification: i.e. if prob(survival) < 0.5, the model predicts `No`. Furthermore, the colour of each node represents the probability: dark blue -> light blue -> light green -> dark green as the probability of survival increases.
+
+Now, to test your ability to interpret the tree, a quiz...
+
+```{r tree-quiz}
+quiz(
+  question("What outcome does our tree predict for a female passenger in lower class with a husband and sister on board?",
+    answer("Did not survive", correct = TRUE),
+    answer("Did survive", correct = FALSE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  ),
+  question("What outcome does our tree predict for a young boy in lower or middle class with no siblings and both parents on board?",
+    answer("Did not survive", correct = FALSE),
+    answer("Did survive", correct = TRUE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+<br>
+
+### Formatting the tree's appearance
+
+Now we will take a look at the `rpart.plot()` arguments. Below is a reminder of the code we used above: 
+
+```{r, echo = TRUE, eval = FALSE}
+rpart.plot(titanic_fit,
+           yesno = 1,
+           fallen.leaves = TRUE,
+           faclen = 3,
+           digits = 2)
+```
+
+* `yesno` adjusts the presence/location of the "yes" and "no" boxes in the plot.
+
+* `fallen.leaves` is a binary argument that sets the leaf nodes to all lie in a row at the bottom.
+
+* `faclen` is a numeric argument that dictates the maximum number of characters the levels of each categorical variable can displayed as (when `faclen` < word length, abbreviation is used).
+
+* `digits` is a numeric argument that specifies the number of decimal places to display for each node's probability.
+
+Play around with code below to get an idea of how these arguments, plus some new ones, can alter the look of your decision tree:
+
+```{r plot-format-exercise-setup}
+titanic_clean <- titanic_data %>%
+  filter(survived %in% c(0,1)) %>%
+  mutate(sex = as.factor(sex),
+         age_status = as.factor(if_else(age <= 16, "child", "adult")),
+         class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")),
+         survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")),
+         port_embarkation = as.factor(embarked)) %>%
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  tidyr::drop_na()
+
+n_data <- nrow(titanic_clean)
+set.seed(123)
+test_index <- sample(1:n_data, size = n_data*0.2)
+titanic_test  <- slice(titanic_clean, test_index)
+titanic_train <- slice(titanic_clean, -test_index)
+
+titanic_fit <- rpart(
+  formula = survived_flag ~ .,
+  data = titanic_train,
+  method = 'class'
+)
+```
+
+
+```{r plot-format-exercise, exercise = TRUE, exercise.setup = 'plot-format-exercise-setup'}
+rpart.plot(titanic_fit,
+           yesno = , # try 0, 1, and 2
+           fallen.leaves = , # try TRUE and FALSE
+           varlen = , # try any values
+           faclen = , # try any values
+           digits = , # try any values
+           extra = 101, # this displays the number of observations that fall into Yes and No
+           under = TRUE, # this changes where each node's text lies
+           box.palette = "Blues", # try plurals of colours (with a capital letter)
+           shadow.col = "grey" # try different colours (no capital needed)
+           )
+```
+
+
 ## Testing the decision tree
+
+To summarise: we have now wrangled our data and done some feature engineering (i.e. new variables from old ones), we split the data up into train and test subsets, built a decision tree and plotted it.
+
+Now we will use our **test** data subset on our tree to see how well the model can predict who survived the Titanic and who did not. This is called **supervised learning**, as our data already contains the 'answers' (i.e. the `survived_flag` variable) with which we can compare our tree's predictions against.
+
+### Predicting with the `{modelr}` package
+
+`{modelr}` gives us access to some useful functions to aid in examining model predictions.
+
+```{r, echo = TRUE, eval = FALSE}
+install.packages("modelr")
+```
+
+Here, we will use the `add_predictions()` function. Note that we are now using the `titanic_test` data that we put aside earlier. We just need to pass to it the model (`titanic_fit`) and the prediction `type` (`class` as before) - optionally, we can use the `var` argument to name the predictions column.
+
+```{r, echo = TRUE, eval = TRUE}
+library(modelr)
+
+titanic_test_pred <- titanic_test %>%
+  add_predictions(titanic_fit, type = "class", var = "survival_pred")
+
+titanic_test_pred
+```
+
+You can see that we have the original `survival_flag` column and now, next to it, the new `survival_pred` column. Comparing the two gives us an idea of how effective our decision tree is at predicting.
+
+<br>
+
+### Checking model performance
 
 ## Random forest
 
@@ -318,58 +573,12 @@ It’s very unlikely that we’ll get an exact match between data sets, but in g
 
 
 
-```{r foundations-basics-quiz}
-quiz(
-  question("What would `typeof(as.logical(0))` return and what is its value?",
-           answer("Numeric - `0`"),
-           answer('Character - `"0"`'),
-           answer("Logical - `TRUE`"),
-           answer("Logical - `FALSE`", correct = TRUE),
-           incorrect = "Not quite, have another go!",
-           allow_retry = TRUE,
-           random_answer_order = TRUE
-           ),
-  question("If `x = 5`, what does this return: `x < 10 || x == 4`?",
-           answer("TRUE", correct = TRUE),
-           answer("FALSE"),
-           incorrect = "Not quite, have another go!",
-           allow_retry = TRUE,
-           random_answer_order = TRUE
-           ),
-  question("What makes an **invalid** name for a variable?",
-           answer("Starting with an underscore (`_`)", correct = TRUE),
-           answer("Starting with a dot (`.`)"),
-           answer("Symbols other than an underscore (`_`) or dot (`.`)", correct = TRUE),
-           answer("Starting with a number", correct = TRUE),
-           answer("Reserved names, e.g. `TRUE`", correct = TRUE),
-           incorrect = "Not quite, have another go!",
-           allow_retry = TRUE,
-           random_answer_order = TRUE
-           )
-)
-```
 
 
 
 ## Help & Feedback
 
 Now it's time to embed your new knowledge and skills, expand with related technologies (e.g. git), and when you're ready *Take R Further* with more training opportunities.
-
-#### Debugging
-
-<div>
-```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/illustrations/r_debugging.jpg")
-```
-</div>
-
-1. **Review warnings/errors** - these can appear cryptic but use Google and some will become familiar. Checking the functions could help too - `?<function>`
-2. **Narrow the problem** - step through the code, isolating the issue to a specific chunk, line, or function.
-3. **Google/StackOverflow** - this can be specific to the bug or more general to the
-problem you’re trying to solve. You should tag queries with "[r]".
-4. **Pair up** - sometimes a fresh pair of eyes makes the difference (you might have just missed a comma). For a more general audience post a message on the R User Group [Technical Queries Teams channel](https://teams.microsoft.com/l/channel/19:9620ef6cf8234d50a0f95caba65a3edf@thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a).
-
-</br>
 
 #### Help
 
