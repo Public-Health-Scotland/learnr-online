@@ -248,7 +248,7 @@ head(titanic_clean)
 
 Now our data is trimmed and consists of:
 
-a) the outcome variable of interest, named `survived_flag` in the answer above (take note of how the 'positive' answer `"Yes"` is placed first in the `levels` ordering - this is important for assessing our model later)
+a) the outcome variable of interest, named `survived_flag` in the answer above
 
 b) a collection of potential predictors that may be useful in our model when predicting `survived`
 
