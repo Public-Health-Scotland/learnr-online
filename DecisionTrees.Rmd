@@ -248,7 +248,7 @@ head(titanic_clean)
 
 Now our data is trimmed and consists of:
 
-a) the outcome variable of interest, the `survived` flag
+a) the outcome variable of interest, named `survived_flag` in the answer above (take note of how the 'positive' answer `"Yes"` is placed first in the `levels` ordering - this is important for assessing our model later)
 
 b) a collection of potential predictors that may be useful in our model when predicting `survived`
 
@@ -390,11 +390,11 @@ grade_this({
 })
 ```
 
-Great! Now we have our tree model, let's do the exciting part and plot it.
-
 <br>
 
 ### Plot the decision tree
+
+Great! Now we have our tree model, let's do the exciting part and plot it.
 
 For visualising trees, we use the `rpart.plot()` function from the `{rpart.plot}` package. Don't worry about all the other arguments for now, just notice that the first argument we pass to it is the tree model object itself.
 
@@ -445,9 +445,9 @@ Let's start from the top and interpret the tree along a single route top to bott
 
 * From this node, the question `class = lower, middle` is asked (i.e. `class %in% c("lower", "middle")`).
 
-* `yes` leads us to another **intermediate node**, which again predicts `No` to survival (prob(survival = 0.16)) and contains 49% of the data.
+* `yes` leads us to another **intermediate node**, which again predicts `No` to survival ($prob(survival = 0.16)$) and contains 49% of the data.
 
-* This node asks whether `age_status = adult` and, if `yes`, leads us along a branch to a **leaf node** at the bottom left that predicts `No`, with prob(survival) = 0.13. 43% of the data set ends up at this node.
+* This node asks whether `age_status = adult` and, if `yes`, leads us along a branch to a **leaf node** at the bottom left that predicts `No`, with $prob(survival) = 0.13$. 43% of the data set ends up at this node.
 
 The algorithm used to build the model uses a probability of 0.5 as the threshold for classification: i.e. if prob(survival) < 0.5, the model predicts `No`. Furthermore, the colour of each node represents the probability: dark blue -> light blue -> light green -> dark green as the probability of survival increases.
 
@@ -502,7 +502,7 @@ titanic_clean <- titanic_data %>%
   mutate(sex = as.factor(sex),
          age_status = as.factor(if_else(age <= 16, "child", "adult")),
          class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")),
-         survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")),
+         survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
          port_embarkation = as.factor(embarked)) %>%
   select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
   tidyr::drop_na()
@@ -542,6 +542,8 @@ To summarise: we have now wrangled our data and done some feature engineering (i
 
 Now we will use our **test** data subset on our tree to see how well the model can predict who survived the Titanic and who did not. This is called **supervised learning**, as our data already contains the 'answers' (i.e. the `survived_flag` variable) with which we can compare our tree's predictions against.
 
+<br>
+
 ### Predicting with the `{modelr}` package
 
 `{modelr}` gives us access to some useful functions to aid in examining model predictions.
@@ -556,16 +558,118 @@ Here, we will use the `add_predictions()` function. Note that we are now using t
 library(modelr)
 
 titanic_test_pred <- titanic_test %>%
-  add_predictions(titanic_fit, type = "class", var = "survival_pred")
+  add_predictions(titanic_fit, type = "class", var = "survived_pred")
 
 titanic_test_pred
 ```
 
-You can see that we have the original `survival_flag` column and now, next to it, the new `survival_pred` column. Comparing the two gives us an idea of how effective our decision tree is at predicting.
+You can see that we have the original `survived_flag` column and now, next to it, the new `survived_pred` column. Comparing the two gives us an idea of how effective our decision tree is at predicting.
 
 <br>
 
 ### Checking model performance
+
+Because we are building a **classification algorithm**, i.e. a model that classifies each row as 1 (survived) or 0 (died), we can check its predictive performance by creating a **confusion matrix**.
+
+Despite the name, a confusion matrix can help you understand your model's capabilities at predicting the variable of interest. We will use the `conf_mat()` function from the `{yardstick}` package.
+
+```{r, eval = FALSE, echo = TRUE}
+install.packages("yardstick")
+```
+
+The `conf_mat()` function just requires the test data with the model's predictions, as well as both the  true target variable (`truth`) and the predicted target variable (`estimate`):
+
+```{r, eval = TRUE, echo = TRUE, message = FALSE}
+library(yardstick)
+
+conf_mat <- titanic_test_pred %>%
+              conf_mat(truth = survived_flag, estimate = survived_pred)
+
+conf_mat
+```
+
+* The columns, i.e. `Truth`, represent the true numbers of survivors and non-survivors from the test data set.
+
+* The rows, i.e. `Prediction` represent the tree's predicted numbers of survivors and non-survivors.
+
+* The main diagonal (top left and bottom right) values show the number of predictions our model got correct: 81 "No's" and 38 "Yes's" correctly predicted.
+
+* The antidiagonal values show the number of predictions our model got incorrect: 14 "No's" that should have been "Yes's" and 8 "Yes's" that should have been "No's".
+
+<br>
+
+>`{yardstick}` provides a few more useful functions to assess our model:
+
+#### 1. Accuracy
+
+`accuracy()` calculates the proportion of correct predictions out of all predictions.
+
+```{r, eval = TRUE, echo = TRUE}
+titanic_test_pred %>% 
+  accuracy(truth = survived_flag, estimate = survived_pred)
+```
+
+The `.estimate` column in the output shows us the *accuracy* measure, i.e. the probability of correctly predicting whether a passenger survived or not: $0.84$
+
+<br>
+
+#### 2. Sensitivity
+
+`sensitivity()` calculates the **true positive rate**, i.e. the proportion of times our model predicted "Yes" correctly. Be aware that the next two functions don't automatically know which outcome of the target variable is positive (i.e. the 'event'), and will choose the first column or row name from the confusion matrix by default. We use the `event_level` parameter to specifically tell these functions the position of `"Yes"`.
+
+```{r, eval = TRUE, echo = TRUE}
+titanic_test_pred %>% 
+  sensitivity(truth = survived_flag, estimate = survived_pred, event_level = "second")
+```
+
+The model *sensitivity* is: $0.72$ 
+
+
+<br>
+
+#### 3. Specificity
+
+`specificity()` calculates the **true negative rate**, i.e. the proportion of times our model predicted "No" correctly.
+
+```{r, eval = TRUE, echo = FALSE}
+titanic_test_pred %>% 
+  specificity(truth = survived_flag, estimate = survived_pred, event_level = "second")
+```
+
+The model *specificity* is: $0.91$ 
+
+<br>
+
+So, our decision tree is better at predicting who did *not* survive the Titanic than it is at predicting those who *did* survive.
+
+<div class="info_box">
+You might wonder why it's necessary to have different calculations for this. In some situations, it's crucial for a model to identify as many positive cases as possible (e.g. cancer screening - so it is caught early), even if it occasionally predicts "Yes"/positive incorrectly. This indicates the model has **high sensitivity**.
+
+In other cases, it's more important for the model to correctly identify negative cases (e.g. absence of a serious but treatable diseases - want to avoid costly and invasive treatment unless completely necessary), even if it means occasionally predicting "No"/negative incorrectly, which indicates **high specificity**.
+</div>
+
+<br>
+
+### Summary
+
+And there we go - you've built a decision tree and tested it's predictive power on a test data set.
+
+```{r summary-quiz}
+quiz(
+  question("Imagine you've built a decision tree (or some other binary classification model) that predicts whether a person will choose to go holiday abroad or in their country of residence. If `holiday_abroad = \"Yes\"` is the positive outcome (i.e. the 'event'), what does a sensitivity of 92% and a specificity of 68% tell you about the model?",
+    answer("The model is very good at predicting who will go abroad but only okay at predicting who will stay home.", correct = TRUE),
+    answer("The model is not good at predicting who will go abroad but is good at predicting who will stay home.", correct = FALSE),
+    answer("The model is very good at predicting who will go abroad and who will stay home.", correct = FALSE),
+    incorrect = "Not quite, have another go!",
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+<br>
+
+## Decision trees with a continuous outcome variable
 
 ## Random forest
 
