@@ -858,7 +858,7 @@ titanic_test_pred_rf %>%
 
 It would appear that the random forest has higher *specificity* compared to the single decision tree from earlier ($0.91$ up to $0.94$) but lower *senstivity* ($0.72$ down to $0.66$). This can happen as a result of the process of combining the predictions of many decision trees: this averaging process can lead to a more conservative model that is less likely to make a positive prediction unless there is a strong agreement among the trees.
 
-Click [here]("https://www.statology.org/decision-tree-vs-random-forest/") to learn more about the differences between decision trees and random forests.
+Click [here](https://www.statology.org/decision-tree-vs-random-forest/) to learn more about the differences between decision trees and random forests.
 
 <br>
 
