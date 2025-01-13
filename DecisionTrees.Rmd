@@ -63,7 +63,7 @@ knitr::include_graphics("images/trees/bussinessman20-08.jpg")
 
 Similar to a regression model (see Intro to Linear Regression), we can build a decision tree using our data, and subsequently predict the chosen outcome variable based on the predictor variables used to build a model.
 
-The useful part of a decision tree is that the predicted outcome variable can be continuous:
+One major advantage of using a decision tree is that the predicted outcome variable can be numeric:
 
 > e.g. if I consumed four eggs, two slices of toast, and a cup of coffee for breakfast, how many miles will I cycle today?
 
@@ -77,7 +77,7 @@ or categorical:
 
 Imagine you have a data set containing many films: with information on genre, awards won, run time etc. for each and, critically, a binary (yes/no) variable on whether you would enjoying watching each movie.
 
-Below is an example of a tree, created using this fictional data, that you could use to decide whether to watch a given film. The process of creating a decision tree produces questions (or 'forks') that the algorithm deems are the best ways of separating our data - in this case, the films we consider watchable from those we do not. By simply answering questions about said film, we could work our way from top to bottom to reach a decision. 
+Below is an example of a tree, created using this fictional data, that you could use to decide whether to watch a given film. The process of creating a decision tree produces questions (or 'branches') that the algorithm deems are the best ways of separating our data - in this case, the films we consider watchable from those we do not. By simply answering questions about said film, we could work our way from top to bottom to reach a decision. 
 
 ```{r echo=FALSE, fig.align='center', out.width="75%"}
 knitr::include_graphics("images/trees/movies_tree.jpg")
@@ -250,7 +250,7 @@ Now our data is trimmed and consists of:
 
 a) the outcome variable of interest, named `survived_flag` in the answer above
 
-b) a collection of potential predictors that may be useful in our model when predicting `survived`
+b) a collection of potential predictors that may be useful in our model when predicting survival
 
 <br>
 
@@ -389,6 +389,19 @@ grade_this({
   fail("Something isn't quite right. Check your code and try again.")
 })
 ```
+
+<br>
+
+<div class="info_box">
+  <h4>Classification algorithm</h4>
+  We won't go into much detail here, but the default algorithm used by `rpart()` to build a classification tree like this is the **Gini impurity** method:
+  
+  * Gini impurity tells us how "mixed" a group of items is.
+  
+  * Imagine you have a jar with two types of sweets: red and blue. If the jar has only red sweets or only blue sweets, it's *pure* (Gini impurity is 0). But if the jar has a mix of both colors, it's *impure* (Gini impurity is higher).
+  
+  * In a decision tree, we want to split the data into groups that are as pure as possible — meaning each group should have mostly one type of outcome. The Gini impurity helps the tree figure out **which split makes the groups the purest**.
+</div>
 
 <br>
 
@@ -669,31 +682,200 @@ quiz(
 
 <br>
 
-## Decision trees with a continuous outcome variable
+## Decision trees with a numeric outcome variable
+
+Up until now we've focused on building a **classification** decision tree (remember, when building the model we specified `method = class`). This enabled us to predict a categorical variable with 2+ outcomes/levels.
+
+However, we can also use `rpart()` to build a decision tree that predicts a **numeric** variable. The main difference is specifying `method = anova`. Numeric data can be discrete (something we *count*, e.g. people) or continuous (something we *measure*, e.g. height).
+
+Try building a decision tree that predicts the number of siblings (+ spouse) a person on board the Titanic has (`sib_sp`). Don't worry about splitting the data and testing the model, just build it using `titanic_clean`.
+
+```{r continuous-tree-exercise-setup, include = FALSE}
+titanic_clean <- titanic_data %>%
+  filter(survived %in% c(0,1)) %>%
+  mutate(sex = as.factor(sex),
+         age_status = as.factor(if_else(age <= 16, "child", "adult")),
+         class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")),
+         survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
+         port_embarkation = as.factor(embarked)) %>%
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  tidyr::drop_na()
+```
+
+
+```{r continuous-tree-exercise, exercise = TRUE, exercise.setup = 'continuous-tree-exercise-setup'}
+titanic_fit_cont <- rpart(
+  formula = , # insert the relevant formula
+  data = , # insert titanic_clean
+  method = '' # insert the correct method
+)
+
+rpart.plot(x =  , # enter the name of the new model
+           yesno = 2,
+           fallen.leaves = TRUE,
+           faclen = 6,
+           digits = 2)
+```
+
+```{r continuous-tree-exercise-check}
+grade_this({
+  pass_if(
+    identical(
+      .result,
+      rpart(
+        formula = sib_sp ~ .,
+        data = titanic_clean,
+        method = 'anova'
+      )
+    ),
+    "Great job! Your answer is correct."
+  )
+  fail_if(
+    !identical(.result$formula, sib_sp ~ .),
+    "The formula argument is incorrect. Make sure it's `target_variable ~ .`."
+  )
+  fail_if(
+    !identical(.result$data, titanic_clean),
+    "The data argument is incorrect. Ensure you're using the appropriate dataset."
+  )
+  fail_if(
+    .result$method != 'anova',
+    "The method argument is incorrect - and remember it should be in quotation marks."
+  )
+  fail("Something isn't quite right. Check your code and try again.")
+})
+```
+
+```{r, eval = FALSE, echo = FALSE}
+titanic_fit_cont <- rpart(
+  formula = sib_sp ~ ., # insert the relevant formula
+  data = titanic_clean, # insert titanic_clean
+  method = 'anova' # insert the correct method
+)
+
+rpart.plot(titanic_fit_cont, # enter the name of the new model
+           yesno = 2,
+           fallen.leaves = TRUE,
+           faclen = 6,
+           digits = 2)
+```
+
+Once you have plotted a decision tree, try to interpret what the values shown in each node represent. (*Hint: the first value shown is no longer probability.*)
+
+<br>
+
 
 ## Random forest
 
+We've managed to build one decision tree, but what if we built a **forest** out of **many** decision trees? Then we could harness the power of many models to predict a target variable. This is known as the **random forest** method and we'll cover that now.
+
+After we built a collection of decision trees that each predicts with their own algorithm, the prediction with the most 'votes' becomes our model prediction. This is generally considered more powerful and more stable than just using one tree.
+
+> e.g. If 50 trees predict an outcome as `true` and 10 predict an outcome as `false`, the overall prediction of the forest will be `true`.
+
+We can create a random forest classifier using the `{ranger}` package.
+
+```{r eval = FALSE, echo = TRUE}
+install.packages("ranger")
+```
+
+See below as we create a random forest to predict Titanic survival:
+
+* The `data` and `formula` are the same as with our original decision tree.
+* `importance` tells the algorithm which method to use to determine a good 'split' in the data versus a bad one.
+    * We are using Gini `"impurity"` as was the default in our single `rpart()` decision tree.
+* `num.trees` simply tells the algorithm how many decision trees to create in the forest.
+* `mtry` tells the algorithm how many variables (selected randomly from the data set) to consider for splitting.
+    * In other words: in each tree, `mtry` variables are selected at each branch, providing a lot of variation across trees.
+* `min.mode.size` sets the minimum number of data points a node can contain - branching stops when the data is filtered down to this number
+    * smaller values allow trees to grow deeper, capturing more nuances in the data but at the risk of *overfitting*
+    * larger values result in shallow trees, improving the their ability to generalise to other data sets but at the risk of *underfitting*
+
+```{r eval = TRUE, echo = TRUE}
+library(ranger)
+
+set.seed(123) # set.seed for the purposes of this course
+rf_classifier <- ranger(data = titanic_train,
+                        formula = survived_flag ~ .,
+                        importance = "impurity",
+                        num.trees = 1000,
+                        mtry = 2,
+                        min.node.size = 5)
+
+rf_classifier
+```
+
+The output shown here tells us that our random forest has an 'out-of-bag' (OOB) prediction error of 19.65%. Check the information box below to get a better understanding of what this means.
+
+<div class="info_box">
+  <h4>Bootstrapping</h4>
+  For those who are interested, OOB samples are selected during training of the random forest. Each tree is built using approximately two thirds of the available data, with one third left out to test on afterwards (known as an OOB sample).
+  
+  This is a form of **bootstrapping**, wherein the algorithm randomly samples some of our data and treats it like a new data set for each tree. The OOB prediction error is calculated by i) taking each observation in the training set and ii) getting the trees that *did not* use this observation during training to make a prediction with it.
+  
+  By comparing the predicted values for these OOB samples to their actual values, the random forest can output an OOB prediction error using the training data alone.
+</div>
+
+<br>
+
+As the decision trees are created, a measure of how important each variable is to the final prediction performance is built up, **i.e. the variables that divide the data best (according to the target variable) are ranked highest**.
+
+`importance()` allows us to see this metric:
+
+```{r eval = TRUE, echo = TRUE}
+importance(rf_classifier)
+```
+
+We can see that `sex` and `class` are the most important predictors of survival.
+
+<br>
+
+### Testing the random forest on the test data
+
+Unfortunately, `ranger()` doesn't work with `{modelr}`'s `add_predictions()` function, so we have to use a small bit of `{dplyr}` combined with the `predict()` function from `{stats}` to get what we want:
+
+```{r, eval = TRUE, echo = TRUE}
+titanic_test_pred_rf <- titanic_test %>%
+  mutate(survived_pred = predict(rf_classifier, data = titanic_test)$predictions)
+
+titanic_test_pred_rf
+```
 
 
+Now we've added a column of predicted values to our test data, we can examine the resulting **confusion matrix** as well as the **sensitivity** and **specificity** metrics (using the `{yardstick}` package from before):
 
+```{r, eval = TRUE, echo = TRUE}
+titanic_test_pred_rf %>%
+              conf_mat(truth = survived_flag, estimate = survived_pred)
 
+titanic_test_pred_rf %>%
+              sensitivity(truth = survived_flag, estimate = survived_pred, event_level = "second")
 
+titanic_test_pred_rf %>%
+              specificity(truth = survived_flag, estimate = survived_pred, event_level = "second")
 
+```
 
-## Help & Feedback
+It would appear that the random forest has higher *specificity* compared to the single decision tree from earlier ($0.91$ up to $0.94$) but lower *senstivity* ($0.72$ down to $0.66$). This can happen as a result of the process of combining the predictions of many decision trees: this averaging process can lead to a more conservative model that is less likely to make a positive prediction unless there is a strong agreement among the trees.
 
-Now it's time to embed your new knowledge and skills, expand with related technologies (e.g. git), and when you're ready *Take R Further* with more training opportunities.
+Click [here]("https://www.statology.org/decision-tree-vs-random-forest/") to learn more about the differences between decision trees and random forests.
+
+<br>
+
+## Review & Feedback
+
+Congratulations on completing this course on **Decision Trees**! We hope you found it useful and you know have confidence to go and try to build your own.
+
+#### Helpful links
+
+* [statology.com page on building a decision tree in R](https://www.statology.org/how-to-build-decision-trees-r/)
+* [statology.com page on decision trees vs random forests](https://www.statology.org/decision-tree-vs-random-forest/)
 
 #### Help
 
-<div>
-```{r echo=FALSE, fig.align='center', out.width="75%"}
-knitr::include_graphics("images/illustrations/r_rollercoaster.png")
-```
-</div>
-
 * [R User Group Teams](https://teams.microsoft.com/l/team/19%3ae9f55a12b7d94ef49877ff455a07f035%40thread.tacv2/conversations?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a) / [Technical Queries](https://teams.microsoft.com/l/channel/19%3a9620ef6cf8234d50a0f95caba65a3edf%40thread.tacv2/Technical%2520Queries?groupId=ec4250f9-b70a-4f32-9372-a232ccb4f713&tenantId=10efe0bd-a030-4bca-809c-b5e6745e499a)
-* [Transforming Publishing Team email](mailto:phs.transformingpublishing@nhs.net?subject=Introduction to R Training Online - Help)
+* `?<function_name>` (or press `F1` while cursor is on relevant function)
+* Data Science Team email: phs.datascience@phs.scot
 
 #### Feedback
 
