@@ -61,7 +61,7 @@ knitr::include_graphics("images/trees/bussinessman20-08.jpg")
 * A map of the possible outcomes of a series of related choices, often seen in businesses as ‘decision flowcharts’ or ‘process flowcharts’
 * A series of choices/questions that are read downwards, that lead to a final prediction for any given data point
 
-Similar to a regression model (see Intro to Linear Regression), we can build a decision tree using our data, and subsequently predict the chosen outcome variable based on the predictor variables used to build a model.
+Similar to a regression model (see [Intro to Linear Regression](https://scotland.shinyapps.io/phs-learnr-linearmodelling/)), we can build a decision tree using our data, and subsequently predict the chosen outcome variable based on the predictor variables used to build a model.
 
 One major advantage of using a decision tree is that the predicted outcome variable can be numeric:
 
@@ -106,7 +106,7 @@ quiz(
 knitr::include_graphics("images/trees/tree_schematic.jpg")
 ```
 
-Notice that, when interpreting a decision tree, we start at the top of the tree. Unintuitively, this top node is referred to as the **root node**. The questions/forks we use to get to a final prediction/decision are known as **intermediate nodes** and the bottom nodes are called **leaf nodes**.
+Notice that, when interpreting a decision tree, we start at the top of the tree. Unintuitively, this top node is referred to as the **root node**. Associated with this is a question/branch that leads to **intermediate nodes** which, following more branches, eventually lead to **leaf nodes** at the bottom.
 
 <br>
 
@@ -130,7 +130,7 @@ To do this we’re going to:
 
 2.	Wrangle the data and perform some **feature engineering**
 
-3.	Create some simple plots to help identify useful predictors for our model
+3.	Optional: Create some simple plots to help identify useful predictors for our model
 
 4.	Build a decision tree model using `rpart()` from the `{rpart}` package
 
@@ -197,23 +197,23 @@ Here is what we’ll do in this section:
 
 2.	Turn the relevant variables into factors (`sex`, `survived`, `pclass`, `embarkation`)
 
-  o	This way the model will identify `sex`, for example, as a factor with 2 levels as opposed to a         character variable
+      *	This way the model will identify `sex`, for example, as a factor with 2 levels as opposed to a         character variable
 
 3.	Create an `age_status` variable which groups individuals under (and including) 16 years of age into a category called “child” category and those over 16 into a category called “adult”.
 
-  o	This is an example of **feature engineering** in which we are creating a new child/adult variable        based on a variable we already have, `age`
+      *	This is an example of **feature engineering** in which we are creating a new child/adult variable        based on a variable we already have, `age`
 
 4.	Drop any variables we don’t need
 
-  o	It’s important to identify and remove the variables which will be of no use inside a decision tree         prior to building it
+      *	It’s important to identify and remove the variables which will be of no use inside a decision tree         prior to building it
 
-  o	We’ll remove those variables that are unique to each row and can’t be grouped into meaningful            categories: `passenger_id`, `name`, `ticket`
+      *	We’ll remove those variables that are unique to each row and can’t be grouped into meaningful            categories: `passenger_id`, `name`, `ticket`
 
-  o	We’ll remove `fare` and `cabin` as the information in these is better represented in the categorical `pclass` variable already 
+      *	We’ll remove `fare` and `cabin` as the information in these is better represented in the categorical `pclass` variable already 
 
 5.	Drop any rows with `NA`
 
-  o	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as        otherwise we sacrifice rows for the sake of variables we don’t want anyway
+      *	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as        otherwise we sacrifice rows for the sake of variables we don’t want anyway
 
 
 Try having a go at the above list of cleaning/wrangling tasks on your own before looking at the answers below.
@@ -223,7 +223,7 @@ titanic_clean <- titanic_data %>%
 ```
 
 <details>
-<summary>Data cleaning code - *click here to expand*</summary>
+<summary>Data cleaning code - ***click here to expand***</summary>
 
 ```{r, echo = TRUE, eval = TRUE}
 titanic_clean <- titanic_data %>%
@@ -258,8 +258,24 @@ b) a collection of potential predictors that may be useful in our model when pre
 
 This isn’t a strictly necessary step when building a decision tree, but it’s good practice to understand your data before building a model with it. Creating some quick visualisations is a great way to better understand your data.
 
-Use ggplot2 to create some visualisations to see which variables appear to have the greatest effect on survival.
-```{r ggplot-input, exercise = TRUE}
+Use `ggplot()` to create some visualisations to see which variables appear to have the greatest effect on survival.
+
+*Hint: try plotting* `survived_flag` *and colour-coding by different variables.*
+
+```{r ggplot-input-setup, include = FALSE}
+titanic_clean <- titanic_data %>%
+  filter(survived %in% c(0,1)) %>%
+  mutate(sex = as.factor(sex), 
+         age_status = as.factor(if_else(age <= 16, "child", "adult")),
+         class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")), 
+         survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
+         port_embarkation = as.factor(embarked)) %>%
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  tidyr::drop_na()
+```
+
+
+```{r ggplot-input, exercise = TRUE, exercise.setup = 'ggplot-input-setup'}
 titanic_clean %>%
   ggplot() +
   ## start coding here
@@ -270,7 +286,7 @@ Once we create the model in the next section, we’ll see if your predictions we
 
 ## Build and plot the decision tree
 
-In this section, we’re going to build the decision tree itself. However, we will want to **test** the performance of the model on some of our `titanic_clean` data. For this reason, we will split the data randomly into an 80%/20% split: building the model on 80% of the data and holding aside 20% to test if the predicted `survival` values it returns are similar to the true values in the data.
+In this section, we’re going to build the decision tree itself. However, we will want to **test** the performance of the model on some of our `titanic_clean` data. For this reason, we will split the data randomly into an 80%/20% split: building the model on 80% of the data and holding aside 20% to test if the predicted `survived_flag` values it returns are similar to the true values in the data.
 
 ### Train/test split
 
@@ -298,7 +314,7 @@ Note the use of `set.seed()`. This just means that the random sampling carried o
 
 This now gives us two data frames to work with: the larger training data `titanic_train` with which we’ll build the decision tree, and the smaller testing data `titanic_train` with which we’ll test the tree with later. It’s important that we leave this testing data aside until then.
 
-We can check how *balanced* the data frames are, in terms of our outcome variable of interest `survived`, by using the `tabyl()` function from the `{janitor}` package. If one side of the train/test split had the large majority of passengers who survived, and the other side had the large majority of passengers who did not, it would be a good idea to resample the data.
+We can check how *balanced* the data frames are, in terms of our outcome variable of interest `survived_flag`, by using the `tabyl()` function from the `{janitor}` package. If one side of the train/test split had the large majority of passengers who survived, and the other side had the large majority of passengers who did not, it would be a good idea to resample the data.
 
 ```{r, echo = TRUE, eval = TRUE}
 # check for balanced sets
@@ -319,9 +335,9 @@ It’s very unlikely that we’ll get an exact match between data sets, but in g
 
 <br>
 
-### Build tree using training data
+### Build the tree using training data
 
-Now we've got our training data ready, we can build the tree using the `rpart()` function from the `{rpart}` package. `rpart` stands for `recursive partitioning and regression trees` - catchy name.
+Now we've got our training data ready, we can build the tree using the `rpart()` function from the `{rpart}` package. `rpart` stands for *recursive partitioning and regression trees* - catchy name.
 
 This function requires:
 
@@ -333,7 +349,7 @@ This function requires:
 
 We'll call the tree model `titanic_fit`. Have a go at creating the model below:
 
-```{r tree-setup, echo = FALSE, eval = TRUE}
+```{r tree-setup, include = FALSE}
 titanic_clean <- titanic_data %>%
   filter(survived %in% c(0,1)) %>%
   mutate(sex = as.factor(sex), 
@@ -365,25 +381,25 @@ titanic_fit <- rpart(
 grade_this({
   pass_if(
     identical(
-      .result,
+      .result$call,
       rpart(
         formula = survived_flag ~ .,
         data = titanic_train,
         method = 'class'
-      )
+      )$call
     ),
     "Great job! Your answer is correct."
   )
   fail_if(
-    !identical(.result$formula, survived_flag ~ .),
+    !all.equal(.result$call$formula, survived_flag ~ .),
     "The formula argument is incorrect. Make sure it's `target_variable ~ .`."
   )
   fail_if(
-    !identical(.result$data, titanic_train),
+    !all.equal(.result$call$data, titanic_train),
     "The data argument is incorrect. Ensure you're using the appropriate training dataset."
   )
   fail_if(
-    .result$method != 'class',
+    .result$call$method != "class",
     "The method argument is incorrect - and remember it should be in quotation marks."
   )
   fail("Something isn't quite right. Check your code and try again.")
