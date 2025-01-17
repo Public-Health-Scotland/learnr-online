@@ -258,7 +258,7 @@ b) a collection of potential predictors that may be useful in our model when pre
 
 This isn’t a strictly necessary step when building a decision tree, but it’s good practice to understand your data before building a model with it. Creating some quick visualisations is a great way to better understand your data.
 
-Use `ggplot()` to create some visualisations to see which variables appear to have the greatest effect on survival.
+Use `ggplot()` to create some visualisations to see which variables appear to have the greatest effect on survival. If you don't feel confident using `ggplot()`, feel free to skip this section for now and make sure to check out our [data visualisation course](https://scotland.shinyapps.io/phs-learnr-dataviz/).
 
 *Hint: try plotting* `survived_flag` *and colour-coding by different variables.*
 
