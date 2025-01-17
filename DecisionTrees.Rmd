@@ -345,7 +345,7 @@ This function requires:
 
 2) The training data, `titanic_train`, to be passed to the `data` argument
 
-3) The type of variable we are interested in to be passed to the `method` argument: `class` for  predicting categorical variables (e.g. survived or not), `anova` for predicting continuous variables.
+3) The type of variable we are interested in to be passed to the `method` argument: `class` for  predicting categorical variables (e.g. survived or not), `anova` for predicting numeric variables.
 
 We'll call the tree model `titanic_fit`. Have a go at creating the model below:
 
@@ -706,7 +706,7 @@ However, we can also use `rpart()` to build a decision tree that predicts a **nu
 
 **Step 1**: Try building a decision tree that predicts the number of siblings (+ spouse) a person on board the Titanic has (`sib_sp`). Don't worry about splitting the data and testing the model, just build it using `titanic_clean`.
 
-```{r continuous-tree-exercise1-setup, include = FALSE}
+```{r numeric-tree-exercise1-setup, include = FALSE}
 titanic_clean <- titanic_data %>%
   filter(survived %in% c(0,1)) %>%
   mutate(sex = as.factor(sex),
@@ -718,7 +718,7 @@ titanic_clean <- titanic_data %>%
   tidyr::drop_na()
 ```
 
-```{r continuous-tree-exercise1, exercise = TRUE, exercise.setup = 'continuous-tree-exercise1-setup'}
+```{r numeric-tree-exercise1, exercise = TRUE, exercise.setup = 'numeric-tree-exercise1-setup'}
 titanic_fit_cont <- rpart(
   formula = , # insert the relevant formula
   data = , # insert titanic_clean
@@ -726,7 +726,7 @@ titanic_fit_cont <- rpart(
 )
 ```
 
-```{r continuous-tree-exercise1-check}
+```{r numeric-tree-exercise1-check}
 grade_this({
   pass_if(
     identical(
@@ -758,7 +758,7 @@ grade_this({
 
 **Step 2**: Plot the decision tree using `rpart.plot()` with whatever formatting you desire.
 
-```{r continuous-tree-exercise2-setup, include = FALSE}
+```{r numeric-tree-exercise2-setup, include = FALSE}
 titanic_clean <- titanic_data %>%
   filter(survived %in% c(0,1)) %>%
   mutate(sex = as.factor(sex),
@@ -776,7 +776,7 @@ titanic_fit_cont <- rpart(
 )
 ```
 
-```{r continuous-tree-exercise2, exercise = TRUE, exercise.setup = 'continuous-tree-exercise2-setup'}
+```{r numeric-tree-exercise2, exercise = TRUE, exercise.setup = 'numeric-tree-exercise2-setup'}
 rpart.plot(x = , # enter the name of the new model
            yesno = 2,
            fallen.leaves = TRUE,
