@@ -395,7 +395,7 @@ grade_this({
     "The formula argument is incorrect. Make sure it's `target_variable ~ .`."
   )
   fail_if(
-    !all.equal(.result$call$data, titanic_train),
+    !all.equal(as.character(.result$call$data), "titanic_train"),
     "The data argument is incorrect. Ensure you're using the appropriate training dataset."
   )
   fail_if(
@@ -425,7 +425,7 @@ grade_this({
 
 Great! Now we have our tree model, let's do the exciting part and plot it.
 
-For visualising trees, we use the `rpart.plot()` function from the `{rpart.plot}` package. Don't worry about all the other arguments for now, just notice that the first argument we pass to it is the tree model object itself.
+For visualising trees, we use the `rpart.plot()` function from the `{rpart.plot}` package. Don't worry about all the other arguments for now, just notice that the first argument we pass to it (`x`) is the tree model object itself.
 
 ```{r, include = FALSE}
 titanic_fit <- rpart(
@@ -439,7 +439,7 @@ titanic_fit <- rpart(
 ```{r, echo = TRUE, eval = TRUE}
 library(rpart.plot)
 
-rpart.plot(titanic_fit,
+rpart.plot(x = titanic_fit,
            yesno = 2,
            fallen.leaves = TRUE,
            faclen = 6,
@@ -478,7 +478,7 @@ Let's start from the top and interpret the tree along a single route top to bott
 
 * This node asks whether `age_status = adult` and, if `yes`, leads us along a branch to a **leaf node** at the bottom left that predicts `No`, with $prob(survival) = 0.13$. 43% of the data set ends up at this node.
 
-The algorithm used to build the model uses a probability of 0.5 as the threshold for classification: i.e. if prob(survival) < 0.5, the model predicts `No`. Furthermore, the colour of each node represents the probability: dark blue -> light blue -> light green -> dark green as the probability of survival increases.
+The algorithm used to build the model uses a probability of 0.5 as the threshold for classification: i.e. if $prob(survival) < 0.5$, the model predicts `No`. Furthermore, the colour of each node represents the probability: dark blue -> light blue -> light green -> dark green as the probability of survival increases.
 
 Now, to test your ability to interpret the tree, a quiz...
 
@@ -508,7 +508,7 @@ quiz(
 Now we will take a look at the `rpart.plot()` arguments. Below is a reminder of the code we used above: 
 
 ```{r, echo = TRUE, eval = FALSE}
-rpart.plot(titanic_fit,
+rpart.plot(x = titanic_fit,
            yesno = 1,
            fallen.leaves = TRUE,
            faclen = 3,
@@ -551,7 +551,7 @@ titanic_fit <- rpart(
 
 
 ```{r plot-format-exercise, exercise = TRUE, exercise.setup = 'plot-format-exercise-setup'}
-rpart.plot(titanic_fit,
+rpart.plot(x = titanic_fit,
            yesno = , # try 0, 1, and 2
            fallen.leaves = , # try TRUE and FALSE
            varlen = , # try any values
@@ -669,7 +669,7 @@ The model *specificity* is: $0.91$
 
 <br>
 
-So, our decision tree is better at predicting who did *not* survive the Titanic than it is at predicting those who *did* survive.
+So, our decision tree is better at predicting who did *not* survive the Titanic than it is at predicting who *did* survive.
 
 <div class="info_box">
 You might wonder why it's necessary to have different calculations for this. In some situations, it's crucial for a model to identify as many positive cases as possible (e.g. cancer screening - so it is caught early), even if it occasionally predicts "Yes"/positive incorrectly. This indicates the model has **high sensitivity**.
@@ -686,7 +686,7 @@ And there we go - you've built a decision tree and tested it's predictive power 
 ```{r summary-quiz}
 quiz(
   question("Imagine you've built a decision tree (or some other binary classification model) that predicts whether a person will choose to go holiday abroad or in their country of residence. If `holiday_abroad = \"Yes\"` is the positive outcome (i.e. the 'event'), what does a sensitivity of 92% and a specificity of 68% tell you about the model?",
-    answer("The model is very good at predicting who will go abroad but only okay at predicting who will stay home.", correct = TRUE),
+    answer("The model is very good at predicting who will go abroad while fairly good at predicting who will stay home.", correct = TRUE),
     answer("The model is not good at predicting who will go abroad but is good at predicting who will stay home.", correct = FALSE),
     answer("The model is very good at predicting who will go abroad and who will stay home.", correct = FALSE),
     incorrect = "Not quite, have another go!",
@@ -704,9 +704,9 @@ Up until now we've focused on building a **classification** decision tree (remem
 
 However, we can also use `rpart()` to build a decision tree that predicts a **numeric** variable. The main difference is specifying `method = anova`. Numeric data can be discrete (something we *count*, e.g. people) or continuous (something we *measure*, e.g. height).
 
-Try building a decision tree that predicts the number of siblings (+ spouse) a person on board the Titanic has (`sib_sp`). Don't worry about splitting the data and testing the model, just build it using `titanic_clean`.
+**Step 1**: Try building a decision tree that predicts the number of siblings (+ spouse) a person on board the Titanic has (`sib_sp`). Don't worry about splitting the data and testing the model, just build it using `titanic_clean`.
 
-```{r continuous-tree-exercise-setup, include = FALSE}
+```{r continuous-tree-exercise1-setup, include = FALSE}
 titanic_clean <- titanic_data %>%
   filter(survived %in% c(0,1)) %>%
   mutate(sex = as.factor(sex),
@@ -718,63 +718,72 @@ titanic_clean <- titanic_data %>%
   tidyr::drop_na()
 ```
 
-
-```{r continuous-tree-exercise, exercise = TRUE, exercise.setup = 'continuous-tree-exercise-setup'}
+```{r continuous-tree-exercise1, exercise = TRUE, exercise.setup = 'continuous-tree-exercise1-setup'}
 titanic_fit_cont <- rpart(
   formula = , # insert the relevant formula
   data = , # insert titanic_clean
   method = '' # insert the correct method
 )
-
-rpart.plot(x =  , # enter the name of the new model
-           yesno = 2,
-           fallen.leaves = TRUE,
-           faclen = 6,
-           digits = 2)
 ```
 
-```{r continuous-tree-exercise-check}
+```{r continuous-tree-exercise1-check}
 grade_this({
   pass_if(
     identical(
-      .result,
+      .result$call,
       rpart(
         formula = sib_sp ~ .,
         data = titanic_clean,
         method = 'anova'
-      )
+      )$call
     ),
     "Great job! Your answer is correct."
   )
   fail_if(
-    !identical(.result$formula, sib_sp ~ .),
+    !all.equal(.result$call$formula, sib_sp ~ .),
     "The formula argument is incorrect. Make sure it's `target_variable ~ .`."
   )
   fail_if(
-    !identical(.result$data, titanic_clean),
-    "The data argument is incorrect. Ensure you're using the appropriate dataset."
+    !all.equal(as.character(.result$call$data), "titanic_clean"),
+    "The data argument is incorrect. Ensure you're using the complete dataset."
   )
   fail_if(
-    .result$method != 'anova',
+    .result$call$method != "anova",
     "The method argument is incorrect - and remember it should be in quotation marks."
   )
   fail("Something isn't quite right. Check your code and try again.")
 })
 ```
 
-```{r, eval = FALSE, echo = FALSE}
+
+**Step 2**: Plot the decision tree using `rpart.plot()` with whatever formatting you desire.
+
+```{r continuous-tree-exercise2-setup, include = FALSE}
+titanic_clean <- titanic_data %>%
+  filter(survived %in% c(0,1)) %>%
+  mutate(sex = as.factor(sex),
+         age_status = as.factor(if_else(age <= 16, "child", "adult")),
+         class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")),
+         survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
+         port_embarkation = as.factor(embarked)) %>%
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  tidyr::drop_na()
+
 titanic_fit_cont <- rpart(
   formula = sib_sp ~ ., # insert the relevant formula
   data = titanic_clean, # insert titanic_clean
   method = 'anova' # insert the correct method
 )
+```
 
-rpart.plot(titanic_fit_cont, # enter the name of the new model
+```{r continuous-tree-exercise2, exercise = TRUE, exercise.setup = 'continuous-tree-exercise2-setup'}
+rpart.plot(x = , # enter the name of the new model
            yesno = 2,
            fallen.leaves = TRUE,
            faclen = 6,
            digits = 2)
 ```
+
 
 Once you have plotted a decision tree, try to interpret what the values shown in each node represent. (*Hint: the first value shown is no longer probability.*)
 
@@ -785,7 +794,7 @@ Once you have plotted a decision tree, try to interpret what the values shown in
 
 We've managed to build one decision tree, but what if we built a **forest** out of **many** decision trees? Then we could harness the power of many models to predict a target variable. This is known as the **random forest** method and we'll cover that now.
 
-After we built a collection of decision trees that each predicts with their own algorithm, the prediction with the most 'votes' becomes our model prediction. This is generally considered more powerful and more stable than just using one tree.
+For a given observation/data point, each tree in the forest will make a prediction with their own algorithm and the prediction with the most 'votes' becomes the *model* prediction. This is generally considered more powerful and more stable than just using one tree.
 
 > e.g. If 50 trees predict an outcome as `true` and 10 predict an outcome as `false`, the overall prediction of the forest will be `true`.
 
@@ -802,7 +811,7 @@ See below as we create a random forest to predict Titanic survival:
     * We are using Gini `"impurity"` as was the default in our single `rpart()` decision tree.
 * `num.trees` simply tells the algorithm how many decision trees to create in the forest.
 * `mtry` tells the algorithm how many variables (selected randomly from the data set) to consider for splitting.
-    * In other words: in each tree, `mtry` variables are selected at each branch, providing a lot of variation across trees.
+    * In other words: in each tree, `mtry` number of variables are considered at each branch, providing a lot of variation across trees.
 * `min.mode.size` sets the minimum number of data points a node can contain - branching stops when the data is filtered down to this number
     * smaller values allow trees to grow deeper, capturing more nuances in the data but at the risk of *overfitting*
     * larger values result in shallow trees, improving the their ability to generalise to other data sets but at the risk of *underfitting*
