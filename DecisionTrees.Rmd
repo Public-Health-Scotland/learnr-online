@@ -39,7 +39,7 @@ knitr::include_graphics("images/phs-logo.png")
 
 Welcome to an Introduction to Decision Trees. This course is designed as a self-led introduction to decision trees for anyone in Public Health Scotland. Throughout this course there will be quizzes to test your knowledge and opportunities to modify and write R code.
 
-```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%", fig.cap = "source: vecteezy.com"}
+```{r intro-pathway, echo=FALSE, fig.align='center', out.width="100%", fig.cap = "source: vecteezy.com", fig.alt = "Cartoon of a man deciding which road to go down."}
 knitr::include_graphics("images/trees/bussinessman20-08.jpg")
 ```
 
@@ -79,7 +79,7 @@ Imagine you have a data set containing many films: with information on genre, aw
 
 Below is an example of a tree, created using this fictional data, that you could use to decide whether to watch a given film. The process of creating a decision tree produces questions (or 'branches') that the algorithm deems are the best ways of separating our data - in this case, the films we consider watchable from those we do not. By simply answering questions about said film, we could work our way from top to bottom to reach a decision. 
 
-```{r echo=FALSE, fig.align='center', out.width="75%"}
+```{r echo=FALSE, fig.align='center', out.width="75%", fig.alt = "A decision tree example showing questions regarding movies to help a user decide which movie to watch."}
 knitr::include_graphics("images/trees/movies_tree.jpg")
 ```
 
@@ -102,7 +102,7 @@ quiz(
 
 ### Decision tree structure
 
-```{r echo=FALSE, fig.align='center', out.width="75%"}
+```{r echo=FALSE, fig.align='center', out.width="75%", fig.alt = "A diagram showing the general layout of a decision tree: root node at the top, branching down to intermediate nodes which eventually end at lead nodes at the bottom."}
 knitr::include_graphics("images/trees/tree_schematic.jpg")
 ```
 
@@ -110,7 +110,7 @@ Notice that, when interpreting a decision tree, we start at the top of the tree.
 
 <br>
 
-```{r echo=FALSE, fig.align='center', out.width="75%"}
+```{r echo=FALSE, fig.align='center', out.width="75%", fig.alt = "A diagram showing how a decision tree is interpreted upside down, i.e. a root at the top to leaves at the bottom."}
 knitr::include_graphics("images/trees/flipped_tree.jpg")
 ```
 
