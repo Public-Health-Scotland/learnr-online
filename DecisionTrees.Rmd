@@ -193,28 +193,30 @@ Prior to building a model, cleaning and wrangling our data is always the first s
 
 Here is what we’ll do in this section:
 
-1.	Filter down to only observations which have a `survived` flag (i.e. that aren’t missing)
+1.	Filter down to only observations which have a `survived` flag (i.e. that aren’t missing).
 
-2.	Turn the relevant variables into factors (`sex`, `survived`, `pclass`, `embarkation`)
+2.	Turn the relevant variables into factors (`sex`, `survived`, `pclass`, `embarkation`).
 
-      *	This way the model will identify `sex`, for example, as a factor with 2 levels as opposed to a         character variable
-
+      *	This way the model will identify `sex`, for example, as a factor with 2 levels as opposed to a         character variable.
+      
 3.	Create an `age_status` variable which groups individuals under (and including) 16 years of age into a category called “child” category and those over 16 into a category called “adult”.
 
-      *	This is an example of **feature engineering** in which we are creating a new child/adult variable        based on a variable we already have, `age`
+      *	This is an example of **feature engineering** in which we are creating a new child/adult variable        based on a variable we already have, `age`.
 
-4.	Drop any variables we don’t need
+4.	Drop any variables we don’t need.
 
-      *	It’s important to identify and remove the variables which will be of no use inside a decision tree         prior to building it
+      *	It’s important to identify and remove the variables which will be of no use inside a decision
+      tree prior to building it.
 
-      *	We’ll remove those variables that are unique to each row and can’t be grouped into meaningful            categories: `passenger_id`, `name`, `ticket`
+      *	We’ll remove those variables that are unique to each row and can’t be grouped into meaningful
+      categories: `passenger_id`, `name`, `ticket`.
 
-      *	We’ll remove `fare` and `cabin` as the information in these is better represented in the categorical `pclass` variable already 
+      *	We’ll remove `fare` and `cabin` as the information in these is better represented in the
+      categorical `pclass` variable already.
 
-5.	Drop any rows with `NA`
+5.	Drop any remaining rows with `NA`.
 
-      *	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as        otherwise we sacrifice rows for the sake of variables we don’t want anyway
-
+      *	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as        otherwise we sacrifice rows for the sake of variables we don’t want anyway.
 
 Try having a go at the above list of cleaning/wrangling tasks on your own before looking at the answers below.
 ```{r wrangle-input, exercise = TRUE}
