@@ -663,7 +663,7 @@ The model *sensitivity* is: $0.72$
 
 `specificity()` calculates the **true negative rate**, i.e. the proportion of times our model predicted "No" correctly.
 
-```{r, eval = TRUE, echo = FALSE}
+```{r, eval = TRUE, echo = TRUE}
 titanic_test_pred %>% 
   specificity(truth = survived_flag, estimate = survived_pred, event_level = "second")
 ```
