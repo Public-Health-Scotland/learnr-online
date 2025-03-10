@@ -48,7 +48,7 @@ knitr::include_graphics("images/trees/bussinessman20-08.jpg")
 <div class="info_box">
   <h4>Course Info</h4>
   <ul>
-     <li>**Prerequisites:** [Introduction to R]("https://scotland.shinyapps.io/phs-learnr-intro/"), [Data Visualisation in R](https://scotland.shinyapps.io/phs-learnr-dataviz/)</li>
+     <li>**Prerequisites:** [Introduction to R](https://scotland.shinyapps.io/phs-learnr-intro/), [Data Visualisation in R](https://scotland.shinyapps.io/phs-learnr-dataviz/)</li>
     <li>This course is built to flow through sections and build on previous knowledge. If you're comfortable with a particular section, you can skip it.</li>
     <li>Most sections have multiple parts to them. Navigate the course by using the buttons at the bottom of the screen to Continue or go to the Next Topic.</li>
     <li>The course will also show progress through sections, a green tick will appear on sections you've completed, and it will remember your place if you decide to close your browser and come back later.</li>
@@ -682,6 +682,8 @@ So, our decision tree is better at predicting who did *not* survive the Titanic 
 You might wonder why it's necessary to have different calculations for this. In some situations, it's crucial for a model to identify as many positive cases as possible (e.g. cancer screening - so it is caught early), even if it occasionally predicts "Yes"/positive incorrectly. This indicates the model has **high sensitivity**.
 
 In other cases, it's more important for the model to correctly identify negative cases (e.g. absence of a serious but treatable diseases - want to avoid costly and invasive treatment unless completely necessary), even if it means occasionally predicting "No"/negative incorrectly, which indicates **high specificity**.
+
+For more info on this topic, click [here](https://pediaa.com/what-is-the-difference-between-specificity-and-sensitivity/).
 </div>
 
 <br>
