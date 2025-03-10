@@ -75,7 +75,7 @@ or categorical:
 
 ### Example: films worth watching
 
-Imagine you have a data set containing many films: with information on genre, awards won, run time etc. for each and, critically, a binary (yes/no) variable on whether you would enjoying watching each movie.
+Imagine you have data on many films: with information on genre, awards won, run time etc. for each and, critically, a binary (yes/no) variable on whether you would enjoying watching each movie.
 
 Below is an example of a tree, created using this fictional data, that you could use to decide whether to watch a given film. The process of creating a decision tree produces questions (or 'branches') that the algorithm deems are the best ways of separating our data - in this case, the films we consider watchable from those we do not. By simply answering questions about said film, we could work our way from top to bottom to reach a decision. 
 
@@ -122,7 +122,7 @@ You can think of it as an upside-down tree, really. Starting from the root at th
 
 ## Goal of this course
 
-In this course, we’re going to build a decision tree based off a dataset about passengers onboard the Titanic. This model will allow us to predict who was most likely to survive the unfortunate sinking of the vessel (apologies for the morbid nature of this data!).
+In this course, we’re going to build a decision tree based on data about passengers on-board the Titanic. This model will allow us to predict who was most likely to survive the unfortunate sinking of the vessel (apologies for the morbid nature of this data!).
 
 To do this we’re going to:
 
@@ -216,7 +216,7 @@ Here is what we’ll do in this section:
 
 5.	Drop any remaining rows with `NA`.
 
-      *	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as        otherwise we sacrifice rows for the sake of variables we don’t want anyway.
+      *	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as otherwise we sacrifice rows for the sake of variables we don’t want anyway.
 
 Try having a go at the above list of cleaning/wrangling tasks on your own before looking at the answers below.
 ```{r wrangle-input, exercise = TRUE}
@@ -292,7 +292,7 @@ In this section, we’re going to build the decision tree itself. However, we wi
 
 ### Train/test split
 
-The following code will split the data into ‘training’ and ‘testing’ subsets.
+The following code will split the data into "training" and "testing" subsets.
 ```{r echo = TRUE, eval = TRUE}
 # number of rows in the data
 n_data <- nrow(titanic_clean)
@@ -333,7 +333,7 @@ titanic_test %>%
 ```
 And this shows us that 37.3% of passengers in the testing data survived and 62.7% did not.
 
-It’s very unlikely that we’ll get an exact match between data sets, but in general the gap between the two will be smaller with larger datasets. For now, this seems like a pretty even split.
+It’s very unlikely that we’ll get an exact match between data frames, but in general the gap between the two will be smaller with larger data. For now, this seems like a pretty even split.
 
 <br>
 
@@ -468,7 +468,7 @@ rpart.plot(titanic_fit,
 
 Let's start from the top and interpret the tree along a single route top to bottom (or root to leaf).
 
-* All of the training data, before being split up by any questions, is represented in the **root node** at the top: the tree predicts that `survived = No` is the most likely outcome overall, with a probability of surviving of 0.41.  The % value shown in each node represents the proportion of the dataset that passes through that node (here, 100%).
+* All of the training data, before being split up by any questions, is represented in the **root node** at the top: the tree predicts that `survived = No` is the most likely outcome overall, with a probability of surviving of 0.41.  The % value shown in each node represents the proportion of the data that passes through that node (here, 100%).
 
 * The first "question" asked of our data is `sex = male` (think of it like an operator, `sex == male`) with two potential branches: `yes` or `no`.
 
@@ -478,7 +478,7 @@ Let's start from the top and interpret the tree along a single route top to bott
 
 * `yes` leads us to another **intermediate node**, which again predicts `No` to survival ($prob(survival = 0.16)$) and contains 49% of the data.
 
-* This node asks whether `age_status = adult` and, if `yes`, leads us along a branch to a **leaf node** at the bottom left that predicts `No`, with $prob(survival) = 0.13$. 43% of the data set ends up at this node.
+* This node asks whether `age_status = adult` and, if `yes`, leads us along a branch to a **leaf node** at the bottom left that predicts `No`, with $prob(survival) = 0.13$. 43% of the data ends up at this node.
 
 The algorithm used to build the model uses a probability of 0.5 as the threshold for classification: i.e. if $prob(survival) < 0.5$, the model predicts `No`. Furthermore, the colour of each node represents the probability: dark blue -> light blue -> light green -> dark green as the probability of survival increases.
 
@@ -619,7 +619,7 @@ conf_mat <- titanic_test_pred %>%
 conf_mat
 ```
 
-* The columns, i.e. `Truth`, represent the true numbers of survivors and non-survivors from the test data set.
+* The columns, i.e. `Truth`, represent the true numbers of survivors and non-survivors from the test data.
 
 * The rows, i.e. `Prediction` represent the tree's predicted numbers of survivors and non-survivors.
 
@@ -683,7 +683,7 @@ In other cases, it's more important for the model to correctly identify negative
 
 ### Summary
 
-And there we go - you've built a decision tree and tested it's predictive power on a test data set.
+And there we go - you've built a decision tree and tested it's predictive power on test data.
 
 ```{r summary-quiz}
 quiz(
@@ -747,7 +747,7 @@ grade_this({
   )
   fail_if(
     !all.equal(as.character(.result$call$data), "titanic_clean"),
-    "The data argument is incorrect. Ensure you're using the complete dataset."
+    "The data argument is incorrect. Ensure you're using the complete data object."
   )
   fail_if(
     .result$call$method != "anova",
@@ -812,7 +812,7 @@ See below as we create a random forest to predict Titanic survival:
 * `importance` tells the algorithm which method to use to determine a good "split" in the data versus a bad one.
     * We are using Gini `"impurity"` as was the default in our single `rpart()` decision tree.
 * `num.trees` simply tells the algorithm how many decision trees to create in the forest.
-* `mtry` tells the algorithm how many variables (selected randomly from the data set) to consider for splitting.
+* `mtry` tells the algorithm how many variables (selected randomly from the data) to consider for splitting.
     * In other words: in each tree, `mtry` number of variables are considered at each branch, providing a lot of variation across trees.
 * `min.mode.size` sets the minimum number of data points a node can contain - branching stops when the data is filtered down to this number
     * smaller values allow trees to grow deeper, capturing more nuances in the data but at the risk of *overfitting*
@@ -838,7 +838,7 @@ The output shown here tells us that our random forest has an "out-of-bag" (OOB) 
   <h4>Bootstrapping</h4>
   For those who are interested, OOB samples are selected during training of the random forest. Each tree is built using approximately two thirds of the available data, with one third left out to test on afterwards (known as an OOB sample).
   
-  This is a form of **bootstrapping**, wherein the algorithm randomly samples some of our data and treats it like a new data set for each tree. The OOB prediction error is calculated by i) taking each observation in the training set and ii) getting the trees that *did not* use this observation during training to make a prediction with it.
+  This is a form of **bootstrapping**, wherein the algorithm randomly samples some of our data and treats it like a new set of data for each tree. The OOB prediction error is calculated by i) taking each observation in the training set and ii) getting the trees that *did not* use this observation during training to make a prediction with it.
   
   By comparing the predicted values for these OOB samples to their actual values, the random forest can output an OOB prediction error using the training data alone.
 </div>
