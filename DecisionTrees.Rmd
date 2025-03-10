@@ -456,7 +456,7 @@ Voila! Here is our decision tree in visual form. See if you can interpret it you
 
 ## Interpret the decision tree
 
-One advantage to decision trees over other types of machine learning models is that they are more easily-interpretable due to their 'flow chart' format.
+One advantage to decision trees over other types of machine learning models is that they are more easily-interpretable due to their "flow chart" format.
 
 ```{r, echo = FALSE, eval = TRUE}
 rpart.plot(titanic_fit,
@@ -470,7 +470,7 @@ Let's start from the top and interpret the tree along a single route top to bott
 
 * All of the training data, before being split up by any questions, is represented in the **root node** at the top: the tree predicts that `survived = No` is the most likely outcome overall, with a probability of surviving of 0.41.  The % value shown in each node represents the proportion of the dataset that passes through that node (here, 100%).
 
-* The first 'question' asked of our data is `sex = male` (think of it like an operator, `sex == male`) with two potential branches: `yes` or `no`.
+* The first "question" asked of our data is `sex = male` (think of it like an operator, `sex == male`) with two potential branches: `yes` or `no`.
 
 * `yes` (or male) leads us left down to an **intermediate node**, which predicts `No` to survival, with a probability of survival of 0.22. 64% of the training data ends up here, essentially meaning that 64% of the data are males.
 
@@ -571,7 +571,7 @@ rpart.plot(x = titanic_fit,
 
 To summarise: we have now wrangled our data and done some feature engineering (i.e. new variables from old ones), we split the data up into train and test subsets, built a decision tree and plotted it.
 
-Now we will use our **test** data subset on our tree to see how well the model can predict who survived the Titanic and who did not. This is called **supervised learning**, as our data already contains the 'answers' (i.e. the `survived_flag` variable) with which we can compare our tree's predictions against.
+Now we will use our **test** data subset on our tree to see how well the model can predict who survived the Titanic and who did not. This is called **supervised learning**, as our data already contains the "answers" (i.e. the `survived_flag` variable) with which we can compare our tree's predictions against.
 
 <br>
 
@@ -646,7 +646,7 @@ The `.estimate` column in the output shows us the *accuracy* measure, i.e. the p
 
 #### 2. Sensitivity
 
-`sensitivity()` calculates the **true positive rate**, i.e. the proportion of times our model predicted "Yes" correctly. Be aware that the next two functions don't automatically know which outcome of the target variable is positive (i.e. the 'event'), and will choose the first column or row name from the confusion matrix by default. We use the `event_level` parameter to specifically tell these functions the position of `"Yes"`.
+`sensitivity()` calculates the **true positive rate**, i.e. the proportion of times our model predicted "Yes" correctly. Be aware that the next two functions don't automatically know which outcome of the target variable is positive (i.e. the "event"), and will choose the first column or row name from the confusion matrix by default. We use the `event_level` parameter to specifically tell these functions the position of `"Yes"`.
 
 ```{r, eval = TRUE, echo = TRUE}
 titanic_test_pred %>% 
@@ -687,7 +687,7 @@ And there we go - you've built a decision tree and tested it's predictive power 
 
 ```{r summary-quiz}
 quiz(
-  question("Imagine you've built a decision tree (or some other binary classification model) that predicts whether a person will choose to go holiday abroad or in their country of residence. If `holiday_abroad = \"Yes\"` is the positive outcome (i.e. the 'event'), what does a sensitivity of 92% and a specificity of 68% tell you about the model?",
+  question("Imagine you've built a decision tree (or some other binary classification model) that predicts whether a person will choose to go holiday abroad or in their country of residence. If `holiday_abroad = \"Yes\"` is the positive outcome (i.e. the \"event\"), what does a sensitivity of 92% and a specificity of 68% tell you about the model?",
     answer("The model is very good at predicting who will go abroad while fairly good at predicting who will stay home.", correct = TRUE),
     answer("The model is not good at predicting who will go abroad but is good at predicting who will stay home.", correct = FALSE),
     answer("The model is very good at predicting who will go abroad and who will stay home.", correct = FALSE),
@@ -796,7 +796,7 @@ Once you have plotted a decision tree, try to interpret what the values shown in
 
 We've managed to build one decision tree, but what if we built a **forest** out of **many** decision trees? Then we could harness the power of many models to predict a target variable. This is known as the **random forest** method and we'll cover that now.
 
-For a given observation/data point, each tree in the forest will make a prediction with their own algorithm and the prediction with the most 'votes' becomes the *model* prediction. This is generally considered more powerful and more stable than just using one tree.
+For a given observation/data point, each tree in the forest will make a prediction with their own algorithm and the prediction with the most "votes" becomes the *model* prediction. This is generally considered more powerful and more stable than just using one tree.
 
 > e.g. If 50 trees predict an outcome as `true` and 10 predict an outcome as `false`, the overall prediction of the forest will be `true`.
 
@@ -809,7 +809,7 @@ install.packages("ranger")
 See below as we create a random forest to predict Titanic survival:
 
 * The `data` and `formula` are the same as with our original decision tree.
-* `importance` tells the algorithm which method to use to determine a good 'split' in the data versus a bad one.
+* `importance` tells the algorithm which method to use to determine a good "split" in the data versus a bad one.
     * We are using Gini `"impurity"` as was the default in our single `rpart()` decision tree.
 * `num.trees` simply tells the algorithm how many decision trees to create in the forest.
 * `mtry` tells the algorithm how many variables (selected randomly from the data set) to consider for splitting.
@@ -832,7 +832,7 @@ rf_classifier <- ranger(data = titanic_train,
 rf_classifier
 ```
 
-The output shown here tells us that our random forest has an 'out-of-bag' (OOB) prediction error of 19.65%. Check the information box below to get a better understanding of what this means.
+The output shown here tells us that our random forest has an "out-of-bag" (OOB) prediction error of 19.65%. Check the information box below to get a better understanding of what this means.
 
 <div class="info_box">
   <h4>Bootstrapping</h4>
