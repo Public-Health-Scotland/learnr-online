@@ -137,9 +137,9 @@ To do this we’re going to:
 
 5.	Visualise the decision tree using `rpart.plot()` from the `{rpart.plot}` package
 
-6.	Interpret the model
+6.	Interpret the model, i.e. which variables in the data help predict survival? Which passenger demographics fare best?
 
-7.	Test the model’s predictive power by comparing predicted values to those in our data
+7.	Test the model’s predictive power by comparing predicted values to those in our data (via a **confusion matrix**, examining **sensitivity** and **specificity**)
 
 Following this, we will create a **random forest** model and see how if this improves the predictive power we can attain.
 
@@ -198,11 +198,11 @@ Here is what we’ll do in this section:
 
 2.	Turn the relevant variables into factors (`sex`, `survived`, `pclass`, `embarkation`).
 
-      *	This way the model will identify `sex`, for example, as a factor with 2 levels as opposed to a         character variable.
+      *	This way the model will identify `sex`, for example, as a factor with 2 levels as opposed to a character variable.
       
 3.	Create an `age_status` variable which groups individuals under (and including) 16 years of age into a category called “child” category and those over 16 into a category called “adult”.
 
-      *	This is an example of **feature engineering** in which we are creating a new child/adult variable        based on a variable we already have, `age`.
+      *	This is an example of **feature engineering** in which we are creating a new child/adult variable based on a variable we already have, `age`.
 
 4.	Drop any variables we don’t need.
 
@@ -219,7 +219,7 @@ Here is what we’ll do in this section:
 
       *	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as otherwise we sacrifice rows for the sake of variables we don’t want anyway.
 
-Try having a go at the above list of cleaning/wrangling tasks on your own before looking at the answers below.
+Try having a go at the above list of cleaning/wrangling tasks on your own before looking at the answers below. It may help to tackle each task one at a time and run the `titanic_clean` code on it's own to check the output after each.
 ```{r wrangle-input, exercise = TRUE}
 titanic_clean <- titanic_data %>%
 ## start coding here
@@ -319,7 +319,7 @@ This now gives us two data frames to work with: the larger training data `titani
 
 We can check how *balanced* the data frames are, in terms of our outcome variable of interest `survived_flag`, by using the `tabyl()` function from the `{janitor}` package. If one side of the train/test split had the large majority of passengers who survived, and the other side had the large majority of passengers who did not, it would be a good idea to resample the data.
 
-```{r, echo = TRUE, eval = TRUE}
+```{r eval=, echo=TRUE, message=FALSE, warning=FALSE}
 # check for balanced sets
 titanic_train %>%
  	janitor::tabyl(survived_flag)
@@ -470,6 +470,10 @@ rpart.plot(titanic_fit,
 Let's start from the top and interpret the tree along a single route top to bottom (or root to leaf).
 
 * All of the training data, before being split up by any questions, is represented in the **root node** at the top: the tree predicts that `survived = No` is the most likely outcome overall, with a probability of surviving of 0.41.  The % value shown in each node represents the proportion of the data that passes through that node (here, 100%).
+
+```{r echo=FALSE, fig.align='center', out.width="75%", fig.alt = "The root node of the newly-created decision tree."}
+knitr::include_graphics("images/trees/node.jpg")
+```
 
 * The first "question" asked of our data is `sex = male` (think of it like an operator, `sex == male`) with two potential branches: `yes` or `no`.
 
