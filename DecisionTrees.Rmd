@@ -263,7 +263,7 @@ This isn’t a strictly necessary step when building a decision tree, but it’s
 
 Use `ggplot()` to create some visualisations to see which variables appear to have the greatest effect on survival. If you don't feel confident using `ggplot()`, feel free to skip this section for now and make sure to check out our [data visualisation course](https://scotland.shinyapps.io/phs-learnr-dataviz/).
 
-*Hint: try plotting* `survived_flag` *and colour-coding by different variables.*
+*Hint: try plotting* `survived_flag` *and colour-coding by different variables (such as* `class`, `age_status`, `sex`*).*
 
 ```{r ggplot-input-setup, include = FALSE}
 titanic_clean <- titanic_data %>%
@@ -281,7 +281,7 @@ titanic_clean <- titanic_data %>%
 ```{r ggplot-input, exercise = TRUE, exercise.setup = 'ggplot-input-setup'}
 titanic_clean %>%
   ggplot() +
-  ## start coding here
+  geom_bar(aes(x = survived_flag))
 ```
 Once we create the model in the next section, we’ll see if your predictions were correct.
 
