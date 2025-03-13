@@ -319,7 +319,7 @@ This now gives us two data frames to work with: the larger training data `titani
 
 We can check how *balanced* the data frames are, in terms of our outcome variable of interest `survived_flag`, by using the `tabyl()` function from the `{janitor}` package. If one side of the train/test split had the large majority of passengers who survived, and the other side had the large majority of passengers who did not, it would be a good idea to resample the data.
 
-```{r eval=, echo=TRUE, message=FALSE, warning=FALSE}
+```{r eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 # check for balanced sets
 titanic_train %>%
  	janitor::tabyl(survived_flag)
