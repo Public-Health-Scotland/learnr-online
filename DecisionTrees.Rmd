@@ -56,34 +56,7 @@ knitr::include_graphics("images/trees/bussinessman20-08.jpg")
 </div>
 </br>
 
-<br>
-
-### Goal of this course
-
-In this course, we’re going to build a decision tree based on data about passengers on-board the Titanic. This model will allow us to predict who was most likely to survive the unfortunate sinking of the vessel (apologies for the morbid nature of this data!).
-
-To do this we’re going to:
-
-1.  Explain [what exactly a decision tree is](#what-is-a-dt) (with examples)
-
-2.  [Read in the relevant data](#reading-in-data)
-
-3.	[Wrangle the data](#data-wrangling) and perform some **feature engineering**
-
-4.	Optional: [Create some simple plots](#visualise-data) to help identify useful predictors for our model
-
-5.	[Build a decision tree model](#build-the-dt) using `rpart()` from the `{rpart}` package and visualise it using `rpart.plot()` from the `{rpart.plot}` package
-
-7.	[Interpret the model](#interpret-the-dt), i.e. which variables in the data help predict survival? Which passenger demographics fare best?
-
-8.	[Test the model’s predictive power](#testing-the-dt) by comparing predicted values to those in our data (via a **confusion matrix**, examining **sensitivity** and **specificity**)
-
-Following this, we will [create a random forest model](#create-a-rf) and see how if this improves the predictive power we can attain.
-
-<br>
-
-
-## What is a decision tree? {#what-is-a-dt}
+### What is a decision tree?
 
 * A useful type of model that allow us to make predictions from our data
 * A map of the possible outcomes of a series of related choices, often seen in businesses as ‘decision flowcharts’ or ‘process flowcharts’
@@ -103,7 +76,7 @@ or categorical:
 
 ```{r intro-quiz1}
 quiz(
-  question("You’re deciding what to wear today. Which method resembles a decision tree?",
+  question("You’re deciding what to wear today. Which method *resembles* a decision tree?",
     answer("Wear your favourite outfit every day", correct = FALSE),
     answer("Check the weather, check your schedule, and choose an outfit based on both", correct = TRUE),
     answer("Close your eyes and grab something from the closet", correct = FALSE),
@@ -114,8 +87,6 @@ quiz(
   )
 )
 ```
-
-<br>
 
 ### Example: films worth watching
 
@@ -164,13 +135,39 @@ You can think of it as an upside-down tree, really. Starting from the root at th
 <br>
 
 
-## Reading in the dataset {#reading-in-data}
+## Goal of this course
 
-Click the 'Run' button below to read in our Titanic data using `read_csv()` from the `{readr}` package:
-```{r readr-exercise, exercise = TRUE}
+In this course, we’re going to build a decision tree based on data about passengers on-board the Titanic. This model will allow us to predict who was most likely to survive the unfortunate sinking of the vessel (apologies for the morbid nature of this data!).
+
+To do this we’re going to:
+
+1.	Read in the relevant data
+
+2.	Wrangle the data and perform some **feature engineering**
+
+3.	Optional: Create some simple plots to help identify useful predictors for our model
+
+4.	Build a decision tree model using `rpart()` from the `{rpart}` package
+
+5.	Visualise the decision tree using `rpart.plot()` from the `{rpart.plot}` package
+
+6.	Interpret the model, i.e. which variables in the data help predict survival? Which passenger demographics fare best?
+
+7.	Test the model’s predictive power by comparing predicted values to those in our data (via a **confusion matrix**, examining **sensitivity** and **specificity**)
+
+Following this, we will create a **random forest** model and see if this improves the predictive power we can attain.
+
+<br>
+
+## Exploring the dataset
+
+We can read in our Titanic data using `read_csv()` from the `{readr}` package:
+```{r, echo = TRUE, eval = FALSE}
 library(readr)
 titanic_data <- read_csv("www/data/titanic_decision_tree_data.csv")
+```
 
+```{r, echo = TRUE, eval = TRUE}
 # check out the first 10 rows of the data
 head(titanic_data)
 ```
@@ -205,17 +202,19 @@ What variables do we have here?
 
 <br>
 
-## Data wrangling and feature engineering {#data-wrangling}
+## Data wrangling and feature engineering
 
-Prior to building a model, cleaning and wrangling our data is always the first step. In this case, we want categorical data to be represented as such (i.e. as factors in R), as well as remove irrelevant variables and missing data to aid the model-building process.
+Prior to building a model, cleaning and wrangling our data is always the first step.
 
 Here is what we’ll do in this section:
 
 1.	Filter down to only observations which have a `survived` flag (i.e. that aren’t missing).
 
-2.	Turn the relevant variables into factors (`sex`, `survived`, `pclass`, `embarkation`).
+2.	Turn the relevant variables into factors (`sex`, `survived`, `pclass`, `embarked`).
 
       *	This way the model will identify `sex`, for example, as a factor with 2 levels as opposed to a character variable.
+      
+      * We'll rename `survived` to `survived_flag` and `embarked` to `port_embarkation` for readability.
       
 3.	Create an `age_status` variable which groups individuals under (and including) 16 years of age into a category called “child” category and those over 16 into a category called “adult”.
 
@@ -237,6 +236,9 @@ Here is what we’ll do in this section:
       *	It’s important to do this after we’ve trimmed down our data to the columns we’re interested in as otherwise we sacrifice rows for the sake of variables we don’t want anyway.
 
 Try having a go at the above list of cleaning/wrangling tasks on your own before looking at the answers below. It may help to tackle each task one at a time and run the `titanic_clean` code on it's own to check the output after each.
+
+(This course will continue with the wrangled data shown in the answers below so don't worry too much if yours doesn't match!)
+
 ```{r wrangle-input, exercise = TRUE}
 titanic_clean <- titanic_data %>%
 ## start coding here
@@ -272,9 +274,11 @@ a) the outcome variable of interest, named `survived_flag` in the answer above
 
 b) a collection of potential predictors that may be useful in our model when predicting survival
 
+Note: decision trees are a form of **supervised learning** in the world of machine learning, as our data already contains the "answers" (i.e. the `survived_flag` variable) with which we can compare our tree's predictions against.
+
 <br>
 
-## Visualise the data {#visualise-data}
+## Visualise the data
 
 This isn’t a strictly necessary step when building a decision tree, but it’s good practice to understand your data before building a model with it. Creating some quick visualisations is a great way to better understand your data.
 
@@ -304,7 +308,7 @@ Once we create the model in the next section, we’ll see if your predictions we
 
 <br>
 
-## Build and plot the decision tree {#build-the-dt}
+## Build and plot the decision tree
 
 In this section, we’re going to build the decision tree itself. However, we will want to **test** the performance of the model on some of our `titanic_clean` data. For this reason, we will split the data randomly into an 80%/20% split: building the model on 80% of the data and holding aside 20% to test if the predicted `survived_flag` values it returns are similar to the true values in the data.
 
@@ -472,7 +476,7 @@ Voila! Here is our decision tree in visual form. See if you can interpret it you
 
 <br>
 
-## Interpret the decision tree {#interpret-the-dt}
+## Interpret the decision tree
 
 One advantage to decision trees over other types of machine learning models is that they are more easily-interpretable due to their "flow chart" format.
 
@@ -543,7 +547,7 @@ rpart.plot(x = titanic_fit,
 
 * `fallen.leaves` is a binary argument that sets the leaf nodes to all lie in a row at the bottom.
 
-* `faclen` is a numeric argument that dictates the maximum number of characters the levels of each categorical variable can displayed as (when `faclen` < word length, abbreviation is used).
+* `faclen` is a numeric argument that dictates the maximum number of characters used to display the levels of each categorical variable in the tree plot (when `faclen` < word length, abbreviation is used).
 
 * `digits` is a numeric argument that specifies the number of decimal places to display for each node's probability.
 
@@ -589,11 +593,11 @@ rpart.plot(x = titanic_fit,
 ```
 
 
-## Testing the decision tree {#testing-the-dt}
+## Testing the decision tree
 
 To summarise: we have now wrangled our data and done some feature engineering (i.e. new variables from old ones), we split the data up into train and test subsets, built a decision tree and plotted it.
 
-Now we will use our **test** data subset on our tree to see how well the model can predict who survived the Titanic and who did not. This is called **supervised learning**, as our data already contains the "answers" (i.e. the `survived_flag` variable) with which we can compare our tree's predictions against.
+Now we will use our **test** data subset on our tree to see how well the model can predict who survived the Titanic and who did not. We can think of this data as "new" data that the model hasn't yet seen.
 
 <br>
 
@@ -676,7 +680,6 @@ titanic_test_pred %>%
 ```
 
 The model *sensitivity* is: $0.72$ 
-
 
 <br>
 
@@ -816,13 +819,17 @@ Once you have plotted a decision tree, try to interpret what the values shown in
 <br>
 
 
-## Random forest {#create-a-rf}
+## Random forest
 
 We've managed to build one decision tree, but what if we built a **forest** out of **many** decision trees? Then we could harness the power of many models to predict a target variable. This is known as the **random forest** method and we'll cover that now.
+
+* As we will see, each tree in the forest is built using a different **randomly-selected**: i) subset of the data, and ii) collection of variables.
 
 For a given observation/data point, each tree in the forest will make a prediction with their own algorithm and the prediction with the most "votes" becomes the *model* prediction. This is generally considered more powerful and more stable than just using one tree.
 
 > e.g. If 50 trees predict an outcome as `true` and 10 predict an outcome as `false`, the overall prediction of the forest will be `true`.
+
+(Note that using a random forest as opposed to a single decision tree comes at the cost of the **transparency** of how each prediction is made.)
 
 We can create a random forest classifier using the `{ranger}` package.
 
@@ -907,7 +914,7 @@ titanic_test_pred_rf %>%
 
 ```
 
-It would appear that the random forest has higher *specificity* compared to the single decision tree from earlier ($0.91$ up to $0.94$) but lower *senstivity* ($0.72$ down to $0.66$). This can happen as a result of the process of combining the predictions of many decision trees: this averaging process can lead to a more conservative model that is less likely to make a positive prediction unless there is a strong agreement among the trees.
+It would appear that the random forest has higher *specificity* compared to the single decision tree from earlier ($0.91$ up to $0.94$) but lower *sensitivity* ($0.72$ down to $0.66$). This can happen as a result of the process of combining the predictions of many decision trees: this averaging process can lead to a more conservative model that is less likely to make a positive prediction unless there is a strong agreement among the trees.
 
 Click [here](https://www.statology.org/decision-tree-vs-random-forest/) to learn more about the differences between decision trees and random forests.
 
