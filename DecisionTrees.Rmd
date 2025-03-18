@@ -103,7 +103,7 @@ knitr::include_graphics("images/trees/movies_tree.jpg")
 
 ```{r intro-quiz2}
 quiz(
-  question("What would the decision tree above recommend for a fantasy film with 0 Oscars, a duration of 1 hour and 43 mins, an age rating of 15, streamable at home, an enjoyable soundtrack, and no giant sandworms?",
+  question("What would the decision tree above recommend for a fantasy film with 0 Oscars, a duration of 1 hour and 43 mins, an age rating of 15, streamable at home, and no giant sandworms?",
     answer("Watch the film", correct = FALSE),
     answer("Don't watch the film", correct = TRUE),
     incorrect = "Not quite, have another go!",
