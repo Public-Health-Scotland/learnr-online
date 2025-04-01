@@ -228,15 +228,80 @@ Try having a go at the above list of cleaning/wrangling tasks on your own before
 
 (This course will continue with the wrangled data shown in the answers below so don't worry too much if yours doesn't match!)
 
-```{r wrangle-input, exercise = TRUE}
+```{r wrangle, exercise = TRUE}
 titanic_clean <- titanic_data |>
 ## start coding here
 ```
 
-<details>
-<summary>Data cleaning code - ***click here to expand***</summary>
+```{r wrangle-hint-1}
+titanic_clean <- titanic_data |>
+# Filter out those without a survived flag
+  filter(___) |>
+  # Convert to factor level
+  mutate(___ = as.factor(___)) |>
+  # Select variables of interest
+  select(___) |>
+  # Drop NAs
+  tidyr::drop_na()
 
-```{r, echo = TRUE, eval = TRUE}
+```
+
+```{r wrangle-hint-2}
+titanic_clean <- titanic_data |>
+  # Filter out those without a survived flag
+  filter(survived %in% ___) |>
+  # Convert to factor level
+  mutate(sex = as.factor(___), 
+         age_status = as.factor(if_else(___, "child", "adult")),
+         class = factor(
+           ___, 
+           levels = ___, 
+           labels = c("lower", "middle", "upper")
+          ), 
+         survived_flag = factor(
+           ___, 
+           levels = ___, 
+           labels = c("No", "Yes")
+          ), 
+         port_embarkation = as.factor(___)) |>
+  # Select variables of interest
+  select(sex, age_status, class, 
+         port_embarkation, sib_sp, parch, survived_flag) |>
+  # Drop NAs
+  tidyr::drop_na()
+
+```
+
+```{r wrangle-solution}
+titanic_clean <- titanic_data |>
+  # Filter out those without a survived flag
+  filter(survived %in% c(0,1)) |>
+  # Convert to factor level
+  mutate(sex = as.factor(sex), 
+         age_status = as.factor(
+           if_else(age <= 16, "child", "adult")
+          ),
+         class = factor(
+           pclass, 
+           levels = c(3, 2, 1), 
+           labels = c("lower", "middle", "upper")
+          ), 
+         survived_flag = factor(
+           survived, 
+           levels = c(0, 1), 
+           labels = c("No", "Yes")
+          ), 
+         port_embarkation = as.factor(embarked)) |>
+  # Select variables of interest
+  select(sex, age_status, class, 
+         port_embarkation, sib_sp, parch, survived_flag) |>
+  # Drop NAs
+  tidyr::drop_na()
+
+head(titanic_clean)
+```
+
+```{r, echo=FALSE, eval=TRUE}
 titanic_clean <- titanic_data |>
   # Filter out those without a survived flag
   filter(survived %in% c(0,1)) |>
@@ -250,10 +315,7 @@ titanic_clean <- titanic_data |>
   select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) |>
   # Drop NAs
   tidyr::drop_na()
-
-head(titanic_clean)
 ```
-</details>
 
 <br>
 
@@ -390,6 +452,16 @@ titanic_fit <- rpart(
 )
 ```
 
+```{r tree-build-solution}
+library(rpart)
+
+titanic_fit <- rpart(
+  formula = survived_flag ~ ., 
+  data = titanic_train,
+  method = 'class'
+)
+```
+
 ```{r tree-build-check}
 grade_this({
   pass_if(
@@ -418,18 +490,6 @@ grade_this({
   fail("Something isn't quite right. Check your code and try again.")
 })
 ```
-
-<summary>Decision tree code answer - ***click here to expand***</summary>
-<details>
-```{r, echo = TRUE, eval = FALSE}
-titanic_fit <- rpart(
-  formula = survived_flag ~ ., 
-  data = titanic_train,
-  method = 'class'
-)
-```
-
-</details>
 
 <br>
 
