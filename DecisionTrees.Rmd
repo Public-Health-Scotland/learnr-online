@@ -236,11 +236,11 @@ titanic_clean <- titanic_data |>
 ```{r wrangle-hint-1}
 titanic_clean <- titanic_data |>
 # Filter out those without a survived flag
-  filter(___) |>
+  filter(...) |>
   # Convert to factor level
-  mutate(___ = as.factor(___)) |>
+  mutate(... = as.factor(...)) |>
   # Select variables of interest
-  select(___) |>
+  select(...) |>
   # Drop NAs
   tidyr::drop_na()
 
@@ -249,21 +249,21 @@ titanic_clean <- titanic_data |>
 ```{r wrangle-hint-2}
 titanic_clean <- titanic_data |>
   # Filter out those without a survived flag
-  filter(survived %in% ___) |>
+  filter(survived %in% ...) |>
   # Convert to factor level
-  mutate(sex = as.factor(___), 
-         age_status = as.factor(if_else(___, "child", "adult")),
+  mutate(sex = as.factor(...), 
+         age_status = as.factor(if_else(..., "child", "adult")),
          class = factor(
-           ___, 
-           levels = ___, 
+           ..., 
+           levels = ..., 
            labels = c("lower", "middle", "upper")
           ), 
          survived_flag = factor(
-           ___, 
-           levels = ___, 
+           ..., 
+           levels = ..., 
            labels = c("No", "Yes")
           ), 
-         port_embarkation = as.factor(___)) |>
+         port_embarkation = as.factor(...)) |>
   # Select variables of interest
   select(sex, age_status, class, 
          port_embarkation, sib_sp, parch, survived_flag) |>
