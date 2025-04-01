@@ -161,17 +161,14 @@ You can think of it as an upside-down tree, really. Starting from the root at th
 
 ## Read in the data {#read-in-data}
 
-We can read in our Titanic data using `read_csv()` from the `{readr}` package. Try clicking "Run Code" to do so:
-```{r read-data, exercise = TRUE}
-library(readr)
-titanic_data <- read_csv("www/data/titanic_decision_tree_data.csv")
+We can read in our Titanic data using `read_csv()` from the `{readr}` package. This has been done for you but you check out the data by clicking "Run Code" below:
 
+```{r read-data, exercise = TRUE}
 # check out the first 10 rows of the data
 head(titanic_data)
 ```
 
-(Note: you won't be able to access this data from your own RStudio session so we recommend following along via the interactive coding sections in the course.)
-
+_**Note:** you won't be able to access this data from your own RStudio session so we recommend following along via the interactive coding sections in the course._
 
 ### Data dictionary
 
@@ -232,7 +229,7 @@ Try having a go at the above list of cleaning/wrangling tasks on your own before
 (This course will continue with the wrangled data shown in the answers below so don't worry too much if yours doesn't match!)
 
 ```{r wrangle-input, exercise = TRUE}
-titanic_clean <- titanic_data %>%
+titanic_clean <- titanic_data |>
 ## start coding here
 ```
 
@@ -240,17 +237,17 @@ titanic_clean <- titanic_data %>%
 <summary>Data cleaning code - ***click here to expand***</summary>
 
 ```{r, echo = TRUE, eval = TRUE}
-titanic_clean <- titanic_data %>%
+titanic_clean <- titanic_data |>
   # Filter out those without a survived flag
-  filter(survived %in% c(0,1)) %>%
+  filter(survived %in% c(0,1)) |>
   # Convert to factor level
   mutate(sex = as.factor(sex), 
          age_status = as.factor(if_else(age <= 16, "child", "adult")),
          class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")), 
          survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
-         port_embarkation = as.factor(embarked)) %>%
+         port_embarkation = as.factor(embarked)) |>
   # Select variables of interest
-  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) |>
   # Drop NAs
   tidyr::drop_na()
 
@@ -279,20 +276,20 @@ Use `ggplot()` to create some visualisations to see which variables appear to ha
 *Hint: try plotting* `survived_flag` *and colour-coding by different variables (such as* `class`, `age_status`, `sex`*).*
 
 ```{r ggplot-input-setup, include = FALSE}
-titanic_clean <- titanic_data %>%
-  filter(survived %in% c(0,1)) %>%
+titanic_clean <- titanic_data |>
+  filter(survived %in% c(0,1)) |>
   mutate(sex = as.factor(sex), 
          age_status = as.factor(if_else(age <= 16, "child", "adult")),
          class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")), 
          survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
-         port_embarkation = as.factor(embarked)) %>%
-  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+         port_embarkation = as.factor(embarked)) |>
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) |>
   tidyr::drop_na()
 ```
 
 
 ```{r ggplot-input, exercise = TRUE, exercise.setup = 'ggplot-input-setup'}
-titanic_clean %>%
+titanic_clean |>
   ggplot() +
   geom_bar(aes(x = survived_flag))
 ```
@@ -334,7 +331,7 @@ We can check how *balanced* the data frames are, in terms of our outcome variabl
 
 ```{r eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE}
 # check for balanced sets
-titanic_train %>%
+titanic_train |>
  	janitor::tabyl(survived_flag)
 ```
 This shows us that 41.2% of passengers in the training data survived and 58.8% did not.
@@ -342,7 +339,7 @@ This shows us that 41.2% of passengers in the training data survived and 58.8% d
 *Note: be aware that the* `percentage` *column actually represents proportions (i.e. between 0 and 1)*
 
 ```{r, echo = TRUE, eval = TRUE}
-titanic_test %>%
+titanic_test |>
  janitor::tabyl(survived_flag)
 ```
 And this shows us that 37.3% of passengers in the testing data survived and 62.7% did not.
@@ -366,14 +363,14 @@ This function requires:
 We'll call the tree model `titanic_fit`. Have a go at creating the model below (the answer is further down if you need):
 
 ```{r tree-setup, include = FALSE}
-titanic_clean <- titanic_data %>%
-  filter(survived %in% c(0,1)) %>%
+titanic_clean <- titanic_data |>
+  filter(survived %in% c(0,1)) |>
   mutate(sex = as.factor(sex), 
          age_status = as.factor(if_else(age <= 16, "child", "adult")),
          class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")), 
          survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
-         port_embarkation = as.factor(embarked)) %>%
-  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+         port_embarkation = as.factor(embarked)) |>
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) |>
   tidyr::drop_na()
 
 n_data <- nrow(titanic_clean)
@@ -558,14 +555,14 @@ rpart.plot(x = titanic_fit,
 Play around with code below to get an idea of how these arguments, plus some new ones, can alter the look of your decision tree:
 
 ```{r plot-format-exercise-setup}
-titanic_clean <- titanic_data %>%
-  filter(survived %in% c(0,1)) %>%
+titanic_clean <- titanic_data |>
+  filter(survived %in% c(0,1)) |>
   mutate(sex = as.factor(sex),
          age_status = as.factor(if_else(age <= 16, "child", "adult")),
          class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")),
          survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
-         port_embarkation = as.factor(embarked)) %>%
-  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+         port_embarkation = as.factor(embarked)) |>
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) |>
   tidyr::drop_na()
 
 n_data <- nrow(titanic_clean)
@@ -618,7 +615,7 @@ Here, we will use the `add_predictions()` function. Note that we are now using t
 ```{r, echo = TRUE, eval = TRUE}
 library(modelr)
 
-titanic_test_pred <- titanic_test %>%
+titanic_test_pred <- titanic_test |>
   add_predictions(titanic_fit, type = "class", var = "survived_pred")
 
 titanic_test_pred
@@ -643,7 +640,7 @@ The `conf_mat()` function just requires the test data with the model's predictio
 ```{r, eval = TRUE, echo = TRUE, message = FALSE}
 library(yardstick)
 
-conf_mat <- titanic_test_pred %>%
+conf_mat <- titanic_test_pred |>
               conf_mat(truth = survived_flag, estimate = survived_pred)
 
 conf_mat
@@ -666,7 +663,7 @@ conf_mat
 `accuracy()` calculates the proportion of correct predictions out of all predictions.
 
 ```{r, eval = TRUE, echo = TRUE}
-titanic_test_pred %>% 
+titanic_test_pred |> 
   accuracy(truth = survived_flag, estimate = survived_pred)
 ```
 
@@ -679,7 +676,7 @@ The `.estimate` column in the output shows us the *accuracy* measure, i.e. the p
 `sensitivity()` calculates the **true positive rate**, i.e. the proportion of times our model predicted "Yes" correctly. Be aware that the next two functions don't automatically know which outcome of the target variable is positive (i.e. the "event"), and will choose the first column or row name from the confusion matrix by default. We use the `event_level` parameter to specifically tell these functions the position of `"Yes"`.
 
 ```{r, eval = TRUE, echo = TRUE}
-titanic_test_pred %>% 
+titanic_test_pred |> 
   sensitivity(truth = survived_flag, estimate = survived_pred, event_level = "second")
 ```
 
@@ -692,7 +689,7 @@ The model *sensitivity* is: $0.72$
 `specificity()` calculates the **true negative rate**, i.e. the proportion of times our model predicted "No" correctly.
 
 ```{r, eval = TRUE, echo = TRUE}
-titanic_test_pred %>% 
+titanic_test_pred |> 
   specificity(truth = survived_flag, estimate = survived_pred, event_level = "second")
 ```
 
@@ -740,14 +737,14 @@ However, we can also use `rpart()` to build a decision tree that predicts a **nu
 **Step 1**: Try building a decision tree that predicts the number of siblings (+ spouse) a person on board the Titanic has (`sib_sp`). Don't worry about splitting the data and testing the model, just build it using `titanic_clean`.
 
 ```{r numeric-tree-exercise1-setup, include = FALSE}
-titanic_clean <- titanic_data %>%
-  filter(survived %in% c(0,1)) %>%
+titanic_clean <- titanic_data |>
+  filter(survived %in% c(0,1)) |>
   mutate(sex = as.factor(sex),
          age_status = as.factor(if_else(age <= 16, "child", "adult")),
          class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")),
          survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
-         port_embarkation = as.factor(embarked)) %>%
-  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+         port_embarkation = as.factor(embarked)) |>
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) |>
   tidyr::drop_na()
 ```
 
@@ -792,14 +789,14 @@ grade_this({
 **Step 2**: Plot the decision tree using `rpart.plot()` with whatever formatting you desire.
 
 ```{r numeric-tree-exercise2-setup, include = FALSE}
-titanic_clean <- titanic_data %>%
-  filter(survived %in% c(0,1)) %>%
+titanic_clean <- titanic_data |>
+  filter(survived %in% c(0,1)) |>
   mutate(sex = as.factor(sex),
          age_status = as.factor(if_else(age <= 16, "child", "adult")),
          class = factor(pclass, levels = c(3, 2, 1), labels = c("lower", "middle", "upper")),
          survived_flag = factor(survived, levels = c(0, 1), labels = c("No", "Yes")), 
-         port_embarkation = as.factor(embarked)) %>%
-  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) %>%
+         port_embarkation = as.factor(embarked)) |>
+  select(sex, age_status, class, port_embarkation, sib_sp, parch, survived_flag) |>
   tidyr::drop_na()
 
 titanic_fit_cont <- rpart(
@@ -897,7 +894,7 @@ We can see that `sex` and `class` are the most important predictors of survival.
 Unfortunately, `ranger()` doesn't work with `{modelr}`'s `add_predictions()` function, so we have to use a small bit of `{dplyr}` combined with the `predict()` function from `{stats}` to get what we want:
 
 ```{r, eval = TRUE, echo = TRUE}
-titanic_test_pred_rf <- titanic_test %>%
+titanic_test_pred_rf <- titanic_test |>
   mutate(survived_pred = predict(rf_classifier, data = titanic_test)$predictions)
 
 titanic_test_pred_rf
@@ -907,13 +904,13 @@ titanic_test_pred_rf
 Now we've added a column of predicted values to our test data, we can examine the resulting **confusion matrix** as well as the **sensitivity** and **specificity** metrics (using the `{yardstick}` package from before):
 
 ```{r, eval = TRUE, echo = TRUE}
-titanic_test_pred_rf %>%
+titanic_test_pred_rf |>
               conf_mat(truth = survived_flag, estimate = survived_pred)
 
-titanic_test_pred_rf %>%
+titanic_test_pred_rf |>
               sensitivity(truth = survived_flag, estimate = survived_pred, event_level = "second")
 
-titanic_test_pred_rf %>%
+titanic_test_pred_rf |>
               specificity(truth = survived_flag, estimate = survived_pred, event_level = "second")
 
 ```
