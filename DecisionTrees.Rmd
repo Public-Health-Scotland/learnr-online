@@ -177,29 +177,20 @@ head(titanic_data)
 
 What variables do we have here?
 
-•	`passenger_id`: a unique number given to each passenger
-
-•	`pclass` : ticket class, 1 = 1st (upper class), 2 = 2nd (middle class), 3 = 3rd (lower class)
-
-•	`name`: passenger name
-
-•	`sex`: biological sex, male or female
-
-•	`age`: passenger age
-
-•	`sib_sp` : number of siblings / spouses on board
-
-•	`parch`: number of parents / children aboard the Titanic; some children travelled only with a nanny, therefore `parch` = 0 for them
-
-•	`ticket`: ticket ID
-
-•	`fare`: the cost of the passenger’s ticket
-
-•	`cabin`: cabin number (if known/relevant)
-
-•	`embarked`: city of embarkation; C = Cherbourg, Q = Queenstown, S = Southampton
-
-•	`survived` : did they survive? 0 = No, 1 = Yes
+| **Variable** | **Description** |
+| -- | ---- |
+| `passenger_id` | a unique number given to each passenger  |
+| `pclass` | ticket class: "1" = 1st (upper class), "2" = 2nd (middle class), "3" = 3rd (lower class)  |
+| `name` | passenger name  |
+| `sex` | biological sex, "male" or "female"  |
+| `age` | passenger age  |
+| `sib_sp` | number of siblings / spouses on board  |
+| `parch` | number of parents / children aboard the Titanic; some children travelled only with a nanny, therefore `parch` = 0 for them  |
+| `ticket` | ticket ID  |
+| `fare` |  the cost of the passenger’s ticket |
+| `cabin` | cabin number (if known/relevant)  |
+| `embarked` | city of embarkation: "C" = Cherbourg, "Q" = Queenstown, "S" = Southampton  |
+| `survived` | did they survive?: "0" = No, "1" = Yes  |
 
 <br>
 
